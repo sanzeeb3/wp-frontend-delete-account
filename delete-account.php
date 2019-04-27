@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Delete Account - For WooCommerce and all.
+ * Plugin Name: Delete Account
  * Description: Lets customers delete thier account by own from their myaccount page.
  * Version: 1.4.7
  * Author: Sanjeev Aryal

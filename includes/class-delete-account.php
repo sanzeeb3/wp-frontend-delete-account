@@ -125,14 +125,17 @@ final class Delete_Account {
 		$locale = apply_filters( 'plugin_locale', get_locale(), 'delete-account' );
 
 		load_textdomain( 'delete-account', WP_LANG_DIR . '/delete-account/delete-account-' . $locale . '.mo' );
-		load_plugin_textdomain( 'delete-account', false, plugin_basename( dirname( WPFORMS_ENTRIES_PLUGIN_FILE ) ) . '/languages' );
+		load_plugin_textdomain( 'delete-account', false, plugin_basename( dirname( DELETE_ACCOUNT_PLUGIN_FILE ) ) . '/languages' );
 	}
-
 
 	/**
 	 * Includes.
 	 */
 	private function includes() {
-		// Includes Files.
+		include_once DA_ABSPATH . '/includes/class-delete-account-frontend.php';
+
+		if( is_admin() ) {
+			include_once DA_ABSPATH . '/includes/class-delete-account-backend.php';
+		}
 	}
 }
