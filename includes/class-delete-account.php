@@ -132,7 +132,9 @@ final class Delete_Account {
 	 * Includes.
 	 */
 	private function includes() {
+		include_once DA_ABSPATH . 'includes/functions-delete-account.php';
 		include_once DA_ABSPATH . '/includes/class-delete-account-frontend.php';
+		include_once DA_ABSPATH . '/includes/class-woocommerce-my-account-tab.php';
 
 		if( is_admin() ) {
 			include_once DA_ABSPATH . '/includes/class-delete-account-backend.php';

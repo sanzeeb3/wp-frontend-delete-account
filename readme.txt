@@ -8,11 +8,11 @@ Stable tag: 1.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Lets customers delete thier account by own from their myaccount page. Also, add the account delete page anywhere with shortcode and gutenberg block.
+Lets customers delete thier account by own from their myaccount page. For non-store sites, add the account delete page anywhere with shortcode and gutenberg block.
 
 == Description ==
 
-New 'Delete Account' tab will be created on WooCommerce myaccount page, so that customers can delete their account by their own. Also, add the 'Delete Account' tab content anywhere with shortcode [delete_account].
+New 'Delete Account' tab will be created on WooCommerce myaccount page, so that customers can delete their account by their own. Also, add the 'Delete Account' tab content anywhere with shortcode [delete_account] for non-store sites.
 
 Settings:
 * reCaptcha, confirm password and custom captcha protection.

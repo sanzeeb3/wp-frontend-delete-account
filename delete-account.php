@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Delete Account
  * Description: Lets customers delete thier account by own from their myaccount page.
- * Version: 1.4.7
+ * Version: 1.0.0
  * Author: Sanjeev Aryal
  * Author URI: http://www.sanjeebaryal.com.np
  * Text Domain: delete-account

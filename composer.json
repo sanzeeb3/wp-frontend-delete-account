@@ -14,18 +14,6 @@
     "dealerdirect/phpcodesniffer-composer-installer": "^0.4.3"
   },
   "scripts": {
-    "pre-update-cmd": [
-      "WPEverest\\GitHooks\\Hooks::preHooks"
-    ],
-    "pre-install-cmd": [
-      "WPEverest\\GitHooks\\Hooks::preHooks"
-    ],
-    "post-install-cmd": [
-      "WPEverest\\GitHooks\\Hooks::postHooks"
-    ],
-    "post-update-cmd": [
-      "WPEverest\\GitHooks\\Hooks::postHooks"
-    ],
     "phpcs": [
       "phpcs -s -p"
     ],
