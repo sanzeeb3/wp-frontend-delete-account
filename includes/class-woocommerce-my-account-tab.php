@@ -55,7 +55,7 @@ Class WooCommerce_Myaccount_Tab {
 	 */
 	public function add_delete_account_tab( $items ) {
 
-		$items['delete-account']	= esc_html__( 'Delete Account', 'delete-account' );
+		$items['delete-account']	= get_option( 'da_title', esc_html__( 'Delete Account', 'delete-account' ) );
 		return $items;
 	}
 }

@@ -3,7 +3,7 @@
  * @since  1.0.0
  *
  * Class for backend tasks.
- * 
+ *
  * @class Delete_Account_Backend
  */
 Class Delete_Account_Backend {
@@ -19,7 +19,7 @@ Class Delete_Account_Backend {
 	 * Add Delete Account Submenu
 	 *
 	 * @since  1.0.0
-	 * 
+	 *
 	 * @return void.
 	 */
 	public function da_register_setting_menu() {
@@ -30,7 +30,7 @@ Class Delete_Account_Backend {
 	 * Creates settings page.
 	 *
 	 * @since  1.0.0
-	 * 
+	 *
 	 * @return void.
 	 */
 	public function da_settings_page(){
@@ -55,7 +55,7 @@ Class Delete_Account_Backend {
 		        		<td><input type="text" name="da_button_label" value ="<?php echo esc_html( $button ); ?>" class="delete-account-button-label" />
 		        		</td>
 		        </tr>
-	
+
 		        <?php do_action( 'delete_account_settings' );?>
 	            <?php wp_nonce_field( 'delete_account_settings', 'delete_account_settings_nonce' );?>
 

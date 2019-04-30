@@ -30,6 +30,9 @@ Settings:
 
 Yes. The plugin is translation ready. You can use any tranlstion plugin. Or customize the plugins language with the provided pot file. The recommended way is to help Entries For WPForms by contributing the translation on [WordPress.org](https://translate.wordpress.org/projects/wp-plugins/delete-account).
 
+= I see page not found while clicking delete account tab?
+
+You might need to refresh the permalinks. Navigate to Settings->Permalinks and Save.
 
 == Screenshots ==
 
