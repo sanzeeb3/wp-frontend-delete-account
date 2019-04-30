@@ -1,6 +1,6 @@
 === Delete Account - For WooCommerce and all ===
 Contributors: sanzeeb3
-Tags: delete-account, woocommerce, delete user, remove account,
+Tags: woo-woo-delete-account, woocommerce, delete user, remove account,
 Requires at least: 4.0
 Tested up to: 5.0
 Requires PHP: 5.3
@@ -12,15 +12,15 @@ Lets customers delete thier account by own from their myaccount page. For non-st
 
 == Description ==
 
-New 'Delete Account' tab will be created on WooCommerce myaccount page, so that customers can delete their account by their own. Also, add the 'Delete Account' tab content anywhere with shortcode [delete_account] for non-store sites.
-
+New 'Delete Account' tab will be created on WooCommerce myaccount page, so that customers can delete their account by their own. Also, add the 'Delete Account' tab content anywhere with shortcode [woo_woo_delete_account] for non-store sites.
+`
 Settings:
 * reCaptcha, confirm password and custom captcha protection.
-* User meta, posts, comments, orders, downloads, products
+* User meta, posts, comments, orders, downloads, productss
 * Delete domain cookies set by user.
 * Delete uploaded media files
 
-[Contribute On GitHub Repository](https://github.com/sanzeeb3/delete-account)
+[Contribute On GitHub Repository](https://github.com/sanzeeb3/woo-woo-delete-account)
 
 [Contact The Author](http://www.sanjeebaryal.com.np)
 
@@ -28,7 +28,7 @@ Settings:
 
 = Can I translate Delete Account?
 
-Yes. The plugin is translation ready. You can use any tranlstion plugin. Or customize the plugins language with the provided pot file. The recommended way is to help Entries For WPForms by contributing the translation on [WordPress.org](https://translate.wordpress.org/projects/wp-plugins/delete-account).
+Yes. The plugin is translation ready. You can use any tranlstion plugin. Or customize the plugins language with the provided pot file. The recommended way is to help Entries For WPForms by contributing the translation on [WordPress.org](https://translate.wordpress.org/projects/wp-plugins/woo-woo-delete-account).
 
 = I see page not found while clicking delete account tab?
 

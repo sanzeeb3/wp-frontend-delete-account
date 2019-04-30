@@ -3,10 +3,10 @@
  * @since  1.0.0
  *
  * Class for frontend tasks.
- * 
- * @class Delete_Account_frontend
+ *
+ * @class Woo_Delete_Account_frontend
  */
-Class Delete_Account_frontend {
+Class Woo_Delete_Account_frontend {
 
 	/**
 	 * Constructor.
@@ -16,4 +16,4 @@ Class Delete_Account_frontend {
 	}
 }
 
-new Delete_Account_frontend();
+new Woo_Delete_Account_frontend();

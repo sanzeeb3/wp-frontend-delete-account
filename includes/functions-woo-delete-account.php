@@ -10,5 +10,5 @@
  *
  * @return Void.
  */
-function delete_account_content() {
+function woo_delete_account_content() {
 }

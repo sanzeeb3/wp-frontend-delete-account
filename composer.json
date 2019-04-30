@@ -1,5 +1,5 @@
 {
-  "name": "delete-account",
+  "name": "woo-delete-account",
   "description": "Lets customers delete thier account by own from their myaccount page.",
   "homepage": "",
   "type": "wordpress-plugin",
