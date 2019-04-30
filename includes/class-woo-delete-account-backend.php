@@ -34,7 +34,7 @@ Class Woo_Delete_Account_Backend {
 	 * @return void.
 	 */
 	public function wda_settings_page(){
-		$title  = get_option( 'wda_title', 'Woo Delete Account' );
+		$title  = get_option( 'wda_title', 'Delete Account' );
 		$button = get_option( 'wda_button_label', 'Confirm' );
 
   		?>
