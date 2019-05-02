@@ -13,6 +13,7 @@ Class Woo_Delete_Account_Backend {
 	 */
 	public function __construct() {
 		add_action('admin_menu', array( $this, 'wda_register_setting_menu') );
+		add_action( 'admin_init', array( $this, 'save_settings' ) );
 	}
 
 	/**
@@ -65,6 +66,35 @@ Class Woo_Delete_Account_Backend {
 
 		</form>
     <?php
+	}
+
+	/**
+	 * Save settings.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return void.
+	 */
+	public function save_settings() {
+
+		if( isset( $_POST['woo_delete_account_settings_nonce'] ) ) {
+
+
+			if( ! wp_verify_nonce( $_POST['woo_delete_account_settings_nonce'], 'woo_delete_account_settings' )
+				) {
+				   print 'Nonce Failed!';
+				   exit;
+			}
+
+			$options = array( 'wda_title', 'wda_button_label' );
+
+			foreach( $options as $option ) {
+				if( isset( $_POST[ $option ] ) ) {
+					$value = sanitize_text_field( $_POST[ $option ] );
+					update_option( $option, $value);
+				}
+			}
+		}
 	}
 }
 
