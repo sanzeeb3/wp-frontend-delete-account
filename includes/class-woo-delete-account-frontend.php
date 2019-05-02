@@ -24,8 +24,11 @@ Class Woo_Delete_Account_frontend {
 	 */
 	public function perform_delete_action() {
 
-		if( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'woo-delete-account' ) ) {
-			// Verify nonce and process action.
+		if ( isset( $_REQUEST['_wpnonce'] ) && isset( $_REQUEST['woo-delete'] ) ) {
+			if( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'woo-delete-account' ) ) {
+				return;
+			}
+
 		}
 	}
 }
