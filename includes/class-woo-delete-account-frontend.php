@@ -13,7 +13,7 @@ Class Woo_Delete_Account_frontend {
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'perform_delete_action' ) );
-		add_action( 'wp_footer', array( $this, 'assets_footer' ), 15 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'assets_footer' ), 15 );
 	}
 
 	/**

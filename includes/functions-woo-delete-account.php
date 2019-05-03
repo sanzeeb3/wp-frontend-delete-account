@@ -37,8 +37,9 @@ function woo_delete_account_content() {
 				} else if( 'custom_captcha' === $security && $captcha_question != '' ) {
 					$html = '<label>' . $captcha_question . '</label>';
 					$html .= '<input type="text" name="wda-custom-captcha-answer" />';
-				} else if( 'recaptcha' === $security ) {
-
+				} else if( 'recaptcha_v2' === $security ) {
+					wp_enqueue_script( 'wda-recaptcha');
+					add_inline_recaptcha_script();
 				}
 
 				echo $html;
@@ -56,4 +57,16 @@ function woo_delete_account_content() {
 			}
 		</style>
 	<?php
+}
+
+/**
+ * Add reCaptcha script inline.
+ *
+ * @since  1.0.0
+ */
+function add_inline_recaptcha_script() {
+	$recaptch_inline  = 'var wdaRecaptchaLoad = function(){jQuery(".g-recaptcha").each(function(index, el){var recaptchaID = grecaptcha.render(el,{callback:function(){wdaRecaptchaCallback(el);}},true);jQuery(el).closest("form").find("button[type=submit]").get(0).recaptchaID = recaptchaID;});};';
+	$recaptch_inline .= 'var wdaRecaptchaCallback = function(el){var $form = jQuery(el).closest("form");$form.find("button[type=submit]").get(0).recaptchaID = false;$form.submit();};';
+
+	wp_add_inline_script( 'wda-recaptcha', $recaptch_inline );
 }

@@ -85,7 +85,7 @@ Class Woo_Delete_Account_Backend {
 		        				<option value="none" <?php selected( 'none', $security, true ) ;?>><?php echo esc_html__( '--None--', 'wp-force-logout' );?></option>
    								<option value="password" <?php selected( 'password', $security, true ) ;?>><?php echo esc_html__( 'Password', 'wp-force-logout' );?></option>
 		        				<option value="custom_captcha" <?php selected( 'custom_captcha', $security, true ) ;?>><?php echo esc_html__( 'Custom Captcha', 'wp-force-logout' );?></option>
-		        				<option value="recaptcha_v2" <?php selected( 'recaptcha_v2', $security, true ) ;?>><?php echo esc_html__( 'reCaptcha v2 (checkbox)', 'wp-force-logout' );?></option>
+		        				<option value="recaptcha_v2" <?php selected( 'recaptcha_v2', $security, true ) ;?>><?php echo esc_html__( 'reCaptcha (v2)', 'wp-force-logout' );?></option>
 		        			</select><br/>
 		        		</td>
 		        </tr>
