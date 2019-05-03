@@ -51,7 +51,7 @@ function woo_delete_account_content() {
 				echo $html;
 			?>
 			<div class="wda-error">
-				<span></span>
+				<span style="color:red"></span>
 			</div>
 			<div class="wda-submit">
 				<a class="woo-delete-account-button" href="<?php echo $link;?>"><button><?php echo $button;?></button></a>

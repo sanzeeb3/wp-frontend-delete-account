@@ -12,8 +12,9 @@ Class Woo_Delete_Account_frontend {
 	 * Constructor.
 	 */
 	public function __construct() {
-		add_action( 'init', array( $this, 'perform_delete_action' ) );
+
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ), 15 );
+		add_action( 'wp_ajax_confirm_delete', array( $this, 'confirm_delete' ) );
 	}
 
 	/**
@@ -23,7 +24,7 @@ Class Woo_Delete_Account_frontend {
 	 *
 	 * @return Void.
 	 */
-	public function perform_delete_action() {
+	public function confirm_delete() {
 
 		if ( isset( $_REQUEST['_wpnonce'] ) && isset( $_REQUEST['woo-delete'] ) ) {
 			if( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'woo-delete-account' ) ) {
@@ -76,6 +77,7 @@ Class Woo_Delete_Account_frontend {
 			'captcha_answer'    => $captcha_answer,
 			'site_key' 			=> $site_key,
 			'site_secret' 		=> $site_secret,
+			'recaptcha_required' => esc_html__( 'reCaptcha is required.', 'woo-delete-account' ),
 		) );
 	}
 }
