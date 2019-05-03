@@ -35,8 +35,10 @@ Class Woo_Delete_Account_Backend {
 	 * @return void.
 	 */
 	public function wda_settings_page(){
-		$title  = get_option( 'wda_title', 'Delete Account' );
-		$button = get_option( 'wda_button_label', 'Confirm' );
+		$title  	= get_option( 'wda_title', 'Delete Account' );
+		$button 	= get_option( 'wda_button_label', 'Confirm' );
+		$attribute 	= get_option( 'wda_attribute' );
+		$users  	= get_users();
 
   		?>
   		<h2 class="wp-heading-inline"><?php esc_html_e( 'Woo Delete Account Settings', 'woo-delete-account' ); ?></h2>
@@ -54,6 +56,19 @@ Class Woo_Delete_Account_Backend {
 		        <tr valign="top">
 		        	<th scope="row"><?php echo esc_html__( 'Button Label', 'woo-delete-account' );?></th>
 		        		<td><input type="text" name="wda_button_label" value ="<?php echo esc_html( $button ); ?>" class="woo-delete-account-button-label" />
+		        		</td>
+		        </tr>
+
+		        <tr valign="top">
+		        	<th scope="row"><?php echo esc_html__( 'Attribute all contents to:', 'woo-delete-account' );?></th>
+		        		<td>
+		        			<select style="width:17%;" name="wda_attribute">
+		        				<option><?php echo esc_html__( '--None--', 'wp-force-logout' );?></option>
+		        				<?php foreach( $users as $user ) {
+		        						echo '<option value="'. $user->ID .'" '. selected( $user->ID, $attribute, true ) .'>'. $user->data->user_login .'</option>';
+		        					}
+								?>
+		        			</select>
 		        		</td>
 		        </tr>
 
@@ -86,7 +101,7 @@ Class Woo_Delete_Account_Backend {
 				   exit;
 			}
 
-			$options = array( 'wda_title', 'wda_button_label' );
+			$options = array( 'wda_title', 'wda_button_label', 'wda_attribute' );
 
 			foreach( $options as $option ) {
 				if( isset( $_POST[ $option ] ) ) {

@@ -13,12 +13,11 @@ Lets customers delete thier account by own from their myaccount page. For non-st
 == Description ==
 
 New 'Delete Account' tab will be created on WooCommerce myaccount page, so that customers can delete their account by their own. Also, add the 'Delete Account' tab content anywhere with shortcode [woo_woo_delete_account] for non-store sites.
-`
-Settings:
+
+Options:
 * reCaptcha, confirm password and custom captcha protection.
-* User meta, posts, comments, orders, downloads, productss
+* reassign the posts by deleted user.
 * Delete domain cookies set by user.
-* Delete uploaded media files
 
 [Contribute On GitHub Repository](https://github.com/sanzeeb3/woo-woo-delete-account)
 
