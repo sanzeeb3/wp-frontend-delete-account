@@ -78,7 +78,8 @@ Class Woo_Delete_Account_frontend {
 			'site_key' 			 => $site_key,
 			'site_secret' 		 => $site_secret,
 			'recaptcha_required' => esc_html__( 'reCaptcha is required.', 'woo-delete-account' ),
-			'incorrect_answer'   => esc_html__( 'Incorrect Answer', 'woo-delete-account' )
+			'incorrect_answer'   => esc_html__( 'Incorrect Answer. Please try again.', 'woo-delete-account' ),
+			'empty_password'   => esc_html__( 'Empty Password.', 'woo-delete-account' ),
 		) );
 	}
 }
