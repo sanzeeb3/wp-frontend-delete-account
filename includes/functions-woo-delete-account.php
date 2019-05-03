@@ -19,16 +19,27 @@ function woo_delete_account_content() {
 					),
 				esc_url( wp_nonce_url( home_url(), 'woo-delete-account' ) )
 			);
-	$security = get_option( 'wda_security', 'password' );
+	$security 			= get_option( 'wda_security', 'password' );
+	$password_text  	= get_option( 'wda_security_password_text', esc_html__( 'Enter password to confirm:', 'woo-delete-account' ) );
+	$captcha_question 	= get_option( 'wda_security_custom_captcha_question', 'What is 11*3?' );
+	$captcha_answer 	= get_option( 'wda_security_custom_captcha_answer', '33' );
+	$site_key			= get_option( 'wda_security_recaptcha_site_key' );
+	$site_secret		= get_option( 'wda_security_recaptcha_site_secret' );
 
 	?>
 		<div class="wda-delete-account-container">
-			<?php if( 'password' === $security ) {
-				$html =  '<label>'. esc_html__( 'Enter password to confirm:', 'woo-delete-account' ) .'</label>';
-				$html .= '<input type="password" name="wda-password" />';
+			<?php
+				$html = '';
+				if( 'password' === $security ) {
+					$html =  '<label>'. $password_text . '</label>';
+					$html .= '<input type="password" name="wda-password" />';
+
+				} else if( 'custom_captcha' === $security && $captcha_question != '' ) {
+					$html = '<label>' . $captcha_question . '</label>';
+					$html .= '<input type="text" name="wda-custom-captcha-answer" />';
+				}
 
 				echo $html;
-			}
 			?>
 
 			<div class="wda-submit">

@@ -33,6 +33,10 @@ Yes. The plugin is translation ready. You can use any tranlstion plugin. Or cust
 
 You might need to refresh the permalinks. Navigate to Settings->Permalinks and Save.
 
+= I accidently deleted my own account. I am the owner of the site.
+
+Unfortunately, there is not any way to recover the deleted user. To create a new user and get access to the site follow: [https://www.wpbeginner.com/wp-tutorials/how-to-add-an-admin-user-to-the-wordpress-database-via-mysql/] (https://www.wpbeginner.com/wp-tutorials/how-to-add-an-admin-user-to-the-wordpress-database-via-mysql/)
+
 == Screenshots ==
 
 1. My Account Delete Account View

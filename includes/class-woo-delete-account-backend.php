@@ -35,11 +35,16 @@ Class Woo_Delete_Account_Backend {
 	 * @return void.
 	 */
 	public function wda_settings_page(){
-		$title  	= get_option( 'wda_title', 'Delete Account' );
-		$button 	= get_option( 'wda_button_label', 'Confirm' );
-		$attribute 	= get_option( 'wda_attribute' );
-		$security 	= get_option( 'wda_security', 'password' );
-		$users  	= get_users();
+		$title  			= get_option( 'wda_title', 'Delete Account' );
+		$button 			= get_option( 'wda_button_label', 'Confirm' );
+		$attribute 			= get_option( 'wda_attribute' );
+		$security 			= get_option( 'wda_security', 'password' );
+		$password_text  	= get_option( 'wda_security_password_text', 'Enter password to confirm:' );
+		$captcha_question 	= get_option( 'wda_security_custom_captcha_question', 'What is 11*3?' );
+		$captcha_answer 	= get_option( 'wda_security_custom_captcha_answer', '33' );
+		$site_key			= get_option( 'wda_security_recaptcha_site_key' );
+		$site_secret		= get_option( 'wda_security_recaptcha_site_secret' );
+		$users  			= get_users();
 
   		?>
   		<h2 class="wp-heading-inline"><?php esc_html_e( 'Woo Delete Account Settings', 'woo-delete-account' ); ?></h2>
@@ -85,6 +90,41 @@ Class Woo_Delete_Account_Backend {
 		        		</td>
 		        </tr>
 
+		        <tr valign="top" class="woo-delete-account-security-password">
+		        	<th scope="row"><?php echo esc_html__( 'Confirmation Text:', 'woo-delete-account' );?></th>
+		        		<td>
+		        			<input style="width:50%" type="text" name="wda_security_password_text" value ="<?php echo esc_html( $password_text ); ?>" class="woo-delete-account-security-password-inline" />
+		        		</td>
+		        </tr>
+
+   		        <tr valign="top" class="woo-delete-account-security-custom-captcha-question">
+		        	<th scope="row"><?php echo esc_html__( 'Captcha Question:', 'woo-delete-account' );?></th>
+		        		<td>
+		        			<input style="width:50%" type="text" name="wda_security_custom_captcha_question" value ="<?php echo esc_html( $captcha_question ); ?>" class="woo-delete-account-security-custom-captcha-question-inline" />
+		        		</td>
+		        </tr>
+
+		        <tr valign="top" class="woo-delete-account-security-custom-captcha-answer">
+		        	<th scope="row"><?php echo esc_html__( 'Captcha Answer:', 'woo-delete-account' );?></th>
+		        		<td>
+		        			<input style="width:50%" type="text" name="wda_security_custom_captcha_answer" value ="<?php echo esc_html( $captcha_answer ); ?>" class="woo-delete-account-security-custom-captcha-answer-inline" />
+		        		</td>
+		        </tr>
+
+		        <tr valign="top" class="woo-delete-account-security-recaptcha-site-key">
+		        	<th scope="row"><?php echo esc_html__( 'Site Key:', 'woo-delete-account' );?></th>
+		        		<td>
+		        			<input style="width:50%" type="text" name="wda_security_recaptcha_site_key" value ="<?php echo esc_html( $site_key ); ?>" class="woo-delete-account-security-recaptcha-site-key-inline" />
+		        		</td>
+		        </tr>
+
+		        <tr valign="top" class="woo-delete-account-security-recaptcha-site-secret">
+		        	<th scope="row"><?php echo esc_html__( 'Site Secret:', 'woo-delete-account' );?></th>
+		        		<td>
+		        			<input style="width:50%" type="text" name="wda_security_recaptcha_site_secret" value ="<?php echo esc_html( $site_secret ); ?>" class="woo-delete-account-security-recaptcha-site-secret-inline" />
+		        		</td>
+		        </tr>
+
 		        <?php do_action( 'woo_delete_account_settings' );?>
 	            <?php wp_nonce_field( 'woo_delete_account_settings', 'woo_delete_account_settings_nonce' );?>
 
@@ -114,7 +154,7 @@ Class Woo_Delete_Account_Backend {
 				   exit;
 			}
 
-			$options = array( 'wda_title', 'wda_button_label', 'wda_attribute', 'wda_security' );
+			$options = array( 'wda_title', 'wda_button_label', 'wda_attribute', 'wda_security', 'wda_security_password_text', 'wda_security_custom_captcha_question', 'wda_security_custom_captcha_answer', 'wda_security_recaptcha_site_key', 'wda_security_recaptcha_site_secret' );
 
 			foreach( $options as $option ) {
 				if( isset( $_POST[ $option ] ) ) {
