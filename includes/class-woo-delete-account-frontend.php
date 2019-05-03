@@ -71,13 +71,14 @@ Class Woo_Delete_Account_frontend {
 		$site_secret		= get_option( 'wda_security_recaptcha_site_secret' );
 
 		wp_localize_script( 'wda-delete-account-frontend', 'wda_plugins_params', array(
-			'ajax_url'          => admin_url( 'admin-ajax.php' ),
-			'wda_nonce' 		=> wp_create_nonce( 'wda_nonce' ),
-			'security' 			=> $security,
-			'captcha_answer'    => $captcha_answer,
-			'site_key' 			=> $site_key,
-			'site_secret' 		=> $site_secret,
+			'ajax_url'           => admin_url( 'admin-ajax.php' ),
+			'wda_nonce' 		 => wp_create_nonce( 'wda_nonce' ),
+			'security' 			 => $security,
+			'captcha_answer'     => $captcha_answer,
+			'site_key' 			 => $site_key,
+			'site_secret' 		 => $site_secret,
 			'recaptcha_required' => esc_html__( 'reCaptcha is required.', 'woo-delete-account' ),
+			'incorrect_answer'   => esc_html__( 'Incorrect Answer', 'woo-delete-account' )
 		) );
 	}
 }

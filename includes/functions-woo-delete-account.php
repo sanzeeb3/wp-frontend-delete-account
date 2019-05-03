@@ -31,12 +31,16 @@ function woo_delete_account_content() {
 			<?php
 				$html = '';
 				if( 'password' === $security ) {
-					$html =  '<label>'. $password_text . '</label>';
+					$html = '<div class="wda-password-confirm">';
+					$html .=  '<label>'. $password_text . '</label>';
 					$html .= '<input type="password" name="wda-password" />';
+					$html .= '</div>';
 
 				} else if( 'custom_captcha' === $security && $captcha_question != '' ) {
-					$html = '<label>' . $captcha_question . '</label>';
+					$html = '<div class="wda-custom-captcha">';
+					$html .= '<label>' . $captcha_question . '</label>';
 					$html .= '<input type="text" name="wda-custom-captcha-answer" />';
+					$html .= '</div">';
 				} else if( 'recaptcha_v2' === $security ) {
 					wp_enqueue_script( 'wda-recaptcha');
 					add_inline_recaptcha_script();
