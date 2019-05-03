@@ -72,6 +72,18 @@ Class Woo_Delete_Account_Backend {
 		        		</td>
 		        </tr>
 
+		        <tr valign="top">
+		        	<th scope="row"><?php echo esc_html__( 'Security method before deleting:', 'woo-delete-account' );?></th>
+		        		<td>
+		        			<select style="width:17%;" name="wda_security">
+		        				<option><?php echo esc_html__( '--None--', 'wp-force-logout' );?></option>
+   								<option><?php echo esc_html__( 'Password Confirmation', 'wp-force-logout' );?></option>
+		        				<option><?php echo esc_html__( 'Custom Captcha', 'wp-force-logout' );?></option>
+		        				<option><?php echo esc_html__( 'reCaptcha v2 (checkbox)', 'wp-force-logout' );?></option>
+		        			</select><br/>
+		        		</td>
+		        </tr>
+
 		        <?php do_action( 'woo_delete_account_settings' );?>
 	            <?php wp_nonce_field( 'woo_delete_account_settings', 'woo_delete_account_settings_nonce' );?>
 
