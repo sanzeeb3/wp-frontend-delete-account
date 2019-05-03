@@ -91,35 +91,35 @@ Class Woo_Delete_Account_Backend {
 		        </tr>
 
 		        <tr valign="top" class="woo-delete-account-security-password">
-		        	<th scope="row"><?php echo esc_html__( 'Confirmation Text:', 'woo-delete-account' );?></th>
+		        	<th scope="row"><?php echo esc_html__( 'Confirmation Text', 'woo-delete-account' );?></th>
 		        		<td>
 		        			<input style="width:50%" type="text" name="wda_security_password_text" value ="<?php echo esc_html( $password_text ); ?>" class="woo-delete-account-security-password-inline" />
 		        		</td>
 		        </tr>
 
    		        <tr valign="top" class="woo-delete-account-security-custom-captcha-question">
-		        	<th scope="row"><?php echo esc_html__( 'Captcha Question:', 'woo-delete-account' );?></th>
+		        	<th scope="row"><?php echo esc_html__( 'Captcha Question', 'woo-delete-account' );?></th>
 		        		<td>
 		        			<input style="width:50%" type="text" name="wda_security_custom_captcha_question" value ="<?php echo esc_html( $captcha_question ); ?>" class="woo-delete-account-security-custom-captcha-question-inline" />
 		        		</td>
 		        </tr>
 
 		        <tr valign="top" class="woo-delete-account-security-custom-captcha-answer">
-		        	<th scope="row"><?php echo esc_html__( 'Captcha Answer:', 'woo-delete-account' );?></th>
+		        	<th scope="row"><?php echo esc_html__( 'Captcha Answer', 'woo-delete-account' );?></th>
 		        		<td>
 		        			<input style="width:50%" type="text" name="wda_security_custom_captcha_answer" value ="<?php echo esc_html( $captcha_answer ); ?>" class="woo-delete-account-security-custom-captcha-answer-inline" />
 		        		</td>
 		        </tr>
 
 		        <tr valign="top" class="woo-delete-account-security-recaptcha-site-key">
-		        	<th scope="row"><?php echo esc_html__( 'Site Key:', 'woo-delete-account' );?></th>
+		        	<th scope="row"><?php echo esc_html__( 'Site Key', 'woo-delete-account' );?></th>
 		        		<td>
 		        			<input style="width:50%" type="text" name="wda_security_recaptcha_site_key" value ="<?php echo esc_html( $site_key ); ?>" class="woo-delete-account-security-recaptcha-site-key-inline" />
 		        		</td>
 		        </tr>
 
 		        <tr valign="top" class="woo-delete-account-security-recaptcha-site-secret">
-		        	<th scope="row"><?php echo esc_html__( 'Site Secret:', 'woo-delete-account' );?></th>
+		        	<th scope="row"><?php echo esc_html__( 'Site Secret', 'woo-delete-account' );?></th>
 		        		<td>
 		        			<input style="width:50%" type="text" name="wda_security_recaptcha_site_secret" value ="<?php echo esc_html( $site_secret ); ?>" class="woo-delete-account-security-recaptcha-site-secret-inline" />
 		        		</td>

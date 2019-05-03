@@ -37,6 +37,8 @@ function woo_delete_account_content() {
 				} else if( 'custom_captcha' === $security && $captcha_question != '' ) {
 					$html = '<label>' . $captcha_question . '</label>';
 					$html .= '<input type="text" name="wda-custom-captcha-answer" />';
+				} else if( 'recaptcha' === $security ) {
+
 				}
 
 				echo $html;
