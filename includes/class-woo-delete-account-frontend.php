@@ -32,6 +32,8 @@ Class Woo_Delete_Account_frontend {
 			$user_id 	= ( int ) $_REQUEST['woo-delete'];
 			$attribute 	= ( int ) get_option( 'wda_attribute' );
 
+			require_once( ABSPATH.'wp-admin/includes/user.php' );
+
 			wp_delete_user( $user_id, $attribute );
 
 		}

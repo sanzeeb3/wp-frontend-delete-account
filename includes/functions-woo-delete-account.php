@@ -21,7 +21,9 @@ function woo_delete_account_content() {
 			);
 
 	?>
-		<a class="woo-delete-account-button" href="<?php echo $link;?>"><button><?php echo $button;?></button></a>
+		<div class="wda-contentcontainer">
+			<a class="woo-delete-account-button" href="<?php echo $link;?>"><button><?php echo $button;?></button></a>
+		</div>
 		<style>
 			.woo-delete-account-button button{
     			background-color: red;
