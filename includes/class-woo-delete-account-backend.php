@@ -38,6 +38,7 @@ Class Woo_Delete_Account_Backend {
 		$title  	= get_option( 'wda_title', 'Delete Account' );
 		$button 	= get_option( 'wda_button_label', 'Confirm' );
 		$attribute 	= get_option( 'wda_attribute' );
+		$security 	= get_option( 'wda_security', 'password' );
 		$users  	= get_users();
 
   		?>
@@ -76,10 +77,10 @@ Class Woo_Delete_Account_Backend {
 		        	<th scope="row"><?php echo esc_html__( 'Security method before deleting:', 'woo-delete-account' );?></th>
 		        		<td>
 		        			<select style="width:17%;" name="wda_security">
-		        				<option><?php echo esc_html__( '--None--', 'wp-force-logout' );?></option>
-   								<option><?php echo esc_html__( 'Password Confirmation', 'wp-force-logout' );?></option>
-		        				<option><?php echo esc_html__( 'Custom Captcha', 'wp-force-logout' );?></option>
-		        				<option><?php echo esc_html__( 'reCaptcha v2 (checkbox)', 'wp-force-logout' );?></option>
+		        				<option value="none" <?php selected( 'none', $security, true ) ;?>><?php echo esc_html__( '--None--', 'wp-force-logout' );?></option>
+   								<option value="password" <?php selected( 'password', $security, true ) ;?>><?php echo esc_html__( 'Password', 'wp-force-logout' );?></option>
+		        				<option value="custom_captcha" <?php selected( 'custom_captcha', $security, true ) ;?>><?php echo esc_html__( 'Custom Captcha', 'wp-force-logout' );?></option>
+		        				<option value="recaptcha_v2" <?php selected( 'recaptcha_v2', $security, true ) ;?>><?php echo esc_html__( 'reCaptcha v2 (checkbox)', 'wp-force-logout' );?></option>
 		        			</select><br/>
 		        		</td>
 		        </tr>
@@ -113,7 +114,7 @@ Class Woo_Delete_Account_Backend {
 				   exit;
 			}
 
-			$options = array( 'wda_title', 'wda_button_label', 'wda_attribute' );
+			$options = array( 'wda_title', 'wda_button_label', 'wda_attribute', 'wda_security' );
 
 			foreach( $options as $option ) {
 				if( isset( $_POST[ $option ] ) ) {
