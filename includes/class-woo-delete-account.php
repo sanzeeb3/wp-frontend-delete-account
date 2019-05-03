@@ -75,9 +75,9 @@ final class Woo_Delete_Account {
 	 * Define DA Constants.
 	 */
 	private function define_constants() {
-		$this->define( 'wda_ABSPATH', dirname( WOO_DELETE_ACCOUNT_PLUGIN_FILE ) . '/' );
-		$this->define( 'wda_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-		$this->define( 'wda_VERSION', $this->version );
+		$this->define( 'WDA_ABSPATH', dirname( WOO_DELETE_ACCOUNT_PLUGIN_FILE ) . '/' );
+		$this->define( 'WDA_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+		$this->define( 'WDA_VERSION', $this->version );
 	}
 
 	/**
@@ -132,12 +132,12 @@ final class Woo_Delete_Account {
 	 * Includes.
 	 */
 	private function includes() {
-		include_once wda_ABSPATH . 'includes/functions-woo-delete-account.php';
-		include_once wda_ABSPATH . '/includes/class-woo-delete-account-frontend.php';
-		include_once wda_ABSPATH . '/includes/class-woocommerce-my-account-tab.php';
+		include_once WDA_ABSPATH . 'includes/functions-woo-delete-account.php';
+		include_once WDA_ABSPATH . '/includes/class-woo-delete-account-frontend.php';
+		include_once WDA_ABSPATH . '/includes/class-woocommerce-my-account-tab.php';
 
 		if( is_admin() ) {
-			include_once wda_ABSPATH . '/includes/class-woo-delete-account-backend.php';
+			include_once WDA_ABSPATH . '/includes/class-woo-delete-account-backend.php';
 		}
 	}
 }
