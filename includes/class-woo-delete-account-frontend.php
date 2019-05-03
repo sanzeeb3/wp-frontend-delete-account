@@ -25,13 +25,12 @@ Class Woo_Delete_Account_frontend {
 	 * @return Void.
 	 */
 	public function confirm_delete() {
-
-		if ( isset( $_REQUEST['_wpnonce'] ) && isset( $_REQUEST['woo-delete'] ) ) {
-			if( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'woo-delete-account' ) ) {
+		if ( isset( $_POST['security'] ) ) {
+			if( ! wp_verify_nonce( $_POST['security'], 'wda_nonce' ) ) {
 				return;
 			}
 
-			$user_id 	= ( int ) $_REQUEST['woo-delete'];
+			$user_id 	= ( int ) $_POST['woo-delete'];
 			$attribute 	= ( int ) get_option( 'wda_attribute' );
 
 			require_once( ABSPATH.'wp-admin/includes/user.php' );
