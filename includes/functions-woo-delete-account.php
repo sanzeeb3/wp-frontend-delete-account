@@ -40,6 +40,12 @@ function woo_delete_account_content() {
 				} else if( 'recaptcha_v2' === $security ) {
 					wp_enqueue_script( 'wda-recaptcha');
 					add_inline_recaptcha_script();
+
+					echo '<div class="wda-recaptcha-container" style="margin-bottom:10px">';
+					echo '<div class="g-recaptcha" data-sitekey="'. esc_attr( $site_key ) .'"></div>';
+					echo '<input type="text" name="g-recaptcha-hidden" class="wda-recaptcha-hidden" style="position:absolute!important;clip:rect(0,0,0,0)!important;height:1px!important;width:1px!important;border:0!important;overflow:hidden!important;padding:0!important;margin:0!important;" required>';
+
+					echo '</div>';
 				}
 
 				echo $html;
@@ -65,8 +71,8 @@ function woo_delete_account_content() {
  * @since  1.0.0
  */
 function add_inline_recaptcha_script() {
-	$recaptch_inline  = 'var wdaRecaptchaLoad = function(){jQuery(".g-recaptcha").each(function(index, el){var recaptchaID = grecaptcha.render(el,{callback:function(){wdaRecaptchaCallback(el);}},true);jQuery(el).closest("form").find("button[type=submit]").get(0).recaptchaID = recaptchaID;});};';
-	$recaptch_inline .= 'var wdaRecaptchaCallback = function(el){var $form = jQuery(el).closest("form");$form.find("button[type=submit]").get(0).recaptchaID = false;$form.submit();};';
+	$recaptcha_inline  = 'var wdaRecaptchaLoad = function(){jQuery(".g-recaptcha").each(function(index, el){grecaptcha.render(el,{callback:function(){wdaRecaptchaCallback(el);}},true);});};';
+	$recaptcha_inline .= 'var wdaRecaptchaCallback = function(el){jQuery(el).find(".wda-recaptcha-hidden").val("1").valid();};';
 
-	wp_add_inline_script( 'wda-recaptcha', $recaptch_inline );
+	wp_add_inline_script( 'wda-recaptcha', $recaptcha_inline );
 }
