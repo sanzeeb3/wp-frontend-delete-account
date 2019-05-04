@@ -11,6 +11,7 @@
  * @return Void.
  */
 function woo_delete_account_content() {
+
 	$button  			= get_option( 'wda_button_label', 'Confirm' );
 	$user_id 			= get_current_user_id();
 	$security 			= get_option( 'wda_security', 'password' );

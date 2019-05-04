@@ -135,6 +135,7 @@ final class Woo_Delete_Account {
 		include_once WDA_ABSPATH . 'includes/functions-woo-delete-account.php';
 		include_once WDA_ABSPATH . '/includes/class-woo-delete-account-frontend.php';
 		include_once WDA_ABSPATH . '/includes/class-woocommerce-my-account-tab.php';
+		include_once WDA_ABSPATH . '/includes/class-wda-gutenberg-block.php';
 
 		if( is_admin() ) {
 			include_once WDA_ABSPATH . '/includes/class-woo-delete-account-backend.php';
