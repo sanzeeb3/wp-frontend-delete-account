@@ -8,7 +8,7 @@ jQuery( function( $ ) {
 
     	    if( 'recaptcha_v2' === wda_plugins_params.security ) {
    				if( grecaptcha && grecaptcha.getResponse().length > 0 ) {
-					error.html('');
+					error.html('').append('<i>'+ wda_plugins_params.processing +'</i>');
 					value = grecaptcha.getResponse();
 				} else {
   			    	error.html('').append('<i>'+ wda_plugins_params.recaptcha_required +'</i>');
@@ -20,7 +20,7 @@ jQuery( function( $ ) {
 					error.html('').append('<i>'+ wda_plugins_params.incorrect_answer +'</i>');
   				    return;
 				} else {
-					error.html('');
+					error.html('').append('<i>'+ wda_plugins_params.processing +'</i>');
 				}
 
     	    } else if ( 'password' === wda_plugins_params.security ) {
@@ -30,7 +30,7 @@ jQuery( function( $ ) {
     	    		error.html('').append('<i>'+ wda_plugins_params.empty_password +'</i>');
     	    		return;
     	    	} else {
-					error.html('');
+					error.html('').append('<i>'+ wda_plugins_params.processing +'</i>');
 				}
     	    }
 
@@ -41,9 +41,13 @@ jQuery( function( $ ) {
 			};
 
 			$.post( wda_plugins_params.ajax_url, data, function( response ) {
+
 				if( response.success === false ) {
 					error.html('').append('<i>'+ response.data.message +'</i>');
 					return;
+				} else if( response.success === true ) {
+					error.html('').append('<i>'+ response.message +'</i>');
+					location.reload();
 				}
         	});
     	});

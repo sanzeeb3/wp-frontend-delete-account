@@ -15,6 +15,7 @@ Class Woo_Delete_Account_frontend {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ), 15 );
 		add_action( 'wp_ajax_confirm_delete', array( $this, 'confirm_delete' ) );
+		add_shortcode( 'frontend_account_delete', 'woo_delete_account_content' );
 	}
 
 	/**
@@ -88,9 +89,13 @@ Class Woo_Delete_Account_frontend {
 		$user_id 	= get_current_user_id();
 		$user 		= get_user_by( 'id', $user_id );
 
-		echo "<pre>"; print_r('NoW DELETE'); echo "</pre>";
 		// require_once( ABSPATH.'wp-admin/includes/user.php' );
 		// wp_delete_user( $user_id, $attribute );
+
+		wp_send_json( array(
+				'success' => true,
+				'message' => esc_html__( 'Deleting...', 'woo-delete-account' ),
+			) );
 	}
 
 	/**
@@ -131,7 +136,8 @@ Class Woo_Delete_Account_frontend {
 			'site_secret' 		 => $site_secret,
 			'recaptcha_required' => esc_html__( 'reCaptcha is required.', 'woo-delete-account' ),
 			'incorrect_answer'   => esc_html__( 'Incorrect Answer. Please try again.', 'woo-delete-account' ),
-			'empty_password'   => esc_html__( 'Empty Password.', 'woo-delete-account' ),
+			'empty_password'   	 => esc_html__( 'Empty Password.', 'woo-delete-account' ),
+			'processing'   	 	 => esc_html__( 'Processing...', 'woo-delete-account' ),
 		) );
 	}
 }

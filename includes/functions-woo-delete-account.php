@@ -11,14 +11,8 @@
  * @return Void.
  */
 function woo_delete_account_content() {
-	$button  = get_option( 'wda_button_label', 'Confirm' );
-	$user_id = get_current_user_id();
-	$link    = add_query_arg(
-				array(
-						'woo-delete' => $user_id
-					),
-				esc_url( wp_nonce_url( home_url(), 'woo-delete-account' ) )
-			);
+	$button  			= get_option( 'wda_button_label', 'Confirm' );
+	$user_id 			= get_current_user_id();
 	$security 			= get_option( 'wda_security', 'password' );
 	$password_text  	= get_option( 'wda_security_password_text', esc_html__( 'Enter password to confirm:', 'woo-delete-account' ) );
 	$captcha_question 	= get_option( 'wda_security_custom_captcha_question', 'What is 11*3?' );
@@ -58,7 +52,7 @@ function woo_delete_account_content() {
 				<span style="color:red"></span>
 			</div>
 			<div class="wda-submit">
-				<a class="woo-delete-account-button" href="<?php echo $link;?>"><button><?php echo $button;?></button></a>
+				<a class="woo-delete-account-button" href="#"><button><?php echo $button;?></button></a>
 			</div>
 		</div>
 		<style>
