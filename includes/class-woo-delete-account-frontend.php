@@ -27,17 +27,50 @@ Class Woo_Delete_Account_frontend {
 	public function confirm_delete() {
 		if ( isset( $_POST['security'] ) ) {
 			if( ! wp_verify_nonce( $_POST['security'], 'wda_nonce' ) ) {
-				return;
+				error_log( print_r( 'Nonce Error! ' ) );
 			}
 
-			$user_id 	= ( int ) $_POST['woo-delete'];
-			$attribute 	= ( int ) get_option( 'wda_attribute' );
+			$security 	= get_option( 'wda_security', 'password' );
+			$pass 		= isset( $_POST['value'] ) ? $_POST['value'] : '';
+			$captcha_answer 	= get_option( 'wda_security_custom_captcha_answer', '33' );
 
-			require_once( ABSPATH.'wp-admin/includes/user.php' );
+			if( 'password' === $security ) {
+				if( $user && wp_check_password( $pass, $user->data->user_pass, $user->ID ) ) {
+					$this->delete_user();
+				} else {
+					wp_send_json_error( array(
+						'message' => __( 'Invalid Password!', 'entries-for-wpforms' ),
+					) );
+				}
+			} elseif( 'custom_captcha' === $security ) {
+				$value = sanitize_text_field( $_POST['value' ] );
+				if( $value === $captcha_answer ) {
+					$this->delete_user();
+				} else {
+					wp_send_json_error( array(
+						'message' =>	esc_html__( 'Incorrect Answer. Please try again.', 'woo-delete-account' ),
+					) );
+				}
+			} elseif( 'recaptcha_v2' === $security ) {
 
-			wp_delete_user( $user_id, $attribute );
+			}
 
 		}
+	}
+
+	/**
+	 * Delete user by ID.
+	 *
+	 * @return void.
+	 */
+	public function delete_user() {
+		$attribute 	= ( int ) get_option( 'wda_attribute' );
+		$user_id 	= get_current_user_id();
+		$user 		= get_user_by( 'id', $user_id );
+
+		echo "<pre>"; print_r('NoW DELETE'); echo "</pre>";
+		// require_once( ABSPATH.'wp-admin/includes/user.php' );
+		// wp_delete_user( $user_id, $attribute );
 	}
 
 	/**

@@ -12,6 +12,8 @@ Lets customers delete thier account by own from their myaccount page. For non-st
 
 == Description ==
 
+# FOR TESTING PURPOSE, USE DUMMY ACCOUNT OR YOU MIGHT DELETE YOURSELF.
+
 New 'Delete Account' tab will be created on WooCommerce myaccount page, so that customers can delete their account by their own. Also, add the 'Delete Account' tab content anywhere with shortcode [woo_woo_delete_account] for non-store sites.
 
 Options:

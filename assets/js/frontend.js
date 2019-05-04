@@ -40,7 +40,10 @@ jQuery( function( $ ) {
 			};
 
 			$.post( wda_plugins_params.ajax_url, data, function( response ) {
-				// Success. Do nothing. Silence is golden.
+				if( response.success === false ) {
+					error.html('').append('<i>'+ response.data.message +'</i>');
+					return;
+				}
         	});
     	});
 });
