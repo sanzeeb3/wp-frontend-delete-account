@@ -31,10 +31,13 @@ Class Woo_Delete_Account_frontend {
 			}
 
 			$security 	= get_option( 'wda_security', 'password' );
-			$pass 		= isset( $_POST['value'] ) ? $_POST['value'] : '';
 			$captcha_answer 	= get_option( 'wda_security_custom_captcha_answer', '33' );
 
 			if( 'password' === $security ) {
+				$user_id 	= get_current_user_id();
+				$user 		= get_user_by( 'id', $user_id );
+				$pass 		= isset( $_POST['value'] ) ? $_POST['value'] : '';
+
 				if( $user && wp_check_password( $pass, $user->data->user_pass, $user->ID ) ) {
 					$this->delete_user();
 				} else {
@@ -44,6 +47,7 @@ Class Woo_Delete_Account_frontend {
 				}
 			} elseif( 'custom_captcha' === $security ) {
 				$value = sanitize_text_field( $_POST['value' ] );
+
 				if( $value === $captcha_answer ) {
 					$this->delete_user();
 				} else {
@@ -53,6 +57,22 @@ Class Woo_Delete_Account_frontend {
 				}
 			} elseif( 'recaptcha_v2' === $security ) {
 
+				if ( ! empty( $_POST['value'] ) ) {
+					$site_secret	= get_option( 'wda_security_recaptcha_site_secret' );
+					$data 			= wp_remote_get( 'https://www.google.com/recaptcha/api/siteverify?secret=' . $site_secret . '&response=' . $_POST['value'] );
+					$data 			= json_decode( wp_remote_retrieve_body( $data ) );
+					if ( empty( $data->success ) ) {
+						wp_send_json_error( array(
+							'message' =>	esc_html__( 'Incorrect reCaptcha. Contact your site administrator.', 'woo-delete-account' ),
+						) );
+					} else {
+						$this->delete_user();
+					}
+				} else {
+					wp_send_json_error( array(
+						'message' =>	esc_html__( 'reCaptcha is required.', 'woo-delete-account' ),
+					) );
+				}
 			}
 
 		}

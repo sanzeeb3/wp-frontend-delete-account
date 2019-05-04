@@ -9,6 +9,7 @@ jQuery( function( $ ) {
     	    if( 'recaptcha_v2' === wda_plugins_params.security ) {
    				if( grecaptcha && grecaptcha.getResponse().length > 0 ) {
 					error.html('');
+					value = grecaptcha.getResponse();
 				} else {
   			    	error.html('').append('<i>'+ wda_plugins_params.recaptcha_required +'</i>');
   				    return;
