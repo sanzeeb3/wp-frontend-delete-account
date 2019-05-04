@@ -14,6 +14,17 @@ Class Woo_Delete_Account_Backend {
 	public function __construct() {
 		add_action('admin_menu', array( $this, 'wda_register_setting_menu') );
 		add_action( 'admin_init', array( $this, 'save_settings' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'load_assets' ) );
+	}
+
+	/**
+	 * Load assets for backend.
+	 *
+	 * @since  1.0.0
+	 * @return void.
+	 */
+	public function load_assets() {
+		wp_enqueue_script( 'woo-delete-account-js', plugins_url( 'assets/js/admin/woo-delete-account.js', WOO_DELETE_ACCOUNT_PLUGIN_FILE ), array(), WDA_VERSION, false );
 	}
 
 	/**
@@ -81,7 +92,7 @@ Class Woo_Delete_Account_Backend {
 		        <tr valign="top">
 		        	<th scope="row"><?php echo esc_html__( 'Security method before deleting:', 'woo-delete-account' );?></th>
 		        		<td>
-		        			<select style="width:17%;" name="wda_security">
+		        			<select style="width:17%;" name="wda_security" class="wda-security">
 		        				<option value="none" <?php selected( 'none', $security, true ) ;?>><?php echo esc_html__( '--None--', 'wp-force-logout' );?></option>
    								<option value="password" <?php selected( 'password', $security, true ) ;?>><?php echo esc_html__( 'Password', 'wp-force-logout' );?></option>
 		        				<option value="custom_captcha" <?php selected( 'custom_captcha', $security, true ) ;?>><?php echo esc_html__( 'Custom Captcha', 'wp-force-logout' );?></option>
@@ -89,7 +100,6 @@ Class Woo_Delete_Account_Backend {
 		        			</select><br/>
 		        		</td>
 		        </tr>
-
 		        <tr valign="top" class="woo-delete-account-security-password">
 		        	<th scope="row"><?php echo esc_html__( 'Confirmation Text', 'woo-delete-account' );?></th>
 		        		<td>
