@@ -4,9 +4,9 @@
  *
  * Class for frontend tasks.
  *
- * @class Woo_Delete_Account_frontend
+ * @class WPFDA_frontend
  */
-Class Woo_Delete_Account_frontend {
+Class WPFDA_frontend {
 
 	/**
 	 * Constructor.
@@ -15,7 +15,7 @@ Class Woo_Delete_Account_frontend {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ), 15 );
 		add_action( 'wp_ajax_confirm_delete', array( $this, 'confirm_delete' ) );
-		add_shortcode( 'frontend_account_delete', 'woo_delete_account_content' );
+		add_shortcode( 'frontend_account_delete', 'wpf_delete_account_content' );
 	}
 
 	/**
@@ -27,12 +27,12 @@ Class Woo_Delete_Account_frontend {
 	 */
 	public function confirm_delete() {
 		if ( isset( $_POST['security'] ) ) {
-			if( ! wp_verify_nonce( $_POST['security'], 'wda_nonce' ) ) {
+			if( ! wp_verify_nonce( $_POST['security'], 'wpfda_nonce' ) ) {
 				error_log( print_r( 'Nonce Error! ' ) );
 			}
 
-			$security 	= get_option( 'wda_security', 'password' );
-			$captcha_answer 	= get_option( 'wda_security_custom_captcha_answer', '33' );
+			$security 			= get_option( 'wpfda_security', 'password' );
+			$captcha_answer 	= get_option( 'wpfda_security_custom_captcha_answer', '33' );
 
 			if( 'password' === $security ) {
 				$user_id 	= get_current_user_id();
@@ -43,7 +43,7 @@ Class Woo_Delete_Account_frontend {
 					$this->delete_user();
 				} else {
 					wp_send_json_error( array(
-						'message' => __( 'Invalid Password!', 'entries-for-wpforms' ),
+						'message' => __( 'Invalid Password!', 'wp-frontend-delete-account' ),
 					) );
 				}
 			} elseif( 'custom_captcha' === $security ) {
@@ -53,25 +53,25 @@ Class Woo_Delete_Account_frontend {
 					$this->delete_user();
 				} else {
 					wp_send_json_error( array(
-						'message' =>	esc_html__( 'Incorrect Answer. Please try again.', 'woo-delete-account' ),
+						'message' =>	esc_html__( 'Incorrect Answer. Please try again.', 'wp-frontend-delete-account' ),
 					) );
 				}
 			} elseif( 'recaptcha_v2' === $security ) {
 
 				if ( ! empty( $_POST['value'] ) ) {
-					$site_secret	= get_option( 'wda_security_recaptcha_site_secret' );
+					$site_secret	= get_option( 'wpfda_security_recaptcha_site_secret' );
 					$data 			= wp_remote_get( 'https://www.google.com/recaptcha/api/siteverify?secret=' . $site_secret . '&response=' . $_POST['value'] );
 					$data 			= json_decode( wp_remote_retrieve_body( $data ) );
 					if ( empty( $data->success ) ) {
 						wp_send_json_error( array(
-							'message' =>	esc_html__( 'Incorrect reCaptcha. Contact your site administrator.', 'woo-delete-account' ),
+							'message' =>	esc_html__( 'Incorrect reCaptcha. Contact your site administrator.', 'wp-frontend-delete-account' ),
 						) );
 					} else {
 						$this->delete_user();
 					}
 				} else {
 					wp_send_json_error( array(
-						'message' =>	esc_html__( 'reCaptcha is required.', 'woo-delete-account' ),
+						'message' =>	esc_html__( 'reCaptcha is required.', 'wp-frontend-delete-account' ),
 					) );
 				}
 			}
@@ -85,21 +85,21 @@ Class Woo_Delete_Account_frontend {
 	 * @return void.
 	 */
 	public function delete_user() {
-		$attribute 	= ( int ) get_option( 'wda_attribute' );
+		$attribute 	= ( int ) get_option( 'wpfda_attribute' );
 		$user_id 	= get_current_user_id();
 		$user 		= get_user_by( 'id', $user_id );
 
-		do_action( 'woo_delete_account_process' );
+		do_action( 'wp_frontend_delete_account_process' );
 
 		// require_once( ABSPATH.'wp-admin/includes/user.php' );
 		// wp_delete_user( $user_id, $attribute );
 
 		wp_send_json( array(
 				'success' => true,
-				'message' => esc_html__( 'Deleting...', 'woo-delete-account' ),
+				'message' => esc_html__( 'Deleting...', 'wp-frontend-delete-account' ),
 		) );
 
-		do_action( 'woo_delete_account_process_complete' );
+		do_action( 'wp_frontend_delete_account_process_complete' );
 	}
 
 	/**
@@ -109,14 +109,14 @@ Class Woo_Delete_Account_frontend {
 	 * @return void.
 	 */
 	public function enqueue_assets() {
-		$site_key			= get_option( 'wda_security_recaptcha_site_key' );
-		$site_secret		= get_option( 'wda_security_recaptcha_site_secret' );
-		$security 			= get_option( 'wda_security', 'password' );
+		$site_key			= get_option( 'wpfda_security_recaptcha_site_key' );
+		$site_secret		= get_option( 'wpfda_security_recaptcha_site_secret' );
+		$security 			= get_option( 'wpfda_security', 'password' );
 
 		if ( $site_key && $site_secret && 'recaptcha_v2' === $security ) {
-			$recaptcha_api = apply_filters( 'woo_delete_account_recaptcha_url', 'https://www.google.com/recaptcha/api.js?onload=wdaRecaptchaLoad&render=explicit' );
+			$recaptcha_api = apply_filters( 'wp_frontend_delete_account_recaptcha_url', 'https://www.google.com/recaptcha/api.js?onload=wpfdaRecaptchaLoad&render=explicit' );
 			wp_register_script(
-				'wda-recaptcha',
+				'wpfda-recaptcha',
 				$recaptcha_api,
 				array( 'jquery' ),
 				'2.0.0',
@@ -124,26 +124,26 @@ Class Woo_Delete_Account_frontend {
 			);
 		}
 
-		wp_enqueue_script( 'wda-delete-account-frontend', plugins_url( 'assets/js/frontend.js', WOO_DELETE_ACCOUNT_PLUGIN_FILE ), array(), WDA_VERSION, false );
+		wp_enqueue_script( 'wpfda-delete-account-frontend', plugins_url( 'assets/js/frontend.js', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
 
-		$security 			= get_option( 'wda_security', 'password' );
-		$captcha_answer 	= get_option( 'wda_security_custom_captcha_answer', '33' );
-		$site_key			= get_option( 'wda_security_recaptcha_site_key' );
-		$site_secret		= get_option( 'wda_security_recaptcha_site_secret' );
+		$security 			= get_option( 'wpfda_security', 'password' );
+		$captcha_answer 	= get_option( 'wpfda_security_custom_captcha_answer', '33' );
+		$site_key			= get_option( 'wpfda_security_recaptcha_site_key' );
+		$site_secret		= get_option( 'wpfda_security_recaptcha_site_secret' );
 
-		wp_localize_script( 'wda-delete-account-frontend', 'wda_plugins_params', array(
+		wp_localize_script( 'wpfda-delete-account-frontend', 'wpfda_plugins_params', array(
 			'ajax_url'           => admin_url( 'admin-ajax.php' ),
-			'wda_nonce' 		 => wp_create_nonce( 'wda_nonce' ),
+			'wpfda_nonce' 		 => wp_create_nonce( 'wpfda_nonce' ),
 			'security' 			 => $security,
 			'captcha_answer'     => $captcha_answer,
 			'site_key' 			 => $site_key,
 			'site_secret' 		 => $site_secret,
-			'recaptcha_required' => esc_html__( 'reCaptcha is required.', 'woo-delete-account' ),
-			'incorrect_answer'   => esc_html__( 'Incorrect Answer. Please try again.', 'woo-delete-account' ),
-			'empty_password'   	 => esc_html__( 'Empty Password.', 'woo-delete-account' ),
-			'processing'   	 	 => esc_html__( 'Processing...', 'woo-delete-account' ),
+			'recaptcha_required' => esc_html__( 'reCaptcha is required.', 'wp-frontend-delete-account' ),
+			'incorrect_answer'   => esc_html__( 'Incorrect Answer. Please try again.', 'wp-frontend-delete-account' ),
+			'empty_password'   	 => esc_html__( 'Empty Password.', 'wp-frontend-delete-account' ),
+			'processing'   	 	 => esc_html__( 'Processing...', 'wp-frontend-delete-account' ),
 		) );
 	}
 }
 
-new Woo_Delete_Account_frontend();
+new WPFDA_frontend();

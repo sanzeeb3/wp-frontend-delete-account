@@ -4,9 +4,9 @@
  *
  * Class for adding gutenberg block.
  *
- * @class WDA_Gutenberg_Block
+ * @class WPFDA_Gutenberg_Block
  */
-Class WDA_Gutenberg_Block {
+Class WPFDA_Gutenberg_Block {
 
 	/**
 	 * Constructor.
@@ -23,8 +23,8 @@ Class WDA_Gutenberg_Block {
 	 */
 	public function load_assets() {
   		wp_enqueue_script(
-    		'wda-gutenberg-block',
-    		plugins_url( 'assets/js/admin/wda-gutenberg-block.js', WOO_DELETE_ACCOUNT_PLUGIN_FILE ),
+    		'wpfda-gutenberg-block',
+    		plugins_url( 'assets/js/admin/wpfda-gutenberg-block.js', WPFDA_PLUGIN_FILE ),
     		array('wp-blocks','wp-editor'),
     		true
   		);
@@ -37,8 +37,8 @@ Class WDA_Gutenberg_Block {
 	 */
 	public function register_block() {
 
-	    register_block_type( 'woo-delete-account/wda-gutenberg-block', array(
-	        'editor_script' 	=> 'wda-gutenberg-block',
+	    register_block_type( 'woo-delete-account/wpfda-gutenberg-block', array(
+	        'editor_script' 	=> 'wpfda-gutenberg-block',
 	        'render_callback' 	=> array( $this, 'render_callback' ),
 	    ) );
 	}
@@ -52,11 +52,11 @@ Class WDA_Gutenberg_Block {
 		static $count = 1;
 
 		if( $count === 1 ) {
-			woo_delete_account_content();
+			wpf_delete_account_content();
 		}
 
 		$count++;
 	}
 }
 
-new WDA_Gutenberg_Block();
+new WPFDA_Gutenberg_Block();

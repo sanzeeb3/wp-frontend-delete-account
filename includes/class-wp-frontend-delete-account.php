@@ -5,12 +5,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Main woo_delete_account Class.
+ * Main WPF_Delete_Account Class.
  *
- * @class   woo_delete_account
+ * @class   WPF_Delete_Account
  * @version 1.0.0
  */
-final class Woo_Delete_Account {
+final class WPF_Delete_Account {
 
 	/**
 	 * Plugin version.
@@ -45,7 +45,7 @@ final class Woo_Delete_Account {
 	 * @since 1.0
 	 */
 	public function __clone() {
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'woo-delete-account' ), '1.0' );
+		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'wp-frontend-delete-account' ), '1.0' );
 	}
 
 	/**
@@ -54,7 +54,7 @@ final class Woo_Delete_Account {
 	 * @since 1.0
 	 */
 	public function __wakeup() {
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'woo-delete-account' ), '1.0' );
+		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'wp-frontend-delete-account' ), '1.0' );
 	}
 
 	/**
@@ -68,16 +68,16 @@ final class Woo_Delete_Account {
 		$this->define_constants();
 		$this->includes();
 
-		do_action( 'woo_delete_account_loaded' );
+		do_action( 'wp_frontend_delete_account_loaded' );
 	}
 
 	/**
-	 * Define DA Constants.
+	 * Define WPFDA Constants.
 	 */
 	private function define_constants() {
-		$this->define( 'WDA_ABSPATH', dirname( WOO_DELETE_ACCOUNT_PLUGIN_FILE ) . '/' );
-		$this->define( 'WDA_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-		$this->define( 'WDA_VERSION', $this->version );
+		$this->define( 'WPFDA', dirname( WPFDA_PLUGIN_FILE ) . '/' );
+		$this->define( 'WPFDA_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+		$this->define( 'WPFDA_VERSION', $this->version );
 	}
 
 	/**
@@ -118,27 +118,27 @@ final class Woo_Delete_Account {
 	 * Note: the first-loaded translation file overrides any following ones if the same translation is present.
 	 *
 	 * Locales found in:
-	 *      - WP_LANG_DIR/woo-delete-account/woo-delete-account-LOCALE.mo
-	 *      - WP_LANG_DIR/plugins/woo-delete-account-LOCALE.mo
+	 *      - WP_LANG_DIR/wp-frontend-delete-account/wp-frontend-delete-account-LOCALE.mo
+	 *      - WP_LANG_DIR/plugins/wp-frontend-delete-account-LOCALE.mo
 	 */
 	public function load_plugin_textdomain() {
-		$locale = apply_filters( 'plugin_locale', get_locale(), 'woo-delete-account' );
+		$locale = apply_filters( 'plugin_locale', get_locale(), 'wp-frontend-delete-account' );
 
-		load_textdomain( 'woo-delete-account', WP_LANG_DIR . '/woo-delete-account/woo-delete-account-' . $locale . '.mo' );
-		load_plugin_textdomain( 'woo-delete-account', false, plugin_basename( dirname( WOO_DELETE_ACCOUNT_PLUGIN_FILE ) ) . '/languages' );
+		load_textdomain( 'wp-frontend-delete-account', WP_LANG_DIR . '/wp-frontend-delete-account/wp-frontend-delete-account-' . $locale . '.mo' );
+		load_plugin_textdomain( 'wp-frontend-delete-account', false, plugin_basename( dirname( WPFDA_PLUGIN_FILE ) ) . '/languages' );
 	}
 
 	/**
 	 * Includes.
 	 */
 	private function includes() {
-		include_once WDA_ABSPATH . 'includes/functions-woo-delete-account.php';
-		include_once WDA_ABSPATH . '/includes/class-woo-delete-account-frontend.php';
-		include_once WDA_ABSPATH . '/includes/class-woocommerce-my-account-tab.php';
-		include_once WDA_ABSPATH . '/includes/class-wda-gutenberg-block.php';
+		include_once WPFDA . '/includes/functions-wp-frontend-delete-account.php';
+		include_once WPFDA . '/includes/class-wp-frontend-delete-account-frontend.php';
+		include_once WPFDA . '/includes/class-wp-frontend-delete-account-woocommerce-my-account-tab.php';
+		include_once WPFDA . '/includes/class-wp-frontend-delete-account-gutenberg-block.php';
 
 		if( is_admin() ) {
-			include_once WDA_ABSPATH . '/includes/class-woo-delete-account-backend.php';
+			include_once WPFDA . '/includes/class-wp-frontend-delete-account-backend.php';
 		}
 	}
 }

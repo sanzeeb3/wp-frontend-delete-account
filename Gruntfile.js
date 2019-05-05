@@ -109,7 +109,7 @@ module.exports = function( grunt ){
 		addtextdomain: {
 			options: {
 				textdomain: '<%= pkg.name %>',
-				updateDomains: ['woo-delete-account']
+				updateDomains: ['wp-frontend-delete-account']
 			},
 			target: {
 				files: {

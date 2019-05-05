@@ -1,5 +1,5 @@
 jQuery( function( $ ) {
-	var security = $('.wda-security');				// Select the security method selector.
+	var security = $('.wpfda-security');			// Select the security method selector.
 	hide_fields( security );						// Hide fields on load.
 
 	$( security ).change( function() {

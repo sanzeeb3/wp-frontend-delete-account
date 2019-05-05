@@ -1,6 +1,6 @@
 {
-  "name": "woo-delete-account",
-  "description": "Lets customers delete thier account by own from their myaccount page.",
+  "name": "wp-frontend-delete-account",
+  "description": "Lets customers delete thier account by their own.",
   "homepage": "",
   "type": "wordpress-plugin",
   "license": "GPL-3.0-or-later",

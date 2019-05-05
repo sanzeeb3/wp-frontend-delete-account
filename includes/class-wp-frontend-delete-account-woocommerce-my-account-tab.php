@@ -20,8 +20,8 @@ Class WooCommerce_Myaccount_Tab {
 
 		add_action( 'init', array( $this, 'register_endpoint' ) );
 		add_filter( 'query_vars', array( $this, 'query_vars' ) );
-		add_filter( 'woocommerce_account_menu_items', array( $this, 'add_woo_delete_account_tab' ) );
-		add_action( 'woocommerce_account_woo-delete-account_endpoint', 'woo_delete_account_content' );
+		add_filter( 'woocommerce_account_menu_items', array( $this, 'add_wpf_delete_account_tab' ) );
+		add_action( 'woocommerce_account_wpf-delete-account_endpoint', 'wpf_delete_account_content' );
 	}
 
 	/**
@@ -30,7 +30,7 @@ Class WooCommerce_Myaccount_Tab {
 	 * @return Void.
 	 */
 	public function register_endpoint() {
-		add_rewrite_endpoint( 'woo-delete-account', EP_ROOT | EP_PAGES );
+		add_rewrite_endpoint( 'wpf-delete-account', EP_ROOT | EP_PAGES );
 	}
 
 	/**
@@ -42,7 +42,7 @@ Class WooCommerce_Myaccount_Tab {
 	 */
 	public function query_vars( $vars ) {
 
-    	$vars[] = 'woo-delete-account';
+    	$vars[] = 'wpf-delete-account';
     	return $vars;
 	}
 
@@ -53,9 +53,9 @@ Class WooCommerce_Myaccount_Tab {
 	 *
 	 * @return array Items including Delete Account.
 	 */
-	public function add_woo_delete_account_tab( $items ) {
+	public function add_wpf_delete_account_tab( $items ) {
 
-		$items['woo-delete-account']	= get_option( 'wda_title', esc_html__( 'Delete Account', 'woo-delete-account' ) );
+		$items['wpf-delete-account']	= get_option( 'wda_title', esc_html__( 'Delete Account', 'wpf-delete-account' ) );
 		return $items;
 	}
 }
