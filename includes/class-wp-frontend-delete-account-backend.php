@@ -92,7 +92,7 @@ Class WPFDA_Backend {
 		        <tr valign="top">
 		        	<th scope="row"><?php echo esc_html__( 'Security method before deleting:', 'wp-frontend-delete-account' );?></th>
 		        		<td>
-		        			<select style="width:17%;" name="wpfda_security" class="wda-security">
+		        			<select style="width:17%;" name="wpfda_security" class="wpfda-security">
 		        				<option value="none" <?php selected( 'none', $security, true ) ;?>><?php echo esc_html__( '--None--', 'wp-frontend-delete-account' );?></option>
    								<option value="password" <?php selected( 'password', $security, true ) ;?>><?php echo esc_html__( 'Password', 'wp-frontend-delete-account' );?></option>
 		        				<option value="custom_captcha" <?php selected( 'custom_captcha', $security, true ) ;?>><?php echo esc_html__( 'Custom Captcha', 'wp-frontend-delete-account' );?></option>

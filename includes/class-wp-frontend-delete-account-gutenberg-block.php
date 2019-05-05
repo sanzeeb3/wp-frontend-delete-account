@@ -37,7 +37,7 @@ Class WPFDA_Gutenberg_Block {
 	 */
 	public function register_block() {
 
-	    register_block_type( 'woo-delete-account/wpfda-gutenberg-block', array(
+	    register_block_type( 'wpf-delete-account/wpfda-gutenberg-block', array(
 	        'editor_script' 	=> 'wpfda-gutenberg-block',
 	        'render_callback' 	=> array( $this, 'render_callback' ),
 	    ) );

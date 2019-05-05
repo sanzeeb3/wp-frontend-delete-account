@@ -40,11 +40,11 @@
 		</properties>
 	</rule>
 	<rule ref="WordPress.Files.FileName.InvalidClassFileName">
-		<exclude-pattern>includes/class-woo-delete-account.php</exclude-pattern>
+		<exclude-pattern>includes/class-wpf-delete-account.php</exclude-pattern>
 	</rule>
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" type="array" value="woo-delete-account" />
+			<property name="text_domain" type="array" value="wpf-delete-account" />
 		</properties>
 	</rule>
 	<rule ref="Squiz.Commenting">

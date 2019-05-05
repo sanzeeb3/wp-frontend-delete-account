@@ -15,7 +15,7 @@ Class WPFDA_frontend {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ), 15 );
 		add_action( 'wp_ajax_confirm_delete', array( $this, 'confirm_delete' ) );
-		add_shortcode( 'frontend_account_delete', 'wpf_delete_account_content' );
+		add_shortcode( 'wp_frontend_delete_account', 'wpf_delete_account_content' );
 	}
 
 	/**

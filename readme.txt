@@ -1,6 +1,6 @@
 === Delete Account - For WooCommerce and all ===
 Contributors: sanzeeb3
-Tags: woo-woo-delete-account, woocommerce, delete user, remove account,
+Tags: woo-wpf-delete-account, woocommerce, delete user, remove account,
 Requires at least: 4.0
 Tested up to: 5.0
 Requires PHP: 5.3
@@ -21,7 +21,7 @@ Options:
 * reassign the posts by deleted user.
 * Delete domain cookies set by user.
 
-[Contribute On GitHub Repository](https://github.com/sanzeeb3/woo-woo-delete-account)
+[Contribute On GitHub Repository](https://github.com/sanzeeb3/woo-wpf-delete-account)
 
 [Contact The Author](http://www.sanjeebaryal.com.np)
 
@@ -29,7 +29,7 @@ Options:
 
 = Can I translate Delete Account?
 
-Yes. The plugin is translation ready. You can use any tranlstion plugin. Or customize the plugins language with the provided pot file. The recommended way is to help Entries For WPForms by contributing the translation on [WordPress.org](https://translate.wordpress.org/projects/wp-plugins/woo-woo-delete-account).
+Yes. The plugin is translation ready. You can use any tranlstion plugin. Or customize the plugins language with the provided pot file. The recommended way is to help Entries For WPForms by contributing the translation on [WordPress.org](https://translate.wordpress.org/projects/wp-plugins/woo-wpf-delete-account).
 
 = I see page not found while clicking delete account tab?
 
