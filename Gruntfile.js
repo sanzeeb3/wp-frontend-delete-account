@@ -97,7 +97,7 @@ module.exports = function( grunt ){
 			},
 			dist: {
 				options: {
-					potFilename: '<%= pkg.name %>.pot',
+					potFilename: 'wp-frontend-delete-account.pot',
 					exclude: [
 						'vendor/.*'
 					]
