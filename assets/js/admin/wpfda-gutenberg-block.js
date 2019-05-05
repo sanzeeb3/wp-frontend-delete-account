@@ -6,7 +6,7 @@ const { registerBlockType } = wp.blocks;
 const el = wp.element.createElement;
 
 
-registerBlockType( 'wpf-delete-account/wpfda-gutenberg-block', {
+registerBlockType( 'wp-frontend-delete-account/delete-account-content', {
     title: __( 'WP Frontend Account Delete', 'wp-frontend-delete-account' ),
     icon: 'admin-users',
     category: 'common',
