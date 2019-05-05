@@ -12,6 +12,10 @@
  */
 function woo_delete_account_content() {
 
+	if( ! is_user_logged_in() ) {
+		return;
+	}
+
 	$button  			= get_option( 'wda_button_label', 'Confirm' );
 	$user_id 			= get_current_user_id();
 	$security 			= get_option( 'wda_security', 'password' );
@@ -20,9 +24,12 @@ function woo_delete_account_content() {
 	$captcha_answer 	= get_option( 'wda_security_custom_captcha_answer', '33' );
 	$site_key			= get_option( 'wda_security_recaptcha_site_key' );
 	$site_secret		= get_option( 'wda_security_recaptcha_site_secret' );
+	$class 				= apply_filters( 'wda_container_class', 'wda-delete-account-container' );
+
+	do_action( 'woo_delete_account_before_content' );
 
 	?>
-		<div class="wda-delete-account-container">
+		<div class="<?php echo $class;?>">
 			<?php
 				$html = '';
 				if( 'password' === $security ) {
@@ -56,6 +63,7 @@ function woo_delete_account_content() {
 				<a class="woo-delete-account-button" href="#"><button><?php echo $button;?></button></a>
 			</div>
 		</div>
+
 		<style>
 			.woo-delete-account-button button{
     			background-color: red;
@@ -64,6 +72,8 @@ function woo_delete_account_content() {
 			}
 		</style>
 	<?php
+
+	do_action( 'woo_delete_account_after_content' );
 }
 
 /**

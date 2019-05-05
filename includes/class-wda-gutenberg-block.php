@@ -39,8 +39,23 @@ Class WDA_Gutenberg_Block {
 
 	    register_block_type( 'woo-delete-account/wda-gutenberg-block', array(
 	        'editor_script' 	=> 'wda-gutenberg-block',
-	        'render_callback' 	=> 'woo_delete_account_content',
+	        'render_callback' 	=> array( $this, 'render_callback' ),
 	    ) );
+	}
+
+	/**
+	 * Renders the content in gutenberg block.
+	 *
+	 * @return void.
+	 */
+	public function render_callback() {
+		static $count = 1;
+
+		if( $count === 1 ) {
+			woo_delete_account_content();
+		}
+
+		$count++;
 	}
 }
 

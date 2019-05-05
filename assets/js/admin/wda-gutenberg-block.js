@@ -8,7 +8,7 @@ const el = wp.element.createElement;
 
 registerBlockType( 'woo-delete-account/wda-gutenberg-block', {
     title: __( 'Frontend Account Delete', 'woo-delete-account' ),
-    icon: 'dismiss',
+    icon: 'admin-users',
     category: 'common',
     attributes: {
         images : {

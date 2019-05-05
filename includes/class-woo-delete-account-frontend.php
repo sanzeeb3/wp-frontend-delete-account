@@ -89,13 +89,17 @@ Class Woo_Delete_Account_frontend {
 		$user_id 	= get_current_user_id();
 		$user 		= get_user_by( 'id', $user_id );
 
+		do_action( 'woo_delete_account_process' );
+
 		// require_once( ABSPATH.'wp-admin/includes/user.php' );
 		// wp_delete_user( $user_id, $attribute );
 
 		wp_send_json( array(
 				'success' => true,
 				'message' => esc_html__( 'Deleting...', 'woo-delete-account' ),
-			) );
+		) );
+
+		do_action( 'woo_delete_account_process_complete' );
 	}
 
 	/**
