@@ -49,9 +49,9 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 2. Password Confirmation
 3. Custom Captcha
 4. reCaptcha
-2. Using Shortcode View
-3. Gutenberg Block View
-4. Settings
+5. Using Shortcode View
+6. Gutenberg Block View
+7. Settings
 
 == Changelog == 
 
