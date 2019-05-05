@@ -37,6 +37,10 @@ Class WPFDA_Gutenberg_Block {
 	 */
 	public function register_block() {
 
+		if( ! function_exists( 'register_block_type' ) ) {
+			return;
+		}
+
 	    register_block_type( 'wp-frontend-delete-account/delete-account-content', array(
 	        'editor_script' 	=> 'wpfda-gutenberg-block',
 	        'render_callback' 	=> array( $this, 'render_callback' ),
