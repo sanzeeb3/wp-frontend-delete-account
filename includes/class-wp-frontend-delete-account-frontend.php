@@ -4,9 +4,9 @@
  *
  * Class for frontend tasks.
  *
- * @class WPFDA_frontend
+ * @class WPFDA_Frontend
  */
-Class WPFDA_frontend {
+Class WPFDA_Frontend {
 
 	/**
 	 * Constructor.
@@ -125,6 +125,7 @@ Class WPFDA_frontend {
 		}
 
 		wp_enqueue_script( 'wpfda-delete-account-frontend', plugins_url( 'assets/js/frontend.js', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
+		wp_enqueue_style( 'wpfda-frontend-css', plugins_url( 'assets/css/wpfda-frontend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
 
 		$security 			= get_option( 'wpfda_security', 'password' );
 		$captcha_answer 	= get_option( 'wpfda_security_custom_captcha_answer', '33' );
@@ -146,4 +147,4 @@ Class WPFDA_frontend {
 	}
 }
 
-new WPFDA_frontend();
+new WPFDA_Frontend();

@@ -4,9 +4,9 @@
  *
  * Class for adding delete account tab in WooCommerce myaccount page.
  *
- * @class WooCommerce_Myaccount_Tab
+ * @class WPFDA_WooCommerce_Myaccount_Tab
  */
-Class WooCommerce_Myaccount_Tab {
+Class WPFDA_WooCommerce_Myaccount_Tab {
 
 	/**
 	 * Constructor.
@@ -60,4 +60,4 @@ Class WooCommerce_Myaccount_Tab {
 	}
 }
 
-new WooCommerce_Myaccount_Tab();
+new WPFDA_WooCommerce_Myaccount_Tab();

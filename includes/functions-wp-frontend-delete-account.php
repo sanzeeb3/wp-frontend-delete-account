@@ -45,7 +45,7 @@ function wpf_delete_account_content() {
 					$html .= '</div">';
 				} else if( 'recaptcha_v2' === $security ) {
 					wp_enqueue_script( 'wpfda-recaptcha');
-					add_inline_recaptcha_script();
+					wpfda_add_inline_recaptcha_script();
 
 					echo '<div class="wpfda-recaptcha-container" style="margin-bottom:10px">';
 					echo '<div class="g-recaptcha" data-sitekey="'. esc_attr( $site_key ) .'"></div>';
@@ -63,14 +63,6 @@ function wpf_delete_account_content() {
 				<a class="wpf-delete-account-button" href="#"><button><?php echo $button;?></button></a>
 			</div>
 		</div>
-
-		<style>
-			.wpf-delete-account-button button{
-    			background-color: red;
-    			border-color: red;
-    			color: #fff;
-			}
-		</style>
 	<?php
 
 	do_action( 'wp_frontend_delete_account_after_content' );
@@ -81,7 +73,7 @@ function wpf_delete_account_content() {
  *
  * @since  1.0.0
  */
-function add_inline_recaptcha_script() {
+function wpfda_add_inline_recaptcha_script() {
 	$recaptcha_inline  = 'var wpfdaRecaptchaLoad = function(){jQuery(".g-recaptcha").each(function(index, el){grecaptcha.render(el,{callback:function(){wpfdaRecaptchaCallback(el);}},true);});};';
 	$recaptcha_inline .= 'var wpfdaRecaptchaCallback = function(el){jQuery(el).find(".wpfda-recaptcha-hidden").val("1").valid();};';
 
