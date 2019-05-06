@@ -18,8 +18,7 @@ registerBlockType( 'wp-frontend-delete-account/delete-account-content', {
         }
     },
     edit( { attributes, setAttributes, className, focus, id } ) {
-        // Put a user interface here.
-        return null;
+        return '[wp_frontend_delete_account]';
 
     },
     save( { attributes, className } ) {
