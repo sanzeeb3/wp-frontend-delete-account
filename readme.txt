@@ -18,7 +18,7 @@ For WooCommerce sites, new 'Delete Account' tab will be created automatically on
 
 For non-store sites, add the 'Delete Account' tab content anywhere with shortcode [wp_frontend_delete_account] or with the built-in gutenberg block.
 
-# Feature and ptions:
+# Feature and Options:
 * Confirm password, custom captcha and reCaptcha protection.
 * Reassign the posts by deleted user.
 * Delete domain cookies set by user.
