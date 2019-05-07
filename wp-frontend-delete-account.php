@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: WP Frontend Delete Account
- * Description: Lets customers delete thier account by their own.
+ * Description: Lets customers delete their account by their own.
  * Version: 1.0.0
  * Author: Sanjeev Aryal
  * Author URI: http://www.sanjeebaryal.com.np
