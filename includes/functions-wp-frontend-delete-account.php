@@ -1,6 +1,6 @@
 <?php
 /**
- * Core Functions of the plguin for both frontend and backend.
+ * Core Functions of the plugin for both frontend and backend.
  *
  * @since  1.0.0
  */
@@ -25,7 +25,6 @@ function wpf_delete_account_content() {
 	$site_key			= get_option( 'wpfda_security_recaptcha_site_key' );
 	$site_secret		= get_option( 'wpfda_security_recaptcha_site_secret' );
 	$class 				= apply_filters( 'wpfda_container_class', 'wpfda-delete-account-container' );
-	$html 				= '';
 
 	do_action( 'wp_frontend_delete_account_before_content' );
 
@@ -53,18 +52,18 @@ function wpf_delete_account_content() {
 		$html .= '</div>';
 	}
 
-	$html .= '<div class="wpfda-error">';
-	$html .= '<span style="color:red"></span>';
-	$html .= '</div>';
+		$html .= '<div class="wpfda-error">';
+		$html .= '<span style="color:red"></span>';
+		$html .= '</div>';
 
-	$html .= '<div class="wpfda-submit">';
-	$html .= '<a class="wpf-delete-account-button" href="#">';
-	$html .= '<button>'. $button .'</button></a>';
+		$html .= '<div class="wpfda-submit">';
+		$html .= '<a class="wpf-delete-account-button" href="#">';
+		$html .= '<button>'. $button .'</button></a>';
+		$html .= '</div>';
+
 	$html .= '</div>';
 
 	do_action( 'wp_frontend_delete_account_after_content' );
-
-	$html .= '</div>';
 
 	return $html;
 }
