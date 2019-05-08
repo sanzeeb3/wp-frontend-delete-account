@@ -16,7 +16,7 @@ final class WPF_Delete_Account {
 	 * Plugin version.
 	 * @var string
 	 */
-	public $version = '1.0.0';
+	public $version = '1.0.1';
 
 
 	/**

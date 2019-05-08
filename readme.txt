@@ -4,7 +4,7 @@ Tags: delete-account, delete account from frontend, frontend delete, remove acco
 Requires at least: 4.0
 Tested up to: 5.0
 Requires PHP: 5.3
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -55,5 +55,12 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 
 == Changelog == 
 
-= 1.0.0 - xx/xx/2019 =
+= 1.0.1 - 05/08/2019 =
+* Fix - Broken functionality due to missing class.
+* Fix - WooCommerce myaccount tab echo content instead of return.
+* Fix - Misplaced before content hook.
+* Fix - Allow delete if no security method is chosen.
+* Add - Feedback on plugin deactivation.
+
+= 1.0.0 - 05/07/2019 =
 * Initial Release

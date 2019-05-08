@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: BUG-EMAIL-ADDR sanzeeb.aryal@gmail.com\n"
+"Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: yyyy-mm-dd hh:mm+0000\n"
-"PO-Revision-Date: 2019-05-07 09:23+0500\n"
+"PO-Revision-Date: 2019-05-08 09:47+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,102 +18,120 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "X-Generator: Eazy Po 0.9.5.3\n"
 
-#: includes/class-wp-frontend-delete-account-backend.php:61
+#: class-wp-frontend-delete-account-backend.php:34
+msgid "Deactivating..."
+msgstr ""
+
+#: class-wp-frontend-delete-account-backend.php:35
+msgid "Oops! Something went wrong"
+msgstr ""
+
+#: class-wp-frontend-delete-account-backend.php:70
 msgid "WP Frontend Delete Account Settings"
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-backend.php:68
+#: class-wp-frontend-delete-account-backend.php:77
 msgid "Title"
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-backend.php:74
+#: class-wp-frontend-delete-account-backend.php:83
 msgid "Button Label"
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-backend.php:80
+#: class-wp-frontend-delete-account-backend.php:89
 msgid "Attribute all contents to:"
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-backend.php:83
-#: includes/class-wp-frontend-delete-account-backend.php:96
+#: class-wp-frontend-delete-account-backend.php:92
+#: class-wp-frontend-delete-account-backend.php:105
 msgid "--None--"
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-backend.php:93
+#: class-wp-frontend-delete-account-backend.php:102
 msgid "Security method before deleting:"
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-backend.php:97
+#: class-wp-frontend-delete-account-backend.php:106
 msgid "Password"
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-backend.php:98
+#: class-wp-frontend-delete-account-backend.php:107
 msgid "Custom Captcha"
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-backend.php:99
+#: class-wp-frontend-delete-account-backend.php:108
 msgid "reCaptcha (v2)"
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-backend.php:104
+#: class-wp-frontend-delete-account-backend.php:113
 msgid "Confirmation Text"
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-backend.php:111
+#: class-wp-frontend-delete-account-backend.php:120
 msgid "Captcha Question"
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-backend.php:118
+#: class-wp-frontend-delete-account-backend.php:127
 msgid "Captcha Answer"
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-backend.php:125
+#: class-wp-frontend-delete-account-backend.php:134
 msgid "Site Key"
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-backend.php:132
+#: class-wp-frontend-delete-account-backend.php:141
 msgid "Site Secret"
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-frontend.php:46
+#: class-wp-frontend-delete-account-backend.php:214
+msgid ""
+"Would you care to let me know the deactivation reason so that I can improve "
+"it for you?"
+msgstr ""
+
+#: class-wp-frontend-delete-account-backend.php:221
+msgid "Skip and deactivate"
+msgstr ""
+
+#: class-wp-frontend-delete-account-frontend.php:46
 msgid "Invalid Password!"
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-frontend.php:56
-#: includes/class-wp-frontend-delete-account-frontend.php:143
+#: class-wp-frontend-delete-account-frontend.php:56
+#: class-wp-frontend-delete-account-frontend.php:144
 msgid "Incorrect Answer. Please try again."
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-frontend.php:67
+#: class-wp-frontend-delete-account-frontend.php:67
 msgid "Incorrect reCaptcha. Contact your site administrator."
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-frontend.php:74
-#: includes/class-wp-frontend-delete-account-frontend.php:142
+#: class-wp-frontend-delete-account-frontend.php:74
+#: class-wp-frontend-delete-account-frontend.php:143
 msgid "reCaptcha is required."
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-frontend.php:99
+#: class-wp-frontend-delete-account-frontend.php:100
 msgid "Deleting..."
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-frontend.php:144
+#: class-wp-frontend-delete-account-frontend.php:145
 msgid "Empty Password."
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-frontend.php:145
+#: class-wp-frontend-delete-account-frontend.php:146
 msgid "Processing..."
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account-woocommerce-my-account-tab.php:58
+#: class-wp-frontend-delete-account-woocommerce-my-account-tab.php:58
 msgid "Delete Account"
 msgstr ""
 
-#: includes/class-wp-frontend-delete-account.php:48
-#: includes/class-wp-frontend-delete-account.php:57
+#: class-wp-frontend-delete-account.php:48
+#: class-wp-frontend-delete-account.php:57
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: includes/functions-wp-frontend-delete-account.php:22
+#: functions-wp-frontend-delete-account.php:22
 msgid "Enter password to confirm:"
 msgstr ""
