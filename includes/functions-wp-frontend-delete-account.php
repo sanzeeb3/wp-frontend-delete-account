@@ -32,13 +32,13 @@ function wpf_delete_account_content() {
 	$html = '<div class="'. $class .'">';
 
 	if( 'password' === $security ) {
-		$html = '<div class="wpfda-password-confirm">';
+		$html .= '<div class="wpfda-password-confirm">';
 		$html .=  '<label>'. $password_text . '</label>';
 		$html .= '<input type="password" name="wpfda-password" />';
 		$html .= '</div>';
 	}
 	else if( 'custom_captcha' === $security && $captcha_question != '' ) {
-		$html = '<div class="wpfda-custom-captcha">';
+		$html .= '<div class="wpfda-custom-captcha">';
 		$html .= '<label>' . $captcha_question . '</label>';
 		$html .= '<input type="text" name="wpfda-custom-captcha-answer" />';
 		$html .= '</div">';
