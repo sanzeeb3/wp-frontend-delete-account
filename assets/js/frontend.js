@@ -32,6 +32,8 @@ jQuery( function( $ ) {
     	    	} else {
 					error.html('').append('<i>'+ wpfda_plugins_params.processing +'</i>');
 				}
+    	    } else if( 'none' === wpfda_plugins_params.security ) {
+    	    	error.html('').append('<i>'+ wpfda_plugins_params.processing +'</i>');
     	    }
 
 			var data = {

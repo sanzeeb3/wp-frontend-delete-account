@@ -74,8 +74,9 @@ Class WPFDA_Frontend {
 						'message' =>	esc_html__( 'reCaptcha is required.', 'wp-frontend-delete-account' ),
 					) );
 				}
+			} elseif( 'none' === $security ) {
+				$this->delete_user();
 			}
-
 		}
 	}
 
