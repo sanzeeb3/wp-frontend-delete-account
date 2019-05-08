@@ -15,6 +15,8 @@ Class WPFDA_Backend {
 		add_action( 'admin_menu', array( $this, 'wpfda_register_setting_menu') );
 		add_action( 'admin_init', array( $this, 'save_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_assets' ) );
+		add_action( 'wp_ajax_wpfda_deactivation_notice', array( $this, 'deactivation_notice' ) );
+		add_action( 'wp_ajax_wpfda_deactivation_email', array( $this, 'deactivation_email' ) );
 	}
 
 	/**
@@ -24,7 +26,14 @@ Class WPFDA_Backend {
 	 * @return void.s
 	 */
 	public function load_assets() {
+		wp_enqueue_style( 'wpfda-backend', plugins_url( 'assets/css/wpfda-backend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, $media = 'all' );
 		wp_enqueue_script( 'wpf-delete-account-js', plugins_url( 'assets/js/admin/wpf-delete-account.js', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
+		wp_localize_script( 'wpf-delete-account-js', 'wpfda_plugins_params', array(
+			'ajax_url'           => admin_url( 'admin-ajax.php' ),
+			'deactivation_nonce' => wp_create_nonce( 'deactivation-notice' ),
+			'deactivating'		 => __( 'Deactivating...', 'wp-frontend-delete-account' ),
+			'wrong'				 => __( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
+		) );
 	}
 
 	/**
@@ -173,6 +182,77 @@ Class WPFDA_Backend {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Popup feedback on plugin deactivation.
+	 *
+	 *  @since  1.0.1
+	 */
+	public static function deactivation_notice() {
+
+		check_ajax_referer( 'deactivation-notice', 'security' );
+
+		ob_start();
+		global $status, $page, $s;
+		$deactivate_url = wp_nonce_url( 'plugins.php?action=deactivate&amp;plugin=' . WPFDA_PLUGIN_FILE . '&amp;plugin_status=' . $status . '&amp;paged=' . $page . '&amp;s=' . $s, 'deactivate-plugin_' . WPFDA_PLUGIN_FILE );
+
+		?>
+			<!-- The Modal -->
+			<div id="wp-frontend-delete-account-modal" class="wp-frontend-delete-account-modal">
+
+				 <!-- Modal content -->
+				 <div class="wp-frontend-delete-account-modal-content">
+				    <div class="wp-frontend-delete-account-modal-header">
+				    </div>
+
+				    <div class="wp-frontend-delete-account-modal-body">
+						<div class="container">
+						  	<form method="post" id="wp-frontend-delete-account-send-deactivation-email">
+
+								<div class="row">
+										<h3 for=""><?php echo __( 'Would you care to let me know the deactivation reason so that I can improve it for you?', 'wp-frontend-delete-account');?></h3>
+									<div class="col-75">
+										<textarea id="message" name="message" placeholder="Deactivation Reason?" style="height:150px"></textarea>
+									</div>
+								</div>
+								<div class="row">
+										<?php wp_nonce_field( 'wpfda_deactivation_email', 'wpfda_deactivation_email' ); ?>
+										<a href="<?php echo $deactivate_url;?>"><?php echo __( 'Skip and deactivate', 'wp-frontend-delete-account' );?>
+										<input type="submit" id="wpfda-send-deactivation-email" value="Deactivate">
+								</div>
+						  </form>
+						</div>
+
+				    <div class="wp-frontend-delete-account-modal-footer">
+				    </div>
+				 </div>
+			</div>
+
+		<?php
+
+		$content = ob_get_clean();
+		wp_send_json( $content ); // WPCS: XSS OK.
+	}
+
+	/**
+	 * Deactivation Email.
+	 *
+	 * @since  1.0.1
+	 *
+	 * @return void
+	 */
+	public function deactivation_email() {
+
+		check_ajax_referer( 'wpfda_deactivation_email', 'security' );
+
+		$message = sanitize_textarea_field( $_POST['message'] );
+
+		if( ! empty( $message ) ) {
+			wp_mail( 'sanzeeb.aryal@gmail.com', 'WP Frontend Delete Account Deactivation', $message );
+		}
+
+		deactivate_plugins( WPFDA_PLUGIN_FILE );
 	}
 }
 
