@@ -21,7 +21,7 @@ Class WPFDA_WooCommerce_Myaccount_Tab {
 		add_action( 'init', array( $this, 'register_endpoint' ) );
 		add_filter( 'query_vars', array( $this, 'query_vars' ) );
 		add_filter( 'woocommerce_account_menu_items', array( $this, 'add_wpf_delete_account_tab' ) );
-		add_action( 'woocommerce_account_wpf-delete-account_endpoint', 'wpf_delete_account_content' );
+		add_action( 'woocommerce_account_wpf-delete-account_endpoint', array( $this, 'add_content' ) );
 	}
 
 	/**
@@ -57,6 +57,18 @@ Class WPFDA_WooCommerce_Myaccount_Tab {
 
 		$items['wpf-delete-account']	= get_option( 'wda_title', esc_html__( 'Delete Account', 'wp-frontend-delete-account' ) );
 		return $items;
+	}
+
+	/**
+	 * Add content to the delete account tab.
+	 *
+	 * @since  1.0.1
+	 *
+	 * @return  void.
+	 */
+	public function add_content() {
+		$contents = wpf_delete_account_content();
+		echo $contents;
 	}
 }
 
