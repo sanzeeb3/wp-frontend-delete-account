@@ -1,4 +1,4 @@
-=== WP Frontend Delete Account - For WooCommerce And All ===
+=== WP Frontend Delete Account ===
 Contributors: sanzeeb3
 Tags: delete-account, delete account from frontend, frontend delete, remove account,
 Requires at least: 4.0
@@ -12,9 +12,7 @@ Lets customers delete thier account by their own from their myaccount page for W
 
 == Description ==
 
-# FOR TESTING PURPOSE, USE DUMMY ACCOUNT OR YOU MIGHT DELETE YOURSELF.
-
-For WooCommerce sites, new 'Delete Account' tab will be created automatically on WooCommerce myaccount page, so that customers can delete their account by their own. 
+Lets customers delete thier account by their own from their myaccount page for WooCommerce sites. New 'Delete Account' tab will be created automatically in myaccount page.
 
 For non-store sites, add the 'Delete Account' tab content anywhere with shortcode [wp_frontend_delete_account] or with the built-in gutenberg block.
 
