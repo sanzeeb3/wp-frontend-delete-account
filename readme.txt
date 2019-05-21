@@ -2,7 +2,7 @@
 Contributors: sanzeeb3
 Tags: delete-account, delete account from frontend, frontend delete, remove account,
 Requires at least: 4.0
-Tested up to: 5.0
+Tested up to: 5.2.0
 Requires PHP: 5.3
 Stable tag: 1.0.1
 License: GPLv3
