@@ -28,13 +28,14 @@ function wpf_delete_account_content() {
 
 	do_action( 'wp_frontend_delete_account_before_content' );
 
+	$html = '<div class="'. $class .'">';
+
 	if ( current_user_can( 'administrator' ) ) {
-		echo '<i style="color:red">';
-		echo esc_html__( 'Just a heads up! You are the site administrator and processing further will delete yourself.', 'wp-frontend-delete-account' );
-		echo '</i>';
+		$html .= '<i style="color:red">';
+		$html .= esc_html__( 'Just a heads up! You are the site administrator and processing further will delete yourself.', 'wp-frontend-delete-account' );
+		$html .= '</i>';
 	}
 
-	$html = '<div class="'. $class .'">';
 
 	if( 'password' === $security ) {
 		$html .= '<div class="wpfda-password-confirm">';
