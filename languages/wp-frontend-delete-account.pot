@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: yyyy-mm-dd hh:mm+0000\n"
-"PO-Revision-Date: 2019-05-08 09:47+0500\n"
+"Report-Msgid-Bugs-To: sanzeeb.aryal@gmail.com\n"
+"POT-Creation-Date: 2019-05-27 hh:mm+0000\n"
+"PO-Revision-Date: 2019-05-27 08:52+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -134,4 +134,10 @@ msgstr ""
 
 #: functions-wp-frontend-delete-account.php:22
 msgid "Enter password to confirm:"
+msgstr ""
+
+#: functions-wp-frontend-delete-account.php:35
+msgid ""
+"Just a heads up! You are the site administrator and processing further will "
+"delete yourself."
 msgstr ""
