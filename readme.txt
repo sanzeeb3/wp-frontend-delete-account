@@ -4,7 +4,7 @@ Tags: delete-account, delete account from frontend, frontend delete, remove acco
 Requires at least: 4.0
 Tested up to: 5.2.0
 Requires PHP: 5.3
-Stable tag: 1.0.2
+Stable tag: 1.1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -33,7 +33,7 @@ The right to be forgotten dovetails with people’s right to access their person
 
 You have one month to respond to a request. I understand you're busy. Make it easy by allowing users to erase their personal data.
 
-I am not a lawyer and this is not a legal Advice. In all circumstances I strongly recommend you consult directly with legal counsel familiar with the GDPR regulations.
+I am not a lawyer and this is not a legal advice. In all circumstances I strongly recommend you consult directly with legal counsel familiar with the GDPR regulations.
 
 == Frequently Asked Questions ==
 
