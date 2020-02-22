@@ -8,7 +8,7 @@ Stable tag: 1.0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Lets customers delete thier account by their own from their myaccount page for WooCommerce sites. For non-store sites, add the account delete page anywhere with shortcode and gutenberg block.
+Lets customers delete their account by their own from their myaccount page for WooCommerce sites. For non-store sites, add the account delete page anywhere with shortcode and gutenberg block.
 
 == Description ==
 
@@ -26,6 +26,14 @@ For non-store sites, add the 'Delete Account' tab content anywhere with shortcod
 [Contribute On GitHub Repository](https://github.com/sanzeeb3/wp-frontend-delete-account)
 
 [Contact The Author](http://www.sanjeebaryal.com.np)
+
+== Gentle reminder of GDPR's Right to be forgotten ==
+
+The right to be forgotten dovetails with people’s right to access their personal information in [Article 15](https://gdpr.eu/article-15-right-of-access/). The right to control one’s data is meaningless if people cannot take action when they no longer consent to processing, when there are significant errors within the data, or if they believe information is being stored unnecessarily. In these cases, an individual can request that the data be erased. 
+
+You have one month to respond to a request. I understand you're busy. Make it easy by allowing users to erase their personal data.
+
+I am not a lawyer and this is not a legal Advice. In all circumstances I strongly recommend you consult directly with legal counsel familiar with the GDPR regulations.
 
 == Frequently Asked Questions ==
 
