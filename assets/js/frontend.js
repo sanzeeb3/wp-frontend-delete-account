@@ -2,19 +2,11 @@
  *
  */
 jQuery( function( $ ) {
+console.log('e');
 	jQuery('body').on('click', '.wpfda-delete-account-container .wpf-delete-account-button button', function(e) {
     	    e.preventDefault();
 			var error =  $(this).parent().parent().siblings( '.wpfda-error' ).find('span');
-
-    	    if( 'recaptcha_v2' === wpfda_plugins_params.security ) {
-   				if( grecaptcha && grecaptcha.getResponse().length > 0 ) {
-					error.html('').append('<i>'+ wpfda_plugins_params.processing +'</i>');
-					value = grecaptcha.getResponse();
-				} else {
-  			    	error.html('').append('<i>'+ wpfda_plugins_params.recaptcha_required +'</i>');
-  				    return;
-				}
-    	    } else if ( 'custom_captcha' === wpfda_plugins_params.security ) {
+    	    if( 'custom_captcha' === wpfda_plugins_params.security ) {
     	    	var value = $('.wpfda-delete-account-container').find('.wpfda-custom-captcha').find('input').val();
 				if( value != wpfda_plugins_params.captcha_answer ) {
 					error.html('').append('<i>'+ wpfda_plugins_params.incorrect_answer +'</i>');
@@ -23,7 +15,7 @@ jQuery( function( $ ) {
 					error.html('').append('<i>'+ wpfda_plugins_params.processing +'</i>');
 				}
 
-    	    } else if ( 'password' === wpfda_plugins_params.security ) {
+    	    } else if ( 'password' === wpfda_plugins_params.security || 'recaptcha_v2' ===  wpfda_plugins_params.security ) { // Backwards compatibility. Removing reCAPTCHA support since 1.1.0.
     	    	value = $('.wpfda-delete-account-container').find('.wpfda-password-confirm').find('input').val();
 
     	    	if( value == '' ) {

@@ -62,8 +62,6 @@ Class WPFDA_Backend {
 		$password_text  	= get_option( 'wpfda_security_password_text', 'Enter password to confirm:' );
 		$captcha_question 	= get_option( 'wpfda_security_custom_captcha_question', 'What is 11*3?' );
 		$captcha_answer 	= get_option( 'wpfda_security_custom_captcha_answer', '33' );
-		$site_key			= get_option( 'wpfda_security_recaptcha_site_key' );
-		$site_secret		= get_option( 'wpfda_security_recaptcha_site_secret' );
 		$users  			= get_users();
 
   		?>
@@ -105,7 +103,6 @@ Class WPFDA_Backend {
 		        				<option value="none" <?php selected( 'none', $security, true ) ;?>><?php echo esc_html__( '--None--', 'wp-frontend-delete-account' );?></option>
    								<option value="password" <?php selected( 'password', $security, true ) ;?>><?php echo esc_html__( 'Password', 'wp-frontend-delete-account' );?></option>
 		        				<option value="custom_captcha" <?php selected( 'custom_captcha', $security, true ) ;?>><?php echo esc_html__( 'Custom Captcha', 'wp-frontend-delete-account' );?></option>
-		        				<option value="recaptcha_v2" <?php selected( 'recaptcha_v2', $security, true ) ;?>><?php echo esc_html__( 'reCaptcha (v2)', 'wp-frontend-delete-account' );?></option>
 		        			</select><br/>
 		        		</td>
 		        </tr>
@@ -127,20 +124,6 @@ Class WPFDA_Backend {
 		        	<th scope="row"><?php echo esc_html__( 'Captcha Answer', 'wp-frontend-delete-account' );?></th>
 		        		<td>
 		        			<input style="width:50%" type="text" name="wpfda_security_custom_captcha_answer" value ="<?php echo esc_html( $captcha_answer ); ?>" class="wp-frontend-delete-account-security-custom-captcha-answer-inline" />
-		        		</td>
-		        </tr>
-
-		        <tr valign="top" class="wp-frontend-delete-account-security-recaptcha-site-key">
-		        	<th scope="row"><?php echo esc_html__( 'Site Key', 'wp-frontend-delete-account' );?></th>
-		        		<td>
-		        			<input style="width:50%" type="text" name="wpfda_security_recaptcha_site_key" value ="<?php echo esc_html( $site_key ); ?>" class="wp-frontend-delete-account-security-recaptcha-site-key-inline" />
-		        		</td>
-		        </tr>
-
-		        <tr valign="top" class="wp-frontend-delete-account-security-recaptcha-site-secret">
-		        	<th scope="row"><?php echo esc_html__( 'Site Secret', 'wp-frontend-delete-account' );?></th>
-		        		<td>
-		        			<input style="width:50%" type="text" name="wpfda_security_recaptcha_site_secret" value ="<?php echo esc_html( $site_secret ); ?>" class="wp-frontend-delete-account-security-recaptcha-site-secret-inline" />
 		        		</td>
 		        </tr>
 
@@ -173,7 +156,7 @@ Class WPFDA_Backend {
 				   exit;
 			}
 
-			$options = array( 'wpfda_title', 'wpfda_button_label', 'wpfda_attribute', 'wpfda_security', 'wpfda_security_password_text', 'wpfda_security_custom_captcha_question', 'wpfda_security_custom_captcha_answer', 'wpfda_security_recaptcha_site_key', 'wpfda_security_recaptcha_site_secret' );
+			$options = array( 'wpfda_title', 'wpfda_button_label', 'wpfda_attribute', 'wpfda_security', 'wpfda_security_password_text', 'wpfda_security_custom_captcha_question', 'wpfda_security_custom_captcha_answer' );
 
 			foreach( $options as $option ) {
 				if( isset( $_POST[ $option ] ) ) {
