@@ -2,7 +2,6 @@
  *
  */
 jQuery( function( $ ) {
-console.log('e');
 	jQuery('body').on('click', '.wpfda-delete-account-container .wpf-delete-account-button button', function(e) {
     	    e.preventDefault();
 			var error =  $(this).parent().parent().siblings( '.wpfda-error' ).find('span');
