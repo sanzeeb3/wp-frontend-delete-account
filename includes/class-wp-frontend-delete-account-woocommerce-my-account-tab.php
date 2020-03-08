@@ -6,7 +6,7 @@
  *
  * @class WPFDA_WooCommerce_Myaccount_Tab
  */
-Class WPFDA_WooCommerce_Myaccount_Tab {
+class WPFDA_WooCommerce_Myaccount_Tab {
 
 	/**
 	 * Constructor.
@@ -14,7 +14,11 @@ Class WPFDA_WooCommerce_Myaccount_Tab {
 	public function __construct() {
 
 		// Return if WooCommerce is not installed.
-		if( ! defined( 'WC_VERSION' ) ) {
+		if ( ! defined( 'WC_VERSION' ) ) {
+			return;
+		}
+
+		if ( true === apply_filters( 'wpfda_disable_delete_account_tab', false ) ) {
 			return;
 		}
 
@@ -42,8 +46,8 @@ Class WPFDA_WooCommerce_Myaccount_Tab {
 	 */
 	public function query_vars( $vars ) {
 
-    	$vars[] = 'wpf-delete-account';
-    	return $vars;
+		$vars[] = 'wpf-delete-account';
+		return $vars;
 	}
 
 	/**
@@ -55,7 +59,7 @@ Class WPFDA_WooCommerce_Myaccount_Tab {
 	 */
 	public function add_wpf_delete_account_tab( $items ) {
 
-		$items['wpf-delete-account']	= get_option( 'wda_title', esc_html__( 'Delete Account', 'wp-frontend-delete-account' ) );
+		$items['wpf-delete-account'] = get_option( 'wda_title', esc_html__( 'Delete Account', 'wp-frontend-delete-account' ) );
 		return $items;
 	}
 

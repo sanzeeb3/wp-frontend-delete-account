@@ -1,4 +1,4 @@
-Delete Account - For WooCommerce and all.
+WP Frontend Delete Account
 
 Copyright 2016 by the contributors
 
@@ -18,11 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 This program incorporates work covered by the following copyright and
 permission notices:
 
-	Delete Account - For WooCommerce and all.
+	WP Frontend Delete Account
 
-	Delete Account is Copyright (c) 2019 Sanjeev Aryal
+	WP Frontend Delete Account is Copyright (c) 2019 Sanjeev Aryal
 
-	Delete Account is released under the GPL
+	WP Frontend Delete Account is released under the GPL
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 

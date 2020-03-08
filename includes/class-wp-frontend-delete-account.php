@@ -14,13 +14,15 @@ final class WPF_Delete_Account {
 
 	/**
 	 * Plugin version.
+	 *
 	 * @var string
 	 */
-	public $version = '1.1.0';
+	public $version = '1.1.1';
 
 
 	/**
 	 * Instance of this class.
+	 *
 	 * @var object
 	 */
 	protected static $_instance = null;
@@ -101,13 +103,13 @@ final class WPF_Delete_Account {
 	 */
 	private function is_request( $type ) {
 		switch ( $type ) {
-			case 'admin' :
+			case 'admin':
 				return is_admin();
-			case 'ajax' :
+			case 'ajax':
 				return defined( 'DOING_AJAX' );
-			case 'cron' :
+			case 'cron':
 				return defined( 'DOING_CRON' );
-			case 'frontend' :
+			case 'frontend':
 				return ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' );
 		}
 	}
@@ -137,7 +139,7 @@ final class WPF_Delete_Account {
 		include_once WPFDA . '/includes/class-wp-frontend-delete-account-woocommerce-my-account-tab.php';
 		include_once WPFDA . '/includes/class-wp-frontend-delete-account-gutenberg-block.php';
 
-		if( is_admin() ) {
+		if ( is_admin() ) {
 			include_once WPFDA . '/includes/class-wp-frontend-delete-account-backend.php';
 		}
 	}

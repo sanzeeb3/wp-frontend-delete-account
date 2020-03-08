@@ -1,30 +1,21 @@
 {
-  "name": "wp-frontend-delete-account",
-  "description": "Lets customers delete thier account by their own.",
-  "homepage": "",
+  "name": "sanzeeb3/wp-frontend-delete-account",
+  "description": "Lets customers delete their account by their own.",
+  "homepage": "https://github.com/sanzeeb3/wp-frontend-delete-account",
   "type": "wordpress-plugin",
   "license": "GPL-3.0-or-later",
   "require": {
-    "composer/installers": "~1.2"
-  },
-  "require-dev": {
-    "squizlabs/php_codesniffer": "*",
-    "wp-coding-standards/wpcs": "^0.14",
-    "wimg/php-compatibility": "^8.0",
-    "dealerdirect/phpcodesniffer-composer-installer": "^0.4.3"
+    "composer/installers": "1.7.0"
   },
   "scripts": {
     "phpcs": [
       "phpcs -s -p"
     ],
+    "phpcs-pre-commit": [
+      "phpcs -s -p -n"
+    ],
     "phpcbf": [
       "phpcbf -p"
     ]
-  },
-  "extra": {
-    "scripts-description": {
-      "phpcs": "Analyze code against the WordPress coding standard with PHP_CodeSniffer",
-      "phpcbf": "Fix coding standards warnings/errors automattically with PHP Code Beautifier"
-    }
   }
 }
