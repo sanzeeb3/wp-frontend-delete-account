@@ -4,7 +4,7 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const el = wp.element.createElement;
-
+const { ServerSideRender } = wp.components;
 
 registerBlockType( 'wp-frontend-delete-account/delete-account-content', {
     title: __( 'WP Frontend Account Delete', 'wp-frontend-delete-account' ),
@@ -17,10 +17,13 @@ registerBlockType( 'wp-frontend-delete-account/delete-account-content', {
 
         }
     },
-    edit( { attributes, setAttributes, className, focus, id } ) {
-        return '[wp_frontend_delete_account]';
-
-    },
+	edit: function ({ attributes }) {
+	    return (
+	        <ServerSideRender
+	            block="wp-frontend-delete-account/delete-account-content"
+	        />
+	    );
+	},
     save( { attributes, className } ) {
         // Gutenberg will save attributes we can use in server-side callback
        return null;

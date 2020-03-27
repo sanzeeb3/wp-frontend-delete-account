@@ -24,7 +24,7 @@ class WPFDA_Gutenberg_Block {
 	public function load_assets() {
 		wp_enqueue_script(
 			'wpfda-gutenberg-block',
-			plugins_url( 'assets/js/admin/wpfda-gutenberg-block.js', WPFDA_PLUGIN_FILE ),
+			plugins_url( 'assets/js/admin/wpfda-gutenberg-block.min.js', WPFDA_PLUGIN_FILE ),
 			array( 'wp-blocks', 'wp-editor' ),
 			true
 		);
