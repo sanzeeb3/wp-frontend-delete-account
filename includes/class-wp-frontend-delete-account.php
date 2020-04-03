@@ -17,7 +17,7 @@ final class WPF_Delete_Account {
 	 *
 	 * @var string
 	 */
-	public $version = '1.1.1';
+	public $version = '1.1.2';
 
 
 	/**

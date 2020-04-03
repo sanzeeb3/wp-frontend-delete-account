@@ -4,7 +4,7 @@ Tags: delete-account, delete account from frontend, frontend delete, remove acco
 Requires at least: 4.0
 Tested up to: 5.2.0
 Requires PHP: 5.3
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -27,7 +27,7 @@ For non-store sites, add the 'Delete Account' tab content anywhere with shortcod
 
 [Contact The Author](http://www.sanjeebaryal.com.np)
 
-== Gentle reminder of GDPR's Right to be forgotten ==
+== A Gentle reminder of GDPR's Right to be forgotten ==
 
 The right to be forgotten dovetails with people’s right to access their personal information in [Article 15](https://gdpr.eu/article-15-right-of-access/). The right to control one’s data is meaningless if people cannot take action when they no longer consent to processing, when there are significant errors within the data, or if they believe information is being stored unnecessarily. In these cases, an individual can request that the data be erased. 
 
@@ -60,6 +60,9 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 7. Settings
 
 == Changelog ==
+
+= 1.1.2 - 03/30/2020 =
+* Enhancement - Render Shortcode content on gutenberg
 
 = 1.1.1 - 03/08/2020 =
 * Conditionally load assets
