@@ -141,6 +141,7 @@ final class WPF_Delete_Account {
 
 		if ( is_admin() ) {
 			include_once WPFDA . '/includes/class-wp-frontend-delete-account-backend.php';
+			include_once WPFDA . '/includes/emails/class-wp-frontend-delete-account-emails.php';
 		}
 	}
 }

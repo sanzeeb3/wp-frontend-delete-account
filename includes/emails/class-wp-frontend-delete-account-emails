@@ -1,0 +1,9 @@
+<?php
+/**
+ * @since  1.0.0
+ *
+ * Class for backend tasks.
+ *
+ * @class WPFDA_Backend
+ */
+class WPFDA_Backend {

@@ -59,6 +59,23 @@ class WPFDA_Backend {
 	 * @return void.
 	 */
 	public function wpfda_settings_page() {
+
+		$emails_active 	 = isset( $_GET['section'] ) && 'emails' === $_GET['section'] ? 'nav-tab-active' : '';
+		$general_active  = empty( $email_active ) ? 'nav-tab-active' : '';
+		$template        = '<h2 class="nav-tab-wrapper">
+			<a href="' . esc_url( admin_url( 'admin.php?page=WP+Frontend+Delete+Account' ) ) . '" class="nav-tab ' . $general_active . '">' . esc_html( 'General', 'wp-frontend-delete-account' ) . '</a>
+			<a href="' . esc_url( wp_nonce_url( admin_url( 'admin.php?page=WP+Frontend+Delete+Account&section=emails' ), 'wp-frontend-delete-account-emails' ) ) . '" class="nav-tab ' . $emails_active . '">' . esc_html__( 'Emails', 'wp-frontend-delete-account' ) . '</a>
+			</h2>';
+		echo $template;
+
+		if ( isset( $_GET['section'] ) && 'emails' === $_GET['section'] ) {
+
+			check_admin_referer( 'wp-frontend-delete-account-emails' );
+
+			WPFDA_Emails::overview();
+			return;
+		}
+
 		$title            = get_option( 'wpfda_title', 'Delete Account' );
 		$button           = get_option( 'wpfda_button_label', 'Confirm' );
 		$attribute        = get_option( 'wpfda_attribute' );
@@ -69,16 +86,9 @@ class WPFDA_Backend {
 		$load_assets      = get_option( 'wpfda_load_assets_globally' );
 		$users            = get_users();
 
-		$emails_active 	 = isset( $_GET['section'] ) && 'emails' === $_GET['section'] ? 'nav-tab-active' : '';
-		$general_active  = empty( $email_active ) ? 'nav-tab-active' : '';
-		$template        = '<h2 class="nav-tab-wrapper">
-			<a href="' . esc_url( admin_url( 'admin.php?page=WP+Frontend+Delete+Account' ) ) . '" class="nav-tab ' . $general_active . '">' . esc_html( 'General', 'wp-frontend-delete-account' ) . '</a>
-			<a href="' . esc_url( wp_nonce_url( admin_url( 'admin.php?page=WP+Frontend+Delete+Account&section=emails' ), 'wp-frontend-delete-account-emails' ) ) . '" class="nav-tab ' . $emails_active . '">' . esc_html__( 'Emails', 'wp-frontend-delete-account' ) . '</a>
-			</h2>';
-		echo $template;
 
 		?>
-		  <h2 class="wp-heading-inline"><?php esc_html_e( 'WP Frontend Delete Account Settings', 'wp-frontend-delete-account' ); ?></h2>
+		  <h2 class="wp-heading-inline"><?php esc_html_e( 'General Settings', 'wp-frontend-delete-account' ); ?></h2>
 		<hr class="wp-header-end">
 		<hr/>
 
