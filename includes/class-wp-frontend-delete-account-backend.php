@@ -187,11 +187,6 @@ class WPFDA_Backend {
 	 */
 	public function save_settings() {
 
-		// Return if not WP Frontend Delete Account page.
-		if ( ! isset( $_GET['page'] ) && 'WP+Frontend+Delete+Account' !== $_GET['page'] ) {
-			return;
-		}
-
 		if ( isset( $_POST['wp_frontend_delete_account_settings_nonce'] ) ) {
 
 			if ( ! wp_verify_nonce( $_POST['wp_frontend_delete_account_settings_nonce'], 'wp_frontend_delete_account_settings' )
