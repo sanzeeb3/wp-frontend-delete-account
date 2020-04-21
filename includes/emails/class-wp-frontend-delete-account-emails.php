@@ -83,13 +83,12 @@ class WPFDA_Emails {
 		$enable = get_option( 'wpfda_enable_' . $email . '_email', 'on' );
 		$recipient = get_option( 'wpfda_email_receipent', get_option( 'admin_email' ) );
 		$default_subject = 'admin' === $email ? esc_html__( 'Heads up! A user deleted their account.', 'wp-frontend-delete-account' ) : esc_html__( 'Your account has been deleted successfully.', 'wp-frontend-delete-account' );
-		$default_message = 'admin' === $email ? esc_html__( 'A user {user_id} - {user_email} has deleted their account.', 'wp-frontend-delete-account' ) : esc_html__( 'Your account has been deleted. In case this is a mistake, please contact the site administrator at '. site_url() .'', 'wp-frontend-delete-account' );
+		$default_message = 'admin' === $email ? esc_html__( 'A user {user_name} - {user_email} has deleted their account.', 'wp-frontend-delete-account' ) : esc_html__( 'Your account has been deleted. In case this is a mistake, please contact the site administrator at '. site_url() .'', 'wp-frontend-delete-account' );
 		$subject = get_option( 'wpfda_'.$email.'_email_subject', $default_subject );
 		$message = get_option( 'wpfda_'.$email.'_email_message', $default_message );
 
 		?>
-		  <h2 class="wp-heading-inline"><?php 'admin' === $email ? esc_html_e( 'Admin Email', 'wp-frontend-delete-account' ) : esc_html_e( 'User Email', 'wp-frontend-delete-account' ); ?></h2>
-
+		  <h2 class="wp-heading-inline"><?php 'admin' === $email ? esc_html_e( 'Admin Email', 'wp-frontend-delete-account' ) : esc_html_e( 'User Email', 'wp-frontend-delete-account' ); ?></h2><a href="<?php echo wp_nonce_url( admin_url('admin.php?page=WP+Frontend+Delete+Account&section=emails' ), 'wp-frontend-delete-account-emails' );?> ">⤴</a>
 			  <div id="email_notification_settings-description">
 
 				<?php if ( 'user' === $email ) : ?>
@@ -133,7 +132,8 @@ class WPFDA_Emails {
 						<td><textarea style="width:50%; height:100%" name="wpfda_<?php echo $email;?>_email_message" class="wp-frontend-delete-account-<?php echo $email;?>-email-message" /><?php echo esc_html( $message ); ?></textarea>
 						</td>
 				</tr>
-
+				<?php do_action( 'wp_frontend_delete_account_settings' ); ?>
+				<?php wp_nonce_field( 'wp_frontend_delete_account_settings', 'wp_frontend_delete_account_settings_nonce' ); ?>
 			</table>
 
 			<?php submit_button(); ?>
