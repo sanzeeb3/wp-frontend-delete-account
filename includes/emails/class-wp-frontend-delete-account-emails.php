@@ -20,7 +20,7 @@ class WPFDA_Emails {
 		foreach( array( 'admin', 'user' ) as $key ) {
 
 			$read_class[ $key ] 	= 'on' === get_option( 'wpfda_enable_'.$key.'_email', 'on' ) ? 'wpfda-enable' : 'wpfda-disable';
-			$tooltip_text[ $key ]	= 'on' === get_option( 'wpfda_enable_'.$key.'_email', 'on' ) ? __( 'Enable this email', 'wp-frontend-delete-account' ) : __( 'Disable this email', 'wp-frontend-delete-account' );
+			$tooltip_text[ $key ]	= 'on' === get_option( 'wpfda_enable_'.$key.'_email', 'on' ) ? __( 'Disable this email', 'wp-frontend-delete-account' ) : __( 'Enable this email', 'wp-frontend-delete-account' );
 			$icon[ $key ]   = '<span title="'. $tooltip_text[$key].'" data-email="'.$key.'" class="wpfda-enable-disable dashicons dashicons-marker '. $read_class[$key] .'">
 							</span>';
 		}
@@ -29,7 +29,7 @@ class WPFDA_Emails {
 			<h2 class="wp-heading-inline"><?php esc_html_e( 'Email Notifications', 'wp-frontend-delete-account' ); ?></h2>
 			<div id="email_notification_settings-description">
 				<p><?php esc_html_e( 'Email notifications sent from WP Frontend Delete Account are listed below. Click on an email to configure it.', 'wp-frontend-delete-account' ); ?></p>
-				<p><?php esc_html_e( '** IMPORTANT: If you are having issue with email delivery, I recommend setting up SMTP in your site using SMTP plugins such as WP Mail SMTP.', 'wp-frontend-delete-account' ); ?></p>
+				<p><?php esc_html_e( 'If you are having issue with email delivery in your site, I recommend setting up SMTP in your site using SMTP plugins such as WP Mail SMTP.', 'wp-frontend-delete-account' ); ?></p>
 			</div>
 			<hr class="wp-header-end">
 			<hr/>

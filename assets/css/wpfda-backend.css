@@ -135,3 +135,29 @@
 	background-color: #5cb85c;
 	color: #fff
 }
+
+.wpfda-enable:hover {
+  cursor: pointer;
+}
+
+span.wpfda-enable.dashicons.dashicons-marker {
+    width: 2px;
+    height: 2px;
+    color: silver;
+    font-size: 14px;
+    padding-top:5px;
+    color:limegreen;
+}
+
+.wpfda-disable:hover {
+  cursor: pointer;
+}
+
+span.wpfda-disable.dashicons.dashicons-marker {
+    width: 2px;
+    height: 2px;
+    color: silver;
+    font-size: 14px;
+    padding-top:5px;
+    color:silver;
+}

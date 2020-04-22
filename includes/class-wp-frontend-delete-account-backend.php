@@ -23,7 +23,7 @@ class WPFDA_Backend {
 	 * Load assets for backend.
 	 *
 	 * @since  1.0.0
-	 * @return void.s
+	 * @return void.
 	 */
 	public function load_assets() {
 		wp_enqueue_style( 'wpfda-backend', plugins_url( 'assets/css/wpfda-backend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, $media = 'all' );
