@@ -16,6 +16,15 @@ class WPFDA_Emails {
 	 * @return void.
 	 */
 	public static function overview() {
+
+		foreach( array( 'admin', 'user' ) as $key ) {
+
+			$read_class[ $key ] 	= 'on' === get_option( 'wpfda_enable_'.$key.'_email', 'on' ) ? 'wpfda-enable' : 'wpfda-disable';
+			$tooltip_text[ $key ]	= 'on' === get_option( 'wpfda_enable_'.$key.'_email', 'on' ) ? __( 'Enable this email', 'wp-frontend-delete-account' ) : __( 'Disable this email', 'wp-frontend-delete-account' );
+			$icon[ $key ]   = '<span title="'. $tooltip_text[$key].'" data-email="'.$key.'" class="wpfda-enable-disable dashicons dashicons-marker '. $read_class[$key] .'">
+							</span>';
+		}
+
 		?>
 			<h2 class="wp-heading-inline"><?php esc_html_e( 'Email Notifications', 'wp-frontend-delete-account' ); ?></h2>
 			<div id="email_notification_settings-description">
@@ -47,7 +56,7 @@ class WPFDA_Emails {
 					</thead>
 					<tbody>
 						<tr>
-							<td class="email-status"><?php echo 'on' === get_option( 'wpfda_enable_admin_email', 'on' ) ? 'ON' : 'OFF';?> </td>
+							<td class="email-status"><?php echo $icon['admin'];?> </td>
 							<td class="email-name"><?php esc_html_e( 'Admin Email', 'wp-frontend-delete-account' ); ?> </td>
 							<td class="email-receipent"><?php echo get_option( 'wpfda_email_receipent', get_option( 'admin_email' ) ); ?> </td>
 							<td class="wc-email-settings-table-actions">
@@ -56,7 +65,7 @@ class WPFDA_Emails {
 						</tr>
 
 						<tr>
-							<td class="email-status"><?php echo 'on' === get_option( 'wpfda_enable_user_email', 'on' ) ? 'ON' : 'OFF';?> </td>
+							<td class="email-status"><?php echo $icon['user'];?> </td>
 							<td class="email-name"><?php esc_html_e( 'User Email', 'wp-frontend-delete-account' ); ?> </td>
 							<td class="email-receipent"> <?php esc_html_e( 'User\'s Email Address', 'wp-frontend-delete-account' ); ?> </td>
 							<td class="wc-email-settings-table-actions">
