@@ -88,8 +88,8 @@ class WPFDA_Emails {
 		$message = get_option( 'wpfda_'.$email.'_email_message', $default_message );
 
 		?>
-		  <h2 class="wp-heading-inline"><?php 'admin' === $email ? esc_html_e( 'Admin Email', 'wp-frontend-delete-account' ) : esc_html_e( 'User Email', 'wp-frontend-delete-account' ); ?></h2><a href="<?php echo wp_nonce_url( admin_url('admin.php?page=WP+Frontend+Delete+Account&section=emails' ), 'wp-frontend-delete-account-emails' );?> ">⤴</a>
-			  <div id="email_notification_settings-description">
+		  <h2 class="wp-heading-inline"><?php 'admin' === $email ? esc_html_e( 'Admin Email', 'wp-frontend-delete-account' ) : esc_html_e( 'User Email', 'wp-frontend-delete-account' ); ?> <a href="<?php echo wp_nonce_url( admin_url('admin.php?page=WP+Frontend+Delete+Account&section=emails' ), 'wp-frontend-delete-account-emails' );?> "> ⤴ </a>
+		</h2>			  <div id="email_notification_settings-description">
 
 				<?php if ( 'user' === $email ) : ?>
 				<p><?php esc_html_e( 'Email notification sent to the user after their account has been deleted.', 'wp-frontend-delete-account' ); ?></p>
@@ -105,7 +105,7 @@ class WPFDA_Emails {
 
 		<form method="post">
 			<table class="form-table">
-								<tr valign="top" class="wp-frontend-delete-account-enable-this-email">
+				<tr valign="top" class="wp-frontend-delete-account-enable-this-email">
 					<th scope="row"><?php echo esc_html__( 'Enable this email', 'wp-frontend-delete-account' ); ?></th>
 						<td>
 							<input type="hidden" name="wpfda_enable_<?php echo $email;?>_email" value="off" />
