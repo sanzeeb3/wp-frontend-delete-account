@@ -7,6 +7,13 @@
   "require": {
     "composer/installers": "1.7.0"
   },
+   "autoload": {
+    "files": [
+        "includes/Main.php",
+        "includes/Backend.php",
+        "includes/emails/Emails.php"
+      ]
+    },
   "scripts": {
     "phpcs": [
       "phpcs -s -p"
