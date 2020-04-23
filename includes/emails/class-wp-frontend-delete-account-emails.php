@@ -149,7 +149,5 @@ class WPFDA_Emails {
 
 		</form>
 		<?php
-
-		return;
 	}
 }
