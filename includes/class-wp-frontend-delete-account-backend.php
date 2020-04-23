@@ -18,6 +18,7 @@ class WPFDA_Backend {
 		add_action( 'wp_ajax_wpfda_deactivation_notice', array( $this, 'deactivation_notice' ) );
 		add_action( 'wp_ajax_wpfda_deactivation_email', array( $this, 'deactivation_email' ) );
 		add_action( 'wp_ajax_wpfda_email_status', array( $this, 'email_status' ) );
+		add_action( 'admin_print_scripts', array( $this, 'remove_notices' ) );
 	}
 
 	/**
@@ -296,6 +297,30 @@ class WPFDA_Backend {
 		$enable = ! empty( $_POST['enable'] ) ? 'on' : 'off';
 
 		update_option( 'wpfda_enable_' . $email . '_email', $enable);
+	}
+
+	/**
+	 * Removes the admin notices on WP Frontend Delete Account settings page.
+	 *
+	 * @since 1.0.0
+	 */
+	public function remove_notices() {
+
+		global $wp_filter;
+
+		if ( ! isset( $_REQUEST['page'] ) || 'WP Frontend Delete Account' !== $_REQUEST['page'] ) {
+			return;
+		}
+
+		foreach ( array( 'user_admin_notices', 'admin_notices', 'all_admin_notices' ) as $wp_notice ) {
+			if ( ! empty( $wp_filter[ $wp_notice ]->callbacks ) && is_array( $wp_filter[ $wp_notice ]->callbacks ) ) {
+				foreach ( $wp_filter[ $wp_notice ]->callbacks as $priority => $hooks ) {
+					foreach ( $hooks as $name => $arr ) {
+						unset( $wp_filter[ $wp_notice ]->callbacks[ $priority ][ $name ] );
+					}
+				}
+			}
+		}
 	}
 }
 

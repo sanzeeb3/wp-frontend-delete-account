@@ -76,7 +76,28 @@ class WPFDA_Emails {
 				</table>
 			</td>
 		</tr>
+
+	</br>
+
 		<?php
+
+		$url = 'https://wordpress.org/support/plugin/wp-frontend-delete-account/reviews/?filter=5#new-post';
+
+		echo sprintf(
+			wp_kses( /* translators: %1$s - WP.org link; %2$s - same WP.org link. */
+				__( 'Please rate <strong>WP Frontend Delete Account</strong> <a href="%1$s" target="_blank" rel="noopener noreferrer">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href="%2$s" target="_blank" rel="noopener noreferrer">WordPress.org</a> to help us spread the word. Thank you!', 'wp-frontend-delete-account' ),
+				array(
+					'strong' => true,
+					'a'      => array(
+						'href'   => true,
+						'target' => true,
+						'rel'    => true,
+					),
+				)
+			),
+			$url,
+			$url
+		);
 	}
 
 	/**

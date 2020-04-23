@@ -76,10 +76,14 @@ class WPFDA_Frontend {
 		$user_id   = get_current_user_id();
 		$user      = get_user_by( 'id', $user_id );
 
-		do_action( 'wp_frontend_delete_account_process' );
+		do_action( 'wp_frontend_delete_account_process', $user );
 
 		require_once ABSPATH . 'wp-admin/includes/user.php';
 		wp_delete_user( $user_id, $attribute );
+
+		$this->send_emails( $user );
+
+		do_action( 'wp_frontend_delete_account_process_complete', $user );
 
 		wp_send_json(
 			array(
@@ -87,8 +91,6 @@ class WPFDA_Frontend {
 				'message' => esc_html__( 'Deleting...', 'wp-frontend-delete-account' ),
 			)
 		);
-
-		do_action( 'wp_frontend_delete_account_process_complete' );
 	}
 
 	/**
@@ -125,6 +127,40 @@ class WPFDA_Frontend {
 					'processing'       => esc_html__( 'Processing...', 'wp-frontend-delete-account' ),
 				)
 			);
+		}
+	}
+
+	/**
+	 * Send emails to admin and user.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return void.
+	 */
+	public function send_emails( $user ) {
+
+		// Send email to admin.
+		if ( 'on' === get_option( 'wpfda_enable_admin_email', 'on' ) ) {
+			$to = get_option( 'wpfda_email_receipent', get_option( 'admin_email' ) );
+			$subject = get_option( 'wpfda_admin_email_subject', 'Heads up! A user deleted their account.' );
+			$message = get_option( 'wpfda_admin_email_message', 'A user {user_name} - {user_email} has deleted their account.' );
+
+			$message = str_replace( '{user_name}', $user->data->user_login, $message );
+			$message = str_replace( '{user_email}', $user->data->user_email, $message );
+
+			$sent = wp_mail( $to, $subject, $message );
+
+			do_action( 'wp_frontend_delete_account_admin_email_sent', $sent );
+		}
+
+		// Send email to user.
+		if ( 'on' === get_option( 'wpfda_enable_user_email', 'on' ) ) {
+			$subject = get_option( 'wpfda_user_email_subject', 'Your account has been deleted successfully.' );
+			$message = get_option( 'wpfda_user_email_message', 'Your account has been deleted. In case this is a mistake, please contact the site administrator at ' . site_url() .'' );
+
+			wp_mail( $user->data->user_email, $subject, $message );
+
+			do_action( 'wp_frontend_delete_account_admin_email_sent', $sent );
 		}
 	}
 }
