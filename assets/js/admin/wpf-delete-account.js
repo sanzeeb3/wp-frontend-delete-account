@@ -37,10 +37,12 @@ jQuery( function( $ ) {
 
 		if( $(this).hasClass( 'wpfda-enable' ) ) {
 			$(this).removeClass('wpfda-enable').addClass('wpfda-disable');
-			var enable = 1;
+			$(this).removeAttr('title').attr( 'title', wpfda_plugins_params.enable_email );
+			var enable = 0;
 		} else {
 			$(this).removeClass('wpfda-disable').addClass('wpfda-enable');
-			var enable = 0;
+			$(this).removeAttr('title').attr( 'title', wpfda_plugins_params.disable_email );
+			var enable = 1;
 		}
 
 		var email = $(this).attr('data-email');

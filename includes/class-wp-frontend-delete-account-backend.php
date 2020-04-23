@@ -38,6 +38,8 @@ class WPFDA_Backend {
 				'status_nonce' 		 => wp_create_nonce( 'email-status' ),
 				'deactivating'       => __( 'Deactivating...', 'wp-frontend-delete-account' ),
 				'wrong'              => __( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
+				'enable_email'       => __( 'Enable this email', 'wp-frontend-delete-account' ),
+				'disable_email'      => __( 'Disable this email', 'wp-frontend-delete-account' ),
 			)
 		);
 	}
@@ -289,6 +291,11 @@ class WPFDA_Backend {
 	public function email_status() {
 
 		check_admin_referer( 'email-status', 'security' );
+
+		$email  = isset( $_POST['email'] ) ? sanitize_text_field( $_POST['email'] ) : '';
+		$enable = ! empty( $_POST['enable'] ) ? 'on' : 'off';
+
+		update_option( 'wpfda_enable_' . $email . '_email', $enable);
 	}
 }
 

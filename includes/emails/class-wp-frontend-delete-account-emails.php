@@ -21,7 +21,7 @@ class WPFDA_Emails {
 
 			$read_class[ $key ]   = 'on' === get_option( 'wpfda_enable_' . $key . '_email', 'on' ) ? 'wpfda-enable' : 'wpfda-disable';
 			$tooltip_text[ $key ] = 'on' === get_option( 'wpfda_enable_' . $key . '_email', 'on' ) ? __( 'Disable this email', 'wp-frontend-delete-account' ) : __( 'Enable this email', 'wp-frontend-delete-account' );
-			$icon[ $key ]         = '<span title="" data-email="' . $key . '" class="wpfda-enable-disable dashicons dashicons-marker ' . $read_class[ $key ] . '">
+			$icon[ $key ]         = '<span title="'.$tooltip_text[ $key ].'" data-email="' . $key . '" class="wpfda-enable-disable dashicons dashicons-marker ' . $read_class[ $key ] . '">
 							</span>';
 		}
 
