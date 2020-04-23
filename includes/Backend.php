@@ -5,7 +5,7 @@ namespace WP_Frontend_Delete_Account;
 /**
  * @since  1.0.0
  *
- * Class for backend tasks.
+ * @since  1.2.0 changed classname "WPFDA_Backend" to "Backend" with namespace.
  *
  * @class Backend
  */

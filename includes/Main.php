@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  *
- * @since 1.2.0 Changed class "WPF_Delete_Account" to "Main".
+ * @since 1.2.0 Changed class "WPF_Delete_Account" to "Main" with namespace.
  */
 final class Main {
 

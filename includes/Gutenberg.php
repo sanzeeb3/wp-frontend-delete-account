@@ -5,11 +5,13 @@ namespace WP_Frontend_Delete_Account;
 /**
  * @since  1.0.0
  *
+ * @since 1.2.0, changed class name from WPFDA_Gutenberg_Block to Gutenberg with Namespace.
+ *
  * Class for adding gutenberg block.
  *
  * @class Gutenberg
  */
-class \WP_Frontend_Delete_Account\Gutenberg {
+class Gutenberg {
 
 	/**
 	 * Constructor.

@@ -3,6 +3,8 @@
  * Core Functions of the plugin for both frontend and backend.
  *
  * @since  1.0.0
+ *
+ * @since 1.2.0 Rename filename from functions-wp-frontend-delete-account.php to Functions.php
  */
 
 /**

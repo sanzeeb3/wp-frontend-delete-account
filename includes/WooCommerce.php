@@ -5,6 +5,8 @@ namespace WP_Frontend_Delete_Account;
 /**
  * @since  1.0.0
  *
+ * @since 1.2.0, changed class name from WPFDA_WooCommerce_Myaccount_Tab to WooCommerce with Namespace.
+ *
  * Class for adding delete account tab in WooCommerce myaccount page.
  *
  * @class WooCommerce
