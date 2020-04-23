@@ -32,7 +32,33 @@ jQuery( function( $ ) {
 			tr.next().next().next().next().next().show();
 		}
 	}
+
+	$('body').on('click', '.wpfda-enable-disable', function(e) {
+
+		if( $(this).hasClass( 'wpfda-enable' ) ) {
+			$(this).removeClass('wpfda-enable').addClass('wpfda-disable');
+			var enable = 1;
+		} else {
+			$(this).removeClass('wpfda-disable').addClass('wpfda-enable');
+			var enable = 0;
+		}
+
+		var email = $(this).attr('data-email');
+
+		var data = {
+			action: 'wpfda_email_status',
+			email: email,
+			enable: enable,
+			security: wpfda_plugins_params.status_nonce
+		}
+
+		$.post( wpfda_plugins_params.ajax_url, data, function( response ) {
+			// Success. Do nothing. Silence is golden.
+	    });
+	});
 });
+
+
 
 // @TODO::Separate js to load only when needed.
 jQuery(document).ready(function( $ ){

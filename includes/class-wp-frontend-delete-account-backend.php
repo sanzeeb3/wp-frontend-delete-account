@@ -17,6 +17,7 @@ class WPFDA_Backend {
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_assets' ) );
 		add_action( 'wp_ajax_wpfda_deactivation_notice', array( $this, 'deactivation_notice' ) );
 		add_action( 'wp_ajax_wpfda_deactivation_email', array( $this, 'deactivation_email' ) );
+		add_action( 'wp_ajax_wpfda_email_status', array( $this, 'email_status' ) );
 	}
 
 	/**
@@ -34,6 +35,7 @@ class WPFDA_Backend {
 			array(
 				'ajax_url'           => admin_url( 'admin-ajax.php' ),
 				'deactivation_nonce' => wp_create_nonce( 'deactivation-notice' ),
+				'status_nonce' 		 => wp_create_nonce( 'email-status' ),
 				'deactivating'       => __( 'Deactivating...', 'wp-frontend-delete-account' ),
 				'wrong'              => __( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
 			)
@@ -275,6 +277,18 @@ class WPFDA_Backend {
 		}
 
 		deactivate_plugins( WPFDA_PLUGIN_FILE );
+	}
+
+	/**
+	 * Email status change from emails overview.
+	 *
+	 * @since  1.2.0
+	 *
+	 * @return
+	 */
+	public function email_status() {
+
+		check_admin_referer( 'email-status', 'security' );
 	}
 }
 
