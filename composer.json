@@ -11,6 +11,10 @@
     "files": [
         "includes/Main.php",
         "includes/Backend.php",
+        "includes/Frontend.php",
+        "includes/WooCommerce.php",
+        "includes/Gutenberg.php",
+        "includes/Functions.php",
         "includes/emails/Emails.php"
       ]
     },
