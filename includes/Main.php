@@ -9,8 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Main Class.
  *
- * @class Main
- *
  * @since 1.0.0
  *
  * @since 1.2.0 Changed class "WPF_Delete_Account" to "Main" with namespace.
@@ -32,8 +30,9 @@ final class Main {
 	 */
 	protected static $_instance = null;
 
-	/*
+	/**
 	 * Return an instance of this class.
+	 *
 	 * @return object A single instance of this class.
 	 */
 	public static function get_instance() {
@@ -89,8 +88,8 @@ final class Main {
 	/**
 	 * Define constant if not already set.
 	 *
-	 * @param string      $name
-	 * @param string|bool $value
+	 * @param string      $name   Name of the constant.
+	 * @param string|bool $value  Value of the constant.
 	 */
 	private function define( $name, $value ) {
 		if ( ! defined( $name ) ) {

@@ -1,143 +1,235 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
+# Copyright (C) 2020 Sanjeev Aryal
+# This file is distributed under the same license as the WP Frontend Delete Account package.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: sanzeeb.aryal@gmail.com\n"
-"POT-Creation-Date: 2019-05-27 hh:mm+0000\n"
-"PO-Revision-Date: 2019-05-27 08:52+0500\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Project-Id-Version: WP Frontend Delete Account 1.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-24 05:46:47+00:00\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Generator: Eazy Po 0.9.5.3\n"
+"PO-Revision-Date: 2020-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: class-wp-frontend-delete-account-backend.php:34
+#: includes/Backend.php:51
 msgid "Deactivating..."
 msgstr ""
 
-#: class-wp-frontend-delete-account-backend.php:35
+#: includes/Backend.php:52
 msgid "Oops! Something went wrong"
 msgstr ""
 
-#: class-wp-frontend-delete-account-backend.php:70
-msgid "WP Frontend Delete Account Settings"
+#: includes/Backend.php:53 includes/emails/Emails.php:24
+#: includes/emails/Emails.php:140
+msgid "Enable this email"
 msgstr ""
 
-#: class-wp-frontend-delete-account-backend.php:77
+#: includes/Backend.php:54 includes/emails/Emails.php:24
+msgid "Disable this email"
+msgstr ""
+
+#: includes/Backend.php:85
+msgid "Emails"
+msgstr ""
+
+#: includes/Backend.php:116
+msgid "General Settings"
+msgstr ""
+
+#: includes/Backend.php:124
+msgid "Load Assets Globally"
+msgstr ""
+
+#: includes/Backend.php:132
 msgid "Title"
 msgstr ""
 
-#: class-wp-frontend-delete-account-backend.php:83
+#: includes/Backend.php:138
 msgid "Button Label"
 msgstr ""
 
-#: class-wp-frontend-delete-account-backend.php:89
+#: includes/Backend.php:144
 msgid "Attribute all contents to:"
 msgstr ""
 
-#: class-wp-frontend-delete-account-backend.php:92
-#: class-wp-frontend-delete-account-backend.php:105
+#: includes/Backend.php:147 includes/Backend.php:161
 msgid "--None--"
 msgstr ""
 
-#: class-wp-frontend-delete-account-backend.php:102
+#: includes/Backend.php:158
 msgid "Security method before deleting:"
 msgstr ""
 
-#: class-wp-frontend-delete-account-backend.php:106
+#: includes/Backend.php:162
 msgid "Password"
 msgstr ""
 
-#: class-wp-frontend-delete-account-backend.php:107
+#: includes/Backend.php:163
 msgid "Custom Captcha"
 msgstr ""
 
-#: class-wp-frontend-delete-account-backend.php:108
-msgid "reCaptcha (v2)"
-msgstr ""
-
-#: class-wp-frontend-delete-account-backend.php:113
+#: includes/Backend.php:168
 msgid "Confirmation Text"
 msgstr ""
 
-#: class-wp-frontend-delete-account-backend.php:120
+#: includes/Backend.php:175
 msgid "Captcha Question"
 msgstr ""
 
-#: class-wp-frontend-delete-account-backend.php:127
+#: includes/Backend.php:182
 msgid "Captcha Answer"
 msgstr ""
 
-#: class-wp-frontend-delete-account-backend.php:134
-msgid "Site Key"
-msgstr ""
-
-#: class-wp-frontend-delete-account-backend.php:141
-msgid "Site Secret"
-msgstr ""
-
-#: class-wp-frontend-delete-account-backend.php:214
+#: includes/Backend.php:254
 msgid ""
 "Would you care to let me know the deactivation reason so that I can improve "
 "it for you?"
 msgstr ""
 
-#: class-wp-frontend-delete-account-backend.php:221
+#: includes/Backend.php:261
 msgid "Skip and deactivate"
 msgstr ""
 
-#: class-wp-frontend-delete-account-frontend.php:46
+#: includes/Frontend.php:52
 msgid "Invalid Password!"
 msgstr ""
 
-#: class-wp-frontend-delete-account-frontend.php:56
-#: class-wp-frontend-delete-account-frontend.php:144
+#: includes/Frontend.php:64 includes/Frontend.php:131
 msgid "Incorrect Answer. Please try again."
 msgstr ""
 
-#: class-wp-frontend-delete-account-frontend.php:67
-msgid "Incorrect reCaptcha. Contact your site administrator."
-msgstr ""
-
-#: class-wp-frontend-delete-account-frontend.php:74
-#: class-wp-frontend-delete-account-frontend.php:143
-msgid "reCaptcha is required."
-msgstr ""
-
-#: class-wp-frontend-delete-account-frontend.php:100
+#: includes/Frontend.php:96
 msgid "Deleting..."
 msgstr ""
 
-#: class-wp-frontend-delete-account-frontend.php:145
+#: includes/Frontend.php:132
 msgid "Empty Password."
 msgstr ""
 
-#: class-wp-frontend-delete-account-frontend.php:146
+#: includes/Frontend.php:133
 msgid "Processing..."
 msgstr ""
 
-#: class-wp-frontend-delete-account-woocommerce-my-account-tab.php:58
-msgid "Delete Account"
-msgstr ""
-
-#: class-wp-frontend-delete-account.php:48
-#: class-wp-frontend-delete-account.php:57
-msgid "Cheatin&#8217; huh?"
-msgstr ""
-
-#: functions-wp-frontend-delete-account.php:22
+#: includes/Functions.php:24
 msgid "Enter password to confirm:"
 msgstr ""
 
-#: functions-wp-frontend-delete-account.php:35
+#: includes/Functions.php:37
 msgid ""
 "Just a heads up! You are the site administrator and processing further will "
 "delete yourself."
+msgstr ""
+
+#: includes/Main.php:54 includes/Main.php:63
+msgid "Cheatin&#8217; huh?"
+msgstr ""
+
+#: includes/WooCommerce.php:67
+msgid "Delete Account"
+msgstr ""
+
+#: includes/emails/Emails.php:30
+msgid "Email Notifications"
+msgstr ""
+
+#: includes/emails/Emails.php:32
+msgid ""
+"Email notifications sent from WP Frontend Delete Account are listed below. "
+"Click on an email to configure it."
+msgstr ""
+
+#: includes/emails/Emails.php:33
+msgid ""
+"If you are having issue with email delivery in your site, I recommend "
+"setting up SMTP in your site using SMTP plugins such as WP Mail SMTP."
+msgstr ""
+
+#: includes/emails/Emails.php:47
+msgid "Email"
+msgstr ""
+
+#: includes/emails/Emails.php:48
+msgid "Recipient(s)"
+msgstr ""
+
+#: includes/emails/Emails.php:49
+msgid "Actions"
+msgstr ""
+
+#: includes/emails/Emails.php:61 includes/emails/Emails.php:122
+msgid "Admin Email"
+msgstr ""
+
+#: includes/emails/Emails.php:64 includes/emails/Emails.php:73
+msgid "Manage"
+msgstr ""
+
+#: includes/emails/Emails.php:70 includes/emails/Emails.php:122
+msgid "User Email"
+msgstr ""
+
+#: includes/emails/Emails.php:71
+msgid "User's Email Address"
+msgstr ""
+
+#: includes/emails/Emails.php:89
+#. translators: %1$s - WP.org link; %2$s - same WP.org link.
+msgid ""
+"Please rate <strong>WP Frontend Delete Account</strong> <a href=\"%1$s\" "
+"target=\"_blank\" rel=\"noopener "
+"noreferrer\">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href=\"%2$s\" "
+"target=\"_blank\" rel=\"noopener noreferrer\">WordPress.org</a> to help us "
+"spread the word. Thank you!"
+msgstr ""
+
+#: includes/emails/Emails.php:116
+msgid "Heads up! A user deleted their account."
+msgstr ""
+
+#: includes/emails/Emails.php:116
+msgid "Your account has been deleted successfully."
+msgstr ""
+
+#: includes/emails/Emails.php:117
+msgid "A user {user_name} - {user_email} has deleted their account."
+msgstr ""
+
+#: includes/emails/Emails.php:126
+msgid "Email notification sent to the user after their account has been deleted."
+msgstr ""
+
+#: includes/emails/Emails.php:130
+msgid ""
+"Email notification sent to the admin if user deleted their account by their "
+"own."
+msgstr ""
+
+#: includes/emails/Emails.php:149
+msgid "Email Recipient"
+msgstr ""
+
+#: includes/emails/Emails.php:156
+msgid "Email Subject"
+msgstr ""
+
+#: includes/emails/Emails.php:162
+msgid "Email Message"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WP Frontend Delete Account"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Lets customers delete their account by their own."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Sanjeev Aryal"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.sanjeebaryal.com.np"
 msgstr ""

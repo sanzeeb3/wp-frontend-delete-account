@@ -111,10 +111,11 @@ class Frontend {
 
 		if ( ( defined( 'WC_VERSION' ) && is_account_page() ) || ( function_exists( 'has_block' ) && has_block( 'wp-frontend-delete-account/delete-account-content' ) ) || has_shortcode( $post->post_content, 'wp_frontend_delete_account' ) || 'on' === get_option( 'wpfda_load_assets_globally' ) ) {
 
+			$suffix   = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 			$security = get_option( 'wpfda_security', 'password' );
 
-			wp_enqueue_script( 'wpfda-delete-account-frontend', plugins_url( 'assets/js/frontend.js', WPFDA_PLUGIN_FILE ), array( 'jquery' ), WPFDA_VERSION, false );
-			wp_enqueue_style( 'wpfda-frontend-css', plugins_url( 'assets/css/wpfda-frontend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
+			wp_enqueue_script( 'wpfda-delete-account-frontend', plugins_url( 'assets/js/frontend' . $suffix . '.js', WPFDA_PLUGIN_FILE ), array( 'jquery' ), WPFDA_VERSION, false );
+			wp_enqueue_style( 'wpfda-frontend-css', plugins_url( 'assets/css/frontend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
 
 			$security       = get_option( 'wpfda_security', 'password' );
 			$captcha_answer = get_option( 'wpfda_security_custom_captcha_answer', '33' );
@@ -146,7 +147,7 @@ class Frontend {
 
 		// Send email to admin.
 		if ( 'on' === get_option( 'wpfda_enable_admin_email', 'on' ) ) {
-			$to = get_option( 'wpfda_email_receipent', get_option( 'admin_email' ) );
+			$to      = get_option( 'wpfda_email_receipent', get_option( 'admin_email' ) );
 			$subject = get_option( 'wpfda_admin_email_subject', 'Heads up! A user deleted their account.' );
 			$message = get_option( 'wpfda_admin_email_message', 'A user {user_name} - {user_email} has deleted their account.' );
 
@@ -161,7 +162,7 @@ class Frontend {
 		// Send email to user.
 		if ( 'on' === get_option( 'wpfda_enable_user_email', 'on' ) ) {
 			$subject = get_option( 'wpfda_user_email_subject', 'Your account has been deleted successfully.' );
-			$message = get_option( 'wpfda_user_email_message', 'Your account has been deleted. In case this is a mistake, please contact the site administrator at ' . site_url() .'' );
+			$message = get_option( 'wpfda_user_email_message', 'Your account has been deleted. In case this is a mistake, please contact the site administrator at ' . site_url() . '' );
 
 			wp_mail( $user->data->user_email, $subject, $message );
 

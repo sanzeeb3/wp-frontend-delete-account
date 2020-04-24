@@ -31,21 +31,31 @@ class Backend {
 	 * @return void.
 	 */
 	public function load_assets() {
-		wp_enqueue_style( 'wpfda-backend', plugins_url( 'assets/css/wpfda-backend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, $media = 'all' );
-		wp_enqueue_script( 'wpf-delete-account-js', plugins_url( 'assets/js/admin/wpf-delete-account.js', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
-		wp_localize_script(
-			'wpf-delete-account-js',
-			'wpfda_plugins_params',
-			array(
-				'ajax_url'           => admin_url( 'admin-ajax.php' ),
-				'deactivation_nonce' => wp_create_nonce( 'deactivation-notice' ),
-				'status_nonce' 		 => wp_create_nonce( 'email-status' ),
-				'deactivating'       => __( 'Deactivating...', 'wp-frontend-delete-account' ),
-				'wrong'              => __( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
-				'enable_email'       => __( 'Enable this email', 'wp-frontend-delete-account' ),
-				'disable_email'      => __( 'Disable this email', 'wp-frontend-delete-account' ),
-			)
-		);
+
+		global $pagenow;
+		global $current_screen;
+
+		if ( 'plugins.php' === $pagenow || 'settings_page_WP Frontend Delete Account' === $current_screen->id ) {
+
+			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
+			wp_enqueue_style( 'wpfda-backend', plugins_url( 'assets/css/backend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, $media = 'all' );
+			wp_enqueue_script( 'wpf-delete-account-js', plugins_url( 'assets/js/admin/backend' . $suffix . '.js', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
+			wp_localize_script(
+				'wpf-delete-account-js',
+				'wpfda_plugins_params',
+				array(
+					'ajax_url'           => admin_url( 'admin-ajax.php' ),
+					'deactivation_nonce' => wp_create_nonce( 'deactivation-notice' ),
+					'status_nonce'       => wp_create_nonce( 'email-status' ),
+					'deactivating'       => __( 'Deactivating...', 'wp-frontend-delete-account' ),
+					'wrong'              => __( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
+					'enable_email'       => __( 'Enable this email', 'wp-frontend-delete-account' ),
+					'disable_email'      => __( 'Disable this email', 'wp-frontend-delete-account' ),
+				)
+			);
+		}
+
 	}
 
 	/**
@@ -299,7 +309,7 @@ class Backend {
 		$email  = isset( $_POST['email'] ) ? sanitize_text_field( $_POST['email'] ) : '';
 		$enable = ! empty( $_POST['enable'] ) ? 'on' : 'off';
 
-		update_option( 'wpfda_enable_' . $email . '_email', $enable);
+		update_option( 'wpfda_enable_' . $email . '_email', $enable );
 	}
 
 	/**

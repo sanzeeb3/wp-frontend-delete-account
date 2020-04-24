@@ -65,7 +65,7 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 * Feature - Emails after account deletion.
 * Refactor - Use of namespaces and composer autoload.
 * Enahancement - Clean unnecessary stuffs.
-* Enahancement - Separate assets for specific purposes and load conditionally.
+* Enahancement - Load assets conditionally on backend.
 * Requires PHP 5.6 or higher.
 
 = 1.1.2 - 03/30/2020 =
