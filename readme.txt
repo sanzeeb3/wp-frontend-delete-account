@@ -2,9 +2,9 @@
 Contributors: sanzeeb3
 Tags: delete-account, delete account from frontend, frontend delete, remove account,
 Requires at least: 4.0
-Tested up to: 5.2.0
-Requires PHP: 5.3
-Stable tag: 1.1.2
+Tested up to: 5.4
+Requires PHP: 5.6
+Stable tag: 1.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -60,6 +60,13 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 7. Settings
 
 == Changelog ==
+
+= 1.2.0 - 04/xx/2020 =
+* Feature - Emails after account deletion.
+* Refactor - Use of namespaces and composer autoload.
+* Enahancement - Clean unnecessary stuffs.
+* Enahancement - Separate assets for specific purposes and load conditionally.
+* Requires PHP 5.6 or higher.
 
 = 1.1.2 - 03/30/2020 =
 * Enhancement - Render Shortcode content on gutenberg

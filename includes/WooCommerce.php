@@ -76,8 +76,7 @@ class WooCommerce {
 	 * @return  void.
 	 */
 	public function add_content() {
-		$contents = wpf_delete_account_content();
-		echo $contents;
+		echo wpf_delete_account_content();
 	}
 }
 
