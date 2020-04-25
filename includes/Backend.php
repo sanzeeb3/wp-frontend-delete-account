@@ -185,8 +185,8 @@ class Backend {
 						</td>
 				</tr>
 
-				<?php do_action( 'wp_frontend_delete_account_email_settings' ); ?>
-				<?php wp_nonce_field( 'wp_frontend_delete_account_email_settings', 'wp_frontend_delete_account_email_settings_nonce' ); ?>
+				<?php do_action( 'wp_frontend_delete_account_settings' ); ?>
+				<?php wp_nonce_field( 'wp_frontend_delete_account_settings', 'wp_frontend_delete_account_settings_nonce' ); ?>
 
 			</table>
 
@@ -214,7 +214,6 @@ class Backend {
 			}
 
 			$options = array( 'wpfda_title', 'wpfda_button_label', 'wpfda_attribute', 'wpfda_security', 'wpfda_security_password_text', 'wpfda_security_custom_captcha_question', 'wpfda_security_custom_captcha_answer', 'wpfda_load_assets_globally', 'wpfda_email_receipent', 'wpfda_enable_user_email', 'wpfda_enable_admin_email', 'wpfda_user_email_subject', 'wpfda_admin_email_subject', 'wpfda_user_email_message', 'wpfda_admin_email_message' );
-
 			foreach ( $options as $option ) {
 				if ( isset( $_POST[ $option ] ) ) {
 					$value = sanitize_text_field( $_POST[ $option ] );

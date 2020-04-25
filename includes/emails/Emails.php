@@ -163,7 +163,7 @@ class Emails {
 						<td><textarea style="width:50%; height:100%" name="wpfda_<?php echo $email; ?>_email_message" class="wp-frontend-delete-account-<?php echo $email; ?>-email-message" /><?php echo esc_html( $message ); ?></textarea>
 						</td>
 				</tr>
-				<?php do_action( 'wp_frontend_delete_account_settings' ); ?>
+				<?php do_action( 'wp_frontend_delete_account_email_settings' ); ?>
 				<?php wp_nonce_field( 'wp_frontend_delete_account_settings', 'wp_frontend_delete_account_settings_nonce' ); ?>
 			</table>
 
