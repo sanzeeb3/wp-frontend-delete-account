@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Frontend Delete Account 1.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-24 05:46:47+00:00\n"
+"POT-Creation-Date: 2020-04-25 09:22:37+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,6 +28,10 @@ msgstr ""
 
 #: includes/Backend.php:54 includes/emails/Emails.php:24
 msgid "Disable this email"
+msgstr ""
+
+#: includes/Backend.php:84
+msgid "General"
 msgstr ""
 
 #: includes/Backend.php:85
@@ -120,10 +124,6 @@ msgstr ""
 msgid ""
 "Just a heads up! You are the site administrator and processing further will "
 "delete yourself."
-msgstr ""
-
-#: includes/Main.php:54 includes/Main.php:63
-msgid "Cheatin&#8217; huh?"
 msgstr ""
 
 #: includes/WooCommerce.php:67

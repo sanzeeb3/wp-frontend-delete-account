@@ -50,20 +50,6 @@ module.exports = function( grunt ){
 			}
 		},
 
-		// Generate all RTL .css files
-		rtlcss: {
-			generate: {
-				expand: true,
-				cwd: '<%= dirs.css %>',
-				src: [
-					'*.css',
-					'!*-rtl.css'
-				],
-				dest: '<%= dirs.css %>/',
-				ext: '-rtl.css'
-			}
-		},
-
 		// Minify all .css files.
 		cssmin: {
 			minify: {
@@ -72,6 +58,27 @@ module.exports = function( grunt ){
 				src: ['*.css'],
 				dest: '<%= dirs.css %>/',
 				ext: '.css'
+			}
+		},
+
+		// Minify all .js files
+		uglify: {
+			options:{
+				sourcemap: 'none',
+			},
+			target: {
+				files:[{
+					expand: true,
+					cwd: '<%= dirs.js %>/admin',
+					src: [
+							'*.js',
+							'!*.min.js',
+							'!gutenberg.js',
+					],
+					dest: '<%= dirs.js %>/admin',
+					ext: '.min.js'
+
+				}]
 			}
 		},
 
@@ -201,7 +208,6 @@ module.exports = function( grunt ){
 					'!*.md',
 					'!*.zip',
 					'!.*/**',
-					'!vendor/**',
 					'!phpcs.xml',
 					'!Gruntfile.js',
 					'!package.json',
@@ -219,6 +225,7 @@ module.exports = function( grunt ){
 	// Load NPM tasks to be used here
 	grunt.loadNpmTasks( 'grunt-sass' );
 	grunt.loadNpmTasks( 'grunt-phpcs' );
+	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
 	grunt.loadNpmTasks( 'grunt-rtlcss' );
 	grunt.loadNpmTasks( 'grunt-postcss' );
 	grunt.loadNpmTasks( 'grunt-stylelint' );
@@ -237,7 +244,6 @@ module.exports = function( grunt ){
 
 	grunt.registerTask( 'css', [
 		'sass',
-		'rtlcss',
 		'postcss',
 		'cssmin'
 	]);

@@ -61,7 +61,7 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 
 == Changelog ==
 
-= 1.2.0 - 04/xx/2020 =
+= 1.2.0 - 04/25/2020 =
 * Feature - Emails after account deletion.
 * Refactor - Use of namespaces and composer autoload.
 * Enahancement - Clean unnecessary stuffs.
