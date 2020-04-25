@@ -81,7 +81,7 @@ class Backend {
 		$emails_active  = isset( $_GET['section'] ) && 'emails' === $_GET['section'] ? 'nav-tab-active' : '';
 		$general_active = empty( $email_active ) ? 'nav-tab-active' : '';
 		$template       = '<h2 class="nav-tab-wrapper">
-			<a href="' . esc_url( admin_url( 'admin.php?page=WP+Frontend+Delete+Account' ) ) . '" class="nav-tab ' . $general_active . '">' . esc_html( 'General', 'wp-frontend-delete-account' ) . '</a>
+			<a href="' . esc_url( admin_url( 'admin.php?page=WP+Frontend+Delete+Account' ) ) . '" class="nav-tab ' . $general_active . '">' . esc_html__( 'General', 'wp-frontend-delete-account' ) . '</a>
 			<a href="' . esc_url( wp_nonce_url( admin_url( 'admin.php?page=WP+Frontend+Delete+Account&section=emails' ), 'wp-frontend-delete-account-emails' ) ) . '" class="nav-tab ' . $emails_active . '">' . esc_html__( 'Emails', 'wp-frontend-delete-account' ) . '</a>
 			</h2>';
 		echo $template;
@@ -113,7 +113,7 @@ class Backend {
 		$users            = get_users();
 
 		?>
-		  <h2 class="wp-heading-inline"><?php esc_html_e( 'General Settings', 'wp-frontend-delete-account' ); ?></h2>
+		<h2 class="wp-heading-inline"><?php esc_html_e( 'General Settings', 'wp-frontend-delete-account' ); ?></h2>
 		<hr class="wp-header-end">
 		<hr/>
 
@@ -147,7 +147,7 @@ class Backend {
 								<option><?php echo esc_html__( '--None--', 'wp-frontend-delete-account' ); ?></option>
 								<?php
 								foreach ( $users as $user ) {
-										echo '<option value="' . $user->ID . '" ' . selected( $user->ID, $attribute, true ) . '>' . $user->data->user_login . '</option>';
+										echo '<option value="' . absint( $user->ID ) . '" ' . selected( $user->ID, $attribute, true ) . '>' . $user->data->user_login . '</option>';
 								}
 								?>
 							</select>
@@ -159,7 +159,7 @@ class Backend {
 						<td>
 							<select style="width:17%;" name="wpfda_security" class="wpfda-security">
 								<option value="none" <?php selected( 'none', $security, true ); ?>><?php echo esc_html__( '--None--', 'wp-frontend-delete-account' ); ?></option>
-								   <option value="password" <?php selected( 'password', $security, true ); ?>><?php echo esc_html__( 'Password', 'wp-frontend-delete-account' ); ?></option>
+								<option value="password" <?php selected( 'password', $security, true ); ?>><?php echo esc_html__( 'Password', 'wp-frontend-delete-account' ); ?></option>
 								<option value="custom_captcha" <?php selected( 'custom_captcha', $security, true ); ?>><?php echo esc_html__( 'Custom Captcha', 'wp-frontend-delete-account' ); ?></option>
 							</select><br/>
 						</td>
@@ -171,7 +171,7 @@ class Backend {
 						</td>
 				</tr>
 
-				   <tr valign="top" class="wp-frontend-delete-account-security-custom-captcha-question">
+				<tr valign="top" class="wp-frontend-delete-account-security-custom-captcha-question">
 					<th scope="row"><?php echo esc_html__( 'Captcha Question', 'wp-frontend-delete-account' ); ?></th>
 						<td>
 							<input style="width:50%" type="text" name="wpfda_security_custom_captcha_question" value ="<?php echo esc_html( $captcha_question ); ?>" class="wp-frontend-delete-account-security-custom-captcha-question-inline" />

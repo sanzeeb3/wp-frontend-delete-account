@@ -164,7 +164,7 @@ class Frontend {
 			$subject = get_option( 'wpfda_user_email_subject', 'Your account has been deleted successfully.' );
 			$message = get_option( 'wpfda_user_email_message', 'Your account has been deleted. In case this is a mistake, please contact the site administrator at ' . site_url() . '' );
 
-			wp_mail( $user->data->user_email, $subject, $message );
+			$sent = wp_mail( $user->data->user_email, $subject, $message );
 
 			do_action( 'wp_frontend_delete_account_admin_email_sent', $sent );
 		}

@@ -7,6 +7,11 @@
  * Author URI: http://www.sanjeebaryal.com.np
  * Text Domain: wp-frontend-delete-account
  * Domain Path: /languages/
+ *
+ * @package    WP Force Logout
+ * @author     Sanjeev Aryal
+ * @since      1.0.0
+ * @license    GPL-3.0+
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -17,6 +22,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! defined( 'WPFDA_PLUGIN_FILE' ) ) {
 	define( 'WPFDA_PLUGIN_FILE', __FILE__ );
 }
+
+/**
+ * Plugin version.
+ *
+ * @var string
+ */
+const WPFDA_VERSION = '1.2.0';
 
 require_once 'vendor/autoload.php';
 
