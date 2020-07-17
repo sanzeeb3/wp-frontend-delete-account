@@ -109,7 +109,9 @@ class Frontend {
 
 		global $post;
 
-		if ( ( defined( 'WC_VERSION' ) && is_account_page() ) || ( function_exists( 'has_block' ) && has_block( 'wp-frontend-delete-account/delete-account-content' ) ) || has_shortcode( $post->post_content, 'wp_frontend_delete_account' ) || 'on' === get_option( 'wpfda_load_assets_globally' ) ) {
+		$has_shortcode = is_singular() && is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'wp_frontend_delete_account' );
+
+		if ( ( defined( 'WC_VERSION' ) && is_account_page() ) || ( function_exists( 'has_block' ) && has_block( 'wp-frontend-delete-account/delete-account-content' ) ) || $has_shortcode || 'on' === get_option( 'wpfda_load_assets_globally' ) ) {
 
 			$suffix   = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 			$security = get_option( 'wpfda_security', 'password' );
