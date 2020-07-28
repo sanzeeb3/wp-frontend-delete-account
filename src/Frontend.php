@@ -1,6 +1,6 @@
 <?php
 
-namespace WP_Frontend_Delete_Account;
+namespace WPFrontendDeleteAccount;
 
 /**
  * @since  1.0.0
@@ -15,8 +15,10 @@ class Frontend {
 
 	/**
 	 * Constructor.
+	 *
+	 * @since  1.3.0 Change Constructor to init.
 	 */
-	public function __construct() {
+	public function init() {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 		add_action( 'wp_ajax_confirm_delete', array( $this, 'confirm_delete' ) );
@@ -172,5 +174,3 @@ class Frontend {
 		}
 	}
 }
-
-new \WP_Frontend_Delete_Account\Frontend();

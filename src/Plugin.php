@@ -1,19 +1,21 @@
 <?php
 
-namespace WP_Frontend_Delete_Account;
+namespace WPFrontendDeleteAccount;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
 /**
- * Main Class.
+ * Plugin Class.
  *
  * @since 1.0.0
  *
  * @since 1.2.0 Changed class "WPF_Delete_Account" to "Main" with namespace.
+ *
+ * @since 1.3.0 Changed class "Main" to "Plugin" for better naming.
  */
-final class Main {
+final class Plugin {
 
 	/**
 	 * Instance of this class.
@@ -44,19 +46,26 @@ final class Main {
 
 		// Load plugin text domain.
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
+		add_action( 'init', array( $this, 'register_classes' ) );
 
 		do_action( 'wp_frontend_delete_account_loaded' );
 	}
 
 	/**
-	 * Define constant if not already set.
+	 * Register the classes we need.
 	 *
-	 * @param string      $name   Name of the constant.
-	 * @param string|bool $value  Value of the constant.
+	 * @since 1.3.0
 	 */
-	private function define( $name, $value ) {
-		if ( ! defined( $name ) ) {
-			define( $name, $value );
+	public function register_classes() {
+
+		$classes = array( 'Backend', 'Frontend', 'WooCommerce', 'Gutenberg' );
+
+		foreach ( $classes as $class ) {
+			if ( \class_exists( __NAMESPACE__ . '\\' . $class ) ) {
+				$class = __NAMESPACE__ . '\\' . $class;
+				$obj   = new $class();
+				$obj->init();
+			}
 		}
 	}
 

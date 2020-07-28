@@ -1,6 +1,8 @@
 <?php
 
-namespace WP_Frontend_Delete_Account;
+namespace WPFrontendDeleteAccount;
+
+use WPFrontendDeleteAccount\Emails\Emails;
 
 /**
  * @since  1.0.0
@@ -12,9 +14,11 @@ namespace WP_Frontend_Delete_Account;
 class Backend {
 
 	/**
-	 * Constructor.
+	 * Initialize.
+	 *
+	 * @since  1.3.0 Change Constructor to init.
 	 */
-	public function __construct() {
+	public function init() {
 		add_action( 'admin_menu', array( $this, 'wpfda_register_setting_menu' ) );
 		add_action( 'admin_init', array( $this, 'save_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_assets' ) );
@@ -91,11 +95,11 @@ class Backend {
 			check_admin_referer( 'wp-frontend-delete-account-emails' );
 
 			if ( ! isset( $_GET['email'] ) ) {
-				\WP_Frontend_Delete_Account\Emails::overview();
+				Emails::overview();
 			} else {
 				// Manage Emails.
 				if ( isset( $_GET['email'] ) ) {
-					\WP_Frontend_Delete_Account\Emails::emails();
+					Emails::emails();
 				}
 			}
 
@@ -335,5 +339,3 @@ class Backend {
 		}
 	}
 }
-
-new \WP_Frontend_Delete_Account\Backend();

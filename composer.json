@@ -5,19 +5,17 @@
   "type": "wordpress-plugin",
   "license": "GPL-3.0-or-later",
   "require": {
+    "php": ">=5.6",
     "composer/installers": "1.7.0"
   },
    "autoload": {
     "files": [
-        "includes/Main.php",
-        "includes/Backend.php",
-        "includes/Frontend.php",
-        "includes/WooCommerce.php",
-        "includes/Gutenberg.php",
-        "includes/Functions.php",
-        "includes/emails/Emails.php"
-      ]
-    },
+        "functions.php"
+    ],
+    "psr-4": {
+        "WPFrontendDeleteAccount\\": "src/"
+    }
+  },
   "scripts": {
     "phpcs": [
       "phpcs -s -p"

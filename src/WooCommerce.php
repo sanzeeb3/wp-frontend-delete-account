@@ -1,6 +1,6 @@
 <?php
 
-namespace WP_Frontend_Delete_Account;
+namespace WPFrontendDeleteAccount;
 
 /**
  * @since  1.0.0
@@ -14,9 +14,11 @@ namespace WP_Frontend_Delete_Account;
 class WooCommerce {
 
 	/**
-	 * Constructor.
+	 * Initialize.
+	 *
+	 * @since  1.3.0 Change Constructor to init.
 	 */
-	public function __construct() {
+	public function init() {
 
 		// Return if WooCommerce is not installed.
 		if ( ! defined( 'WC_VERSION' ) ) {
@@ -79,5 +81,3 @@ class WooCommerce {
 		echo wpf_delete_account_content();
 	}
 }
-
-new \WP_Frontend_Delete_Account\WooCommerce();

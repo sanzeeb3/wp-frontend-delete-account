@@ -1,6 +1,6 @@
 <?php
 
-namespace WP_Frontend_Delete_Account;
+namespace WPFrontendDeleteAccount;
 
 /**
  * @since  1.0.0
@@ -14,9 +14,12 @@ namespace WP_Frontend_Delete_Account;
 class Gutenberg {
 
 	/**
-	 * Constructor.
+	 * Initialize.
+	 *
+	 * @since  1.3.0 Change Constructor to init.
 	 */
-	public function __construct() {
+	public function init() {
+
 		add_action( 'init', array( $this, 'register_block' ) );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'load_assets' ) );
 	}
@@ -55,5 +58,3 @@ class Gutenberg {
 		);
 	}
 }
-
-new \WP_Frontend_Delete_Account\Gutenberg();
