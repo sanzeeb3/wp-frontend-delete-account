@@ -14,9 +14,12 @@ namespace WPFrontendDeleteAccount;
 class Gutenberg {
 
 	/**
-	 * Constructor.
+	 * Initialize.
+	 *
+	 * @since  1.3.0 Change Constructor to init.
 	 */
-	public function __construct() {
+	public function init() {
+
 		add_action( 'init', array( $this, 'register_block' ) );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'load_assets' ) );
 	}

@@ -46,19 +46,25 @@ final class Plugin {
 
 		// Load plugin text domain.
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
+    	add_action( 'init', array( $this, 'register_classes' ) );
 
 		do_action( 'wp_frontend_delete_account_loaded' );
 	}
 
 	/**
-	 * Define constant if not already set.
+	 * Register the classes we need.
 	 *
-	 * @param string      $name   Name of the constant.
-	 * @param string|bool $value  Value of the constant.
+	 * @since 1.3.0
 	 */
-	private function define( $name, $value ) {
-		if ( ! defined( $name ) ) {
-			define( $name, $value );
+	public function register_classes() {
+		$classes = [ 'Backend', 'Frontend', 'WooCommerce', 'Gutenberg' ];
+
+		foreach ($classes as $class) {
+			if ( \class_exists( __NAMESPACE__ . '\\' . $class ) ) {
+				$class = __NAMESPACE__ . '\\' . $class;
+				$obj = new $class();
+				$obj->init();
+			}
 		}
 	}
 

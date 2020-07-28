@@ -14,14 +14,18 @@ namespace WPFrontendDeleteAccount;
 class WooCommerce {
 
 	/**
-	 * Constructor.
+	 * Initialize.
+	 *
+	 * @since  1.3.0 Change Constructor to init.
 	 */
-	public function __construct() {
+	public function init() {
 
 		// Return if WooCommerce is not installed.
 		if ( ! defined( 'WC_VERSION' ) ) {
 			return;
 		}
+
+
 
 		if ( true === apply_filters( 'wpfda_disable_delete_account_tab', false ) ) {
 			return;
