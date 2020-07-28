@@ -1,6 +1,6 @@
 <?php
 
-namespace WP_Frontend_Delete_Account;
+namespace WPFrontendDeleteAccount;
 
 /**
  * @since  1.0.0
@@ -79,5 +79,3 @@ class WooCommerce {
 		echo wpf_delete_account_content();
 	}
 }
-
-new \WP_Frontend_Delete_Account\WooCommerce();

@@ -1,19 +1,21 @@
 <?php
 
-namespace WP_Frontend_Delete_Account;
+namespace WPFrontendDeleteAccount;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
 /**
- * Main Class.
+ * Plugin Class.
  *
  * @since 1.0.0
  *
  * @since 1.2.0 Changed class "WPF_Delete_Account" to "Main" with namespace.
+ *
+ * @since 1.3.0 Changed class "Main" to "Plugin" for better naming.
  */
-final class Main {
+final class Plugin {
 
 	/**
 	 * Instance of this class.

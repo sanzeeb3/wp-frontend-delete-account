@@ -1,6 +1,6 @@
 <?php
 
-namespace WP_Frontend_Delete_Account;
+namespace WPFrontendDeleteAccount;
 
 /**
  * @since  1.0.0
@@ -172,5 +172,3 @@ class Frontend {
 		}
 	}
 }
-
-new \WP_Frontend_Delete_Account\Frontend();

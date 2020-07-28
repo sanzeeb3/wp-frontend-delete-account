@@ -33,14 +33,14 @@ const WPFDA_VERSION = '1.2.1';
 require_once 'vendor/autoload.php';
 
 /**
- * Return the main instance of Main Class.
+ * Return the main instance of Plugin Class.
  *
  * @since  1.2.0
  *
- * @return Main.
+ * @return Plugin.
  */
 function wp_frontend_delete_account() {
-		return \WP_Frontend_Delete_Account\Main::get_instance();
+		return \WPFrontendDeleteAccount\Plugin::get_instance();
 }
 
 wp_frontend_delete_account();

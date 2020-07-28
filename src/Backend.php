@@ -1,6 +1,6 @@
 <?php
 
-namespace WP_Frontend_Delete_Account;
+namespace WPFrontendDeleteAccount;
 
 /**
  * @since  1.0.0
@@ -91,11 +91,11 @@ class Backend {
 			check_admin_referer( 'wp-frontend-delete-account-emails' );
 
 			if ( ! isset( $_GET['email'] ) ) {
-				\WP_Frontend_Delete_Account\Emails::overview();
+				\WPFrontendDeleteAccount\Emails::overview();
 			} else {
 				// Manage Emails.
 				if ( isset( $_GET['email'] ) ) {
-					\WP_Frontend_Delete_Account\Emails::emails();
+					\WPFrontendDeleteAccount\Emails::emails();
 				}
 			}
 
@@ -335,5 +335,3 @@ class Backend {
 		}
 	}
 }
-
-new \WP_Frontend_Delete_Account\Backend();
