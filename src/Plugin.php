@@ -46,7 +46,7 @@ final class Plugin {
 
 		// Load plugin text domain.
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
-    	add_action( 'init', array( $this, 'register_classes' ) );
+		add_action( 'init', array( $this, 'register_classes' ) );
 
 		do_action( 'wp_frontend_delete_account_loaded' );
 	}
@@ -58,12 +58,12 @@ final class Plugin {
 	 */
 	public function register_classes() {
 
-		$classes = [ 'Backend', 'Frontend', 'WooCommerce', 'Gutenberg' ];
+		$classes = array( 'Backend', 'Frontend', 'WooCommerce', 'Gutenberg' );
 
-		foreach ($classes as $class) {
+		foreach ( $classes as $class ) {
 			if ( \class_exists( __NAMESPACE__ . '\\' . $class ) ) {
 				$class = __NAMESPACE__ . '\\' . $class;
-				$obj = new $class();
+				$obj   = new $class();
 				$obj->init();
 			}
 		}

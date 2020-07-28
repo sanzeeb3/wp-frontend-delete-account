@@ -25,8 +25,6 @@ class WooCommerce {
 			return;
 		}
 
-
-
 		if ( true === apply_filters( 'wpfda_disable_delete_account_tab', false ) ) {
 			return;
 		}
