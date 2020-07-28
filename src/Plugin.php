@@ -57,6 +57,7 @@ final class Plugin {
 	 * @since 1.3.0
 	 */
 	public function register_classes() {
+
 		$classes = [ 'Backend', 'Frontend', 'WooCommerce', 'Gutenberg' ];
 
 		foreach ($classes as $class) {
