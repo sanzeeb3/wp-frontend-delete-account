@@ -8,7 +8,7 @@
  * Text Domain: wp-frontend-delete-account
  * Domain Path: /languages/
  *
- * @package    WP Force Logout
+ * @package    WP Frontend Delete Account
  * @author     Sanjeev Aryal
  * @since      1.0.0
  * @license    GPL-3.0+
