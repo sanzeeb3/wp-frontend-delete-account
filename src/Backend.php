@@ -114,7 +114,9 @@ class Backend {
 		$captcha_question = get_option( 'wpfda_security_custom_captcha_question', 'What is 11*3?' );
 		$captcha_answer   = get_option( 'wpfda_security_custom_captcha_answer', '33' );
 		$load_assets      = get_option( 'wpfda_load_assets_globally' );
+		$wc_data 	      = get_option( 'wpfda_wc_data' );
 		$users            = get_users();
+		$wc_defined 		  = defined( 'WC_VERSION' );
 
 		?>
 		<h2 class="wp-heading-inline"><?php esc_html_e( 'General Settings', 'wp-frontend-delete-account' ); ?></h2>
@@ -129,6 +131,20 @@ class Backend {
 						<td>
 							<input type="hidden" name="wpfda_load_assets_globally" value="off" />
 							<input style="width:auto" type="checkbox" name="wpfda_load_assets_globally" class="wp-frontend-delete-account-load-assets-globally-inline" <?php checked( 'on', $load_assets ); ?> />
+							<i><?php echo esc_html__( 'Check this only if you are having any compatiblitiy issues.', 'wp-frontend-delete-account' ); ?> </i>
+						</td>
+				</tr>
+
+				<tr valign="top" class="wp-frontend-delete-account-wc-data">
+					<th scope="row"><?php echo esc_html__( 'Remove WooCommerce Personal data', 'wp-frontend-delete-account' ); ?></th>
+						<td>
+							<input type="hidden" name="wpfda_wc_data" value="off" />
+							<input style="width:auto" type="checkbox" name="wpfda_wc_data" class="wp-frontend-delete-account-wc-data-inline" <?php echo ! $wc_defined ? 'disabled': '' ;?> <?php checked( 'on', $wc_data ); ?> />
+							<i><?php echo esc_html__( 'This option removes all personal data of the deleted user from WooCommerce orders, download data, user token etc.', 'wp-frontend-delete-account' ); ?> </i>
+							<?php if ( ! $wc_defined ) {
+									?> <br/><br/><i style="color:grey;"> <?php echo esc_html( 'WooCommerce is not installed on your site, currently.' ); ?> </i> <?php
+								}
+							?>
 						</td>
 				</tr>
 
