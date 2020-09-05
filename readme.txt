@@ -4,7 +4,7 @@ Tags: delete-account, delete account from frontend, frontend delete, remove acco
 Requires at least: 4.0
 Tested up to: 5.5.1
 Requires PHP: 5.6
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -60,6 +60,9 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 7. Settings
 
 == Changelog ==
+
+= 1.3.1 - 09/05/2020 =
+* Fix - Error due to small case folder
 
 = 1.3.0 - 09/04/2020 =
 * Refactor - Use of autoloading and namespaces.
