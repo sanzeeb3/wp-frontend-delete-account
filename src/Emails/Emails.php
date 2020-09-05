@@ -27,13 +27,11 @@ class Emails {
 		}
 
 		?>
-			<h2 class="wp-heading-inline"><?php esc_html_e( 'Email Notifications', 'wp-frontend-delete-account' ); ?></h2>
+			<h2><?php esc_html_e( 'Email Notifications', 'wp-frontend-delete-account' ); ?></h2>
 			<div id="email_notification_settings-description">
 				<p><?php esc_html_e( 'Email notifications sent from WP Frontend Delete Account are listed below. Click on an email to configure it.', 'wp-frontend-delete-account' ); ?></p>
 				<p><?php esc_html_e( 'If you are having issue with email delivery in your site, I recommend setting up SMTP in your site using SMTP plugins such as WP Mail SMTP.', 'wp-frontend-delete-account' ); ?></p>
 			</div>
-			<hr class="wp-header-end">
-			<hr/>
 		<tr valign="top">
 		<td class="wc_emails_wrapper" colspan="3">
 			<table style="width:75%" class="wc_emails widefat" cellspacing="0">
@@ -77,28 +75,7 @@ class Emails {
 				</table>
 			</td>
 		</tr>
-
-	</br>
-
 		<?php
-
-		$url = 'https://wordpress.org/support/plugin/wp-frontend-delete-account/reviews/?filter=5#new-post';
-
-		echo sprintf(
-			wp_kses( /* translators: %1$s - WP.org link; %2$s - same WP.org link. */
-				__( 'Please rate <strong>WP Frontend Delete Account</strong> <a href="%1$s" target="_blank" rel="noopener noreferrer">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href="%2$s" target="_blank" rel="noopener noreferrer">WordPress.org</a> to help us spread the word. Thank you!', 'wp-frontend-delete-account' ),
-				array(
-					'strong' => true,
-					'a'      => array(
-						'href'   => true,
-						'target' => true,
-						'rel'    => true,
-					),
-				)
-			),
-			$url,
-			$url
-		);
 	}
 
 	/**

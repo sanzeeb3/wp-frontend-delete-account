@@ -26,6 +26,9 @@ class Backend {
 		add_action( 'wp_ajax_wpfda_deactivation_email', array( $this, 'deactivation_email' ) );
 		add_action( 'wp_ajax_wpfda_email_status', array( $this, 'email_status' ) );
 		add_action( 'admin_print_scripts', array( $this, 'remove_notices' ) );
+		add_action( 'in_admin_header', array( $this, 'review_notice' ) );
+		add_action( 'wp_ajax_wp_frontend_delete_account_dismiss_review_notice', array( $this, 'dismiss_review_notice' ) );
+
 	}
 
 	/**
@@ -52,6 +55,7 @@ class Backend {
 					'ajax_url'           => admin_url( 'admin-ajax.php' ),
 					'deactivation_nonce' => wp_create_nonce( 'deactivation-notice' ),
 					'status_nonce'       => wp_create_nonce( 'email-status' ),
+					'review_nonce'		 => wp_create_nonce( 'review-notice' ),
 					'deactivating'       => __( 'Deactivating...', 'wp-frontend-delete-account' ),
 					'wrong'              => __( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
 					'enable_email'       => __( 'Enable this email', 'wp-frontend-delete-account' ),
@@ -117,9 +121,7 @@ class Backend {
 		$users            = get_users();
 
 		?>
-		<h2 class="wp-heading-inline"><?php esc_html_e( 'General Settings', 'wp-frontend-delete-account' ); ?></h2>
-		<hr class="wp-header-end">
-		<hr/>
+		<h2><?php esc_html_e( 'General Settings', 'wp-frontend-delete-account' ); ?></h2>
 
 		<form method="post">
 			<table class="form-table">
@@ -313,6 +315,64 @@ class Backend {
 		$enable = ! empty( $_POST['enable'] ) ? 'on' : 'off';
 
 		update_option( 'wpfda_enable_' . $email . '_email', $enable );
+	}
+
+	/**
+	 * Outputs the Review notice on admin header.
+	 *
+	 * @since 1.3.2
+	 */
+	function review_notice() {
+
+		global $current_screen;
+
+		// Show only to Admins
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$notice_dismissed = get_option( 'wpfda_review_notice_dismissed', 'no' );
+
+		if ( 'yes' == $notice_dismissed ) {
+			return;
+		}
+
+		if ( ! empty( $current_screen->id ) && $current_screen->id !== 'settings_page_WP Frontend Delete Account' ) {
+			return;
+		}
+
+		?>
+			<div id="wp-frontend-delete-account-review-notice" class="notice notice-info wp-frontend-delete-account-review-notice">
+				<div class="wp-frontend-delete-account-review-thumbnail">
+					<img src="<?php echo plugins_url( 'assets/logo.png', WPFDA_PLUGIN_FILE ); ?>" alt="">
+				</div>
+				<div class="wp-frontend-delete-account-review-text">
+
+						<h3><?php _e( 'Whoopee! 😀', 'wp-frontend-delete-account' ); ?></h3>
+						<p><?php _e( 'Are you enjoying the plugin? Would you do me some favour and leave a <a href="https://wordpress.org/support/plugin/wp-frontend-delete-account/reviews/?filter=5#new-post" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> review on <a href="https://wordpress.org/support/plugin/wp-frontend-delete-account/reviews/?filter=5#new-post" target="_blank"><strong>WordPress.org</strong></a> to help us spread the word and boost my motivation?', 'wp-frontend-delete-account' ); ?></p>
+
+					<ul class="wp-frontend-delete-account-review-ul">
+						<li><a class="button button-primary" href="https://wordpress.org/support/plugin/wp-frontend-delete-account/reviews/?filter=5#new-post" target="_blank"><span class="dashicons dashicons-external"></span><?php _e( 'Sure, I\'d love to!', 'wp-frontend-delete-account' ); ?></a></li>
+						<li><a href="#" class="button button-secondary notice-dismiss"><span  class="dashicons dashicons-smiley"></span><?php _e( 'I already did!', 'wp-frontend-delete-account' ); ?></a></li>
+						<li><a href="#" class="button button-link notice-dismiss"><span class="dashicons dashicons-dismiss"></span><?php _e( 'No, I won\'t.', 'wp-frontend-delete-account' ); ?></a></li>
+					 </ul>
+				</div>
+			</div>
+		<?php
+	}
+
+	/**
+	 * Dismiss the reveiw notice on dissmiss click
+	 *
+	 * @since 1.3.2
+	 */
+	function dismiss_review_notice() {
+
+		check_admin_referer( 'review-notice', 'security' );
+
+		if ( ! empty( $_POST['dismissed'] ) ) {
+			update_option( 'wpfda_review_notice_dismissed', 'yes' );
+		}
 	}
 
 	/**
