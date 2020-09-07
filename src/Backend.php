@@ -349,12 +349,12 @@ class Backend {
 				<div class="wp-frontend-delete-account-review-text">
 
 						<h3><?php _e( 'Whoopee! 😀', 'wp-frontend-delete-account' ); ?></h3>
-						<p><?php _e( 'Are you enjoying the plugin? Would you do me some favour and leave a <a href="https://wordpress.org/support/plugin/wp-frontend-delete-account/reviews/?filter=5#new-post" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> review on <a href="https://wordpress.org/support/plugin/wp-frontend-delete-account/reviews/?filter=5#new-post" target="_blank"><strong>WordPress.org</strong></a> to help us spread the word and boost my motivation?', 'wp-frontend-delete-account' ); ?></p>
+						<p><?php _e( 'How\'s it going? I hope that you\'ve found WP Frontend Delete Account helpful. Would you do me some favour and leave a <a href="https://wordpress.org/support/plugin/wp-frontend-delete-account/reviews/?filter=5#new-post" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> review on <a href="https://wordpress.org/support/plugin/wp-frontend-delete-account/reviews/?filter=5#new-post" target="_blank"><strong>WordPress.org</strong></a> to help us spread the word and boost my motivation?', 'wp-frontend-delete-account' ); ?></p>
 
 					<ul class="wp-frontend-delete-account-review-ul">
 						<li><a class="button button-primary" href="https://wordpress.org/support/plugin/wp-frontend-delete-account/reviews/?filter=5#new-post" target="_blank"><span class="dashicons dashicons-external"></span><?php _e( 'Sure, I\'d love to!', 'wp-frontend-delete-account' ); ?></a></li>
-						<li><a href="#" class="button button-secondary notice-dismiss"><span  class="dashicons dashicons-smiley"></span><?php _e( 'I already did!', 'wp-frontend-delete-account' ); ?></a></li>
-						<li><a href="#" class="button button-link notice-dismiss"><span class="dashicons dashicons-dismiss"></span><?php _e( 'No, I won\'t.', 'wp-frontend-delete-account' ); ?></a></li>
+						<li><a class="button button-link notice-dismiss" target="_blank" href="http://sanjeebaryal.com.np/contact"><span class="dashicons dashicons-sos"></span><?php _e( 'I need help!', 'wp-frontend-delete-account' ); ?></a></li>
+						<li><a href="#" class="button button-link notice-dismiss"><span class="dashicons dashicons-dismiss"></span><?php _e( 'Dismiss Forever.', 'wp-frontend-delete-account' ); ?></a></li>
 					 </ul>
 				</div>
 			</div>
