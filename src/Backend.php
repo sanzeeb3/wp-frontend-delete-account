@@ -353,7 +353,7 @@ class Backend {
 
 					<ul class="wp-frontend-delete-account-review-ul">
 						<li><a class="button button-primary" href="https://wordpress.org/support/plugin/wp-frontend-delete-account/reviews/?filter=5#new-post" target="_blank"><span class="dashicons dashicons-external"></span><?php _e( 'Sure, I\'d love to!', 'wp-frontend-delete-account' ); ?></a></li>
-						<li><a class="button button-link notice-dismiss" target="_blank" href="http://sanjeebaryal.com.np/contact"><span class="dashicons dashicons-sos"></span><?php _e( 'I need help!', 'wp-frontend-delete-account' ); ?></a></li>
+						<li><a class="button button-link" target="_blank" href="http://sanjeebaryal.com.np/contact"><span class="dashicons dashicons-sos"></span><?php _e( 'I need help!', 'wp-frontend-delete-account' ); ?></a></li>
 						<li><a href="#" class="button button-link notice-dismiss"><span class="dashicons dashicons-dismiss"></span><?php _e( 'Dismiss Forever.', 'wp-frontend-delete-account' ); ?></a></li>
 					 </ul>
 				</div>
