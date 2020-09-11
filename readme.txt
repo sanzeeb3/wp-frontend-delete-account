@@ -1,6 +1,6 @@
 === WP Frontend Delete Account ===
 Contributors: sanzeeb3
-Tags: delete-account, delete account from frontend, frontend delete, remove account,
+Tags: delete-account, delete-account-from-frontend, frontend-delete, remove-account, gdpr, gdpr-erasure
 Requires at least: 4.0
 Tested up to: 5.5.1
 Requires PHP: 5.6
