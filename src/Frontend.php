@@ -39,7 +39,7 @@ class Frontend {
 			}
 
 			$security       = get_option( 'wpfda_security', 'password' );
-			$captcha_answer = get_option( 'wpfda_security_custom_captcha_answer', '33' );
+			$captcha_answer = get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' );
 
 			if ( 'password' === $security || 'recaptcha_v2' === $security ) { // Backwards compatibility. Removing reCAPTCHA support since 1.1.0.
 				$user_id = get_current_user_id();
@@ -122,7 +122,7 @@ class Frontend {
 			wp_enqueue_style( 'wpfda-frontend-css', plugins_url( 'assets/css/frontend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
 
 			$security       = get_option( 'wpfda_security', 'password' );
-			$captcha_answer = get_option( 'wpfda_security_custom_captcha_answer', '33' );
+			$captcha_answer = get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' );
 
 			wp_localize_script(
 				'wpfda-delete-account-frontend',

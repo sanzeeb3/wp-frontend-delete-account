@@ -115,8 +115,8 @@ class Backend {
 		$attribute        = get_option( 'wpfda_attribute' );
 		$security         = get_option( 'wpfda_security', 'password' );
 		$password_text    = get_option( 'wpfda_security_password_text', 'Enter password to confirm:' );
-		$captcha_question = get_option( 'wpfda_security_custom_captcha_question', 'What is 11*3?' );
-		$captcha_answer   = get_option( 'wpfda_security_custom_captcha_answer', '33' );
+		$captcha_question = get_option( 'wpfda_security_custom_captcha_question', 'Enter PERMANENTLY DELETE to confirm:' );
+		$captcha_answer   = get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' );
 		$load_assets      = get_option( 'wpfda_load_assets_globally' );
 		$users            = get_users();
 

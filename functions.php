@@ -24,8 +24,8 @@ function wpf_delete_account_content() {
 	$user_id          = get_current_user_id();
 	$security         = get_option( 'wpfda_security', 'password' );
 	$password_text    = get_option( 'wpfda_security_password_text', esc_html__( 'Enter password to confirm:', 'wp-frontend-delete-account' ) );
-	$captcha_question = get_option( 'wpfda_security_custom_captcha_question', 'What is 11*3?' );
-	$captcha_answer   = get_option( 'wpfda_security_custom_captcha_answer', '33' );
+	$captcha_question = get_option( 'wpfda_security_custom_captcha_question', 'Enter PERMANENTLY DELETE to confirm:' );
+	$captcha_answer   = get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' );
 	$site_key         = get_option( 'wpfda_security_recaptcha_site_key' );
 	$site_secret      = get_option( 'wpfda_security_recaptcha_site_secret' );
 	$class            = apply_filters( 'wpfda_container_class', 'wpfda-delete-account-container' );
