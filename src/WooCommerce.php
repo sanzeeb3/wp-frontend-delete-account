@@ -25,10 +25,6 @@ class WooCommerce {
 			return;
 		}
 
-		if ( true === apply_filters( 'wpfda_disable_delete_account_tab', false ) ) {
-			return;
-		}
-
 		add_action( 'init', array( $this, 'register_endpoint' ) );
 		add_filter( 'query_vars', array( $this, 'query_vars' ) );
 		add_filter( 'woocommerce_account_menu_items', array( $this, 'add_wpf_delete_account_tab' ) );
@@ -41,6 +37,7 @@ class WooCommerce {
 	 * @return Void.
 	 */
 	public function register_endpoint() {
+
 		add_rewrite_endpoint( 'wpf-delete-account', EP_ROOT | EP_PAGES );
 	}
 
@@ -65,6 +62,10 @@ class WooCommerce {
 	 * @return array Items including Delete Account.
 	 */
 	public function add_wpf_delete_account_tab( $items ) {
+
+		if ( true === apply_filters( 'wpfda_disable_delete_account_tab', false ) ) {
+			return $items;
+		}
 
 		$items['wpf-delete-account'] = get_option( 'wda_title', esc_html__( 'Delete Account', 'wp-frontend-delete-account' ) );
 		return $items;

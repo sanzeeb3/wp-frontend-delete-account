@@ -46,17 +46,6 @@ final class Plugin {
 
 		// Load plugin text domain.
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
-		add_action( 'init', array( $this, 'register_classes' ) );
-
-		do_action( 'wp_frontend_delete_account_loaded' );
-	}
-
-	/**
-	 * Register the classes we need.
-	 *
-	 * @since 1.3.0
-	 */
-	public function register_classes() {
 
 		$classes = array( 'Backend', 'Frontend', 'WooCommerce', 'Gutenberg' );
 
@@ -67,6 +56,8 @@ final class Plugin {
 				$obj->init();
 			}
 		}
+
+		do_action( 'wp_frontend_delete_account_loaded' );
 	}
 
 	/**
