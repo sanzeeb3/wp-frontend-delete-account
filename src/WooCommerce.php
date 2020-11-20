@@ -38,6 +38,18 @@ class WooCommerce {
 	 */
 	public function register_endpoint() {
 
+		$permalink = get_option( 'permalink_structure' );
+
+		if ( empty( $permalink ) ) {
+
+			global $wp_rewrite;
+
+			update_option( 'rewrite_rules', FALSE );
+
+			$wp_rewrite->set_permalink_structure('/%postname%/');
+			$wp_rewrite->flush_rules( true );
+		}
+
 		add_rewrite_endpoint( 'wpf-delete-account', EP_ROOT | EP_PAGES );
 	}
 

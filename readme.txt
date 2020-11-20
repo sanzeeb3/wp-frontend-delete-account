@@ -4,7 +4,7 @@ Tags: delete-account, delete-account-from-frontend, frontend-delete, remove-acco
 Requires at least: 4.0
 Tested up to: 5.5.1
 Requires PHP: 5.6
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -60,6 +60,9 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 7. Settings
 
 == Changelog ==
+
+= 1.3.4 - 11/20/2020 =
+* Fix - 404 page when the permanlinkns has yet not been set.
 
 = 1.3.3 - 10/02/2020 =
 * 404 page on post name permalinks.
