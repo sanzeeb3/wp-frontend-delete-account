@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Frontend Delete Account package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Frontend Delete Account 1.2.1\n"
+"Project-Id-Version: WP Frontend Delete Account 1.3.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-28 06:44:47+00:00\n"
+"POT-Creation-Date: 2020-11-20 09:30:50+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,209 +13,227 @@ msgstr ""
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: includes/Backend.php:51
-msgid "Deactivating..."
-msgstr ""
-
-#: includes/Backend.php:52
-msgid "Oops! Something went wrong"
-msgstr ""
-
-#: includes/Backend.php:53 includes/emails/Emails.php:24
-#: includes/emails/Emails.php:140
-msgid "Enable this email"
-msgstr ""
-
-#: includes/Backend.php:54 includes/emails/Emails.php:24
-msgid "Disable this email"
-msgstr ""
-
-#: includes/Backend.php:84
-msgid "General"
-msgstr ""
-
-#: includes/Backend.php:85
-msgid "Emails"
-msgstr ""
-
-#: includes/Backend.php:116
-msgid "General Settings"
-msgstr ""
-
-#: includes/Backend.php:124
-msgid "Load Assets Globally"
-msgstr ""
-
-#: includes/Backend.php:132
-msgid "Title"
-msgstr ""
-
-#: includes/Backend.php:138
-msgid "Button Label"
-msgstr ""
-
-#: includes/Backend.php:144
-msgid "Attribute all contents to:"
-msgstr ""
-
-#: includes/Backend.php:147 includes/Backend.php:161
-msgid "--None--"
-msgstr ""
-
-#: includes/Backend.php:158
-msgid "Security method before deleting:"
-msgstr ""
-
-#: includes/Backend.php:162
-msgid "Password"
-msgstr ""
-
-#: includes/Backend.php:163
-msgid "Custom Captcha"
-msgstr ""
-
-#: includes/Backend.php:168
-msgid "Confirmation Text"
-msgstr ""
-
-#: includes/Backend.php:175
-msgid "Captcha Question"
-msgstr ""
-
-#: includes/Backend.php:182
-msgid "Captcha Answer"
-msgstr ""
-
-#: includes/Backend.php:253
-msgid ""
-"Would you care to let me know the deactivation reason so that I can improve "
-"it for you?"
-msgstr ""
-
-#: includes/Backend.php:260
-msgid "Skip and deactivate"
-msgstr ""
-
-#: includes/Frontend.php:52
-msgid "Invalid Password!"
-msgstr ""
-
-#: includes/Frontend.php:64 includes/Frontend.php:133
-msgid "Incorrect Answer. Please try again."
-msgstr ""
-
-#: includes/Frontend.php:96
-msgid "Deleting..."
-msgstr ""
-
-#: includes/Frontend.php:134
-msgid "Empty Password."
-msgstr ""
-
-#: includes/Frontend.php:135
-msgid "Processing..."
-msgstr ""
-
-#: includes/Functions.php:24
+#: functions.php:26
 msgid "Enter password to confirm:"
 msgstr ""
 
-#: includes/Functions.php:37
+#: functions.php:39
 msgid ""
 "Just a heads up! You are the site administrator and processing further will "
 "delete yourself."
 msgstr ""
 
-#: includes/WooCommerce.php:67
-msgid "Delete Account"
+#: src/Backend.php:59
+msgid "Deactivating..."
 msgstr ""
 
-#: includes/emails/Emails.php:30
+#: src/Backend.php:60
+msgid "Oops! Something went wrong"
+msgstr ""
+
+#: src/Backend.php:61 src/Emails/Emails.php:24 src/Emails/Emails.php:117
+msgid "Enable this email"
+msgstr ""
+
+#: src/Backend.php:62 src/Emails/Emails.php:24
+msgid "Disable this email"
+msgstr ""
+
+#: src/Backend.php:92
+msgid "General"
+msgstr ""
+
+#: src/Backend.php:93
+msgid "Emails"
+msgstr ""
+
+#: src/Backend.php:124
+msgid "General Settings"
+msgstr ""
+
+#: src/Backend.php:130
+msgid "Load Assets Globally"
+msgstr ""
+
+#: src/Backend.php:138
+msgid "Title"
+msgstr ""
+
+#: src/Backend.php:144
+msgid "Button Label"
+msgstr ""
+
+#: src/Backend.php:150
+msgid "Attribute all contents to:"
+msgstr ""
+
+#: src/Backend.php:153 src/Backend.php:167
+msgid "--None--"
+msgstr ""
+
+#: src/Backend.php:164
+msgid "Security method before deleting:"
+msgstr ""
+
+#: src/Backend.php:168
+msgid "Password"
+msgstr ""
+
+#: src/Backend.php:169
+msgid "Custom Captcha"
+msgstr ""
+
+#: src/Backend.php:174
+msgid "Confirmation Text"
+msgstr ""
+
+#: src/Backend.php:181
+msgid "Captcha Question"
+msgstr ""
+
+#: src/Backend.php:188
+msgid "Captcha Answer"
+msgstr ""
+
+#: src/Backend.php:259
+msgid ""
+"Would you care to let me know the deactivation reason so that I can improve "
+"it for you?"
+msgstr ""
+
+#: src/Backend.php:266
+msgid "Skip and deactivate"
+msgstr ""
+
+#: src/Backend.php:351
+msgid "Whoopee! 😀"
+msgstr ""
+
+#: src/Backend.php:352
+msgid ""
+"How's it going? I hope that you've found WP Frontend Delete Account "
+"helpful. Would you do me some favour and leave a <a "
+"href=\"https://wordpress.org/support/plugin/wp-frontend-delete-account/"
+"reviews/?filter=5#new-post\" "
+"target=\"_blank\">&#9733;&#9733;&#9733;&#9733;&#9733;</a> review on <a "
+"href=\"https://wordpress.org/support/plugin/wp-frontend-delete-account/"
+"reviews/?filter=5#new-post\" "
+"target=\"_blank\"><strong>WordPress.org</strong></a> to help us spread the "
+"word and boost my motivation?"
+msgstr ""
+
+#: src/Backend.php:355
+msgid "Sure, I'd love to!"
+msgstr ""
+
+#: src/Backend.php:356
+msgid "I need help!"
+msgstr ""
+
+#: src/Backend.php:357
+msgid "Dismiss Forever."
+msgstr ""
+
+#: src/Emails/Emails.php:30
 msgid "Email Notifications"
 msgstr ""
 
-#: includes/emails/Emails.php:32
+#: src/Emails/Emails.php:32
 msgid ""
 "Email notifications sent from WP Frontend Delete Account are listed below. "
 "Click on an email to configure it."
 msgstr ""
 
-#: includes/emails/Emails.php:33
+#: src/Emails/Emails.php:33
 msgid ""
 "If you are having issue with email delivery in your site, I recommend "
 "setting up SMTP in your site using SMTP plugins such as WP Mail SMTP."
 msgstr ""
 
-#: includes/emails/Emails.php:47
+#: src/Emails/Emails.php:45
 msgid "Email"
 msgstr ""
 
-#: includes/emails/Emails.php:48
+#: src/Emails/Emails.php:46
 msgid "Recipient(s)"
 msgstr ""
 
-#: includes/emails/Emails.php:49
+#: src/Emails/Emails.php:47
 msgid "Actions"
 msgstr ""
 
-#: includes/emails/Emails.php:61 includes/emails/Emails.php:122
+#: src/Emails/Emails.php:59 src/Emails/Emails.php:99
 msgid "Admin Email"
 msgstr ""
 
-#: includes/emails/Emails.php:64 includes/emails/Emails.php:73
+#: src/Emails/Emails.php:62 src/Emails/Emails.php:71
 msgid "Manage"
 msgstr ""
 
-#: includes/emails/Emails.php:70 includes/emails/Emails.php:122
+#: src/Emails/Emails.php:68 src/Emails/Emails.php:99
 msgid "User Email"
 msgstr ""
 
-#: includes/emails/Emails.php:71
+#: src/Emails/Emails.php:69
 msgid "User's Email Address"
 msgstr ""
 
-#: includes/emails/Emails.php:89
-#. translators: %1$s - WP.org link; %2$s - same WP.org link.
-msgid ""
-"Please rate <strong>WP Frontend Delete Account</strong> <a href=\"%1$s\" "
-"target=\"_blank\" rel=\"noopener "
-"noreferrer\">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href=\"%2$s\" "
-"target=\"_blank\" rel=\"noopener noreferrer\">WordPress.org</a> to help us "
-"spread the word. Thank you!"
-msgstr ""
-
-#: includes/emails/Emails.php:116
+#: src/Emails/Emails.php:93
 msgid "Heads up! A user deleted their account."
 msgstr ""
 
-#: includes/emails/Emails.php:116
+#: src/Emails/Emails.php:93
 msgid "Your account has been deleted successfully."
 msgstr ""
 
-#: includes/emails/Emails.php:117
+#: src/Emails/Emails.php:94
 msgid "A user {user_name} - {user_email} has deleted their account."
 msgstr ""
 
-#: includes/emails/Emails.php:126
+#: src/Emails/Emails.php:103
 msgid "Email notification sent to the user after their account has been deleted."
 msgstr ""
 
-#: includes/emails/Emails.php:130
+#: src/Emails/Emails.php:107
 msgid ""
 "Email notification sent to the admin if user deleted their account by their "
 "own."
 msgstr ""
 
-#: includes/emails/Emails.php:149
+#: src/Emails/Emails.php:126
 msgid "Email Recipient"
 msgstr ""
 
-#: includes/emails/Emails.php:156
+#: src/Emails/Emails.php:133
 msgid "Email Subject"
 msgstr ""
 
-#: includes/emails/Emails.php:162
+#: src/Emails/Emails.php:139
 msgid "Email Message"
+msgstr ""
+
+#: src/Frontend.php:54
+msgid "Invalid Password!"
+msgstr ""
+
+#: src/Frontend.php:66 src/Frontend.php:135
+msgid "Incorrect Answer. Please try again."
+msgstr ""
+
+#: src/Frontend.php:98
+msgid "Deleting..."
+msgstr ""
+
+#: src/Frontend.php:136
+msgid "Empty Password."
+msgstr ""
+
+#: src/Frontend.php:137
+msgid "Processing..."
+msgstr ""
+
+#: src/WooCommerce.php:82
+msgid "Delete Account"
 msgstr ""
 
 #. Plugin Name of the plugin/theme

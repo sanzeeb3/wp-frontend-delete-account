@@ -42,7 +42,7 @@ class Backend {
 		global $pagenow;
 		global $current_screen;
 
-		if ( 'plugins.php' === $pagenow || 'settings_page_WP Frontend Delete Account' === $current_screen->id ) {
+		if ( 'plugins.php' === $pagenow || 'settings_page_wp-frontend-delete-account' === $current_screen->id ) {
 
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
@@ -74,7 +74,7 @@ class Backend {
 	 * @return void.
 	 */
 	public function wpfda_register_setting_menu() {
-		add_options_page( 'WP Frontend Delete Account Settings', 'WP Frontend Delete Account', 'manage_options', 'WP Frontend Delete Account', array( $this, 'wpfda_settings_page' ) );
+		add_options_page( 'WP Frontend Delete Account Settings', 'WP Frontend Delete Account', 'manage_options', 'wp-frontend-delete-account', array( $this, 'wpfda_settings_page' ) );
 	}
 
 	/**
@@ -89,8 +89,8 @@ class Backend {
 		$emails_active  = isset( $_GET['section'] ) && 'emails' === $_GET['section'] ? 'nav-tab-active' : '';
 		$general_active = empty( $email_active ) ? 'nav-tab-active' : '';
 		$template       = '<h2 class="nav-tab-wrapper">
-			<a href="' . esc_url( admin_url( 'admin.php?page=WP+Frontend+Delete+Account' ) ) . '" class="nav-tab ' . $general_active . '">' . esc_html__( 'General', 'wp-frontend-delete-account' ) . '</a>
-			<a href="' . esc_url( wp_nonce_url( admin_url( 'admin.php?page=WP+Frontend+Delete+Account&section=emails' ), 'wp-frontend-delete-account-emails' ) ) . '" class="nav-tab ' . $emails_active . '">' . esc_html__( 'Emails', 'wp-frontend-delete-account' ) . '</a>
+			<a href="' . esc_url( admin_url( 'admin.php?page=wp-frontend-delete-account' ) ) . '" class="nav-tab ' . $general_active . '">' . esc_html__( 'General', 'wp-frontend-delete-account' ) . '</a>
+			<a href="' . esc_url( wp_nonce_url( admin_url( 'admin.php?page=wp-frontend-delete-account&section=emails' ), 'wp-frontend-delete-account-emails' ) ) . '" class="nav-tab ' . $emails_active . '">' . esc_html__( 'Emails', 'wp-frontend-delete-account' ) . '</a>
 			</h2>';
 		echo $template;
 
@@ -337,7 +337,7 @@ class Backend {
 			return;
 		}
 
-		if ( ! empty( $current_screen->id ) && $current_screen->id !== 'settings_page_WP Frontend Delete Account' ) {
+		if ( ! empty( $current_screen->id ) && $current_screen->id !== 'settings_page_wp-frontend-delete-account' ) {
 			return;
 		}
 
