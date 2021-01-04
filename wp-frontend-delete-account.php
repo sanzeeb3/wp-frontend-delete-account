@@ -30,7 +30,7 @@ if ( ! defined( 'WPFDA_PLUGIN_FILE' ) ) {
  */
 const WPFDA_VERSION = '1.3.4';
 
-require_once 'vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 /**
  * Return the main instance of Plugin Class.

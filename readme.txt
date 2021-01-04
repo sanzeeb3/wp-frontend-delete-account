@@ -63,6 +63,7 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 
 = Unreleasd =
 * Add - pl_PL translation (props to Jacek)
+* Fix - Correctly load autoload file
 
 = 1.3.4 - 11/20/2020 =
 * Fix - 404 page when the permanlinkns has yet not been set.
