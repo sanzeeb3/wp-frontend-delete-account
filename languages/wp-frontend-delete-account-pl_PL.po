@@ -1,0 +1,253 @@
+# Copyright (C) 2020 Sanjeev Aryal
+# This file is distributed under the same license as the WP Frontend Delete Account package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Frontend Delete Account 1.2.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-28 06:44:47+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2020-12-17 14:10+0100\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"X-Generator: Poedit 2.4.2\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n"
+"%100<12 || n%100>14) ? 1 : 2);\n"
+"Language: pl_PL\n"
+
+#: includes/Backend.php:51
+msgid "Deactivating..."
+msgstr "Deaktywacja…"
+
+#: includes/Backend.php:52
+msgid "Oops! Something went wrong"
+msgstr "Ups! Coś poszło nie tak"
+
+#: includes/Backend.php:53 includes/emails/Emails.php:24
+#: includes/emails/Emails.php:140
+msgid "Enable this email"
+msgstr "Włącz ten email"
+
+#: includes/Backend.php:54 includes/emails/Emails.php:24
+msgid "Disable this email"
+msgstr "Wyłącz ten Email"
+
+#: includes/Backend.php:84
+msgid "General"
+msgstr "Ogólne"
+
+#: includes/Backend.php:85
+msgid "Emails"
+msgstr "E-maile"
+
+#: includes/Backend.php:116
+msgid "General Settings"
+msgstr "Ustawienia ogólne"
+
+#: includes/Backend.php:124
+msgid "Load Assets Globally"
+msgstr "Wgraj zasoby globalnie"
+
+#: includes/Backend.php:132
+msgid "Title"
+msgstr "Tytuł"
+
+#: includes/Backend.php:138
+msgid "Button Label"
+msgstr "Etykieta przycisku"
+
+#: includes/Backend.php:144
+msgid "Attribute all contents to:"
+msgstr "Przypisz całą zawartość do:"
+
+#: includes/Backend.php:147 includes/Backend.php:161
+msgid "--None--"
+msgstr "—brak—"
+
+#: includes/Backend.php:158
+msgid "Security method before deleting:"
+msgstr "Metoda zabezpieczenia przed usunięciem:"
+
+#: includes/Backend.php:162
+msgid "Password"
+msgstr "Hasło"
+
+#: includes/Backend.php:163
+msgid "Custom Captcha"
+msgstr "Własna Captcha"
+
+#: includes/Backend.php:168
+msgid "Confirmation Text"
+msgstr "Tekst potwierdzający"
+
+#: includes/Backend.php:175
+msgid "Captcha Question"
+msgstr "Pytanie Captcha"
+
+#: includes/Backend.php:182
+msgid "Captcha Answer"
+msgstr "Odpowiedź Captcha"
+
+#: includes/Backend.php:253
+msgid ""
+"Would you care to let me know the deactivation reason so that I can improve "
+"it for you?"
+msgstr ""
+"Czy poświęcisz czas aby dać mi znać dlaczego reaktywowałeś, abym mógł "
+"usprawnić wtyczkę dla Ciebie?"
+
+#: includes/Backend.php:260
+msgid "Skip and deactivate"
+msgstr "Pomiń i dezaktywuj"
+
+#: includes/Frontend.php:52
+msgid "Invalid Password!"
+msgstr "Niewłaściwe hasło!"
+
+#: includes/Frontend.php:64 includes/Frontend.php:133
+msgid "Incorrect Answer. Please try again."
+msgstr "Niewłaściwa odpowiedź. Spróbuj ponownie."
+
+#: includes/Frontend.php:96
+msgid "Deleting..."
+msgstr "Usuwanie…"
+
+#: includes/Frontend.php:134
+msgid "Empty Password."
+msgstr "Puste hasło."
+
+#: includes/Frontend.php:135
+msgid "Processing..."
+msgstr "Przetwarzanie…"
+
+#: includes/Functions.php:24
+msgid "Enter password to confirm:"
+msgstr "Wpisz hasło aby potwierdzić:"
+
+#: includes/Functions.php:37
+msgid ""
+"Just a heads up! You are the site administrator and processing further will "
+"delete yourself."
+msgstr ""
+"Uwaga! Jesteś administratorem strony i dalsze działanie usunie Twoje konto."
+
+#: includes/WooCommerce.php:67
+msgid "Delete Account"
+msgstr "Usuń konto"
+
+#: includes/emails/Emails.php:30
+msgid "Email Notifications"
+msgstr "Powiadomienia e-mail"
+
+#: includes/emails/Emails.php:32
+msgid ""
+"Email notifications sent from WP Frontend Delete Account are listed below. "
+"Click on an email to configure it."
+msgstr ""
+"Powiadomienia e-mail wysyłane z WP Frontend Usuń Konto są wypisane poniżej. "
+"Kliknij na e-mail aby go skonfigurować."
+
+#: includes/emails/Emails.php:33
+msgid ""
+"If you are having issue with email delivery in your site, I recommend "
+"setting up SMTP in your site using SMTP plugins such as WP Mail SMTP."
+msgstr ""
+"Jeśli występuje problem z dostarczeniem e-maili z Twojej strony, polecamy "
+"ustawić wysyłkę poprzez SMPT za pomocą wtyczki, takich jak WP Mail SMTP."
+
+#: includes/emails/Emails.php:47
+msgid "Email"
+msgstr "E-mail"
+
+#: includes/emails/Emails.php:48
+msgid "Recipient(s)"
+msgstr "Odbiorca(-cy)"
+
+#: includes/emails/Emails.php:49
+msgid "Actions"
+msgstr "Akcje"
+
+#: includes/emails/Emails.php:61 includes/emails/Emails.php:122
+msgid "Admin Email"
+msgstr "E-mail administratora"
+
+#: includes/emails/Emails.php:64 includes/emails/Emails.php:73
+msgid "Manage"
+msgstr "Zarządzaj"
+
+#: includes/emails/Emails.php:70 includes/emails/Emails.php:122
+msgid "User Email"
+msgstr "E-mail użytkownika"
+
+#: includes/emails/Emails.php:71
+msgid "User's Email Address"
+msgstr "Adres e-mail użytkownika"
+
+#. translators: %1$s - WP.org link; %2$s - same WP.org link.
+#: includes/emails/Emails.php:89
+msgid ""
+"Please rate <strong>WP Frontend Delete Account</strong> <a href=\"%1$s\" "
+"target=\"_blank\" rel=\"noopener noreferrer\">&#9733;&#9733;&#9733;&#9733;"
+"&#9733;</a> on <a href=\"%2$s\" target=\"_blank\" rel=\"noopener noreferrer"
+"\">WordPress.org</a> to help us spread the word. Thank you!"
+msgstr ""
+"Proszę oceń <strong>WP Frontend Delete Account</strong> <a href=„%1$s” "
+"target=„_blank” rel=„noopener noreferrer”>&#9733;&#9733;&#9733;&#9733;"
+"&#9733;</a> na <a href=„%2$s” target=„_blank” rel=„noopener "
+"noreferrer”>WordPress.org</a> aby pomóc spopularyzować wtyczkę. Dziękujemy!"
+
+#: includes/emails/Emails.php:116
+msgid "Heads up! A user deleted their account."
+msgstr "Uprzedzamy - użytkownik usunął swoje konto."
+
+#: includes/emails/Emails.php:116
+msgid "Your account has been deleted successfully."
+msgstr "Twoje konto zostało usunięte."
+
+#: includes/emails/Emails.php:117
+msgid "A user {user_name} - {user_email} has deleted their account."
+msgstr "Użytkownik {user_name} - {user_email} usunął swoje konto."
+
+#: includes/emails/Emails.php:126
+msgid ""
+"Email notification sent to the user after their account has been deleted."
+msgstr ""
+"Powiadomienie email wysyłane do użytkownika po tym, jak ich konto zostało "
+"usunięte."
+
+#: includes/emails/Emails.php:130
+msgid ""
+"Email notification sent to the admin if user deleted their account by their "
+"own."
+msgstr ""
+"Powiadomienie email wysyłane do administratora, jeśli użytkownik usunął "
+"konto samodzielnie."
+
+#: includes/emails/Emails.php:149
+msgid "Email Recipient"
+msgstr "Odbiorca wiadomości"
+
+#: includes/emails/Emails.php:156
+msgid "Email Subject"
+msgstr "Temat wiadomości"
+
+#: includes/emails/Emails.php:162
+msgid "Email Message"
+msgstr "Wiadomość Email"
+
+#. Plugin Name of the plugin/theme
+msgid "WP Frontend Delete Account"
+msgstr "WP Frontend Usuń Konto"
+
+#. Description of the plugin/theme
+msgid "Lets customers delete their account by their own."
+msgstr "Pozwólmy klientom samemu usuwać swoje konta."
+
+#. Author of the plugin/theme
+msgid "Sanjeev Aryal"
+msgstr "Sanjeev Aryal"
+
+#. Author URI of the plugin/theme
+msgid "http://www.sanjeebaryal.com.np"
+msgstr "http://www.sanjeebaryal.com.np"
