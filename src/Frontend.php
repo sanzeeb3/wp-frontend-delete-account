@@ -90,14 +90,14 @@ class Frontend {
 
 		$this->send_emails( $user );
 
-		do_action( 'wp_frontend_delete_account_process_complete', $user );
-
 		wp_send_json(
 			array(
 				'success' => true,
 				'message' => esc_html__( 'Deleting...', 'wp-frontend-delete-account' ),
 			)
 		);
+
+		do_action( 'wp_frontend_delete_account_process_complete', $user );
 	}
 
 	/**
