@@ -2,9 +2,9 @@
 Contributors: sanzeeb3
 Tags: delete-account, delete-account-from-frontend, frontend-delete, remove-account, gdpr, gdpr-erasure
 Requires at least: 4.0
-Tested up to: 5.5.1
+Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 1.3.4
+Stable tag: 1.3.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -33,7 +33,7 @@ The right to be forgotten dovetails with people’s right to access their person
 
 You have one month to respond to a request. I understand you're busy. Make it easy by allowing users to erase their personal data.
 
-I am not a lawyer and this is not a legal advice. In all circumstances I strongly recommend you consult directly with legal counsel familiar with the GDPR regulations.
+**I am not a lawyer and this is not a legal advice.** In all circumstances I strongly recommend you consult directly with legal counsel familiar with the GDPR regulations.
 
 == Frequently Asked Questions ==
 
@@ -61,9 +61,10 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 
 == Changelog ==
 
-= Unreleasd =
+= 1.3.5 - 1/10/2021 =
+* Fix - Correctly load autoload file.
+* Fix - WooCommerce myaccount tab custom title
 * Add - pl_PL translation (props to Jacek)
-* Fix - Correctly load autoload file
 
 = 1.3.4 - 11/20/2020 =
 * Fix - 404 page when the permanlinkns has yet not been set.
