@@ -93,7 +93,7 @@ class Emails {
 		$default_subject = 'admin' === $email ? esc_html__( 'Heads up! A user deleted their account.', 'wp-frontend-delete-account' ) : esc_html__( 'Your account has been deleted successfully.', 'wp-frontend-delete-account' );
 		$default_message = 'admin' === $email ? esc_html__( 'A user {user_name} - {user_email} has deleted their account.', 'wp-frontend-delete-account' ) : esc_html__( 'Your account has been deleted. In case this is a mistake, please contact the site administrator at ' . site_url() . '', 'wp-frontend-delete-account' );
 		$subject         = get_option( 'wpfda_' . $email . '_email_subject', $default_subject );
-		$message         = get_option( 'wpfda_' . $email . '_email_message', $default_message );
+		$message         = get_option( 'wp-frontend-delete-account-'. $email .'-email-editor', $default_message );
 
 		?>
 		  <h2 class="wp-heading-inline"><?php 'admin' === $email ? esc_html_e( 'Admin Email', 'wp-frontend-delete-account' ) : esc_html_e( 'User Email', 'wp-frontend-delete-account' ); ?> <a href="<?php echo wp_nonce_url( admin_url( 'admin.php?page=wp-frontend-delete-account&section=emails' ), 'wp-frontend-delete-account-emails' ); ?> "> ⤴ </a>
@@ -137,8 +137,17 @@ class Emails {
 
 				<tr valign="top">
 					<th scope="row"><?php echo esc_html__( 'Email Message', 'wp-frontend-delete-account' ); ?></th>
-						<td><textarea style="width:50%; height:100%" name="wpfda_<?php echo $email; ?>_email_message" class="wp-frontend-delete-account-<?php echo $email; ?>-email-message" /><?php echo esc_html( $message ); ?></textarea>
+						<td>
+							<?php
+								$editor_id = 'wp-frontend-delete-account-'. $email .'-email-editor';
+								$args      = array(
+									'media_buttons' => false,
+								);
+
+								wp_editor( $message, $editor_id, $args );
+							?>
 						</td>
+
 				</tr>
 				<?php do_action( 'wp_frontend_delete_account_email_settings' ); ?>
 				<?php wp_nonce_field( 'wp_frontend_delete_account_settings', 'wp_frontend_delete_account_settings_nonce' ); ?>

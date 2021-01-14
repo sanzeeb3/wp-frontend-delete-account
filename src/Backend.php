@@ -219,12 +219,40 @@ class Backend {
 				   exit;
 			}
 
-			$options = array( 'wpfda_title', 'wpfda_button_label', 'wpfda_attribute', 'wpfda_security', 'wpfda_security_password_text', 'wpfda_security_custom_captcha_question', 'wpfda_security_custom_captcha_answer', 'wpfda_load_assets_globally', 'wpfda_email_receipent', 'wpfda_enable_user_email', 'wpfda_enable_admin_email', 'wpfda_user_email_subject', 'wpfda_admin_email_subject', 'wpfda_user_email_message', 'wpfda_admin_email_message' );
+			$email           = sanitize_text_field( $_GET['email'] );
+			$options = array( 'wpfda_title', 'wpfda_button_label', 'wpfda_attribute', 'wpfda_security', 'wpfda_security_password_text', 'wpfda_security_custom_captcha_question', 'wpfda_security_custom_captcha_answer', 'wpfda_load_assets_globally', 'wpfda_email_receipent', 'wpfda_enable_user_email', 'wpfda_enable_admin_email', 'wpfda_user_email_subject', 'wpfda_admin_email_subject', 'wp-frontend-delete-account-'. $email .'-email-editor' );
+
 			foreach ( $options as $option ) {
 				if ( isset( $_POST[ $option ] ) ) {
 					$value = sanitize_text_field( $_POST[ $option ] );
 					update_option( $option, $value );
 				}
+			}
+
+			if ( isset( $_POST ['wp-frontend-delete-account-'. $email .'-email-editor'] ) ) {
+				$editor = wp_kses(
+					wp_unslash( $_POST['wp-frontend-delete-account-' . $email .'-email-editor'] ),
+					array(
+						'a'      => array(
+							'href'  => array(),
+							'title' => array(),
+						),
+						'b'      => array(),
+						'br'     => array(),
+						'p'      => array(),
+						'pre'    => array(),
+						'ul'     => array(),
+						'li'     => array(),
+						'em'     => array(),
+						'strong' => array(),
+						'img'    => array(
+							'src' => array(),
+							'alt' => array(),
+						),
+					)
+				);
+
+				update_option( 'wp-frontend-delete-account-'. $email .'-email-editor', $editor );
 			}
 		}
 	}
