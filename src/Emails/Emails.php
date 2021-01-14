@@ -147,6 +147,11 @@ class Emails {
 								wp_editor( $message, $editor_id, $args );
 							?>
 						</td>
+						<style>
+							#wp-wp-frontend-delete-account-admin-email-editor-wrap, #wp-wp-frontend-delete-account-user-email-editor-wrap {
+								width: 80%;
+							}
+						</style>
 
 				</tr>
 				<?php do_action( 'wp_frontend_delete_account_email_settings' ); ?>
