@@ -44,9 +44,9 @@ class WooCommerce {
 
 			global $wp_rewrite;
 
-			update_option( 'rewrite_rules', FALSE );
+			update_option( 'rewrite_rules', false );
 
-			$wp_rewrite->set_permalink_structure('/%postname%/');
+			$wp_rewrite->set_permalink_structure( '/%postname%/' );
 			$wp_rewrite->flush_rules( true );
 		}
 

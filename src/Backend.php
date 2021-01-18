@@ -55,7 +55,7 @@ class Backend {
 					'ajax_url'           => admin_url( 'admin-ajax.php' ),
 					'deactivation_nonce' => wp_create_nonce( 'deactivation-notice' ),
 					'status_nonce'       => wp_create_nonce( 'email-status' ),
-					'review_nonce'		 => wp_create_nonce( 'review-notice' ),
+					'review_nonce'       => wp_create_nonce( 'review-notice' ),
 					'deactivating'       => __( 'Deactivating...', 'wp-frontend-delete-account' ),
 					'wrong'              => __( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
 					'enable_email'       => __( 'Enable this email', 'wp-frontend-delete-account' ),
@@ -219,8 +219,7 @@ class Backend {
 				   exit;
 			}
 
-			$email           = sanitize_text_field( $_GET['email'] );
-			$options = array( 'wpfda_title', 'wpfda_button_label', 'wpfda_attribute', 'wpfda_security', 'wpfda_security_password_text', 'wpfda_security_custom_captcha_question', 'wpfda_security_custom_captcha_answer', 'wpfda_load_assets_globally', 'wpfda_email_receipent', 'wpfda_enable_user_email', 'wpfda_enable_admin_email', 'wpfda_user_email_subject', 'wpfda_admin_email_subject', 'wpfda_'. $email .'_email_message' );
+			$options = array( 'wpfda_title', 'wpfda_button_label', 'wpfda_attribute', 'wpfda_security', 'wpfda_security_password_text', 'wpfda_security_custom_captcha_question', 'wpfda_security_custom_captcha_answer', 'wpfda_load_assets_globally', 'wpfda_email_receipent', 'wpfda_enable_user_email', 'wpfda_enable_admin_email', 'wpfda_user_email_subject', 'wpfda_admin_email_subject');
 
 			foreach ( $options as $option ) {
 				if ( isset( $_POST[ $option ] ) ) {
@@ -229,9 +228,11 @@ class Backend {
 				}
 			}
 
-			if ( isset( $_POST ['wpfda_' . $email . '_email_message'] ) ) {
+			$email   = sanitize_text_field( $_GET['email'] );
+
+			if ( isset( $_POST [ 'wpfda_' . $email . '_email_message' ] ) ) {
 				$editor = wp_kses(
-					wp_unslash( $_POST['wpfda_' . $email . '_email_message'] ),
+					wp_unslash( $_POST[ 'wpfda_' . $email . '_email_message' ] ),
 					array(
 						'a'      => array(
 							'href'  => array(),

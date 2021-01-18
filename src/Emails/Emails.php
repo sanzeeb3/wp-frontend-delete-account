@@ -93,7 +93,7 @@ class Emails {
 		$default_subject = 'admin' === $email ? esc_html__( 'Heads up! A user deleted their account.', 'wp-frontend-delete-account' ) : esc_html__( 'Your account has been deleted successfully.', 'wp-frontend-delete-account' );
 		$default_message = 'admin' === $email ? esc_html__( 'A user {user_name} - {user_email} has deleted their account.', 'wp-frontend-delete-account' ) : esc_html__( 'Your account has been deleted. In case this is a mistake, please contact the site administrator at ' . site_url() . '', 'wp-frontend-delete-account' );
 		$subject         = get_option( 'wpfda_' . $email . '_email_subject', $default_subject );
-		$message         = get_option( 'wpfda_'. $email .'_email_message', $default_message );
+		$message         = get_option( 'wpfda_' . $email . '_email_message', $default_message );
 
 		?>
 		  <h2 class="wp-heading-inline"><?php 'admin' === $email ? esc_html_e( 'Admin Email', 'wp-frontend-delete-account' ) : esc_html_e( 'User Email', 'wp-frontend-delete-account' ); ?> <a href="<?php echo wp_nonce_url( admin_url( 'admin.php?page=wp-frontend-delete-account&section=emails' ), 'wp-frontend-delete-account-emails' ); ?> "> ⤴ </a>
@@ -139,13 +139,13 @@ class Emails {
 					<th scope="row"><?php echo esc_html__( 'Email Message', 'wp-frontend-delete-account' ); ?></th>
 						<td>
 							<?php
-								$editor_id = 'wpfda_'. $email .'_email_message';
+								$editor_id = 'wpfda_' . $email . '_email_message';
 								$args      = array(
 									'media_buttons' => false,
 								);
 
 								wp_editor( $message, $editor_id, $args );
-							?>
+								?>
 						</td>
 						<style>
 							#wp-wpfda_admin_email_message-wrap, #wp-wpfda_user_email_message-wrap {
