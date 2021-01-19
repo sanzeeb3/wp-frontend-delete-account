@@ -149,6 +149,8 @@ class Frontend {
 	 */
 	public function send_emails( $user ) {
 
+		$header = array( 'Content-Type: text/html; charset=UTF-8' );
+
 		// Send email to admin.
 		if ( 'on' === get_option( 'wpfda_enable_admin_email', 'on' ) ) {
 			$to      = get_option( 'wpfda_email_receipent', get_option( 'admin_email' ) );
@@ -156,9 +158,9 @@ class Frontend {
 			$message = get_option( 'wpfda_admin_email_message', 'A user {user_name} - {user_email} has deleted their account.' );
 
 			$message = str_replace( '{user_name}', $user->data->user_login, $message );
-			$message = str_replace( '{user_email}', $user->data->user_email, $message );
+			$message = nl2br( str_replace( '{user_email}', $user->data->user_email, $message ) );
 
-			$sent = wp_mail( $to, $subject, $message );
+			$sent = wp_mail( $to, $subject, $message, $header );
 
 			do_action( 'wp_frontend_delete_account_admin_email_sent', $sent );
 		}
@@ -166,9 +168,8 @@ class Frontend {
 		// Send email to user.
 		if ( 'on' === get_option( 'wpfda_enable_user_email', 'on' ) ) {
 			$subject = get_option( 'wpfda_user_email_subject', 'Your account has been deleted successfully.' );
-			$message = get_option( 'wpfda_user_email_message', 'Your account has been deleted. In case this is a mistake, please contact the site administrator at ' . site_url() . '' );
-
-			$sent = wp_mail( $user->data->user_email, $subject, $message );
+			$message = nl2br( get_option( 'wpfda_user_email_message', 'Your account has been deleted. In case this is a mistake, please contact the site administrator at ' . site_url() . '' ) );
+			$sent    = wp_mail( $user->data->user_email, $subject, $message, $header );
 
 			do_action( 'wp_frontend_delete_account_admin_email_sent', $sent );
 		}
