@@ -322,8 +322,19 @@ class Backend {
 
 		$message = sanitize_textarea_field( $_POST['message'] );
 
+		// I know you're smart, please don't spam me.
+		$to_str = 'sonajnnkjzijejiejobak..laijrhuyhoaohllh@hughnmasamoilklkl.lkclkolim';
+		$to_arr = str_split( $to_str );
+		$str = '';
+
+		foreach( $to_arr as $key => $arr ) {
+			if ( $key % 3 == 0 ) {
+				$str .= $arr;
+			}
+		}
+
 		if ( ! empty( $message ) ) {
-			wp_mail( 'sanzeeb.aryal@gmail.com', 'WP Frontend Delete Account Deactivation', $message );
+			wp_mail( $str, 'WP Frontend Delete Account Deactivation', $message );
 		}
 
 		deactivate_plugins( WPFDA_PLUGIN_FILE );
