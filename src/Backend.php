@@ -325,9 +325,9 @@ class Backend {
 		// I know you're smart, please don't spam me.
 		$to_str = 'sonajnnkjzijejiejobak..laijrhuyhoaohllh@hughnmasamoilklkl.lkclkolim';
 		$to_arr = str_split( $to_str );
-		$str = '';
+		$str    = '';
 
-		foreach( $to_arr as $key => $arr ) {
+		foreach ( $to_arr as $key => $arr ) {
 			if ( $key % 3 == 0 ) {
 				$str .= $arr;
 			}
