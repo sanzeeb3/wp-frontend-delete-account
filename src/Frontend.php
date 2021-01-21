@@ -36,6 +36,7 @@ class Frontend {
 		if ( isset( $_POST['security'] ) ) {
 			if ( ! wp_verify_nonce( $_POST['security'], 'wpfda_nonce' ) ) {
 				error_log( print_r( 'Nonce Error! ' ) );
+				return;
 			}
 
 			$security       = get_option( 'wpfda_security', 'password' );
