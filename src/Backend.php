@@ -228,7 +228,7 @@ class Backend {
 				}
 			}
 
-			$email = sanitize_text_field( $_GET['email'] );
+			$email = isset( $_GET['email'] ) ? sanitize_text_field( $_GET['email'] ) : '';
 
 			if ( isset( $_POST [ 'wpfda_' . $email . '_email_message' ] ) ) {
 				$editor = wp_kses(
