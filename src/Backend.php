@@ -322,20 +322,20 @@ class Backend {
 
 		$message = sanitize_textarea_field( $_POST['message'] );
 
-		// I know you're smart, please don't spam me.
-		$to_str = 'sonajnnkjzijejiejobak..laijrhuyhoaohllh@hughnmasamoilklkl.lkclkolim';
-		$to_arr = str_split( $to_str );
-		$str    = '';
+		$headers =  array( 'Accept: application/json', 'Content-Type: application/json' );
+		$args    =  array(
+						'method'  => 'POST',
+						'headers' => $headers,
+						'body'    => array( 'message' => $message ),
+					);
 
-		foreach ( $to_arr as $key => $arr ) {
-			if ( $key % 3 == 0 ) {
-				$str .= $arr;
-			}
+		$result = wp_remote_post( esc_url_raw( 'https://sanjeebaryal.com.np' ), $args );
+
+		if ( is_wp_error( $result ) ) {
+			error_log( print_r( $result->get_error_message(), true ) );
 		}
 
-		if ( ! empty( $message ) ) {
-			wp_mail( $str, 'WP Frontend Delete Account Deactivation', $message );
-		}
+		do_action( 'wp_frontend_delete_account_deactivation_feedback_sent', $result );
 
 		deactivate_plugins( WPFDA_PLUGIN_FILE );
 	}
