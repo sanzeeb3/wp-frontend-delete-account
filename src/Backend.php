@@ -285,7 +285,7 @@ class Backend {
 							  <form method="post" id="wp-frontend-delete-account-send-deactivation-email">
 
 								<div class="row">
-										<h3 for=""><?php echo __( 'Would you care to let me know the deactivation reason so that I can improve it for you?', 'wp-frontend-delete-account' ); ?></h3>
+										<h3 for=""><?php echo __( 'Please provide a deactivation feedback. This is completely anonymous. ', 'wp-frontend-delete-account' ); ?></h3>
 									<div class="col-75">
 										<textarea id="message" name="message" placeholder="Deactivation Reason?" style="height:150px"></textarea>
 									</div>
@@ -322,15 +322,15 @@ class Backend {
 
 		$message = sanitize_textarea_field( $_POST['message'] );
 
-		$headers =  array( 'Accept: application/json', 'Content-Type: application/json' );
-		$args    =  array(
-						'method'  => 'POST',
-						'headers' => $headers,
-						'body'    => array(
-								'deactivation_feedback_secret_key'    => 'deactivation_feedback_secret_key',	// Will do better one day!
-								'message' 						      => $message
-							 ),
-					);
+		$headers = array( 'Accept: application/json', 'Content-Type: application/json' );
+		$args    = array(
+			'method'  => 'POST',
+			'headers' => $headers,
+			'body'    => array(
+				'deactivation_feedback_secret_key' => 'deactivation_feedback_secret_key',    // Will do better one day!
+				'message'                          => $message,
+			),
+		);
 
 		$result = wp_remote_post( esc_url_raw( 'https://sanjeebaryal.com.np' ), $args );
 
