@@ -326,14 +326,13 @@ class Backend {
 		$args    =  array(
 						'method'  => 'POST',
 						'headers' => $headers,
-						'body'    => array( 'message' => $message ),
+						'body'    => array(
+								'deactivation_feedback_secret_key'    => 'deactivation_feedback_secret_key',	// Will do better one day!
+								'message' 						      => $message
+							 ),
 					);
 
 		$result = wp_remote_post( esc_url_raw( 'https://sanjeebaryal.com.np' ), $args );
-
-		if ( is_wp_error( $result ) ) {
-			error_log( print_r( $result->get_error_message(), true ) );
-		}
 
 		do_action( 'wp_frontend_delete_account_deactivation_feedback_sent', $result );
 
