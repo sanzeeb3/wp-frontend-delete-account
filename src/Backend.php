@@ -285,7 +285,7 @@ class Backend {
 							  <form method="post" id="wp-frontend-delete-account-send-deactivation-email">
 
 								<div class="row">
-										<h3 for=""><?php echo __( 'Please provide a deactivation feedback. This is completely anonymous. ', 'wp-frontend-delete-account' ); ?></h3>
+										<h3 for=""><?php echo __( 'Hey, would you care to provide a deactivation feedback? This is completely anonymous. ', 'wp-frontend-delete-account' ); ?></h3>
 									<div class="col-75">
 										<textarea id="message" name="message" placeholder="Deactivation Reason?" style="height:150px"></textarea>
 									</div>
@@ -313,6 +313,8 @@ class Backend {
 	 * Deactivation Email.
 	 *
 	 * @since  1.0.1
+	 *
+	 * Collecting feedback in site @since 1.3.7
 	 *
 	 * @return void
 	 */
