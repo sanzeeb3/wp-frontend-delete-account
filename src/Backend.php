@@ -314,7 +314,7 @@ class Backend {
 	 *
 	 * @since  1.0.1
 	 *
-	 * Collecting feedback in site @since 1.3.7
+	 * Collecting feedback in site @since 1.4.0
 	 *
 	 * @return void
 	 */

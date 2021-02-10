@@ -18,10 +18,12 @@ class Emails {
 	 */
 	public static function overview() {
 
-		foreach ( array( 'admin', 'user' ) as $key ) {
+		foreach ( array( 'admin', 'user', 'feedback' ) as $key ) {
 
-			$read_class[ $key ]   = 'on' === get_option( 'wpfda_enable_' . $key . '_email', 'on' ) ? 'wpfda-enable' : 'wpfda-disable';
-			$tooltip_text[ $key ] = 'on' === get_option( 'wpfda_enable_' . $key . '_email', 'on' ) ? __( 'Disable this email', 'wp-frontend-delete-account' ) : __( 'Enable this email', 'wp-frontend-delete-account' );
+			$default = 'feedback' !== $key ? 'on' : 'off';
+
+			$read_class[ $key ]   = 'on' === get_option( 'wpfda_enable_' . $key . '_email', $default ) ? 'wpfda-enable' : 'wpfda-disable';
+			$tooltip_text[ $key ] = 'on' === get_option( 'wpfda_enable_' . $key . '_email', $default ) ? __( 'Disable this email', 'wp-frontend-delete-account' ) : __( 'Enable this email', 'wp-frontend-delete-account' );
 			$icon[ $key ]         = '<span title="' . $tooltip_text[ $key ] . '" data-email="' . $key . '" class="wpfda-enable-disable dashicons dashicons-marker ' . $read_class[ $key ] . '">
 							</span>';
 		}
@@ -69,6 +71,15 @@ class Emails {
 							<td class="email-receipent"> <?php esc_html_e( 'User\'s Email Address', 'wp-frontend-delete-account' ); ?> </td>
 							<td class="wc-email-settings-table-actions">
 								<a class="button" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=wp-frontend-delete-account&section=emails&email=user' ), 'wp-frontend-delete-account-emails' ) ); ?>"><?php esc_html_e( 'Manage', 'wp-frontend-delete-account' ); ?></a>
+							</td>
+						</tr>
+
+						<tr>
+							<td class="email-status"><?php echo $icon['feedback']; ?> </td>
+							<td class="email-name"><?php esc_html_e( 'Feedback Email', 'wp-frontend-delete-account' ); ?> </td>
+							<td class="email-receipent"><?php echo get_option( 'wpfda_feedback_email_receipent', get_option( 'admin_email' ) ); ?> </td>
+							<td class="wc-email-settings-table-actions">
+								<a class="button" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=wp-frontend-delete-account&section=emails&email=feedback' ), 'wp-frontend-delete-account-emails' ) ); ?>"><?php esc_html_e( 'Manage', 'wp-frontend-delete-account' ); ?></a>
 							</td>
 						</tr>
 					</tbody>
