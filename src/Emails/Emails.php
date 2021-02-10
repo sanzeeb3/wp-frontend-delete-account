@@ -98,25 +98,59 @@ class Emails {
 	 */
 	public static function emails() {
 
-		$email           = sanitize_text_field( $_GET['email'] );
-		$enable          = get_option( 'wpfda_enable_' . $email . '_email', 'on' );
-		$recipient       = get_option( 'wpfda_email_receipent', get_option( 'admin_email' ) );
-		$default_subject = 'admin' === $email ? esc_html__( 'Heads up! A user deleted their account.', 'wp-frontend-delete-account' ) : esc_html__( 'Your account has been deleted successfully.', 'wp-frontend-delete-account' );
+		$email       = sanitize_text_field( $_GET['email'] );
+		$default     = 'feedback' !== $email ? 'on' : 'off';
+		$option_name = 'admin' === $email ? 'wpfda_email_receipent' : 'wpfda_feedback_email_receipent';
+
+		$enable    = get_option( 'wpfda_enable_' . $email . '_email', $default );
+		$recipient = get_option( $option_name, get_option( 'admin_email' ) );
+
+		switch ( $email ) {
+			case 'admin':
+				$default_subject = esc_html__( 'Heads up! A user deleted their account.', 'wp-frontend-delete-account' );
+				break;
+			case 'user':
+				$default_subject = esc_html__( 'Your account has been deleted successfully.', 'wp-frontend-delete-account' );
+				break;
+			case 'feedback':
+				$default_subject = esc_html__( 'A user - {user_email} provided a feedback on account deletion.', 'wp-frontend-delete-account' );
+				break;
+		}
+
 		$default_message = 'admin' === $email ? esc_html__( 'A user {user_name} - {user_email} has deleted their account.', 'wp-frontend-delete-account' ) : esc_html__( 'Your account has been deleted. In case this is a mistake, please contact the site administrator at ' . site_url() . '', 'wp-frontend-delete-account' );
 		$subject         = get_option( 'wpfda_' . $email . '_email_subject', $default_subject );
 		$message         = get_option( 'wpfda_' . $email . '_email_message', $default_message );
 
 		?>
-		  <h2 class="wp-heading-inline"><?php 'admin' === $email ? esc_html_e( 'Admin Email', 'wp-frontend-delete-account' ) : esc_html_e( 'User Email', 'wp-frontend-delete-account' ); ?> <a href="<?php echo wp_nonce_url( admin_url( 'admin.php?page=wp-frontend-delete-account&section=emails' ), 'wp-frontend-delete-account-emails' ); ?> "> ⤴ </a>
-		</h2>			  <div id="email_notification_settings-description">
+		  <h2 class="wp-heading-inline">
+		  <?php
+			switch ( $email ) {
+				case 'admin':
+					esc_html_e( 'Admin Email', 'wp-frontend-delete-account' );
+					break;
+				case 'user':
+					esc_html_e( 'User Email', 'wp-frontend-delete-account' );
+					break;
+				case 'feedback':
+					esc_html_e( 'Feedback Email', 'wp-frontend-delete-account' );
+					break;
+
+			}
+			?>
+			 <a href="<?php echo wp_nonce_url( admin_url( 'admin.php?page=wp-frontend-delete-account&section=emails' ), 'wp-frontend-delete-account-emails' ); ?> "> ⤴ </a>
+			</h2>			  <div id="email_notification_settings-description">
 
 				<?php if ( 'user' === $email ) : ?>
-				<p><?php esc_html_e( 'Email notification sent to the user after their account has been deleted.', 'wp-frontend-delete-account' ); ?></p>
-			<?php endif; ?>
+					<p><?php esc_html_e( 'Email notification sent to the user after their account has been deleted.', 'wp-frontend-delete-account' ); ?></p>
+				<?php endif; ?>
 
 				<?php if ( 'admin' === $email ) : ?>
-				<p><?php esc_html_e( 'Email notification sent to the admin if user deleted their account by their own.', 'wp-frontend-delete-account' ); ?></p>
-							<?php endif; ?>
+					<p><?php esc_html_e( 'Email notification sent to the admin if user deleted their account by their own.', 'wp-frontend-delete-account' ); ?></p>
+				<?php endif; ?>
+
+				<?php if ( 'feedback' === $email ) : ?>
+					<p><?php esc_html_e( 'Email notification sent to the admin if user leaves a feedback upon deleting their account.', 'wp-frontend-delete-account' ); ?></p>
+				<?php endif; ?>
 			</div>
 
 		<hr class="wp-header-end">
@@ -132,10 +166,11 @@ class Emails {
 						</td>
 				</tr>
 
-				<?php if ( 'admin' === $email ) : ?>
+				<?php if ( 'admin' === $email || 'feedback' === $email ) : ?>
+					<?php $name = 'admin' === $email ? 'wpfda_email_receipent' : 'wpfda_feedback_email_receipent'; ?>
 					<tr valign="top">
 					<th scope="row"><?php echo esc_html__( 'Email Recipient', 'wp-frontend-delete-account' ); ?></th>
-						<td><input style="width:50%" type="text" name="wpfda_email_receipent" value ="<?php echo esc_html( $recipient ); ?>" class="wp-frontend-delete-account-receipent" />
+						<td><input style="width:50%" type="text" name="<?php echo $name; ?>" value ="<?php echo esc_html( $recipient ); ?>" class="wp-frontend-delete-account-receipent" />
 						</td>
 				</tr>
 			<?php endif; ?>
@@ -148,22 +183,30 @@ class Emails {
 
 				<tr valign="top">
 					<th scope="row"><?php echo esc_html__( 'Email Message', 'wp-frontend-delete-account' ); ?></th>
-						<td>
-							<?php
-								$editor_id = 'wpfda_' . $email . '_email_message';
-								$args      = array(
-									'media_buttons' => false,
-								);
+							<td>
 
-								wp_editor( $message, $editor_id, $args );
+								<?php
+
+								if ( 'feedback' !== $email ) {
+
+									$editor_id = 'wpfda_' . $email . '_email_message';
+									$args      = array(
+										'media_buttons' => false,
+									);
+
+									wp_editor( $message, $editor_id, $args );
+								} else {
+									echo '<i>' . esc_html__( 'Feedback provided by the user. 😀', 'wp-frontend-delete-account' ) . '</i>';
+								}
 								?>
-						</td>
+
+							</td>
+
 						<style>
 							#wp-wpfda_admin_email_message-wrap, #wp-wpfda_user_email_message-wrap {
 								width: 80%;
 							}
 						</style>
-
 				</tr>
 				<?php do_action( 'wp_frontend_delete_account_email_settings' ); ?>
 				<?php wp_nonce_field( 'wp_frontend_delete_account_settings', 'wp_frontend_delete_account_settings_nonce' ); ?>
