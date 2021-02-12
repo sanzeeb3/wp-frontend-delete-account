@@ -209,9 +209,9 @@ class Frontend {
 							  <form method="post" id="wp-frontend-delete-account-send-deactivation-email">
 
 								<div class="row">
-										<h3 for=""><?php echo esc_html__( 'Hey, would you care to provide feedback on your account deletion?', 'wp-frontend-delete-account' ); ?></h3>
+										<h3 for=""><?php echo apply_filters( 'wp_frontend_delete_account_delete_feedback_label', esc_html__( 'Hey, would you care to provide feedback on your account deletion?', 'wp-frontend-delete-account' ) ); ?></h3>
 									<div class="col-75">
-										<textarea id="message" name="message" placeholder="<?php echo esc_html( 'Account deletion reason?', 'wp-frontend-delete-account') ;?>" style="height:150px"></textarea>
+										<textarea id="message" name="message" placeholder="<?php echo apply_filters( 'wp_frontend_delete_account_delete_feedback_placeholder', esc_html( 'Account deletion reason?', 'wp-frontend-delete-account') ) ;?>" style="height:150px"></textarea>
 									</div>
 								</div>
 								<div class="row">
