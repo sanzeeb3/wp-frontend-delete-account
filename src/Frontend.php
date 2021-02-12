@@ -22,10 +22,54 @@ class Frontend {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 		add_action( 'wp_ajax_confirm_delete', array( $this, 'confirm_delete' ) );
-		add_action( 'wp_ajax_delete_feedback', [ $this, 'delete_feedback' ] );
-		add_action( 'wp_ajax_delete_feedback_email', [ $this, 'delete_feedback_email' ] );
-		add_action( 'wp_ajax__nopriv_delete_feedback_email', [ $this, 'delete_feedback_email' ] );
+		add_action( 'wp_ajax_delete_feedback', array( $this, 'delete_feedback' ) );
+		add_action( 'wp_ajax_delete_feedback_email', array( $this, 'delete_feedback_email' ) );
+		add_action( 'wp_ajax__nopriv_delete_feedback_email', array( $this, 'delete_feedback_email' ) );
 		add_shortcode( 'wp_frontend_delete_account', 'wpf_delete_account_content' );
+	}
+
+	/**
+	 * Register scripts for frontend.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return void.
+	 */
+	public function enqueue_assets() {
+
+		global $post;
+
+		$has_shortcode = is_singular() && is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'wp_frontend_delete_account' );
+
+		if ( ( defined( 'WC_VERSION' ) && is_account_page() ) || ( function_exists( 'has_block' ) && has_block( 'wp-frontend-delete-account/delete-account-content' ) ) || $has_shortcode || 'on' === get_option( 'wpfda_load_assets_globally' ) ) {
+
+			$suffix   = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+			$security = get_option( 'wpfda_security', 'password' );
+
+			wp_enqueue_script( 'wpfda-delete-account-frontend', plugins_url( 'assets/js/frontend' . $suffix . '.js', WPFDA_PLUGIN_FILE ), array( 'jquery' ), WPFDA_VERSION, false );
+			wp_enqueue_style( 'wpfda-frontend-css', plugins_url( 'assets/css/frontend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
+
+			$security       = get_option( 'wpfda_security', 'password' );
+			$captcha_answer = get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' );
+
+			wp_localize_script(
+				'wpfda-delete-account-frontend',
+				'wpfda_plugins_params',
+				array(
+					'ajax_url'            => admin_url( 'admin-ajax.php' ),
+					'wpfda_nonce'         => wp_create_nonce( 'wpfda_nonce' ),
+					'security'            => $security,
+					'captcha_answer'      => $captcha_answer,
+					'is_feedback_enabled' => get_option( 'wpfda_enable_feedback_email', 'no' ),
+					'incorrect_answer'    => esc_html__( 'Incorrect Answer. Please try again.', 'wp-frontend-delete-account' ),
+					'empty_password'      => esc_html__( 'Empty Password.', 'wp-frontend-delete-account' ),
+					'processing'          => esc_html__( 'Processing...', 'wp-frontend-delete-account' ),
+					'deleting'            => esc_html__( 'Deleting...', 'wp-frontend-delete-account' ),
+					'wrong'               => esc_html__( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
+					'current_user_email'  => wp_get_current_user()->user_email,
+				)
+			);
+		}
 	}
 
 	/**
@@ -90,7 +134,7 @@ class Frontend {
 		do_action( 'wp_frontend_delete_account_process', $user );
 
 		require_once ABSPATH . 'wp-admin/includes/user.php';
-		// wp_delete_user( $user_id, $attribute );
+		wp_delete_user( $user_id, $attribute );
 
 		$this->send_emails( $user );
 
@@ -102,49 +146,6 @@ class Frontend {
 		);
 
 		do_action( 'wp_frontend_delete_account_process_complete', $user );
-	}
-
-	/**
-	 * Register scripts for frontend.
-	 *
-	 * @since  1.0.0
-	 *
-	 * @return void.
-	 */
-	public function enqueue_assets() {
-
-		global $post;
-
-		$has_shortcode = is_singular() && is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'wp_frontend_delete_account' );
-
-		if ( ( defined( 'WC_VERSION' ) && is_account_page() ) || ( function_exists( 'has_block' ) && has_block( 'wp-frontend-delete-account/delete-account-content' ) ) || $has_shortcode || 'on' === get_option( 'wpfda_load_assets_globally' ) ) {
-
-			$suffix   = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-			$security = get_option( 'wpfda_security', 'password' );
-
-			wp_enqueue_script( 'wpfda-delete-account-frontend', plugins_url( 'assets/js/frontend' . $suffix . '.js', WPFDA_PLUGIN_FILE ), array( 'jquery' ), WPFDA_VERSION, false );
-			wp_enqueue_style( 'wpfda-frontend-css', plugins_url( 'assets/css/frontend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
-
-			$security       = get_option( 'wpfda_security', 'password' );
-			$captcha_answer = get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' );
-
-			wp_localize_script(
-				'wpfda-delete-account-frontend',
-				'wpfda_plugins_params',
-				array(
-					'ajax_url'            => admin_url( 'admin-ajax.php' ),
-					'wpfda_nonce'         => wp_create_nonce( 'wpfda_nonce' ),
-					'security'            => $security,
-					'captcha_answer'      => $captcha_answer,
-					'is_feedback_enabled' => get_option( 'wpfda_enable_feedback_email', 'no' ),
-					'incorrect_answer'    => esc_html__( 'Incorrect Answer. Please try again.', 'wp-frontend-delete-account' ),
-					'empty_password'      => esc_html__( 'Empty Password.', 'wp-frontend-delete-account' ),
-					'processing'          => esc_html__( 'Processing...', 'wp-frontend-delete-account' ),
-					'deleting'            => esc_html__( 'Deleting...', 'wp-frontend-delete-account' ),
-					'wrong'               => esc_html__( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
-				)
-			);
-		}
 	}
 
 	/**
@@ -183,9 +184,9 @@ class Frontend {
 	}
 
 	/**
-	 * Popup feedback on account deletion.
+	 * Render popup feedback form on account deletion.
 	 *
-	 *  @since  1.0.1
+	 *  @since  1.4.0
 	 */
 	public static function delete_feedback() {
 
@@ -215,13 +216,13 @@ class Frontend {
 								<div class="row">
 										<h3 for=""><?php echo apply_filters( 'wp_frontend_delete_account_delete_feedback_label', esc_html__( 'Hey, would you care to provide feedback on your account deletion?', 'wp-frontend-delete-account' ) ); ?></h3>
 									<div class="col-75">
-										<textarea id="message" name="message" placeholder="<?php echo apply_filters( 'wp_frontend_delete_account_delete_feedback_placeholder', esc_html( 'Account deletion reason?', 'wp-frontend-delete-account') ) ;?>" style="height:150px"></textarea>
+										<textarea id="message" name="message" placeholder="<?php echo apply_filters( 'wp_frontend_delete_account_delete_feedback_placeholder', esc_html( 'Account deletion reason?', 'wp-frontend-delete-account' ) ); ?>" style="height:150px"></textarea>
 									</div>
 								</div>
 								<div class="row">
 										<?php wp_nonce_field( 'wpfda_delete_feedback_email', 'wpfda_delete_feedback_email' ); ?>
 										<a href=""><?php echo __( 'Skip and delete', 'wp-frontend-delete-account' ); ?>
-										<input type="submit" id="wpfda-send-deactivation-email" value="<?php echo esc_html__( 'Delete Account', 'wp-frontend-delete-account' );?> ">
+										<input type="submit" id="wpfda-send-deactivation-email" value="<?php echo esc_html__( 'Delete Account', 'wp-frontend-delete-account' ); ?> ">
 								</div>
 						  </form>
 						</div>
@@ -238,11 +239,9 @@ class Frontend {
 	}
 
 	/**
-	 * Deactivation Email.
+	 * Feedback from the popup form.
 	 *
-	 * @since  1.0.1
-	 *
-	 * Collecting feedback in site @since 1.4.0
+	 * @since  1.4.0
 	 *
 	 * @return void
 	 */
@@ -256,5 +255,15 @@ class Frontend {
 			return;
 		}
 
+		if ( empty( $_POST['message'] ) ) {
+			return;
+		}
+
+		$message    = sanitize_textarea_field( $_POST['message'] );
+		$user_email = sanitize_email( $_POST['user_email'] );
+
+		$subject = str_replace( '{user_email}', $user_email, esc_html__( 'A user - {user_email} provided a feedback on account deletion.', 'wp-frontend-delete-account' ) );
+
+		wp_mail( get_option( 'wpfda_feedback_email_receipent', get_option( 'admin_email' ) ), $subject, $message );
 	}
 }

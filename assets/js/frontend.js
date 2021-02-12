@@ -71,6 +71,7 @@ jQuery( function( $ ) {
 									action: 'delete_feedback_email',
 									security: nonce,
 									message: message,
+									user_email: wpfda_plugins_params.current_user_email
 								}
 
 								$.post( wpfda_plugins_params.ajax_url, data, function( response ) {
@@ -93,7 +94,7 @@ jQuery( function( $ ) {
 						});
 					}
 
-					// location.reload();
+					location.reload();
 				}
         	});
     	});
