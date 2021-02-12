@@ -40,6 +40,11 @@ jQuery( function( $ ) {
 					return;
 				} else if( response.success === true ) {
 					error.html('').append('<i>'+ response.message +'</i>');
+
+					if ( wpfda_plugins_params.is_feedback_enabled === 'on' ) {
+
+					}
+
 					location.reload();
 				}
         	});

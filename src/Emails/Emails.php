@@ -24,7 +24,7 @@ class Emails {
 
 			$read_class[ $key ]   = 'on' === get_option( 'wpfda_enable_' . $key . '_email', $default ) ? 'wpfda-enable' : 'wpfda-disable';
 			$tooltip_text[ $key ] = 'on' === get_option( 'wpfda_enable_' . $key . '_email', $default ) ? __( 'Disable this email', 'wp-frontend-delete-account' ) : __( 'Enable this email', 'wp-frontend-delete-account' );
-			$icon[ $key ]         = '<span title="' . $tooltip_text[ $key ] . '" data-email="' . $key . '" class="wpfda-enable-disable dashicons dashicons-marker ' . $read_class[ $key ] . '">
+			$icon[ $key ]         = '<span title="' . esc_attr( $tooltip_text[ $key ] ) . '" data-email="' . esc_attr( $key ) . '" class="wpfda-enable-disable dashicons dashicons-marker ' . esc_atr( $read_class[ $key ] ) . '">
 							</span>';
 		}
 
@@ -196,7 +196,7 @@ class Emails {
 
 									wp_editor( $message, $editor_id, $args );
 								} else {
-									echo '<i>' . esc_html__( 'Feedback provided by the user. 😀', 'wp-frontend-delete-account' ) . '</i>';
+									echo '<i>' . esc_html__( 'Feedback provided by the user.', 'wp-frontend-delete-account' ) . '</i> 😀';
 								}
 								?>
 
