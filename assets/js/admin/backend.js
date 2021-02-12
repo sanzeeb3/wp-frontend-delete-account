@@ -102,7 +102,7 @@ jQuery(document).ready(function( $ ){
 		    $("#wpfda-send-deactivation-email").click( function( e ) {
 		    	e.preventDefault();
 
-		    	this.value 		= wpfda_plugins_params.deactivating;
+		    	this.value 		= wpfda_plugins_params.deleting;
 		    	var form 		= $("#wp-frontend-delete-account-send-deactivation-email");
 
 				var message		= form.find( ".row .col-75 textarea#message" ).val();

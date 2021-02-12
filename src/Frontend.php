@@ -23,6 +23,8 @@ class Frontend {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 		add_action( 'wp_ajax_confirm_delete', array( $this, 'confirm_delete' ) );
 		add_action( 'wp_ajax_delete_feedback', [ $this, 'delete_feedback' ] );
+		add_action( 'wp_ajax_delete_feedback_email', [ $this, 'delete_feedback_email' ] );
+		add_action( 'wp_ajax__nopriv_delete_feedback_email', [ $this, 'delete_feedback_email' ] );
 		add_shortcode( 'wp_frontend_delete_account', 'wpf_delete_account_content' );
 	}
 
@@ -138,6 +140,8 @@ class Frontend {
 					'incorrect_answer'    => esc_html__( 'Incorrect Answer. Please try again.', 'wp-frontend-delete-account' ),
 					'empty_password'      => esc_html__( 'Empty Password.', 'wp-frontend-delete-account' ),
 					'processing'          => esc_html__( 'Processing...', 'wp-frontend-delete-account' ),
+					'deleting'            => esc_html__( 'Deleting...', 'wp-frontend-delete-account' ),
+					'wrong'               => esc_html__( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
 				)
 			);
 		}
@@ -215,7 +219,7 @@ class Frontend {
 									</div>
 								</div>
 								<div class="row">
-										<?php wp_nonce_field( 'wpfda_delete_feedback_email', 'wpfda_deactivation_email' ); ?>
+										<?php wp_nonce_field( 'wpfda_delete_feedback_email', 'wpfda_delete_feedback_email' ); ?>
 										<a href=""><?php echo __( 'Skip and delete', 'wp-frontend-delete-account' ); ?>
 										<input type="submit" id="wpfda-send-deactivation-email" value="<?php echo esc_html__( 'Delete', 'wp-frontend-delete-account' );?> ">
 								</div>
@@ -231,5 +235,21 @@ class Frontend {
 
 		$content = ob_get_clean();
 		wp_send_json( $content ); // WPCS: XSS OK.
+	}
+
+	/**
+	 * Deactivation Email.
+	 *
+	 * @since  1.0.1
+	 *
+	 * Collecting feedback in site @since 1.4.0
+	 *
+	 * @return void
+	 */
+	public function delete_feedback_email() {
+
+		check_ajax_referer( 'delete_feedback_email', 'security' );
+
+		error_log( print_r( 'I\'m here', true ) );
 	}
 }

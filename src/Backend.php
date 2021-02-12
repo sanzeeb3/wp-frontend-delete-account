@@ -56,10 +56,10 @@ class Backend {
 					'deactivation_nonce' => wp_create_nonce( 'deactivation-notice' ),
 					'status_nonce'       => wp_create_nonce( 'email-status' ),
 					'review_nonce'       => wp_create_nonce( 'review-notice' ),
-					'deactivating'       => __( 'Deactivating...', 'wp-frontend-delete-account' ),
-					'wrong'              => __( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
-					'enable_email'       => __( 'Enable this email', 'wp-frontend-delete-account' ),
-					'disable_email'      => __( 'Disable this email', 'wp-frontend-delete-account' ),
+					'deactivating'       => esc_html__( 'Deactivating...', 'wp-frontend-delete-account' ),
+					'wrong'              => esc_html__( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
+					'enable_email'       => esc_html__( 'Enable this email', 'wp-frontend-delete-account' ),
+					'disable_email'      => esc_html__( 'Disable this email', 'wp-frontend-delete-account' ),
 				)
 			);
 		}

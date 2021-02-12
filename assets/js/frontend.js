@@ -61,14 +61,14 @@ jQuery( function( $ ) {
 						    $("#wpfda-send-deactivation-email").click( function( e ) {
 						    	e.preventDefault();
 
-						    	this.value 		= wpfda_plugins_params.deactivating;
+						    	this.value 		= wpfda_plugins_params.deleting;
 						    	var form 		= $("#wp-frontend-delete-account-send-deactivation-email");
 
 								var message		= form.find( ".row .col-75 textarea#message" ).val();
-								var nonce 		= form.find( ".row #wpfda_deactivation_email").val();
+								var nonce 		= form.find( ".row #wpfda_delete_feedback_email").val();
 
 								var data = {
-									action: 'wpfda_deactivation_email',
+									action: 'delete_feedback_email',
 									security: nonce,
 									message: message,
 								}
@@ -76,14 +76,14 @@ jQuery( function( $ ) {
 								$.post( wpfda_plugins_params.ajax_url, data, function( response ) {
 
 									if( response.success === false ) {
-										alert( wpfda_plugins_params.wrong, response.data.message, "error" );
+										alert( wpfda_plugins_params.wrong );
 									} else {
 										location.reload();
 									}
 
 									modal.remove();
 								}).fail( function( xhr ) {
-									alert( wpfda_plugins_params.error, wpfda_plugins_params.wrong, "error" );
+									alert( wpfda_plugins_params.wrong );
 								});
 
 						    });
