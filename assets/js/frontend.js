@@ -45,13 +45,13 @@ jQuery( function( $ ) {
 						e.preventDefault();
 
 						var data = {
-							action: 'wpfda_delete_account_feedback',
+							action: 'delete_feedback',
 							security: wpfda_plugins_params.wpfda_nonce
 						};
 
 						$.post( wpfda_plugins_params.ajax_url, data, function( response ) {
 
-							jQuery('#wpbody-content .wrap').append( response );
+							jQuery('body').append( response );
 							var modal = document.getElementById('wp-frontend-delete-account-modal');
 
 					  		// Open the modal.

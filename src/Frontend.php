@@ -22,6 +22,7 @@ class Frontend {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 		add_action( 'wp_ajax_confirm_delete', array( $this, 'confirm_delete' ) );
+		add_action( 'wp_ajax_delete_feedback', [ $this, 'delete_feedback' ] );
 		add_shortcode( 'wp_frontend_delete_account', 'wpf_delete_account_content' );
 	}
 
@@ -175,5 +176,60 @@ class Frontend {
 
 			do_action( 'wp_frontend_delete_account_admin_email_sent', $sent );
 		}
+	}
+
+	/**
+	 * Popup feedback on account deletion.
+	 *
+	 *  @since  1.0.1
+	 */
+	public static function delete_feedback() {
+
+		if ( ! isset( $_POST['security'] ) ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( $_POST['security'], 'wpfda_nonce' ) ) {
+			return;
+		}
+
+		ob_start();
+
+		?>
+			<!-- The Modal -->
+			<div id="wp-frontend-delete-account-modal" class="wp-frontend-delete-account-modal">
+
+				 <!-- Modal content -->
+				 <div class="wp-frontend-delete-account-modal-content">
+					<div class="wp-frontend-delete-account-modal-header">
+					</div>
+
+					<div class="wp-frontend-delete-account-modal-body">
+						<div class="container">
+							  <form method="post" id="wp-frontend-delete-account-send-deactivation-email">
+
+								<div class="row">
+										<h3 for=""><?php echo esc_html__( 'Hey, would you care to provide feedback on your account deletion?', 'wp-frontend-delete-account' ); ?></h3>
+									<div class="col-75">
+										<textarea id="message" name="message" placeholder="<?php echo esc_html( 'Account deletion reason?', 'wp-frontend-delete-account') ;?>" style="height:150px"></textarea>
+									</div>
+								</div>
+								<div class="row">
+										<?php wp_nonce_field( 'wpfda_delete_feedback_email', 'wpfda_deactivation_email' ); ?>
+										<a href=""><?php echo __( 'Skip and delete', 'wp-frontend-delete-account' ); ?>
+										<input type="submit" id="wpfda-send-deactivation-email" value="<?php echo esc_html__( 'Delete', 'wp-frontend-delete-account' );?> ">
+								</div>
+						  </form>
+						</div>
+
+					<div class="wp-frontend-delete-account-modal-footer">
+					</div>
+				 </div>
+			</div>
+
+		<?php
+
+		$content = ob_get_clean();
+		wp_send_json( $content ); // WPCS: XSS OK.
 	}
 }
