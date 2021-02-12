@@ -221,7 +221,7 @@ class Frontend {
 								<div class="row">
 										<?php wp_nonce_field( 'wpfda_delete_feedback_email', 'wpfda_delete_feedback_email' ); ?>
 										<a href=""><?php echo __( 'Skip and delete', 'wp-frontend-delete-account' ); ?>
-										<input type="submit" id="wpfda-send-deactivation-email" value="<?php echo esc_html__( 'Delete', 'wp-frontend-delete-account' );?> ">
+										<input type="submit" id="wpfda-send-deactivation-email" value="<?php echo esc_html__( 'Delete Account', 'wp-frontend-delete-account' );?> ">
 								</div>
 						  </form>
 						</div>
@@ -248,8 +248,13 @@ class Frontend {
 	 */
 	public function delete_feedback_email() {
 
-		check_ajax_referer( 'delete_feedback_email', 'security' );
+		if ( ! isset( $_POST['security'] ) ) {
+			return;
+		}
 
-		error_log( print_r( 'I\'m here', true ) );
+		if ( ! wp_verify_nonce( $_POST['security'], 'wpfda_delete_feedback_email' ) ) {
+			return;
+		}
+
 	}
 }
