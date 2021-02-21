@@ -93,8 +93,6 @@ jQuery( function( $ ) {
 							window.console.log( xhr.responseText );
 						});
 					}
-
-					location.reload();
 				}
         	});
     	});

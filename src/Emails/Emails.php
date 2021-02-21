@@ -5,6 +5,8 @@ namespace WPFrontendDeleteAccount\Emails;
 /**
  * @since  1.2.0
  *
+ * @todo : refactor whole class with all emails functionality including the email templates.
+ *
  * @class Emails
  */
 class Emails {
@@ -44,9 +46,9 @@ class Emails {
 							'wp_frontend_delete_account_email_setting_columns',
 							array(
 								'status'    => '',
-								'name'      => __( 'Email', 'wp-frontend-delete-account' ),
-								'recipient' => __( 'Recipient(s)', 'wp-frontend-delete-account' ),
-								'actions'   => __( 'Actions', 'wp-frontend-delete-account' ),
+								'name'      => esc_html__( 'Email', 'wp-frontend-delete-account' ),
+								'recipient' => esc_html__( 'Recipient(s)', 'wp-frontend-delete-account' ),
+								'actions'   => esc_html__( 'Actions', 'wp-frontend-delete-account' ),
 							)
 						);
 						foreach ( $columns as $key => $column ) {

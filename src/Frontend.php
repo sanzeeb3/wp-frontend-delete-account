@@ -23,6 +23,7 @@ class Frontend {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 		add_action( 'wp_ajax_confirm_delete', array( $this, 'confirm_delete' ) );
 		add_action( 'wp_ajax_delete_feedback', array( $this, 'delete_feedback' ) );
+		add_action( 'wp_ajax__nopriv_delete_feedback', array( $this, 'delete_feedback' ) );
 		add_action( 'wp_ajax_delete_feedback_email', array( $this, 'delete_feedback_email' ) );
 		add_action( 'wp_ajax__nopriv_delete_feedback_email', array( $this, 'delete_feedback_email' ) );
 		add_shortcode( 'wp_frontend_delete_account', 'wpf_delete_account_content' );
