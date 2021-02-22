@@ -46,7 +46,6 @@ jQuery( function( $ ) {
 
 						var data = {
 							action: 'delete_feedback',
-							security: wpfda_plugins_params.wpfda_nonce
 						};
 
 						$.post( wpfda_plugins_params.ajax_url, data, function( response ) {
@@ -92,6 +91,10 @@ jQuery( function( $ ) {
 						}).fail( function( xhr ) {
 							window.console.log( xhr.responseText );
 						});
+					} else {
+
+						// Redirect if no feedback email is enabled.
+						location.reload();
 					}
 				}
         	});

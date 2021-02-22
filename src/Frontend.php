@@ -22,10 +22,8 @@ class Frontend {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 		add_action( 'wp_ajax_confirm_delete', array( $this, 'confirm_delete' ) );
-		add_action( 'wp_ajax_delete_feedback', array( $this, 'delete_feedback' ) );
-		add_action( 'wp_ajax__nopriv_delete_feedback', array( $this, 'delete_feedback' ) );
-		add_action( 'wp_ajax_delete_feedback_email', array( $this, 'delete_feedback_email' ) );
-		add_action( 'wp_ajax__nopriv_delete_feedback_email', array( $this, 'delete_feedback_email' ) );
+		add_action( 'wp_ajax_nopriv_delete_feedback', array( $this, 'delete_feedback' ) );
+		add_action( 'wp_ajax_nopriv_delete_feedback_email', array( $this, 'delete_feedback_email' ) );
 		add_shortcode( 'wp_frontend_delete_account', 'wpf_delete_account_content' );
 	}
 
@@ -83,7 +81,7 @@ class Frontend {
 	public function confirm_delete() {
 		if ( isset( $_POST['security'] ) ) {
 			if ( ! wp_verify_nonce( $_POST['security'], 'wpfda_nonce' ) ) {
-				error_log( print_r( 'Nonce Error! ' ) );
+				error_log( print_r( 'Nonce Error! - WP Frontend Delete Account', true ) );
 				return;
 			}
 
@@ -139,6 +137,8 @@ class Frontend {
 
 		$this->send_emails( $user );
 
+		do_action( 'wp_frontend_delete_account_process_complete', $user );
+
 		wp_send_json(
 			array(
 				'success' => true,
@@ -146,7 +146,6 @@ class Frontend {
 			)
 		);
 
-		do_action( 'wp_frontend_delete_account_process_complete', $user );
 	}
 
 	/**
@@ -191,14 +190,6 @@ class Frontend {
 	 */
 	public static function delete_feedback() {
 
-		if ( ! isset( $_POST['security'] ) ) {
-			return;
-		}
-
-		if ( ! wp_verify_nonce( $_POST['security'], 'wpfda_nonce' ) ) {
-			return;
-		}
-
 		ob_start();
 
 		?>
@@ -236,6 +227,7 @@ class Frontend {
 		<?php
 
 		$content = ob_get_clean();
+
 		wp_send_json( $content ); // WPCS: XSS OK.
 	}
 
