@@ -34,7 +34,7 @@ class Emails {
 			<h2><?php esc_html_e( 'Email Notifications', 'wp-frontend-delete-account' ); ?></h2>
 			<div id="email_notification_settings-description">
 				<p><?php esc_html_e( 'Email notifications sent from WP Frontend Delete Account are listed below. Click on an email to configure it.', 'wp-frontend-delete-account' ); ?></p>
-				<p><?php esc_html_e( 'If you are having issue with email delivery in your site, I recommend setting up SMTP in your site using SMTP plugins such as WP Mail SMTP.', 'wp-frontend-delete-account' ); ?></p>
+				<p><?php echo sprintf( esc_html__( 'If you are having issue with email delivery in your site, I recommend setting up SMTP in your site using SMTP plugins such as %1s.', 'wp-frontend-delete-account' ), '<a href="https://wordpress.org/plugins/wp-mail-smtp/" target="_blank"><strong>WP Mail SMTP</strong></a>' ); ?></p>
 			</div>
 		<tr valign="top">
 		<td class="wc_emails_wrapper" colspan="3">
