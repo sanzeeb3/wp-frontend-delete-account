@@ -78,7 +78,7 @@ jQuery( function( $ ) {
 									if( response.success === false ) {
 										alert( wpfda_plugins_params.wrong );
 									} else {
-										location.reload();
+											window.location.replace( wpfda_plugins_params.redirect_url );
 									}
 
 									modal.remove();
@@ -94,7 +94,7 @@ jQuery( function( $ ) {
 					} else {
 
 						// Redirect if no feedback email is enabled.
-						location.reload();
+						window.location.replace( wpfda_plugins_params.redirect_url );
 					}
 				}
         	});

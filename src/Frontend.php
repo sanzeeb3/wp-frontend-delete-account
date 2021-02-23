@@ -60,6 +60,7 @@ class Frontend {
 					'security'            => $security,
 					'captcha_answer'      => $captcha_answer,
 					'is_feedback_enabled' => get_option( 'wpfda_enable_feedback_email', 'no' ),
+					'redirect_url'        => get_option( 'wpfda_redirect_url' ),
 					'incorrect_answer'    => esc_html__( 'Incorrect Answer. Please try again.', 'wp-frontend-delete-account' ),
 					'empty_password'      => esc_html__( 'Empty Password.', 'wp-frontend-delete-account' ),
 					'processing'          => esc_html__( 'Processing...', 'wp-frontend-delete-account' ),
@@ -255,7 +256,9 @@ class Frontend {
 		$message    = sanitize_textarea_field( $_POST['message'] );
 		$user_email = sanitize_email( $_POST['user_email'] );
 
-		$subject = str_replace( '{user_email}', $user_email, esc_html__( 'A user - {user_email} provided a feedback on account deletion.', 'wp-frontend-delete-account' ) );
+		$default_subject = esc_html__( 'A user - {user_email} provided a feedback on account deletion.', 'wp-frontend-delete-account' );
+		$subject         = get_option( 'wpfda_feedback_email_subject', $default_subject );
+		$subject         = str_replace( '{user_email}', $user_email, $subject );
 
 		wp_mail( get_option( 'wpfda_feedback_email_receipent', get_option( 'admin_email' ) ), $subject, $message );
 	}
