@@ -17,9 +17,7 @@ Lets customers delete thier account by their own from their myaccount page for W
 For non-store sites, add the 'Delete Account' tab content anywhere with shortcode [wp_frontend_delete_account] or with the built-in gutenberg block.
 
 # Feature and Options:
-* Confirm password, custom captcha and reCaptcha protection.
 * Reassign the posts by deleted user.
-* Delete domain cookies set by user.
 * Gutenberg block.
 * Shortcode [wp_frontend_delete_account]
 
@@ -52,14 +50,15 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 == Screenshots ==
 
 1. My Account Delete Account View
-2. Password Confirmation
-3. Custom Captcha
-4. reCaptcha
-5. Using Shortcode View
-6. Gutenberg Block View
-7. Settings
+2. Using Shortcode View
+3. Gutenberg Block View
 
 == Changelog ==
+
+= 1.4.0 - xx/xx/2021 =
+* Feature - Redirect URL after account delete.
+* Feature - Feedback email after account delete.
+* Tweak - Send plugin deactivation feedback to site.
 
 = 1.3.6 - 1/21/2021 =
 * Feature - Editor field for email message.
