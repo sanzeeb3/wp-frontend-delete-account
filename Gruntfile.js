@@ -78,8 +78,22 @@ module.exports = function( grunt ){
 					dest: '<%= dirs.js %>/admin',
 					ext: '.min.js'
 
-				}]
-			}
+				}],
+			},
+			target_f: {
+					// For frontend JS file which isn't categorized yet.
+					files:[{
+						expand: true,
+						cwd: '<%= dirs.js %>',
+						src: [
+								'*.js',
+						],
+						dest: '<%= dirs.js %>',
+						ext: '.min.js'
+
+					}],
+				}
+
 		},
 
 		// Watch changes for assets.
