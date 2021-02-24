@@ -4,7 +4,7 @@ Tags: delete-account, delete-account-from-frontend, frontend-delete, remove-acco
 Requires at least: 4.0
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -54,6 +54,9 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 3. Gutenberg Block View
 
 == Changelog ==
+
+= 1.4.1 - 02/24/2021 =
+* Fix - undefined variable on plugin deactivation.
 
 = 1.4.0 - 02/23/2021 =
 * Feature - Redirect URL after account delete.
