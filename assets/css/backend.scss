@@ -217,3 +217,17 @@ span.wpfda-disable.dashicons.dashicons-marker {
 	margin-top: 3px;
 	margin-right: 5px
 }
+
+#wp-frontend-delete-account-settings-page {
+  display: flex;
+}
+
+.wp-frontend-delete-account-settings {
+	width: 100%;
+}
+
+.wp-frontend-delete-account-recommended-plugins .plugin-card {
+	width: auto !important;
+	float: none;
+	margin: 8px !important;
+}

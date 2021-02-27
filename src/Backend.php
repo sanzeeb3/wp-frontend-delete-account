@@ -123,89 +123,98 @@ class Backend {
 		?>
 		<h2><?php esc_html_e( 'General Settings', 'wp-frontend-delete-account' ); ?></h2>
 
-		<form method="post">
-			<table class="form-table">
+		<div id="wp-frontend-delete-account-settings-page">
+			<div class="wp-frontend-delete-account-settings">
+				<form  method="post">
+					<table class="form-table">
 
-				<tr valign="top" class="wp-frontend-delete-account-load-assets-globally">
-					<th scope="row"><?php echo esc_html__( 'Load Assets Globally', 'wp-frontend-delete-account' ); ?></th>
-						<td>
-							<input type="hidden" name="wpfda_load_assets_globally" value="off" />
-							<input style="width:auto" type="checkbox" name="wpfda_load_assets_globally" class="wp-frontend-delete-account-load-assets-globally-inline" <?php checked( 'on', $load_assets ); ?> />
-						</td>
-				</tr>
+						<tr valign="top" class="wp-frontend-delete-account-load-assets-globally">
+							<th scope="row"><?php echo esc_html__( 'Load Assets Globally', 'wp-frontend-delete-account' ); ?></th>
+								<td>
+									<input type="hidden" name="wpfda_load_assets_globally" value="off" />
+									<input style="width:auto" type="checkbox" name="wpfda_load_assets_globally" class="wp-frontend-delete-account-load-assets-globally-inline" <?php checked( 'on', $load_assets ); ?> />
+								</td>
+						</tr>
 
-				<tr valign="top">
-					<th scope="row"><?php echo esc_html__( 'Title', 'wp-frontend-delete-account' ); ?></th>
-						<td><input type="text" name="wpfda_title" value ="<?php echo esc_html( $title ); ?>" class="wp-frontend-delete-account-title" />
-						</td>
-				</tr>
+						<tr valign="top">
+							<th scope="row"><?php echo esc_html__( 'Title', 'wp-frontend-delete-account' ); ?></th>
+								<td><input type="text" name="wpfda_title" value ="<?php echo esc_html( $title ); ?>" class="wp-frontend-delete-account-title" />
+								</td>
+						</tr>
 
-				<tr valign="top">
-					<th scope="row"><?php echo esc_html__( 'Button Label', 'wp-frontend-delete-account' ); ?></th>
-						<td><input type="text" name="wpfda_button_label" value ="<?php echo esc_html( $button ); ?>" class="wp-frontend-delete-account-button-label" />
-						</td>
-				</tr>
+						<tr valign="top">
+							<th scope="row"><?php echo esc_html__( 'Button Label', 'wp-frontend-delete-account' ); ?></th>
+								<td><input type="text" name="wpfda_button_label" value ="<?php echo esc_html( $button ); ?>" class="wp-frontend-delete-account-button-label" />
+								</td>
+						</tr>
 
-				<tr valign="top">
-					<th scope="row"><?php echo esc_html__( 'Redirect URL', 'wp-frontend-delete-account' ); ?></th>
-						<td><input type="url" name="wpfda_redirect_url" value ="<?php echo esc_html( $redirect_url ); ?>" class="wp-frontend-delete-account-redirect-url" /><br/>
-						<i><?php echo esc_html__( 'Leave empty for same page redirect.' ); ?></i>
-						</td>
-				</tr>
+						<tr valign="top">
+							<th scope="row"><?php echo esc_html__( 'Redirect URL', 'wp-frontend-delete-account' ); ?></th>
+								<td><input type="url" name="wpfda_redirect_url" value ="<?php echo esc_html( $redirect_url ); ?>" class="wp-frontend-delete-account-redirect-url" /><br/>
+								<i><?php echo esc_html__( 'Leave empty for same page redirect.' ); ?></i>
+								</td>
+						</tr>
 
-				<tr valign="top">
-					<th scope="row"><?php echo esc_html__( 'Attribute all contents to:', 'wp-frontend-delete-account' ); ?></th>
-						<td>
-							<select style="width:17%;" name="wpfda_attribute">
-								<option><?php echo esc_html__( '--None--', 'wp-frontend-delete-account' ); ?></option>
-								<?php
-								foreach ( $users as $user ) {
-										echo '<option value="' . absint( $user->ID ) . '" ' . selected( $user->ID, $attribute, true ) . '>' . $user->data->user_login . '</option>';
-								}
-								?>
-							</select>
-						</td>
-				</tr>
+						<tr valign="top">
+							<th scope="row"><?php echo esc_html__( 'Attribute all contents to:', 'wp-frontend-delete-account' ); ?></th>
+								<td>
+									<select style="width:17%;" name="wpfda_attribute">
+										<option><?php echo esc_html__( '--None--', 'wp-frontend-delete-account' ); ?></option>
+										<?php
+										foreach ( $users as $user ) {
+												echo '<option value="' . absint( $user->ID ) . '" ' . selected( $user->ID, $attribute, true ) . '>' . $user->data->user_login . '</option>';
+										}
+										?>
+									</select>
+								</td>
+						</tr>
 
-				<tr valign="top">
-					<th scope="row"><?php echo esc_html__( 'Security method before deleting:', 'wp-frontend-delete-account' ); ?></th>
-						<td>
-							<select style="width:17%;" name="wpfda_security" class="wpfda-security">
-								<option value="none" <?php selected( 'none', $security, true ); ?>><?php echo esc_html__( '--None--', 'wp-frontend-delete-account' ); ?></option>
-								<option value="password" <?php selected( 'password', $security, true ); ?>><?php echo esc_html__( 'Password', 'wp-frontend-delete-account' ); ?></option>
-								<option value="custom_captcha" <?php selected( 'custom_captcha', $security, true ); ?>><?php echo esc_html__( 'Custom Captcha', 'wp-frontend-delete-account' ); ?></option>
-							</select><br/>
-						</td>
-				</tr>
-				<tr valign="top" class="wp-frontend-delete-account-security-password">
-					<th scope="row"><?php echo esc_html__( 'Confirmation Text', 'wp-frontend-delete-account' ); ?></th>
-						<td>
-							<input style="width:50%" type="text" name="wpfda_security_password_text" value ="<?php echo esc_html( $password_text ); ?>" class="wp-frontend-delete-account-security-password-inline" />
-						</td>
-				</tr>
+						<tr valign="top">
+							<th scope="row"><?php echo esc_html__( 'Security method before deleting:', 'wp-frontend-delete-account' ); ?></th>
+								<td>
+									<select style="width:17%;" name="wpfda_security" class="wpfda-security">
+										<option value="none" <?php selected( 'none', $security, true ); ?>><?php echo esc_html__( '--None--', 'wp-frontend-delete-account' ); ?></option>
+										<option value="password" <?php selected( 'password', $security, true ); ?>><?php echo esc_html__( 'Password', 'wp-frontend-delete-account' ); ?></option>
+										<option value="custom_captcha" <?php selected( 'custom_captcha', $security, true ); ?>><?php echo esc_html__( 'Custom Captcha', 'wp-frontend-delete-account' ); ?></option>
+									</select><br/>
+								</td>
+						</tr>
+						<tr valign="top" class="wp-frontend-delete-account-security-password">
+							<th scope="row"><?php echo esc_html__( 'Confirmation Text', 'wp-frontend-delete-account' ); ?></th>
+								<td>
+									<input style="width:50%" type="text" name="wpfda_security_password_text" value ="<?php echo esc_html( $password_text ); ?>" class="wp-frontend-delete-account-security-password-inline" />
+								</td>
+						</tr>
 
-				<tr valign="top" class="wp-frontend-delete-account-security-custom-captcha-question">
-					<th scope="row"><?php echo esc_html__( 'Captcha Question', 'wp-frontend-delete-account' ); ?></th>
-						<td>
-							<input style="width:50%" type="text" name="wpfda_security_custom_captcha_question" value ="<?php echo esc_html( $captcha_question ); ?>" class="wp-frontend-delete-account-security-custom-captcha-question-inline" />
-						</td>
-				</tr>
+						<tr valign="top" class="wp-frontend-delete-account-security-custom-captcha-question">
+							<th scope="row"><?php echo esc_html__( 'Captcha Question', 'wp-frontend-delete-account' ); ?></th>
+								<td>
+									<input style="width:50%" type="text" name="wpfda_security_custom_captcha_question" value ="<?php echo esc_html( $captcha_question ); ?>" class="wp-frontend-delete-account-security-custom-captcha-question-inline" />
+								</td>
+						</tr>
 
-				<tr valign="top" class="wp-frontend-delete-account-security-custom-captcha-answer">
-					<th scope="row"><?php echo esc_html__( 'Captcha Answer', 'wp-frontend-delete-account' ); ?></th>
-						<td>
-							<input style="width:50%" type="text" name="wpfda_security_custom_captcha_answer" value ="<?php echo esc_html( $captcha_answer ); ?>" class="wp-frontend-delete-account-security-custom-captcha-answer-inline" />
-						</td>
-				</tr>
+						<tr valign="top" class="wp-frontend-delete-account-security-custom-captcha-answer">
+							<th scope="row"><?php echo esc_html__( 'Captcha Answer', 'wp-frontend-delete-account' ); ?></th>
+								<td>
+									<input style="width:50%" type="text" name="wpfda_security_custom_captcha_answer" value ="<?php echo esc_html( $captcha_answer ); ?>" class="wp-frontend-delete-account-security-custom-captcha-answer-inline" />
+								</td>
+						</tr>
 
-				<?php do_action( 'wp_frontend_delete_account_settings' ); ?>
-				<?php wp_nonce_field( 'wp_frontend_delete_account_settings', 'wp_frontend_delete_account_settings_nonce' ); ?>
+						<?php do_action( 'wp_frontend_delete_account_settings' ); ?>
+						<?php wp_nonce_field( 'wp_frontend_delete_account_settings', 'wp_frontend_delete_account_settings_nonce' ); ?>
 
-			</table>
+					</table>
 
-			<?php submit_button(); ?>
+					<?php submit_button(); ?>
 
-		</form>
+				</form>
+			</div>
+
+			<div class="wp-frontend-delete-account-recommended-plugins">
+				<?php include_once WPFDA_PLUGIN_DIR . '/recommended-plugins.php'; ?>
+			</div>
+		</div>
+
 		<?php
 	}
 

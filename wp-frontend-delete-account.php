@@ -23,6 +23,11 @@ if ( ! defined( 'WPFDA_PLUGIN_FILE' ) ) {
 	define( 'WPFDA_PLUGIN_FILE', __FILE__ );
 }
 
+// Plugin Folder Path.
+if ( ! defined( 'WPFDA_PLUGIN_DIR' ) ) {
+	define( 'WPFDA_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+}
+
 /**
  * Plugin version.
  *
