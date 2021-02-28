@@ -76,6 +76,24 @@ jQuery( function( $ ) {
 			// Success. Do nothing. Silence is golden.
     	});
 	});
+
+	// Recommended plugins dismiss.
+	$('body').on('click', '.wpfda-recommended-plugins-dismiss', function(e) {
+
+	    e.preventDefault();
+
+        $(".wp-frontend-delete-account-recommended-plugins").hide();
+
+		var data = {
+			action: 'wp_frontend_delete_account_dismiss_recommended_plugins',
+			security: wpfda_plugins_params.review_nonce,
+			dismissed: true,
+		};
+
+		$.post( wpfda_plugins_params.ajax_url, data, function( response ) {
+			// Success. Do nothing. Silence is golden.
+    	});
+	});
 });
 
 

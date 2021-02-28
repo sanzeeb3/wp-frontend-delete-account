@@ -28,6 +28,7 @@ class Backend {
 		add_action( 'admin_print_scripts', array( $this, 'remove_notices' ) );
 		add_action( 'in_admin_header', array( $this, 'review_notice' ) );
 		add_action( 'wp_ajax_wp_frontend_delete_account_dismiss_review_notice', array( $this, 'dismiss_review_notice' ) );
+		add_action( 'wp_ajax_wp_frontend_delete_account_dismiss_recommended_plugins', array( $this, 'dismiss_recommended_plugins' ) );
 	}
 
 	/**
@@ -210,10 +211,14 @@ class Backend {
 				</form>
 			</div>
 
-			<div class="wp-frontend-delete-account-recommended-plugins">
-				<a class="wpfda-recommended-plugins-dismiss" href="#">Dismiss</a>
-				<?php include_once WPFDA_PLUGIN_DIR . '/recommended-plugins.php'; ?>
-			</div>
+			<?php if ( get_option( 'wpfda_recommended_plugins_dismissed' ) !== 'yes' ) {
+				?>
+					<div class="wp-frontend-delete-account-recommended-plugins">
+						<a class="wpfda-recommended-plugins-dismiss" href="#"><?php echo esc_html__( 'Dismiss', 'wp-frontend-delete-account');?></a>
+						<?php include_once WPFDA_PLUGIN_DIR . '/recommended-plugins.php'; ?>
+					</div>
+				<?php
+			}?>
 		</div>
 
 		<?php
@@ -424,12 +429,26 @@ class Backend {
 	 *
 	 * @since 1.3.2
 	 */
-	function dismiss_review_notice() {
+	public function dismiss_review_notice() {
 
 		check_admin_referer( 'review-notice', 'security' );
 
 		if ( ! empty( $_POST['dismissed'] ) ) {
 			update_option( 'wpfda_review_notice_dismissed', 'yes' );
+		}
+	}
+
+	/**
+	 * Dismiss the reveiw notice on dissmiss click
+	 *
+	 * @since 1.5.0
+	 */
+	public function dismiss_recommended_plugins() {
+
+		check_admin_referer( 'review-notice', 'security' );
+
+		if ( ! empty( $_POST['dismissed'] ) ) {
+			update_option( 'wpfda_recommended_plugins_dismissed', 'yes' );
 		}
 	}
 
