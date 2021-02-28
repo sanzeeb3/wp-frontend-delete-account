@@ -211,6 +211,7 @@ class Backend {
 			</div>
 
 			<div class="wp-frontend-delete-account-recommended-plugins">
+				<a class="wpfda-recommended-plugins-dismiss" href="#">Dismiss</a>
 				<?php include_once WPFDA_PLUGIN_DIR . '/recommended-plugins.php'; ?>
 			</div>
 		</div>
