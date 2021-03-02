@@ -169,7 +169,7 @@ class Frontend {
 			$message = str_replace( '{user_name}', $user->data->user_login, $message );
 			$message = nl2br( str_replace( '{user_email}', $user->data->user_email, $message ) );
 
-			$sent = wp_mail( $to, $subject, $message, $header );
+			$this->send( $to, $subject, $message, $header );
 
 			do_action( 'wp_frontend_delete_account_admin_email_sent', $sent );
 		}
@@ -178,9 +178,41 @@ class Frontend {
 		if ( 'on' === get_option( 'wpfda_enable_user_email', 'on' ) ) {
 			$subject = get_option( 'wpfda_user_email_subject', 'Your account has been deleted successfully.' );
 			$message = nl2br( get_option( 'wpfda_user_email_message', 'Your account has been deleted. In case this is a mistake, please contact the site administrator at ' . site_url() . '' ) );
-			$sent    = wp_mail( $user->data->user_email, $subject, $message, $header );
+
+			$this->send( $user->data->user_email, $subject, $message, $header );
 
 			do_action( 'wp_frontend_delete_account_admin_email_sent', $sent );
+		}
+	}
+
+	/**
+	 * Actually send emails.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @return bool
+	 */
+	private function send( $to, $subject, $message, $header ) {
+
+		if ( defined( 'WC_VERSION' ) ) {
+
+			// Get woocommerce mailer from instance
+			$mailer  = WC()->mailer();
+
+			// Header Title.
+			$heading = get_bloginfo( 'name' );
+
+			// Wrap message using woocommerce html email template
+		 	$wrapped_message = $mailer->wrap_message( $heading, $message );
+
+		 	$wc_email = new WC_Email;
+
+	    	// Style the wrapped message with woocommerce inline styles
+	 	 	$message = $wc_email->style_inline( $wrapped_message );
+
+	 	 	$mailer->send( $to, $subject, $message, $header );
+		} else {
+			wp_mail( $to, $subject, $message, $header );
 		}
 	}
 

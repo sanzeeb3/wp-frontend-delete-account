@@ -281,6 +281,23 @@ class Backend {
 	}
 
 	/**
+	 * Email status change from emails overview.
+	 *
+	 * @since  1.2.0
+	 *
+	 * @return
+	 */
+	public function email_status() {
+
+		check_admin_referer( 'email-status', 'security' );
+
+		$email  = isset( $_POST['email'] ) ? sanitize_text_field( $_POST['email'] ) : '';
+		$enable = ! empty( $_POST['enable'] ) ? 'on' : 'off';
+
+		update_option( 'wpfda_enable_' . $email . '_email', $enable );
+	}
+
+	/**
 	 * Popup feedback on plugin deactivation.
 	 *
 	 *  @since  1.0.1
@@ -361,23 +378,6 @@ class Backend {
 		do_action( 'wp_frontend_delete_account_deactivation_feedback_sent', $result );
 
 		deactivate_plugins( WPFDA_PLUGIN_FILE );
-	}
-
-	/**
-	 * Email status change from emails overview.
-	 *
-	 * @since  1.2.0
-	 *
-	 * @return
-	 */
-	public function email_status() {
-
-		check_admin_referer( 'email-status', 'security' );
-
-		$email  = isset( $_POST['email'] ) ? sanitize_text_field( $_POST['email'] ) : '';
-		$enable = ! empty( $_POST['enable'] ) ? 'on' : 'off';
-
-		update_option( 'wpfda_enable_' . $email . '_email', $enable );
 	}
 
 	/**
