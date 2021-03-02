@@ -91,10 +91,10 @@ class Emails {
 
 		<?php
 
-			if ( defined( 'WC_VERSION' ) ) {
-				echo '<br/>';
-				echo sprintf( esc_html__( 'The email sender options, email templates etc. can be customized from %1s.', 'wp-frontend-delete-account' ), '<a href="'. esc_url( admin_url( 'admin.php?page=wc-settings&tab=email' ) ) .'">WooCommerce</a>' );
-			}
+		if ( defined( 'WC_VERSION' ) ) {
+			echo '<br/>';
+			echo sprintf( esc_html__( 'The email sender options, email templates etc. can be customized from %1s.', 'wp-frontend-delete-account' ), '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=email' ) ) . '">WooCommerce</a>' );
+		}
 	}
 
 	/**

@@ -169,9 +169,9 @@ class Frontend {
 			$message = str_replace( '{user_name}', $user->data->user_login, $message );
 			$message = nl2br( str_replace( '{user_email}', $user->data->user_email, $message ) );
 
-			$this->send( $to, $subject, $message, $header );
+			$this->now_send( $to, $subject, $message, $header );
 
-			do_action( 'wp_frontend_delete_account_admin_email_sent', $sent );
+			do_action( 'wp_frontend_delete_account_admin_email_sent' );
 		}
 
 		// Send email to user.
@@ -179,40 +179,44 @@ class Frontend {
 			$subject = get_option( 'wpfda_user_email_subject', 'Your account has been deleted successfully.' );
 			$message = nl2br( get_option( 'wpfda_user_email_message', 'Your account has been deleted. In case this is a mistake, please contact the site administrator at ' . site_url() . '' ) );
 
-			$this->send( $user->data->user_email, $subject, $message, $header );
+			$this->now_send( $user->data->user_email, $subject, $message, $header );
 
-			do_action( 'wp_frontend_delete_account_admin_email_sent', $sent );
+			do_action( 'wp_frontend_delete_account_admin_email_sent' );
 		}
 	}
 
 	/**
 	 * Actually send emails.
 	 *
+	 * Using WooCommerce sending options and templates for sites using WooCommerce.
+	 *
 	 * @since  1.5.0
 	 *
 	 * @return bool
 	 */
-	private function send( $to, $subject, $message, $header ) {
+	private function now_send( $to, $subject, $message, $header ) {
 
 		if ( defined( 'WC_VERSION' ) ) {
 
 			// Get woocommerce mailer from instance
-			$mailer  = WC()->mailer();
+			$mailer = \WC()->mailer();
 
 			// Header Title.
-			$heading = get_bloginfo( 'name' );
+			$heading = \get_bloginfo( 'name' );
 
 			// Wrap message using woocommerce html email template
-		 	$wrapped_message = $mailer->wrap_message( $heading, $message );
+			$wrapped_message = $mailer->wrap_message( $heading, $message );
 
-		 	$wc_email = new WC_Email;
+			$wc_email = new \WC_Email();
 
-	    	// Style the wrapped message with woocommerce inline styles
-	 	 	$message = $wc_email->style_inline( $wrapped_message );
+			// Style the wrapped message with woocommerce inline styles
+			$message = $wc_email->style_inline( $wrapped_message );
 
-	 	 	$mailer->send( $to, $subject, $message, $header );
+			$sent = $mailer->send( $to, $subject, $message );
+
 		} else {
-			wp_mail( $to, $subject, $message, $header );
+
+			$sent = \wp_mail( $to, $subject, $message, $header );
 		}
 	}
 

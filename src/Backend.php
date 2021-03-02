@@ -211,14 +211,16 @@ class Backend {
 				</form>
 			</div>
 
-			<?php if ( get_option( 'wpfda_recommended_plugins_dismissed' ) !== 'yes' ) {
+			<?php
+			if ( get_option( 'wpfda_recommended_plugins_dismissed' ) !== 'yes' ) {
 				?>
 					<div class="wp-frontend-delete-account-recommended-plugins">
-						<a class="wpfda-recommended-plugins-dismiss" href="#"><?php echo esc_html__( 'Dismiss', 'wp-frontend-delete-account');?></a>
+						<a class="wpfda-recommended-plugins-dismiss" href="#"><?php echo esc_html__( 'Dismiss', 'wp-frontend-delete-account' ); ?></a>
 						<?php include_once WPFDA_PLUGIN_DIR . '/recommended-plugins.php'; ?>
 					</div>
 				<?php
-			}?>
+			}
+			?>
 		</div>
 
 		<?php
