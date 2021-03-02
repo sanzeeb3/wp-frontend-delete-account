@@ -404,6 +404,17 @@ class Backend {
 			return;
 		}
 
+		$is_emails_section = isset( $_GET['section'] ) && $_GET['section'] === 'emails' ? true : false;
+
+		/**
+		 * Only display review notice on the Emails section. Avoid too much distraction.
+		 *
+		 * @since  1.5.0.
+		 */
+		if ( ! $is_emails_section ) {
+			return;
+		}
+
 		?>
 			<div id="wp-frontend-delete-account-review-notice" class="notice notice-info wp-frontend-delete-account-review-notice">
 				<div class="wp-frontend-delete-account-review-thumbnail">
