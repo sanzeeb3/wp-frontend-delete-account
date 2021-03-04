@@ -146,7 +146,6 @@ class Frontend {
 				'message' => esc_html__( 'Deleting...', 'wp-frontend-delete-account' ),
 			)
 		);
-
 	}
 
 	/**
@@ -194,7 +193,7 @@ class Frontend {
 	 *
 	 * @return bool
 	 */
-	private function now_send( $to, $subject, $message, $header ) {
+	private function now_send( $to, $subject, $message, $header = array( 'Content-Type: text/html; charset=UTF-8' ) ) {
 
 		if ( defined( 'WC_VERSION' ) ) {
 
@@ -296,6 +295,8 @@ class Frontend {
 		$subject         = get_option( 'wpfda_feedback_email_subject', $default_subject );
 		$subject         = str_replace( '{user_email}', $user_email, $subject );
 
-		wp_mail( get_option( 'wpfda_feedback_email_receipent', get_option( 'admin_email' ) ), $subject, $message );
+		$sent = $this->now_send( get_option( 'wpfda_feedback_email_receipent', get_option( 'admin_email' ) ), $subject, $message );
+
+		do_action( 'wp_frontend_delete_account_feedback_email_sent', $sent );
 	}
 }
