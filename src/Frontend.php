@@ -169,9 +169,9 @@ class Frontend {
 			$message = str_replace( '{user_name}', $user->data->user_login, $message );
 			$message = nl2br( str_replace( '{user_email}', $user->data->user_email, $message ) );
 
-			$this->now_send( $to, $subject, $message, $header );
+			$sent = $this->now_send( $to, $subject, $message, $header );
 
-			do_action( 'wp_frontend_delete_account_admin_email_sent' );
+			do_action( 'wp_frontend_delete_account_admin_email_sent', $sent );
 		}
 
 		// Send email to user.
@@ -179,9 +179,9 @@ class Frontend {
 			$subject = get_option( 'wpfda_user_email_subject', 'Your account has been deleted successfully.' );
 			$message = nl2br( get_option( 'wpfda_user_email_message', 'Your account has been deleted. In case this is a mistake, please contact the site administrator at ' . site_url() . '' ) );
 
-			$this->now_send( $user->data->user_email, $subject, $message, $header );
+			$sent = $this->now_send( $user->data->user_email, $subject, $message, $header );
 
-			do_action( 'wp_frontend_delete_account_admin_email_sent' );
+			do_action( 'wp_frontend_delete_account_admin_email_sent', $sent );
 		}
 	}
 
