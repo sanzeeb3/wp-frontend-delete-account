@@ -55,6 +55,10 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 
 == Changelog ==
 
+= 1.5.0 - xx/xx/2021 =
+* Add - WooCommerce Email Templates for sites using WooCommerce.
+* Add - Recommended plugins.
+
 = 1.4.2 - 02/24/2021 =
 * Fix - Issue with JS minification when debug mode is off.
 
