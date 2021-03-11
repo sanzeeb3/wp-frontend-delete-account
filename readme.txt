@@ -2,7 +2,7 @@
 Contributors: sanzeeb3
 Tags: delete-account, delete-account-from-frontend, frontend-delete, remove-account, gdpr, gdpr-erasure
 Requires at least: 4.0
-Tested up to: 5.6
+Tested up to: 5.7
 Requires PHP: 5.6
 Stable tag: 1.4.2
 License: GPLv3
@@ -39,7 +39,7 @@ You have one month to respond to a request. I understand you're busy. Make it ea
 
 Yes. The plugin is translation ready. You can use any tranlstion plugin. Or customize the plugins language with the provided pot file. The recommended way is to help WP Frontend Delete Account by contributing the translation on [WordPress.org](https://translate.wordpress.org/projects/wp-plugins/wp-frontend-delete-account).
 
-= I see page not found while clicking delete account tab?
+= I see 404 error: page not found?
 
 You might need to refresh the permalinks. Navigate to Settings->Permalinks and Save.
 
