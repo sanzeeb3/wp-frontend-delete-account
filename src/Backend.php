@@ -152,7 +152,7 @@ class Backend {
 						<tr valign="top">
 							<th scope="row"><?php echo esc_html__( 'Redirect URL', 'wp-frontend-delete-account' ); ?></th>
 								<td><input type="url" name="wpfda_redirect_url" value ="<?php echo esc_html( $redirect_url ); ?>" class="wp-frontend-delete-account-redirect-url" /><br/>
-								<i><?php echo esc_html__( 'Leave empty for same page redirect.' ); ?></i>
+								<i><?php echo esc_html__( 'Leave empty for same page redirect.', 'wp-frontend-delete-account' ); ?></i>
 								</td>
 						</tr>
 
