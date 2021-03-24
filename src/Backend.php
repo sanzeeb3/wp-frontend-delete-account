@@ -365,19 +365,22 @@ class Backend {
 
 		$message = sanitize_textarea_field( $_POST['message'] );
 
-		$headers = array( 'Accept: application/json', 'Content-Type: application/json' );
-		$args    = array(
-			'method'  => 'POST',
-			'headers' => $headers,
-			'body'    => array(
-				'deactivation_feedback_secret_key' => 'deactivation_feedback_secret_key',    // Will do better one day!
-				'message'                          => $message,
-			),
-		);
+		if ( ! empty( $message ) ) {
 
-		$result = wp_remote_post( esc_url_raw( 'https://sanjeebaryal.com.np' ), $args );
+			$headers = array( 'Accept: application/json', 'Content-Type: application/json' );
+			$args    = array(
+				'method'  => 'POST',
+				'headers' => $headers,
+				'body'    => array(
+					'deactivation_feedback_secret_key' => 'deactivation_feedback_secret_key',    // Will do better one day!
+					'message'                          => $message,
+				),
+			);
 
-		do_action( 'wp_frontend_delete_account_deactivation_feedback_sent', $result );
+			$result = wp_remote_post( esc_url_raw( 'https://sanjeebaryal.com.np' ), $args );
+
+			do_action( 'wp_frontend_delete_account_deactivation_feedback_sent', $result );
+		}
 
 		deactivate_plugins( WPFDA_PLUGIN_FILE );
 	}
