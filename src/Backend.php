@@ -247,7 +247,7 @@ class Backend {
 
 			foreach ( $options as $option ) {
 				if ( isset( $_POST[ $option ] ) ) {
-					$value = sanitize_text_field( $_POST[ $option ] );
+					$value = sanitize_text_field( wp_unslash( $_POST[ $option ] ) );
 					update_option( $option, $value );
 				}
 			}
@@ -363,7 +363,7 @@ class Backend {
 
 		check_ajax_referer( 'wpfda_deactivation_email', 'security' );
 
-		$message = sanitize_textarea_field( $_POST['message'] );
+		$message = sanitize_textarea_field( wp_unslash( $_POST['message'] ) );
 
 		if ( ! empty( $message ) ) {
 

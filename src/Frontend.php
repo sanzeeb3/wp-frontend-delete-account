@@ -288,7 +288,7 @@ class Frontend {
 			return;
 		}
 
-		$message    = sanitize_textarea_field( $_POST['message'] );
+		$message    = sanitize_textarea_field( wp_unslash( $_POST['message'] ) );
 		$user_email = sanitize_email( $_POST['user_email'] );
 
 		$default_subject = esc_html__( 'A user - {user_email} provided a feedback on account deletion.', 'wp-frontend-delete-account' );
