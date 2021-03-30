@@ -5,6 +5,8 @@ namespace WPFrontendDeleteAccount;
 use WPFrontendDeleteAccount\Emails\Emails;
 
 /**
+ * Handles the Settings page for WP Frontend Delete Account.
+ *
  * @since  1.0.0
  *
  * @since  1.2.0 changed classname "WPFDA_Backend" to "Backend" with namespace.
@@ -92,6 +94,8 @@ class Backend {
 			<a href="' . esc_url( admin_url( 'admin.php?page=wp-frontend-delete-account' ) ) . '" class="nav-tab ' . $general_active . '">' . esc_html__( 'General', 'wp-frontend-delete-account' ) . '</a>
 			<a href="' . esc_url( wp_nonce_url( admin_url( 'admin.php?page=wp-frontend-delete-account&section=emails' ), 'wp-frontend-delete-account-emails' ) ) . '" class="nav-tab ' . $emails_active . '">' . esc_html__( 'Emails', 'wp-frontend-delete-account' ) . '</a>
 			</h2>';
+
+		// phpcs:ignore
 		echo $template;
 
 		if ( isset( $_GET['section'] ) && 'emails' === $_GET['section'] ) {
@@ -163,6 +167,7 @@ class Backend {
 										<option><?php echo esc_html__( '--None--', 'wp-frontend-delete-account' ); ?></option>
 										<?php
 										foreach ( $users as $user ) {
+												// phpcs:ignore
 												echo '<option value="' . absint( $user->ID ) . '" ' . selected( $user->ID, $attribute, true ) . '>' . $user->data->user_login . '</option>';
 										}
 										?>
@@ -237,10 +242,11 @@ class Backend {
 
 		if ( isset( $_POST['wp_frontend_delete_account_settings_nonce'] ) ) {
 
+			// phpcs:ignore
 			if ( ! wp_verify_nonce( $_POST['wp_frontend_delete_account_settings_nonce'], 'wp_frontend_delete_account_settings' )
 				) {
-				   print 'Nonce Failed!';
-				   exit;
+				print 'Nonce Failed!';
+				exit;
 			}
 
 			$options = array( 'wpfda_title', 'wpfda_button_label', 'wpfda_redirect_url', 'wpfda_attribute', 'wpfda_security', 'wpfda_security_password_text', 'wpfda_security_custom_captcha_question', 'wpfda_security_custom_captcha_answer', 'wpfda_load_assets_globally', 'wpfda_email_receipent', 'wpfda_feedback_email_receipent', 'wpfda_enable_user_email', 'wpfda_enable_admin_email', 'wpfda_user_email_subject', 'wpfda_admin_email_subject', 'wpfda_enable_feedback_email', 'wpfda_feedback_email_subject' );
