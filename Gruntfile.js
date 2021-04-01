@@ -2,91 +2,110 @@
 module.exports = function( grunt ){
 	'use strict';
 
-	grunt.initConfig({
+	grunt.initConfig(
+		{
 
-		// Store project settings.
-		pkg: grunt.file.readJSON( 'package.json' ),
+			// Store project settings.
+			pkg: grunt.file.readJSON( 'package.json' ),
 
-		// Setting folder templates.
-		dirs: {
-			js: 'assets/js',
-			css: 'assets/css'
-		},
-
-		// JavaScript linting with JSHint.
-		jshint: {
-			options: {
-				jshintrc: '.jshintrc'
+			// Setting folder templates.
+			dirs: {
+				js: 'assets/js',
+				css: 'assets/css'
 			},
-			all: [
+
+			// JavaScript linting with JSHint.
+			jshint: {
+				options: {
+					jshintrc: '.jshintrc'
+				},
+				all: [
 				'Gruntfile.js'
-			]
-		},
-
-		// Sass linting with Stylelint.
-		stylelint: {
-			options: {
-				stylelintrc: '.stylelintrc'
+				]
 			},
-			all: [
+
+			replace: {
+				dist: {
+					options: {
+						patterns: [
+						{
+							match: 'foo',
+							replacement: 'bar'
+						}
+						]
+					},
+					files: [
+					{
+						expand: true, flatten: true, src: ['src/*.php'], dest: 'src/'
+					}
+					]
+				}
+			},
+
+			// Sass linting with Stylelint.
+			stylelint: {
+				options: {
+					stylelintrc: '.stylelintrc'
+				},
+				all: [
 				'<%= dirs.css %>/*.scss'
-			]
-		},
-
-		// Compile all .scss files.
-		sass: {
-			options: {
-				sourcemap: 'none',
-				implementation: require( 'node-sass' )
+				]
 			},
-			compile: {
-				files: [{
+
+			// Compile all .scss files.
+			sass: {
+				options: {
+					sourcemap: 'none',
+					implementation: require( 'node-sass' )
+				},
+				compile: {
+					files: [{
+						expand: true,
+						cwd: '<%= dirs.css %>/',
+						src: ['*.scss'],
+						dest: '<%= dirs.css %>/',
+						ext: '.css'
+					}]
+				}
+			},
+
+			// Minify all .css files.
+			cssmin: {
+				minify: {
 					expand: true,
 					cwd: '<%= dirs.css %>/',
-					src: ['*.scss'],
+					src: ['*.css'],
 					dest: '<%= dirs.css %>/',
 					ext: '.css'
-				}]
-			}
-		},
-
-		// Minify all .css files.
-		cssmin: {
-			minify: {
-				expand: true,
-				cwd: '<%= dirs.css %>/',
-				src: ['*.css'],
-				dest: '<%= dirs.css %>/',
-				ext: '.css'
-			}
-		},
-
-		// Minify all .js files
-		uglify: {
-			options:{
-				sourcemap: 'none',
+				}
 			},
-			target: {
-				files:[{
-					expand: true,
-					cwd: '<%= dirs.js %>/admin',
-					src: [
+
+			// Minify all .js files
+			uglify: {
+				options:{
+					sourcemap: 'none',
+				},
+				target: {
+					files:[{
+						expand: true,
+						cwd: '<%= dirs.js %>/admin',
+						src: [
 							'*.js',
 							'!*.min.js',
 							'!gutenberg.js',
-					],
-					dest: '<%= dirs.js %>/admin',
-					ext: '.min.js'
+						],
+						dest: '<%= dirs.js %>/admin',
+						ext: '.min.js'
 
-				}],
-			},
-			target_f: {
+					}],
+				},
+				target_f: {
 					// For frontend JS file which isn't categorized yet.
 					files:[{
 						expand: true,
 						cwd: '<%= dirs.js %>',
 						src: [
-								'*.js',
+							'*.js',
 						],
 						dest: '<%= dirs.js %>',
 						ext: '.min.js'
@@ -94,60 +113,60 @@ module.exports = function( grunt ){
 					}],
 				}
 
-		},
+			},
 
-		// Watch changes for assets.
-		watch: {
-			css: {
-				files: [
+			// Watch changes for assets.
+			watch: {
+				css: {
+					files: [
 					'<%= dirs.css %>/*.scss'
-				],
-				tasks: ['sass', 'rtlcss', 'postcss', 'cssmin']
-			}
-		},
-
-		// Generate POT files.
-		makepot: {
-			options: {
-				type: 'wp-plugin',
-				domainPath: 'languages',
-				potHeaders: {
-					'report-msgid-bugs-to': '',
-					'language-team': 'LANGUAGE <EMAIL@ADDRESS>'
+					],
+					tasks: ['sass', 'rtlcss', 'postcss', 'cssmin']
 				}
 			},
-			dist: {
+
+			// Generate POT files.
+			makepot: {
 				options: {
-					potFilename: 'wp-frontend-delete-account.pot',
-					exclude: [
+					type: 'wp-plugin',
+					domainPath: 'languages',
+					potHeaders: {
+						'report-msgid-bugs-to': '',
+						'language-team': 'LANGUAGE <EMAIL@ADDRESS>'
+					}
+				},
+				dist: {
+					options: {
+						potFilename: 'wp-frontend-delete-account.pot',
+						exclude: [
 						'vendor/.*'
-					]
+						]
+					}
 				}
-			}
-		},
-
-		// Add Textdomain.
-		addtextdomain: {
-			options: {
-				textdomain: '<%= pkg.name %>',
-				updateDomains: ['wp-frontend-delete-account']
 			},
-			target: {
-				files: {
-					src: [
+
+			// Add Textdomain.
+			addtextdomain: {
+				options: {
+					textdomain: '<%= pkg.name %>',
+					updateDomains: ['wp-frontend-delete-account']
+				},
+				target: {
+					files: {
+						src: [
 						'**/*.php',         // Include all files
 						'!node_modules/**', // Exclude node_modules/
 						'!vendor/**'        // Exclude vendor/
-					]
+						]
+					}
 				}
-			}
-		},
+			},
 
-		// Check textdomain errors.
-		checktextdomain: {
-			options: {
-				text_domain: '<%= pkg.name %>',
-				keywords: [
+			// Check textdomain errors.
+			checktextdomain: {
+				options: {
+					text_domain: '<%= pkg.name %>',
+					keywords: [
 					'__:1,2d',
 					'_e:1,2d',
 					'_x:1,2c,3d',
@@ -162,61 +181,63 @@ module.exports = function( grunt ){
 					'_nx:1,2,4c,5d',
 					'_n_noop:1,2,3d',
 					'_nx_noop:1,2,3c,4d'
-				]
-			},
-			files: {
-				src: [
+					]
+				},
+				files: {
+					src: [
 					'**/*.php',               // Include all files
 					'!includes/libraries/**', // Exclude libraries/
 					'!node_modules/**',       // Exclude node_modules/
 					'!vendor/**'              // Exclude vendor/
-				],
-				expand: true
-			}
-		},
-
-		// PHP Code Sniffer.
-		phpcs: {
-			options: {
-				bin: 'vendor/bin/phpcs'
+					],
+					expand: true
+				}
 			},
-			dist: {
-				src:  [
+
+			// PHP Code Sniffer.
+			phpcs: {
+				options: {
+					bin: 'vendor/bin/phpcs'
+				},
+				dist: {
+					src:  [
 					'**/*.php',               // Include all files
 					'!includes/libraries/**', // Exclude libraries/
 					'!node_modules/**',       // Exclude node_modules/
 					'!vendor/**'              // Exclude vendor/
-				]
-			}
-		},
+					]
+				}
+			},
 
-		// Autoprefixer.
-		postcss: {
-			options: {
-				processors: [
-					require( 'autoprefixer' )({
-						browsers: [
+			// Autoprefixer.
+			postcss: {
+				options: {
+					processors: [
+					require( 'autoprefixer' )(
+						{
+							browsers: [
 							'> 0.1%',
 							'ie 8',
 							'ie 9'
-						]
-					})
+							]
+						}
+					)
 				]
-			},
-			dist: {
-				src: [
+				},
+				dist: {
+					src: [
 					'<%= dirs.css %>/*.css'
-				]
-			}
-		},
-
-		// Compress files and folders.
-		compress: {
-			options: {
-				archive: '<%= pkg.name %>.zip'
+					]
+				}
 			},
-			files: {
-				src: [
+
+			// Compress files and folders.
+			compress: {
+				options: {
+					archive: '<%= pkg.name %>.zip'
+				},
+				files: {
+					src: [
 					'**',
 					'!.*',
 					'!*.md',
@@ -230,12 +251,13 @@ module.exports = function( grunt ){
 					'!node_modules/**',
 					'!package-lock.json',
 					'!vendor/composer/installers/**'
-				],
-				dest: '<%= pkg.name %>',
-				expand: true
+					],
+					dest: '<%= pkg.name %>',
+					expand: true
+				}
 			}
 		}
-	});
+	);
 
 	// Load NPM tasks to be used here
 	grunt.loadNpmTasks( 'grunt-sass' );
@@ -250,31 +272,48 @@ module.exports = function( grunt ){
 	grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-contrib-compress' );
+	grunt.loadNpmTasks( 'grunt-replace' );
 
 	// Register tasks
-	grunt.registerTask( 'default', [
+	grunt.registerTask(
+		'default',
+		[
 		'css',
-		'i18n'
-	]);
+		'i18n',
+		'replace'
+		]
+	);
 
-	grunt.registerTask( 'css', [
+	grunt.registerTask(
+		'css',
+		[
 		'sass',
 		'postcss',
 		'cssmin'
-	]);
+		]
+	);
 
 	// Only an alias to 'default' task.
-	grunt.registerTask( 'dev', [
+	grunt.registerTask(
+		'dev',
+		[
 		'default'
-	]);
+		]
+	);
 
-	grunt.registerTask( 'zip', [
+	grunt.registerTask(
+		'zip',
+		[
 		'dev',
 		'compress'
-	]);
+		]
+	);
 
-	grunt.registerTask( 'i18n', [
+	grunt.registerTask(
+		'i18n',
+		[
 		'checktextdomain',
 		'makepot'
-	]);
+		]
+	);
 };

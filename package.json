@@ -29,6 +29,7 @@
     "grunt-contrib-watch": "~1.1.0",
     "grunt-phpcs": "~0.4.0",
     "grunt-postcss": "~0.9.0",
+    "grunt-replace": "^2.0.1",
     "grunt-rtlcss": "~2.0.1",
     "grunt-sass": "~3.0.1",
     "grunt-stylelint": "~0.10.1",
