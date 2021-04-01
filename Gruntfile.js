@@ -29,8 +29,8 @@ module.exports = function( grunt ){
 					options: {
 						patterns: [
 						{
-							match: 'foo',
-							replacement: 'bar'
+							match: '{version}',
+							replacement: '<%= pkg.version %>'
 						}
 						]
 					},
