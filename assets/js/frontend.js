@@ -58,9 +58,12 @@ jQuery( function( $ ) {
 
 					  		// On click on send email button on the modal.
 						    $("#wpfda-send-deactivation-email").click( function( e ) {
+
 						    	e.preventDefault();
 
 						    	this.value 		= wpfda_plugins_params.deleting;
+								this.disabled   = true;	// Disable the feedback button once email is sent to avoid duplicates.
+
 						    	var form 		= $("#wp-frontend-delete-account-send-deactivation-email");
 
 								var message		= form.find( ".row .col-75 textarea#message" ).val();
