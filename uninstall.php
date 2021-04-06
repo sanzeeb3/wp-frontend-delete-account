@@ -2,7 +2,7 @@
 /**
  * Uninstall WP Frontend Delete Account.
  *
- * @since @@{version}
+ * @since 1.5.2
  */
 
 // Exit if accessed directly.

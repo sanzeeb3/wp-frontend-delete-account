@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Frontend Delete Account package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Frontend Delete Account 1.5.0\n"
+"Project-Id-Version: WP Frontend Delete Account 1.5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-19 03:57:47+00:00\n"
+"POT-Creation-Date: 2021-04-06 12:50:15+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -108,105 +108,105 @@ msgstr ""
 msgid "<strong>Compatible</strong> with your version of WordPress"
 msgstr ""
 
-#: src/Backend.php:59
+#: src/Backend.php:61
 msgid "Deactivating..."
 msgstr ""
 
-#: src/Backend.php:60 src/Frontend.php:68
+#: src/Backend.php:62 src/Frontend.php:68
 msgid "Oops! Something went wrong"
 msgstr ""
 
-#: src/Backend.php:61 src/Emails/Emails.php:28 src/Emails/Emails.php:170
+#: src/Backend.php:63 src/Emails/Emails.php:28 src/Emails/Emails.php:170
 msgid "Enable this email"
 msgstr ""
 
-#: src/Backend.php:62 src/Emails/Emails.php:28
+#: src/Backend.php:64 src/Emails/Emails.php:28
 msgid "Disable this email"
 msgstr ""
 
-#: src/Backend.php:92
+#: src/Backend.php:94
 msgid "General"
 msgstr ""
 
-#: src/Backend.php:93
+#: src/Backend.php:95
 msgid "Emails"
 msgstr ""
 
-#: src/Backend.php:125
+#: src/Backend.php:129
 msgid "General Settings"
 msgstr ""
 
-#: src/Backend.php:133
+#: src/Backend.php:137
 msgid "Load Assets Globally"
 msgstr ""
 
-#: src/Backend.php:141
+#: src/Backend.php:145
 msgid "Title"
 msgstr ""
 
-#: src/Backend.php:147
+#: src/Backend.php:151
 msgid "Button Label"
 msgstr ""
 
-#: src/Backend.php:153
+#: src/Backend.php:157
 msgid "Redirect URL"
 msgstr ""
 
-#: src/Backend.php:155
+#: src/Backend.php:159
 msgid "Leave empty for same page redirect."
 msgstr ""
 
-#: src/Backend.php:160
+#: src/Backend.php:164
 msgid "Attribute all contents to:"
 msgstr ""
 
-#: src/Backend.php:163 src/Backend.php:177
+#: src/Backend.php:167 src/Backend.php:182
 msgid "--None--"
 msgstr ""
 
-#: src/Backend.php:174
+#: src/Backend.php:179
 msgid "Security method before deleting:"
 msgstr ""
 
-#: src/Backend.php:178
+#: src/Backend.php:183
 msgid "Password"
 msgstr ""
 
-#: src/Backend.php:179
+#: src/Backend.php:184
 msgid "Custom Captcha"
 msgstr ""
 
-#: src/Backend.php:184
+#: src/Backend.php:189
 msgid "Confirmation Text"
 msgstr ""
 
-#: src/Backend.php:191
+#: src/Backend.php:196
 msgid "Captcha Question"
 msgstr ""
 
-#: src/Backend.php:198
+#: src/Backend.php:203
 msgid "Captcha Answer"
 msgstr ""
 
-#: src/Backend.php:218
+#: src/Backend.php:223
 msgid "Dismiss"
 msgstr ""
 
-#: src/Backend.php:329
+#: src/Backend.php:335
 msgid ""
 "Hey, would you care to provide a deactivation feedback? This is completely "
 "anonymous. "
 msgstr ""
 
-#: src/Backend.php:336
+#: src/Backend.php:342
 msgid "Skip and deactivate"
 msgstr ""
 
-#: src/Backend.php:427
+#: src/Backend.php:436
 msgid "Whoopee! 😀"
 msgstr ""
 
-#: src/Backend.php:428
+#: src/Backend.php:437
 msgid ""
 "How's it going? I hope that you've found WP Frontend Delete Account "
 "helpful. Would you do me some favour and leave a <a "
@@ -219,15 +219,15 @@ msgid ""
 "word and boost my motivation?"
 msgstr ""
 
-#: src/Backend.php:431
+#: src/Backend.php:440
 msgid "Sure, I'd love to!"
 msgstr ""
 
-#: src/Backend.php:432
+#: src/Backend.php:441
 msgid "I need help!"
 msgstr ""
 
-#: src/Backend.php:433
+#: src/Backend.php:442
 msgid "Dismiss Forever."
 msgstr ""
 
