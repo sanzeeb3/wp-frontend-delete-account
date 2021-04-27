@@ -137,6 +137,7 @@ class Frontend {
 		wp_delete_user( $user_id, $attribute );
 
 		$this->send_emails( $user );
+		$this->delete_comments( $user_id );
 
 		do_action( 'wp_frontend_delete_account_process_complete', $user );
 
@@ -146,6 +147,27 @@ class Frontend {
 				'message' => esc_html__( 'Deleting...', 'wp-frontend-delete-account' ),
 			)
 		);
+	}
+
+	/**
+	 * Delete user's comments if the settings is enabled.
+	 *
+	 * @since  @@{version}
+	 *
+	 */
+	public function delete_comments( $user_id ) {
+
+		if ( 'on' === get_option( 'wpfda_delete_comments' ) ) {
+			include_once( ABSPATH . 'wp-admin/includes/comment.php' );
+
+			$comments = get_comments( array( 'user_id' => $user_id ) );
+
+			foreach ( $comments as $comment ) {
+
+				// Delete comments.
+				wp_delete_comment( $comment['comment_ID'] );
+			}
+		}
 	}
 
 	/**
