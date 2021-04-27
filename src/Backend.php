@@ -122,6 +122,7 @@ class Backend {
 		$captcha_question = get_option( 'wpfda_security_custom_captcha_question', 'Enter PERMANENTLY DELETE to confirm:' );
 		$captcha_answer   = get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' );
 		$load_assets      = get_option( 'wpfda_load_assets_globally' );
+		$delete_comments  = get_option( 'wpfda_delete_comments' );
 		$redirect_url     = get_option( 'wpfda_redirect_url' );
 		$users            = get_users();
 
@@ -138,6 +139,16 @@ class Backend {
 								<td>
 									<input type="hidden" name="wpfda_load_assets_globally" value="off" />
 									<input style="width:auto" type="checkbox" name="wpfda_load_assets_globally" class="wp-frontend-delete-account-load-assets-globally-inline" <?php checked( 'on', $load_assets ); ?> />
+									<i><?php echo esc_html__( 'Check this if only you have compatiblity/styling issues.', 'wp-frontend-delete-account' ); ?></i>
+						</tr>
+
+						<tr valign="top" class="wp-frontend-delete-account-delete-comments">
+							<th scope="row"><?php echo esc_html__( 'Delete Comments', 'wp-frontend-delete-account' ); ?></th>
+								<td>
+									<input type="hidden" name="wpfda_delete_comments" value="off" />
+									<input style="width:auto" type="checkbox" name="wpfda_delete_comments" class="wp-frontend-delete-account-delete-comments-inline" <?php checked( 'on', $delete_comments ); ?> />
+								<i><?php echo esc_html__( 'Delete all comments by users when they delete themselves.', 'wp-frontend-delete-account' ); ?></i>
+								</td>
 								</td>
 						</tr>
 
@@ -249,7 +260,7 @@ class Backend {
 				exit;
 			}
 
-			$options = array( 'wpfda_title', 'wpfda_button_label', 'wpfda_redirect_url', 'wpfda_attribute', 'wpfda_security', 'wpfda_security_password_text', 'wpfda_security_custom_captcha_question', 'wpfda_security_custom_captcha_answer', 'wpfda_load_assets_globally', 'wpfda_email_receipent', 'wpfda_feedback_email_receipent', 'wpfda_enable_user_email', 'wpfda_enable_admin_email', 'wpfda_user_email_subject', 'wpfda_admin_email_subject', 'wpfda_enable_feedback_email', 'wpfda_feedback_email_subject' );
+			$options = array( 'wpfda_title', 'wpfda_button_label', 'wpfda_redirect_url', 'wpfda_attribute', 'wpfda_security', 'wpfda_security_password_text', 'wpfda_security_custom_captcha_question', 'wpfda_security_custom_captcha_answer', 'wpfda_load_assets_globally', 'wpfda_delete_comments', 'wpfda_email_receipent', 'wpfda_feedback_email_receipent', 'wpfda_enable_user_email', 'wpfda_enable_admin_email', 'wpfda_user_email_subject', 'wpfda_admin_email_subject', 'wpfda_enable_feedback_email', 'wpfda_feedback_email_subject' );
 
 			foreach ( $options as $option ) {
 				if ( isset( $_POST[ $option ] ) ) {

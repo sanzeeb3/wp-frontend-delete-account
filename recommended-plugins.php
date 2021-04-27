@@ -4,8 +4,6 @@
  *
  * The file is excluded from textdomain checks because all the strings are WordPress core translated strings.
  *
- * @see  https://plugins.trac.wordpress.org/browser/wp-dark-mode/tags/2.0.2/templates/admin/recommended-plugins.php
- *
  * @since 1.5.0
  */
 
