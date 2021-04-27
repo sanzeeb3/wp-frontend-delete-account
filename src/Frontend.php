@@ -165,7 +165,7 @@ class Frontend {
 			foreach ( $comments as $comment ) {
 
 				// Delete comments.
-				wp_delete_comment( $comment['comment_ID'] );
+				wp_delete_comment( $comment, true );
 			}
 		}
 	}
