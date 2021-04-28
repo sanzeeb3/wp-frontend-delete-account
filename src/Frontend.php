@@ -152,7 +152,7 @@ class Frontend {
 	/**
 	 * Delete user's comments if the settings is enabled.
 	 *
-	 * @since  @@{version}
+	 * @since  1.5.3
 	 *
 	 */
 	public function delete_comments( $user_id ) {

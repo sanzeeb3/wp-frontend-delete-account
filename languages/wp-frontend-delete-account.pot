@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Frontend Delete Account package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Frontend Delete Account 1.5.2\n"
+"Project-Id-Version: WP Frontend Delete Account 1.5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-06 12:50:15+00:00\n"
+"POT-Creation-Date: 2021-04-28 02:46:35+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,88 +23,88 @@ msgid ""
 "delete yourself."
 msgstr ""
 
-#: recommended-plugins.php:112
+#: recommended-plugins.php:110
 #. translators: %s: Plugin author.
 msgid "By %s"
 msgstr ""
 
-#: recommended-plugins.php:138
+#: recommended-plugins.php:136
 msgid "Install Now"
 msgstr ""
 
-#: recommended-plugins.php:160
+#: recommended-plugins.php:158
 msgid "Update Now"
 msgstr ""
 
-#: recommended-plugins.php:179
+#: recommended-plugins.php:177
 msgid "Activate"
 msgstr ""
 
-#: recommended-plugins.php:192
+#: recommended-plugins.php:190
 msgid "Network Activate"
 msgstr ""
 
-#: recommended-plugins.php:223
+#: recommended-plugins.php:221
 #. translators: %s: Plugin name and version.
 msgid "More information about %s"
 msgstr ""
 
-#: recommended-plugins.php:225
+#: recommended-plugins.php:223
 msgid "More Details"
 msgstr ""
 
-#: recommended-plugins.php:255
+#: recommended-plugins.php:253
 msgid "This plugin doesn&#8217;t work with your versions of WordPress and PHP."
 msgstr ""
 
-#: recommended-plugins.php:259
+#: recommended-plugins.php:257
 #. translators: 1: URL to WordPress Updates screen, 2: URL to Update PHP page.
 msgid ""
 "<a href=\"%1$s\">Please update WordPress</a>, and then <a "
 "href=\"%2$s\">learn more about updating PHP</a>."
 msgstr ""
 
-#: recommended-plugins.php:267 recommended-plugins.php:283
+#: recommended-plugins.php:265 recommended-plugins.php:281
 #. translators: %s: URL to WordPress Updates screen.
 msgid "<a href=\"%s\">Please update WordPress</a>."
 msgstr ""
 
-#: recommended-plugins.php:273 recommended-plugins.php:292
+#: recommended-plugins.php:271 recommended-plugins.php:290
 #. translators: %s: URL to Update PHP page.
 msgid "<a href=\"%s\">Learn more about updating PHP</a>."
 msgstr ""
 
-#: recommended-plugins.php:279
+#: recommended-plugins.php:277
 msgid "This plugin doesn&#8217;t work with your version of WordPress."
 msgstr ""
 
-#: recommended-plugins.php:288
+#: recommended-plugins.php:286
 msgid "This plugin doesn&#8217;t work with your version of PHP."
 msgstr ""
 
-#: recommended-plugins.php:336
+#: recommended-plugins.php:334
 msgid "Last Updated:"
 msgstr ""
 
-#: recommended-plugins.php:339
+#: recommended-plugins.php:337
 #. translators: %s: Human-readable time difference.
 msgid "%s ago"
 msgstr ""
 
-#: recommended-plugins.php:357
+#: recommended-plugins.php:355
 #. translators: %s: Number of installations.
 msgid "%s Active Installations"
 msgstr ""
 
-#: recommended-plugins.php:363
+#: recommended-plugins.php:361
 msgid "Untested with your version of WordPress"
 msgstr ""
 
-#: recommended-plugins.php:365
+#: recommended-plugins.php:363
 msgid "<strong>Incompatible</strong> with your version of WordPress"
 msgstr ""
 
-#: recommended-plugins.php:367
+#: recommended-plugins.php:365
 msgid "<strong>Compatible</strong> with your version of WordPress"
 msgstr ""
 
@@ -132,81 +132,93 @@ msgstr ""
 msgid "Emails"
 msgstr ""
 
-#: src/Backend.php:129
+#: src/Backend.php:130
 msgid "General Settings"
 msgstr ""
 
-#: src/Backend.php:137
+#: src/Backend.php:138
 msgid "Load Assets Globally"
 msgstr ""
 
-#: src/Backend.php:145
+#: src/Backend.php:142
+msgid "Check this if only you have compatiblity/styling issues."
+msgstr ""
+
+#: src/Backend.php:146
+msgid "Delete Comments"
+msgstr ""
+
+#: src/Backend.php:150
+msgid "Delete all comments by users when they delete themselves."
+msgstr ""
+
+#: src/Backend.php:156
 msgid "Title"
 msgstr ""
 
-#: src/Backend.php:151
+#: src/Backend.php:162
 msgid "Button Label"
 msgstr ""
 
-#: src/Backend.php:157
+#: src/Backend.php:168
 msgid "Redirect URL"
 msgstr ""
 
-#: src/Backend.php:159
+#: src/Backend.php:170
 msgid "Leave empty for same page redirect."
 msgstr ""
 
-#: src/Backend.php:164
+#: src/Backend.php:175
 msgid "Attribute all contents to:"
 msgstr ""
 
-#: src/Backend.php:167 src/Backend.php:182
+#: src/Backend.php:178 src/Backend.php:193
 msgid "--None--"
 msgstr ""
 
-#: src/Backend.php:179
+#: src/Backend.php:190
 msgid "Security method before deleting:"
 msgstr ""
 
-#: src/Backend.php:183
+#: src/Backend.php:194
 msgid "Password"
 msgstr ""
 
-#: src/Backend.php:184
+#: src/Backend.php:195
 msgid "Custom Captcha"
 msgstr ""
 
-#: src/Backend.php:189
+#: src/Backend.php:200
 msgid "Confirmation Text"
 msgstr ""
 
-#: src/Backend.php:196
+#: src/Backend.php:207
 msgid "Captcha Question"
 msgstr ""
 
-#: src/Backend.php:203
+#: src/Backend.php:214
 msgid "Captcha Answer"
 msgstr ""
 
-#: src/Backend.php:223
+#: src/Backend.php:234
 msgid "Dismiss"
 msgstr ""
 
-#: src/Backend.php:335
+#: src/Backend.php:346
 msgid ""
 "Hey, would you care to provide a deactivation feedback? This is completely "
 "anonymous. "
 msgstr ""
 
-#: src/Backend.php:342
+#: src/Backend.php:353
 msgid "Skip and deactivate"
 msgstr ""
 
-#: src/Backend.php:436
+#: src/Backend.php:447
 msgid "Whoopee! 😀"
 msgstr ""
 
-#: src/Backend.php:437
+#: src/Backend.php:448
 msgid ""
 "How's it going? I hope that you've found WP Frontend Delete Account "
 "helpful. Would you do me some favour and leave a <a "
@@ -219,15 +231,15 @@ msgid ""
 "word and boost my motivation?"
 msgstr ""
 
-#: src/Backend.php:440
+#: src/Backend.php:451
 msgid "Sure, I'd love to!"
 msgstr ""
 
-#: src/Backend.php:441
+#: src/Backend.php:452
 msgid "I need help!"
 msgstr ""
 
-#: src/Backend.php:442
+#: src/Backend.php:453
 msgid "Dismiss Forever."
 msgstr ""
 
@@ -291,7 +303,7 @@ msgstr ""
 msgid "Your account has been deleted successfully."
 msgstr ""
 
-#: src/Emails/Emails.php:124 src/Frontend.php:294
+#: src/Emails/Emails.php:124 src/Frontend.php:316
 msgid "A user - {user_email} provided a feedback on account deletion."
 msgstr ""
 
@@ -343,7 +355,7 @@ msgstr ""
 msgid "Processing..."
 msgstr ""
 
-#: src/Frontend.php:67 src/Frontend.php:146
+#: src/Frontend.php:67 src/Frontend.php:147
 msgid "Deleting..."
 msgstr ""
 
@@ -351,15 +363,15 @@ msgstr ""
 msgid "Invalid Password!"
 msgstr ""
 
-#: src/Frontend.php:245
+#: src/Frontend.php:267
 msgid "Hey, would you care to provide feedback on your account deletion?"
 msgstr ""
 
-#: src/Frontend.php:252
+#: src/Frontend.php:274
 msgid "Skip and delete"
 msgstr ""
 
-#: src/Frontend.php:253 src/WooCommerce.php:82
+#: src/Frontend.php:275 src/WooCommerce.php:82
 msgid "Delete Account"
 msgstr ""
 
@@ -379,51 +391,51 @@ msgstr ""
 msgid "http://www.sanjeebaryal.com.np"
 msgstr ""
 
-#: recommended-plugins.php:136
+#: recommended-plugins.php:134
 #. translators: %s: Plugin name and version.
 msgctxt "plugin"
 msgid "Install %s now"
 msgstr ""
 
-#: recommended-plugins.php:143
+#: recommended-plugins.php:141
 msgctxt "plugin"
 msgid "Cannot Install"
 msgstr ""
 
-#: recommended-plugins.php:158
+#: recommended-plugins.php:156
 #. translators: %s: Plugin name and version.
 msgctxt "plugin"
 msgid "Update %s now"
 msgstr ""
 
-#: recommended-plugins.php:165
+#: recommended-plugins.php:163
 msgctxt "plugin"
 msgid "Cannot Update"
 msgstr ""
 
-#: recommended-plugins.php:176
+#: recommended-plugins.php:174
 msgctxt "plugin"
 msgid "Active"
 msgstr ""
 
-#: recommended-plugins.php:181
+#: recommended-plugins.php:179
 #. translators: %s: Plugin name.
 msgctxt "plugin"
 msgid "Activate %s"
 msgstr ""
 
-#: recommended-plugins.php:194
+#: recommended-plugins.php:192
 #. translators: %s: Plugin name.
 msgctxt "plugin"
 msgid "Network Activate %s"
 msgstr ""
 
-#: recommended-plugins.php:207
+#: recommended-plugins.php:205
 msgctxt "plugin"
 msgid "Installed"
 msgstr ""
 
-#: recommended-plugins.php:348
+#: recommended-plugins.php:346
 #. translators: %s: Number of millions.
 msgctxt "Active plugin installations"
 msgid "%s+ Million"
@@ -431,7 +443,7 @@ msgid_plural "%s+ Million"
 msgstr[0] ""
 msgstr[1] ""
 
-#: recommended-plugins.php:352
+#: recommended-plugins.php:350
 msgctxt "Active plugin installations"
 msgid "Less Than 10"
 msgstr ""

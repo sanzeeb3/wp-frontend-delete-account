@@ -4,7 +4,7 @@ Tags: delete-account, delete-account-from-frontend, frontend-delete, remove-acco
 Requires at least: 4.0
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 1.5.2
+Stable tag: 1.5.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -18,6 +18,7 @@ For non-store sites, add the 'Delete Account' tab content anywhere with shortcod
 
 # Feature and Options:
 * Reassign the posts by deleted user.
+* Optinally delete comments by the user.
 * Gutenberg block.
 * Shortcode [wp_frontend_delete_account]
 
@@ -54,6 +55,9 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 3. Gutenberg Block View
 
 == Changelog ==
+
+= 1.5.3 - 04/28/2021 =
+* Feature - Optinally delete comments
 
 = 1.5.2 - 04/06/2021 =
 * Enhancement - Remove plugin data on plugin delete
