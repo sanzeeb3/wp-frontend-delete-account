@@ -28,9 +28,6 @@ class Backend {
 		add_action( 'wp_ajax_wpfda_deactivation_email', array( $this, 'deactivation_email' ) );
 		add_action( 'wp_ajax_wpfda_email_status', array( $this, 'email_status' ) );
 		add_action( 'admin_print_scripts', array( $this, 'remove_notices' ) );
-		add_action( 'in_admin_header', array( $this, 'review_notice' ) );
-		add_action( 'wp_ajax_wp_frontend_delete_account_dismiss_review_notice', array( $this, 'dismiss_review_notice' ) );
-		add_action( 'wp_ajax_wp_frontend_delete_account_dismiss_recommended_plugins', array( $this, 'dismiss_recommended_plugins' ) );
 	}
 
 	/**
@@ -57,7 +54,6 @@ class Backend {
 					'ajax_url'           => admin_url( 'admin-ajax.php' ),
 					'deactivation_nonce' => wp_create_nonce( 'deactivation-notice' ),
 					'status_nonce'       => wp_create_nonce( 'email-status' ),
-					'review_nonce'       => wp_create_nonce( 'review-notice' ),
 					'deactivating'       => __( 'Deactivating...', 'wp-frontend-delete-account' ),
 					'wrong'              => esc_html__( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
 					'enable_email'       => esc_html__( 'Enable this email', 'wp-frontend-delete-account' ),
@@ -226,19 +222,6 @@ class Backend {
 
 				</form>
 			</div>
-
-			<?php
-			if ( get_option( 'wpfda_recommended_plugins_dismissed' ) !== 'yes' ) {
-				?>
-					<div class="wp-frontend-delete-account-recommended-plugins">
-						<a class="wpfda-recommended-plugins-dismiss" href="#"><?php echo esc_html__( 'Dismiss', 'wp-frontend-delete-account' ); ?></a>
-						<?php include_once WPFDA_PLUGIN_DIR . '/recommended-plugins.php'; ?>
-					</div>
-				<?php
-			}
-			?>
-		</div>
-
 		<?php
 	}
 
@@ -403,89 +386,6 @@ class Backend {
 	}
 
 	/**
-	 * Outputs the Review notice on admin header.
-	 *
-	 * @since 1.3.2
-	 */
-	function review_notice() {
-
-		global $current_screen;
-
-		// Show only to Admins
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-
-		$notice_dismissed = get_option( 'wpfda_review_notice_dismissed', 'no' );
-
-		if ( 'yes' == $notice_dismissed ) {
-			return;
-		}
-
-		if ( ! empty( $current_screen->id ) && $current_screen->id !== 'settings_page_wp-frontend-delete-account' ) {
-			return;
-		}
-
-		$is_emails_section = isset( $_GET['section'] ) && $_GET['section'] === 'emails' ? true : false;
-
-		/**
-		 * Only display review notice on the Emails section. Avoid too much distraction.
-		 *
-		 * @since  1.5.0.
-		 */
-		if ( ! $is_emails_section ) {
-			return;
-		}
-
-		?>
-			<div id="wp-frontend-delete-account-review-notice" class="notice notice-info wp-frontend-delete-account-review-notice">
-				<div class="wp-frontend-delete-account-review-thumbnail">
-					<img src="<?php echo plugins_url( 'assets/logo.png', WPFDA_PLUGIN_FILE ); ?>" alt="">
-				</div>
-				<div class="wp-frontend-delete-account-review-text">
-
-						<h3><?php _e( 'Whoopee! 😀', 'wp-frontend-delete-account' ); ?></h3>
-						<p><?php _e( 'How\'s it going? I hope that you\'ve found WP Frontend Delete Account helpful. Would you do me some favour and leave a <a href="https://wordpress.org/support/plugin/wp-frontend-delete-account/reviews/?filter=5#new-post" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> review on <a href="https://wordpress.org/support/plugin/wp-frontend-delete-account/reviews/?filter=5#new-post" target="_blank"><strong>WordPress.org</strong></a> to help us spread the word and boost my motivation?', 'wp-frontend-delete-account' ); ?></p>
-
-					<ul class="wp-frontend-delete-account-review-ul">
-						<li><a class="button button-primary" href="https://wordpress.org/support/plugin/wp-frontend-delete-account/reviews/?filter=5#new-post" target="_blank"><span class="dashicons dashicons-external"></span><?php _e( 'Sure, I\'d love to!', 'wp-frontend-delete-account' ); ?></a></li>
-						<li><a class="button button-link" target="_blank" href="http://sanjeebaryal.com.np/contact"><span class="dashicons dashicons-sos"></span><?php _e( 'I need help!', 'wp-frontend-delete-account' ); ?></a></li>
-						<li><a href="#" class="button button-link notice-dismiss"><span class="dashicons dashicons-dismiss"></span><?php _e( 'Dismiss Forever.', 'wp-frontend-delete-account' ); ?></a></li>
-					 </ul>
-				</div>
-			</div>
-		<?php
-	}
-
-	/**
-	 * Dismiss the reveiw notice on dissmiss click
-	 *
-	 * @since 1.3.2
-	 */
-	public function dismiss_review_notice() {
-
-		check_admin_referer( 'review-notice', 'security' );
-
-		if ( ! empty( $_POST['dismissed'] ) ) {
-			update_option( 'wpfda_review_notice_dismissed', 'yes' );
-		}
-	}
-
-	/**
-	 * Dismiss the reveiw notice on dissmiss click
-	 *
-	 * @since 1.5.0
-	 */
-	public function dismiss_recommended_plugins() {
-
-		check_admin_referer( 'review-notice', 'security' );
-
-		if ( ! empty( $_POST['dismissed'] ) ) {
-			update_option( 'wpfda_recommended_plugins_dismissed', 'yes' );
-		}
-	}
-
-	/**
 	 * Removes the admin notices on WP Frontend Delete Account settings page.
 	 *
 	 * @since 1.0.0
@@ -494,7 +394,7 @@ class Backend {
 
 		global $wp_filter;
 
-		if ( ! isset( $_REQUEST['page'] ) || 'WP Frontend Delete Account' !== $_REQUEST['page'] ) {
+		if ( ! isset( $_REQUEST['page'] ) || 'wp-frontend-delete-account' !== $_REQUEST['page'] ) {
 			return;
 		}
 
