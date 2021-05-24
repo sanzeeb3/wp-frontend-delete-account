@@ -56,6 +56,9 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 
 == Changelog ==
 
+= 1.5.4 - xx/xx/2021 =
+* Enhancement - Remove unnecssary review notice and recommended plugins.
+
 = 1.5.3 - 04/28/2021 =
 * Feature - Optinally delete comments
 
