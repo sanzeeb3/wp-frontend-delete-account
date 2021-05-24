@@ -134,10 +134,12 @@ class Frontend {
 		do_action( 'wp_frontend_delete_account_process', $user );
 
 		require_once ABSPATH . 'wp-admin/includes/user.php';
-		wp_delete_user( $user_id, $attribute );
+		$deleted = wp_delete_user( $user_id, $attribute );
 
-		$this->send_emails( $user );
-		$this->delete_comments( $user_id );
+		if ( $deleted ) {
+			$this->send_emails( $user );
+			$this->delete_comments( $user_id );
+		}
 
 		do_action( 'wp_frontend_delete_account_process_complete', $user );
 

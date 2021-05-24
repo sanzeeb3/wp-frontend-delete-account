@@ -4,12 +4,17 @@
 jQuery( function( $ ) {
 	jQuery('body').on('click', '.wpfda-delete-account-container .wpf-delete-account-button button', function(e) {
     	    e.preventDefault();
+			$btn = this;
+			$btn.disabled = true;
+
 			var error =  $(this).parent().parent().siblings( '.wpfda-error' ).find('span');
+
     	    if( 'custom_captcha' === wpfda_plugins_params.security ) {
     	    	var value = $('.wpfda-delete-account-container').find('.wpfda-custom-captcha').find('input').val();
 				if( value != wpfda_plugins_params.captcha_answer ) {
 					error.html('').append('<i>'+ wpfda_plugins_params.incorrect_answer +'</i>');
-  				    return;
+					$btn.disabled = false;
+					return;
 				} else {
 					error.html('').append('<i>'+ wpfda_plugins_params.processing +'</i>');
 				}
@@ -19,7 +24,8 @@ jQuery( function( $ ) {
 
     	    	if( value == '' ) {
     	    		error.html('').append('<i>'+ wpfda_plugins_params.empty_password +'</i>');
-    	    		return;
+					$btn.disabled = false;
+					return;
     	    	} else {
 					error.html('').append('<i>'+ wpfda_plugins_params.processing +'</i>');
 				}
@@ -37,6 +43,7 @@ jQuery( function( $ ) {
 
 				if( response.success === false ) {
 					error.html('').append('<i>'+ response.data.message +'</i>');
+					$btn.disabled = false;
 					return;
 				} else if( response.success === true ) {
 					error.html('').append('<i>'+ response.message +'</i>');
