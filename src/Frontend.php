@@ -42,10 +42,9 @@ class Frontend {
 
 		if ( ( defined( 'WC_VERSION' ) && is_account_page() ) || ( function_exists( 'has_block' ) && has_block( 'wp-frontend-delete-account/delete-account-content' ) ) || $has_shortcode || 'on' === get_option( 'wpfda_load_assets_globally' ) ) {
 
-			$suffix   = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 			$security = get_option( 'wpfda_security', 'password' );
 
-			wp_enqueue_script( 'wpfda-delete-account-frontend', plugins_url( 'assets/js/frontend' . $suffix . '.js', WPFDA_PLUGIN_FILE ), array( 'jquery' ), WPFDA_VERSION, false );
+			wp_enqueue_script( 'wpfda-delete-account-frontend', plugins_url( 'assets/js/frontend.js', WPFDA_PLUGIN_FILE ), array( 'jquery' ), WPFDA_VERSION, false );
 			wp_enqueue_style( 'wpfda-frontend-css', plugins_url( 'assets/css/frontend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
 
 			$security       = get_option( 'wpfda_security', 'password' );
