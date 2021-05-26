@@ -316,8 +316,8 @@ class Backend {
 			<!-- The Modal -->
 			<div id="wp-frontend-delete-account-modal" class="wp-frontend-delete-account-modal">
 
-				 <!-- Modal content -->
-				 <div class="wp-frontend-delete-account-modal-content">
+				<!-- Modal content -->
+				<div class="wp-frontend-delete-account-modal-content">
 					<div class="wp-frontend-delete-account-modal-header">
 					</div>
 
@@ -326,14 +326,14 @@ class Backend {
 							<form method="post" id="wp-frontend-delete-account-send-deactivation-email">
 
 								<div class="row">
-										<h3 for=""><?php echo __( 'Hey, would you care to provide a deactivation feedback? This is completely anonymous. ', 'wp-frontend-delete-account' ); ?></h3>
+										<h3 for=""><?php echo esc_html__( 'Hey, would you care to provide a deactivation feedback? This is completely anonymous. ', 'wp-frontend-delete-account' ); ?></h3>
 									<div class="col-75">
 										<textarea id="message" name="message" placeholder="Deactivation Reason?" style="height:150px"></textarea>
 									</div>
 								</div>
 								<div class="row">
 										<?php wp_nonce_field( 'wpfda_deactivation_email', 'wpfda_deactivation_email' ); ?>
-										<a href="<?php echo $deactivate_url; ?>"><?php echo __( 'Skip and deactivate', 'wp-frontend-delete-account' ); ?>
+										<a href="<?php echo $deactivate_url; ?>"><?php echo esc_html__( 'Skip and deactivate', 'wp-frontend-delete-account' ); ?>
 										<input type="submit" id="wpfda-send-deactivation-email" value="Deactivate">
 								</div>
 							</form>
