@@ -9,10 +9,25 @@
 	<exclude-pattern>\.idea/*</exclude-pattern>
 	<exclude-pattern>assets/*</exclude-pattern>
 
+	<arg value="ps"/>
+	<arg name="colors"/>
+	<arg name="parallel" value="100"/>
+	<arg name="extensions" value="php"/>
+	<arg name="cache" value=".phpcs.cache"/>
+
 	<rule ref="WordPress">
 		<!-- PSR4 -->
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
-    	<exclude name="WordPress.Commenting.FileComment.Missing"/>
+	</rule>
+
+	<rule ref="Squiz.Commenting">
+		<exclude name="Squiz.Commenting.FileComment.Missing" />
+	</rule>
+
+	<rule ref="Generic.Metrics.NestingLevel">
+		<properties>
+			<property name="absoluteNestingLevel" value="3"/>
+		</properties>
 	</rule>
 </ruleset>
