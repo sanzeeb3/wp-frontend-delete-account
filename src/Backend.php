@@ -278,7 +278,7 @@ class Backend {
 				);
 
 				update_option( 'wpfda_' . $email . '_email_message', $editor );
-			}
+			}//end if
 		}
 	}
 
@@ -323,7 +323,7 @@ class Backend {
 
 					<div class="wp-frontend-delete-account-modal-body">
 						<div class="container">
-							  <form method="post" id="wp-frontend-delete-account-send-deactivation-email">
+							<form method="post" id="wp-frontend-delete-account-send-deactivation-email">
 
 								<div class="row">
 										<h3 for=""><?php echo __( 'Hey, would you care to provide a deactivation feedback? This is completely anonymous. ', 'wp-frontend-delete-account' ); ?></h3>
@@ -336,12 +336,12 @@ class Backend {
 										<a href="<?php echo $deactivate_url; ?>"><?php echo __( 'Skip and deactivate', 'wp-frontend-delete-account' ); ?>
 										<input type="submit" id="wpfda-send-deactivation-email" value="Deactivate">
 								</div>
-						  </form>
+							</form>
 						</div>
 
 					<div class="wp-frontend-delete-account-modal-footer">
 					</div>
-				 </div>
+				</div>
 			</div>
 
 		<?php

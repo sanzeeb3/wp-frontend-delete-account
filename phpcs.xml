@@ -24,10 +24,4 @@
 	<rule ref="Squiz.Commenting">
 		<exclude name="Squiz.Commenting.FileComment.Missing" />
 	</rule>
-
-	<rule ref="Generic.Metrics.NestingLevel">
-		<properties>
-			<property name="absoluteNestingLevel" value="3"/>
-		</properties>
-	</rule>
 </ruleset>
