@@ -154,12 +154,11 @@ class Frontend {
 	 * Delete user's comments if the settings is enabled.
 	 *
 	 * @since  1.5.3
-	 *
 	 */
 	public function delete_comments( $user_id ) {
 
 		if ( 'on' === get_option( 'wpfda_delete_comments' ) ) {
-			include_once( ABSPATH . 'wp-admin/includes/comment.php' );
+			include_once ABSPATH . 'wp-admin/includes/comment.php';
 
 			$comments = get_comments( array( 'user_id' => $user_id ) );
 

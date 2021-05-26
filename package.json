@@ -9,6 +9,25 @@
   },
   "license": "GPL-3.0+",
   "main": "Gruntfile.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.php": [
+      "php -d display_errors=1 -l",
+      "composer run-script phpcs-pre-commit"
+    ],
+    "*.scss": [
+      "stylelint --syntax=scss --fix",
+      "git add"
+    ],
+    "!(*.min).js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "scripts": {
     "build": "cross-env BABEL_ENV=default NODE_ENV=production webpack",
     "dev": "cross-env BABEL_ENV=default webpack --watch"
@@ -29,7 +48,7 @@
     "grunt-contrib-watch": "~1.1.0",
     "grunt-phpcs": "~0.4.0",
     "grunt-postcss": "~0.9.0",
-    "grunt-replace": "^2.0.1",
+    "grunt-replace": "^2.0.2",
     "grunt-rtlcss": "~2.0.1",
     "grunt-sass": "~3.0.1",
     "grunt-stylelint": "~0.10.1",

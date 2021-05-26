@@ -10,6 +10,7 @@ project.properties
 *.sublime-project
 *.sublime-workspace
 .sublimelinterrc
+.phpcs.cache
 
 # Grunt
 /node_modules/
