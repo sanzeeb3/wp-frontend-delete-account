@@ -232,7 +232,7 @@ class Backend {
 	 *
 	 * @return void.
 	 */
-	public function save_settings() {
+	public function save_settings() {//phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
 
 		if ( isset( $_POST['wp_frontend_delete_account_settings_nonce'] ) ) {
 
@@ -252,7 +252,7 @@ class Backend {
 				}
 			}
 
-			$email = isset( $_GET['email'] ) ? sanitize_text_field( $_GET['email'] ) : '';
+			$email = isset( $_GET['email'] ) ? sanitize_text_field( wp_unslash( $_GET['email'] ) ) : '';
 
 			if ( isset( $_POST [ 'wpfda_' . $email . '_email_message' ] ) ) {
 				$editor = wp_kses(
@@ -279,21 +279,19 @@ class Backend {
 
 				update_option( 'wpfda_' . $email . '_email_message', $editor );
 			}//end if
-		}
+		}//end if
 	}
 
 	/**
 	 * Email status change from emails overview.
 	 *
 	 * @since  1.2.0
-	 *
-	 * @return
 	 */
 	public function email_status() {
 
 		check_admin_referer( 'email-status', 'security' );
 
-		$email  = isset( $_POST['email'] ) ? sanitize_text_field( $_POST['email'] ) : '';
+		$email  = isset( $_POST['email'] ) ? sanitize_text_field( wp_unslash( $_POST['email'] ) ) : '';
 		$enable = ! empty( $_POST['enable'] ) ? 'on' : 'off';
 
 		update_option( 'wpfda_enable_' . $email . '_email', $enable );
@@ -333,7 +331,7 @@ class Backend {
 								</div>
 								<div class="row">
 										<?php wp_nonce_field( 'wpfda_deactivation_email', 'wpfda_deactivation_email' ); ?>
-										<a href="<?php echo $deactivate_url; ?>"><?php echo esc_html__( 'Skip and deactivate', 'wp-frontend-delete-account' ); ?>
+										<a href="<?php echo esc_url( $deactivate_url ); ?>"><?php echo esc_html__( 'Skip and deactivate', 'wp-frontend-delete-account' ); ?>
 										<input type="submit" id="wpfda-send-deactivation-email" value="Deactivate">
 								</div>
 							</form>
@@ -347,7 +345,8 @@ class Backend {
 		<?php
 
 		$content = ob_get_clean();
-		wp_send_json( $content ); // WPCS: XSS OK.
+		wp_send_json( $content );
+		// WPCS: XSS OK.
 	}
 
 	/**
@@ -363,7 +362,7 @@ class Backend {
 
 		check_ajax_referer( 'wpfda_deactivation_email', 'security' );
 
-		$message = sanitize_textarea_field( wp_unslash( $_POST['message'] ) );
+		$message = isset( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '';
 
 		if ( ! empty( $message ) ) {
 
@@ -372,7 +371,8 @@ class Backend {
 				'method'  => 'POST',
 				'headers' => $headers,
 				'body'    => array(
-					'deactivation_feedback_secret_key' => 'deactivation_feedback_secret_key',    // Will do better one day!
+					// Will do better one day!
+					'deactivation_feedback_secret_key' => 'deactivation_feedback_secret_key',
 					'message'                          => $message,
 				),
 			);
@@ -390,11 +390,11 @@ class Backend {
 	 *
 	 * @since 1.0.0
 	 */
-	public function remove_notices() {
+	public function remove_notices() { //phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
 
 		global $wp_filter;
 
-		if ( ! isset( $_REQUEST['page'] ) || 'wp-frontend-delete-account' !== $_REQUEST['page'] ) {
+		if ( ! isset( $_REQUEST['page'] ) || 'wp-frontend-delete-account' !== $_REQUEST['page'] ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			return;
 		}
 

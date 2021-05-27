@@ -3,11 +3,11 @@
 namespace WPFrontendDeleteAccount;
 
 /**
- * @since  1.0.0
+ * Class for adding delete account tab in WooCommerce myaccount page.
+ *
+ * @since 1.0.0
  *
  * @since 1.2.0, changed class name from WPFDA_WooCommerce_Myaccount_Tab to WooCommerce with Namespace.
- *
- * Class for adding delete account tab in WooCommerce myaccount page.
  *
  * @class WooCommerce
  */
@@ -33,8 +33,6 @@ class WooCommerce {
 
 	/**
 	 * Register Delete Account Endpoint.
-	 *
-	 * @return Void.
 	 */
 	public function register_endpoint() {
 
@@ -56,7 +54,7 @@ class WooCommerce {
 	/**
 	 * Add new query var.
 	 *
-	 * @param array $vars vars,
+	 * @param array $vars vars.
 	 *
 	 * @return array.
 	 */
@@ -91,6 +89,7 @@ class WooCommerce {
 	 * @return  void.
 	 */
 	public function add_content() {
+		//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo wpf_delete_account_content();
 	}
 }

@@ -21,7 +21,21 @@
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
 	</rule>
 
+	<rule ref="Generic.Metrics.CyclomaticComplexity">
+		<properties>
+			<property name="complexity" value="5"/>
+			<property name="absoluteComplexity" value="7"/>
+		</properties>
+	</rule>
+
+	<rule ref="Generic.Metrics.NestingLevel">
+		<properties>
+			<property name="absoluteNestingLevel" value="4"/>
+		</properties>
+	</rule>
+
 	<rule ref="Squiz.Commenting">
 		<exclude name="Squiz.Commenting.FileComment.Missing" />
+		<exclude name="Squiz.Commenting.FileComment.MissingPackageTag" />
 	</rule>
 </ruleset>

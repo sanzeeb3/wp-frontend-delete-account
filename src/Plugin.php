@@ -3,7 +3,8 @@
 namespace WPFrontendDeleteAccount;
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit;
+	// Exit if accessed directly.
 }
 
 /**

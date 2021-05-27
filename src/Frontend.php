@@ -3,11 +3,11 @@
 namespace WPFrontendDeleteAccount;
 
 /**
- * @since  1.0.0
+ * Class for frontend tasks.
+ *
+ *  @since  1.0.0
  *
  * @since  1.2.0 changed classname "WPFDA_Frontend" to "Frontend" with namespace.
- *
- * Class for frontend tasks.
  *
  * @class Frontend
  */
@@ -68,7 +68,7 @@ class Frontend {
 					'current_user_email'  => wp_get_current_user()->user_email,
 				)
 			);
-		}
+		}//end if
 	}
 
 	/**
@@ -78,20 +78,20 @@ class Frontend {
 	 *
 	 * @return Void.
 	 */
-	public function confirm_delete() {
+	public function confirm_delete() { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.MaxExceeded
 		if ( isset( $_POST['security'] ) ) {
-			if ( ! wp_verify_nonce( $_POST['security'], 'wpfda_nonce' ) ) {
-				error_log( print_r( 'Nonce Error! - WP Frontend Delete Account', true ) );
+			if ( ! wp_verify_nonce( wp_unslash( $_POST['security'] ), 'wpfda_nonce' ) ) { //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				return;
 			}
 
 			$security       = get_option( 'wpfda_security', 'password' );
 			$captcha_answer = get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' );
 
-			if ( 'password' === $security || 'recaptcha_v2' === $security ) { // Backwards compatibility. Removing reCAPTCHA support since 1.1.0.
+			if ( 'password' === $security || 'recaptcha_v2' === $security ) {
+				// Backwards compatibility. Removing reCAPTCHA support since 1.1.0.
 				$user_id = get_current_user_id();
 				$user    = get_user_by( 'id', $user_id );
-				$pass    = isset( $_POST['value'] ) ? $_POST['value'] : '';
+				$pass    = isset( $_POST['value'] ) ? wp_unslash( $_POST['value'] ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 				if ( $user && wp_check_password( $pass, $user->data->user_pass, $user->ID ) ) {
 					$this->delete_user();
@@ -103,7 +103,7 @@ class Frontend {
 					);
 				}
 			} elseif ( 'custom_captcha' === $security ) {
-				$value = sanitize_text_field( $_POST['value'] );
+				$value = sanitize_text_field( wp_unslash( $_POST['value'] ) );
 
 				if ( $value === $captcha_answer ) {
 					$this->delete_user();
@@ -116,8 +116,8 @@ class Frontend {
 				}
 			} elseif ( 'none' === $security ) {
 				$this->delete_user();
-			}
-		}
+			}//end if
+		}//end if
 	}
 
 	/**
@@ -153,6 +153,8 @@ class Frontend {
 	/**
 	 * Delete user's comments if the settings is enabled.
 	 *
+	 * @param int $user_id User ID.
+	 *
 	 * @since  1.5.3
 	 */
 	public function delete_comments( $user_id ) {
@@ -172,6 +174,8 @@ class Frontend {
 
 	/**
 	 * Send emails to admin and user.
+	 *
+	 * @param obj $user An instance of user.
 	 *
 	 * @since  1.0.0
 	 *
@@ -211,26 +215,29 @@ class Frontend {
 	 *
 	 * Using WooCommerce sending options and templates for sites using WooCommerce.
 	 *
-	 * @since  1.5.0
+	 * @param string $to      Receipent's email address.
+	 * @param string $subject Subject of the email.
+	 * @param string $message Email content.
+	 * @param array  $header  Email header.
 	 *
-	 * @return bool
+	 * @since  1.5.0
 	 */
 	private function now_send( $to, $subject, $message, $header = array( 'Content-Type: text/html; charset=UTF-8' ) ) {
 
 		if ( defined( 'WC_VERSION' ) ) {
 
-			// Get woocommerce mailer from instance
+			// Get woocommerce mailer from instance.
 			$mailer = \WC()->mailer();
 
 			// Header Title.
 			$heading = \get_bloginfo( 'name' );
 
-			// Wrap message using woocommerce html email template
+			// Wrap message using woocommerce html email template.
 			$wrapped_message = $mailer->wrap_message( $heading, $message );
 
 			$wc_email = new \WC_Email();
 
-			// Style the wrapped message with woocommerce inline styles
+			// Style the wrapped message with woocommerce inline styles.
 			$message = $wc_email->style_inline( $wrapped_message );
 
 			$sent = $mailer->send( $to, $subject, $message );
@@ -238,7 +245,7 @@ class Frontend {
 		} else {
 
 			$sent = \wp_mail( $to, $subject, $message, $header );
-		}
+		}//end if
 	}
 
 	/**
@@ -254,39 +261,39 @@ class Frontend {
 			<!-- The Modal -->
 			<div id="wp-frontend-delete-account-modal" class="wp-frontend-delete-account-modal">
 
-				 <!-- Modal content -->
-				 <div class="wp-frontend-delete-account-modal-content">
+				<!-- Modal content -->
+				<div class="wp-frontend-delete-account-modal-content">
 					<div class="wp-frontend-delete-account-modal-header">
 					</div>
 
 					<div class="wp-frontend-delete-account-modal-body">
 						<div class="container">
-							  <form method="post" id="wp-frontend-delete-account-send-deactivation-email">
-
+							<form method="post" id="wp-frontend-delete-account-send-deactivation-email">
 								<div class="row">
-										<h3 for=""><?php echo apply_filters( 'wp_frontend_delete_account_delete_feedback_label', esc_html__( 'Hey, would you care to provide feedback on your account deletion?', 'wp-frontend-delete-account' ) ); ?></h3>
+										<h3 for=""><?php echo apply_filters( 'wp_frontend_delete_account_delete_feedback_label', esc_html__( 'Hey, would you care to provide feedback on your account deletion?', 'wp-frontend-delete-account' ) ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h3>
 									<div class="col-75">
-										<textarea id="message" name="message" placeholder="<?php echo apply_filters( 'wp_frontend_delete_account_delete_feedback_placeholder', esc_html( 'Account deletion reason?', 'wp-frontend-delete-account' ) ); ?>" style="height:150px"></textarea>
+										<textarea id="message" name="message" placeholder="<?php echo apply_filters( 'wp_frontend_delete_account_delete_feedback_placeholder', esc_html__( 'Account deletion reason?', 'wp-frontend-delete-account' ) ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" style="height:150px"></textarea>
 									</div>
 								</div>
 								<div class="row">
 										<?php wp_nonce_field( 'wpfda_delete_feedback_email', 'wpfda_delete_feedback_email' ); ?>
-										<a href=""><?php echo __( 'Skip and delete', 'wp-frontend-delete-account' ); ?>
+										<a href=""><?php echo esc_html__( 'Skip and delete', 'wp-frontend-delete-account' ); ?>
 										<input type="submit" id="wpfda-send-deactivation-email" value="<?php echo esc_html__( 'Delete Account', 'wp-frontend-delete-account' ); ?> ">
 								</div>
-						  </form>
+							</form>
 						</div>
 
 					<div class="wp-frontend-delete-account-modal-footer">
 					</div>
-				 </div>
+				</div>
 			</div>
 
 		<?php
 
 		$content = ob_get_clean();
 
-		wp_send_json( $content ); // WPCS: XSS OK.
+		wp_send_json( $content );
+		// WPCS: XSS OK.
 	}
 
 	/**
@@ -302,7 +309,7 @@ class Frontend {
 			return;
 		}
 
-		if ( ! wp_verify_nonce( $_POST['security'], 'wpfda_delete_feedback_email' ) ) {
+		if ( ! wp_verify_nonce( wp_unslash( $_POST['security'] ), 'wpfda_delete_feedback_email' ) ) { //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			return;
 		}
 
@@ -311,7 +318,7 @@ class Frontend {
 		}
 
 		$message    = sanitize_textarea_field( wp_unslash( $_POST['message'] ) );
-		$user_email = sanitize_email( $_POST['user_email'] );
+		$user_email = isset( $_POST['user_email'] ) ? sanitize_email( wp_unslash( $_POST['user_email'] ) ) : '';
 
 		$default_subject = esc_html__( 'A user - {user_email} provided a feedback on account deletion.', 'wp-frontend-delete-account' );
 		$subject         = get_option( 'wpfda_feedback_email_subject', $default_subject );

@@ -4,7 +4,7 @@
  * Description: Lets customers delete their account by their own.
  * Version: 1.5.4.1
  * Author: Sanjeev Aryal
- * Author URI: http://www.sanjeebaryal.com.np
+ * Author URI: https://www.sanjeebaryal.com.np
  * Text Domain: wp-frontend-delete-account
  * Domain Path: /languages/
  *
@@ -15,7 +15,8 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit;
+	// Exit if accessed directly.
 }
 
 // Define WPFDA_PLUGIN_FILE.

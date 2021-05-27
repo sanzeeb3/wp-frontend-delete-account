@@ -3,11 +3,11 @@
 namespace WPFrontendDeleteAccount;
 
 /**
+ * Class for adding gutenberg block.
+ *
  * @since  1.0.0
  *
  * @since 1.2.0, changed class name from WPFDA_Gutenberg_Block to Gutenberg with Namespace.
- *
- * Class for adding gutenberg block.
  *
  * @class Gutenberg
  */
@@ -34,6 +34,7 @@ class Gutenberg {
 			'wpfda-gutenberg-block',
 			plugins_url( 'assets/js/admin/gutenberg.min.js', WPFDA_PLUGIN_FILE ),
 			array( 'wp-blocks', 'wp-editor' ),
+			WPFDA_VERSION,
 			true
 		);
 	}

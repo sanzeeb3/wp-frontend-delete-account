@@ -12,7 +12,7 @@
 /**
  * Delete Account content.
  *
- * @return Void.
+ * @return string
  */
 function wpf_delete_account_content() {
 
@@ -45,7 +45,7 @@ function wpf_delete_account_content() {
 		$html .= '<label>' . $password_text . '</label>';
 		$html .= ' <input type="password" name="wpfda-password" />';
 		$html .= '</div>';
-	} elseif ( 'custom_captcha' === $security && $captcha_question != '' ) {
+	} elseif ( 'custom_captcha' === $security && '' !== $captcha_question ) {
 		$html .= '<div class="wpfda-custom-captcha">';
 		$html .= '<label>' . $captcha_question . '</label>';
 		$html .= '<input type="text" name="wpfda-custom-captcha-answer" />';
