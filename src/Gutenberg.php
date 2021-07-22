@@ -33,7 +33,7 @@ class Gutenberg {
 		wp_enqueue_script(
 			'wpfda-gutenberg-block',
 			plugins_url( 'assets/js/admin/gutenberg.min.js', WPFDA_PLUGIN_FILE ),
-			array( 'wp-blocks', 'wp-editor' ),
+			array( 'wp-blocks' ),
 			WPFDA_VERSION,
 			true
 		);
