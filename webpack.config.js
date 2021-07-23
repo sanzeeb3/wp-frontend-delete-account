@@ -1,8 +1,8 @@
 module.exports = {
-	entry: './assets/js/admin/wpfda-gutenberg-block.js',
+	entry: './assets/js/admin/gutenberg.js',
 	output: {
 		path: __dirname,
-		filename: 'assets/js/admin/wpfda-gutenberg-block.min.js',
+		filename: 'assets/js/admin/gutenberg.min.js',
 	},
 	module: {
 		loaders: [
