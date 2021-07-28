@@ -27,7 +27,7 @@ class WooCommerce {
 
 		add_action( 'init', array( $this, 'register_endpoint' ) );
 		add_filter( 'query_vars', array( $this, 'query_vars' ) );
-		add_filter( 'woocommerce_account_menu_items', array( $this, 'add_wpf_delete_account_tab' ) );
+		add_filter( 'woocommerce_account_menu_items', array( $this, 'add_wpf_delete_account_tab' ), PHP_INT_MAX );
 		add_action( 'woocommerce_account_wpf-delete-account_endpoint', array( $this, 'add_content' ) );
 	}
 
