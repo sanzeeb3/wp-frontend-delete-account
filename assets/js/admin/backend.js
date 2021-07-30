@@ -4,24 +4,75 @@ import { __ } from '@wordpress/i18n';
 
 class Field extends Component {
 
+	constructor(props) {
+    	super(props);
+
+    	this.state = {
+    		value: props.attr.defaultValue,
+    		isChecked: 'on' === props.attr.defaultValue ? true : false
+    	};
+
+	    this.handleInputChange = this.handleInputChange.bind(this);
+  	}
+
+	handleInputChange(event) {
+	    this.setState(
+	    	{
+	    		value: event.target.value,
+	    		isChecked: event.target.checked,
+	    	}
+	    );
+	}
+
 	render() {
 
 		var element = '';
 
 		switch(this.props.attr.type) {
 			case 'text':
-				element = <input type="text" name={"wpfda_" + this.props.attr.name} defaultValue={this.props.attr.defaultValue} className={"wp-frontend-delete-account-" + this.props.attr.id + "-inline"} />;
+				element = <input
+							type="text"
+							onChange={this.handleInputChange}
+							name={"wpfda_" + this.props.attr.name}
+							value={this.state.value}
+							className={"wp-frontend-delete-account-" + this.props.attr.id + "-inline"}
+						/>;
 			break;
 
 			case 'url':
-				element = <input type="url" name={"wpfda_" + this.props.attr.name} defaultValue={this.props.attr.defaultValue} className={"wp-frontend-delete-account-" + this.props.attr.id + "-inline"} />;
+				element = <input
+							type="url"
+							onChange={this.handleInputChange}
+							name={"wpfda_" + this.props.attr.name}
+							value={this.state.value}
+							className={"wp-frontend-delete-account-" + this.props.attr.id + "-inline"}
+						/>;
 			break;
 
 			case 'checkbox':
-				element = <input type="checkbox" name={"wpfda_" + this.props.attr.name} className={"wp-frontend-delete-account-" + this.props.attr.id + "-inline"}/>;
+				element = <input
+							type="checkbox"
+							onChange={this.handleInputChange}
+							checked={this.state.isChecked}
+							name={"wpfda_" + this.props.attr.name}
+							className={"wp-frontend-delete-account-" + this.props.attr.id + "-inline"}
+						/>;
 			break;
 
 			case 'select':
+				element = <select
+							name={"wpfda_" + this.props.attr.name }
+							value={this.state.value}
+							onChange={this.handleInputChange}>
+
+							<option> { __( 'None', 'wp-frontend-delete-account' ) } </option>
+							{
+								this.props.attr.options.map( (option) =>
+									<option key={option.value} value={option.value}>{option.label}</option>
+								)
+							}
+
+							</select>
 			break;
 
 			default:
@@ -32,6 +83,7 @@ class Field extends Component {
 			<tr valign="top" className={"wp-frontend-delete-account-" + this.props.attr.id}>
 				<th scope="row">{this.props.attr.label}</th>
 				<td>
+					{this.props.attr.type === 'checkbox' ? <input type ="hidden" value="off" name={"wpfda_" + this.props.attr.name}/> : null}
 					{element}
 				</td>
 			</tr>
@@ -41,6 +93,14 @@ class Field extends Component {
 
 class Form extends Component {
 	render() {
+
+		var users = wpfda_plugins_params.users;
+
+		var attribute_options = [];
+
+		users.map( (user) =>
+			attribute_options[attribute_options.length] = { value: user.ID, label: user.data.user_login }
+		);
 
 		const fields = [
 			{
@@ -84,11 +144,11 @@ class Form extends Component {
 				type: 'url'
 			},
 			{
-				id: 'attribue',
-				name: 'attribue',
+				id: 'attribute',
+				name: 'attribute',
 				label: __( 'Attribute all contents to:', 'wp-frontend-delete-account' ),
 				type: 'select',
-				options: wpfda_plugins_params.users,
+				options: attribute_options,
 				defaultValue: wpfda_plugins_params.attribute
 			},
 			{
