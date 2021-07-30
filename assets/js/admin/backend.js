@@ -6,18 +6,43 @@ class Field extends Component {
 
 	render() {
 
+		var element = '';
+
+		switch(this.props.attr.type) {
+			case 'text':
+				element = <input type="text" name={"wpfda_" + this.props.attr.name} defaultValue={this.props.attr.defaultValue} className={"wp-frontend-delete-account-" + this.props.attr.id + "-inline"} />;
+			break;
+
+			case 'url':
+				element = <input type="url" name={"wpfda_" + this.props.attr.name} defaultValue={this.props.attr.defaultValue} className={"wp-frontend-delete-account-" + this.props.attr.id + "-inline"} />;
+			break;
+
+			case 'checkbox':
+				element = <input type="checkbox" name={"wpfda_" + this.props.attr.name} className={"wp-frontend-delete-account-" + this.props.attr.id + "-inline"}/>;
+			break;
+
+			case 'select':
+			break;
+
+			default:
+		}
+
 		return (
 
-			<tr key="">
+			<tr valign="top" className={"wp-frontend-delete-account-" + this.props.attr.id}>
+				<th scope="row">{this.props.attr.label}</th>
+				<td>
+					{element}
+				</td>
 			</tr>
 		);
 	}
 }
 
-class Settings extends Component {
+class Form extends Component {
 	render() {
 
-		const attrs = [
+		const fields = [
 			{
 				id: 'load-assets-globally',
 				name: 'load_assets_globally',
@@ -39,7 +64,7 @@ class Settings extends Component {
 				name: 'title',
 				label: __( 'Title', 'wp-frontend-delete-account' ),
 				desc: '',
-				value: wpfda_plugins_params.title,
+				defaultValue: wpfda_plugins_params.title,
 				type: 'text'
 			},
 			{
@@ -47,7 +72,7 @@ class Settings extends Component {
 				name: 'button_label',
 				label: __( 'Button Label', 'wp-frontend-delete-account' ),
 				desc: '',
-				value: wpfda_plugins_params.button,
+				defaultValue: wpfda_plugins_params.button,
 				type: 'text'
 			},
 			{
@@ -55,7 +80,7 @@ class Settings extends Component {
 				name: 'redirect_url',
 				label: __( 'Redirect URL', 'wp-frontend-delete-account' ),
 				desc: __( 'Leave empty for same page redirect', 'wp-frontend-delete-account' ),
-				value: wpfda_plugins_params.redirect_url,
+				defaultValue: wpfda_plugins_params.redirect_url,
 				type: 'url'
 			},
 			{
@@ -88,38 +113,42 @@ class Settings extends Component {
 				id: 'security-password',
 				name: 'security_password_text',
 				label: __( 'Confirmation Text', 'wp-frontend-delete-account' ),
-				value: wpfda_plugins_params.password_text,
+				defaultValue: wpfda_plugins_params.password_text,
 				type: 'text'
 			},
 			{
 				id: 'security-custom-captcha-question',
 				name: 'security_custom_captcha_question',
 				label: __( 'Captcha Question', 'wp-frontend-delete-account' ),
-				value: wpfda_plugins_params.captcha_question,
+				defaultValue: wpfda_plugins_params.captcha_question,
 				type: 'text'
 			},
 			{
 				id: 'security-custom-captcha-answer',
 				name: 'security_custom_captcha_answer',
 				label: __( 'Captcha Answer', 'wp-frontend-delete-account' ),
-				value: wpfda_plugins_params.captcha_answer,
+				defaultValue: wpfda_plugins_params.captcha_answer,
 				type: 'text'
 			},
 		];
 
 		return (
 			<div className="wp-frontend-delete-account-settings">
-				<form method="POST">
+				<form method="post">
 					<table className="form-table">
 						<tbody>
 							{
-								attrs.map( (attr) =>
+								fields.map( (field) =>
 
-									<Field attr={attr} />
+									<Field key={field.id} attr={field} />
 								)
 							}
 						</tbody>
 					</table>
+
+					<input type="hidden" id="wpfda-general-settings-save-nonce" name="wp_frontend_delete_account_settings_nonce" value={wpfda_plugins_params.wpfda_general_settings_nonce} />
+					<p className="submit"><input type="submit" name="submit" id="submit" className="button button-primary button-large" value="Save Changes" /></p>
+
 				</form>
 			</div>
 		)
@@ -128,7 +157,7 @@ class Settings extends Component {
 
 document.addEventListener( "DOMContentLoaded", function(event) {
 	render(
-		<Settings />,
+		<Form />,
 		document.getElementById( 'wp-frontend-delete-account-settings-page' )
 	)
 });

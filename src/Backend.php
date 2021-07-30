@@ -154,7 +154,7 @@ class Backend {
 		if ( isset( $_POST['wp_frontend_delete_account_settings_nonce'] ) ) {
 
 			// phpcs:ignore
-			if ( ! wp_verify_nonce( $_POST['wp_frontend_delete_account_settings_nonce'], 'wp_frontend_delete_account_settings' )
+			if ( ! wp_verify_nonce( $_POST['wp_frontend_delete_account_settings_nonce'], 'wpfda-general-settings-save' )
 				) {
 				print 'Nonce Failed!';
 				exit;
