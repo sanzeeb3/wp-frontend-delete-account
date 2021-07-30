@@ -64,6 +64,8 @@
     "npm": ">=5.5.1"
   },
   "dependencies": {
+    "@wordpress/element": "2.20.2",
+    "@wordpress/i18n": "3.19.2",
     "save": "^2.3.3"
   }
 }

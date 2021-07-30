@@ -46,18 +46,30 @@ class Backend {
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 			wp_enqueue_style( 'wpfda-backend', plugins_url( 'assets/css/backend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, $media = 'all' );
-			wp_enqueue_script( 'wpf-delete-account-js', plugins_url( 'assets/js/admin/backend' . $suffix . '.js', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
+			wp_enqueue_script( 'wpf-delete-account-js', plugins_url( 'assets/js/admin/backend.min.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
 			wp_localize_script(
 				'wpf-delete-account-js',
 				'wpfda_plugins_params',
 				array(
 					'ajax_url'           => admin_url( 'admin-ajax.php' ),
 					'deactivation_nonce' => wp_create_nonce( 'deactivation-notice' ),
+					'wpfda_general_settings_nonce' => wp_create_nonce( 'wpfda-general-settings-save' ),
 					'status_nonce'       => wp_create_nonce( 'email-status' ),
 					'deactivating'       => __( 'Deactivating...', 'wp-frontend-delete-account' ),
 					'wrong'              => esc_html__( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
 					'enable_email'       => esc_html__( 'Enable this email', 'wp-frontend-delete-account' ),
 					'disable_email'      => esc_html__( 'Disable this email', 'wp-frontend-delete-account' ),
+					'title'              => get_option( 'wpfda_title', 'Delete Account' ),
+					'button'             => get_option( 'wpfda_button_label', 'Confirm' ),
+					'attribute'          => get_option( 'wpfda_attribute' ),
+					'security'           => get_option( 'wpfda_security', 'password' ),
+					'password_text'      => get_option( 'wpfda_security_password_text', 'Enter password to confirm:' ),
+					'captcha_question'   => get_option( 'wpfda_security_custom_captcha_question', 'Enter PERMANENTLY DELETE to confirm:' ),
+					'captcha_answer'     => get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' ),
+					'load_assets'        => get_option( 'wpfda_load_assets_globally' ),
+					'delete_comments'    => get_option( 'wpfda_delete_comments' ),
+					'redirect_url'       => get_option( 'wpfda_redirect_url' ),
+					'users'              => get_users()
 				)
 			);
 		}
@@ -125,102 +137,7 @@ class Backend {
 		?>
 		<h2><?php esc_html_e( 'General Settings', 'wp-frontend-delete-account' ); ?></h2>
 
-		<div id="wp-frontend-delete-account-settings-page">
-			<div class="wp-frontend-delete-account-settings">
-				<form  method="post">
-					<table class="form-table">
-
-						<tr valign="top" class="wp-frontend-delete-account-load-assets-globally">
-							<th scope="row"><?php echo esc_html__( 'Load Assets Globally', 'wp-frontend-delete-account' ); ?></th>
-								<td>
-									<input type="hidden" name="wpfda_load_assets_globally" value="off" />
-									<input style="width:auto" type="checkbox" name="wpfda_load_assets_globally" class="wp-frontend-delete-account-load-assets-globally-inline" <?php checked( 'on', $load_assets ); ?> />
-									<i><?php echo esc_html__( 'Check this if only you have compatiblity/styling issues.', 'wp-frontend-delete-account' ); ?></i>
-						</tr>
-
-						<tr valign="top" class="wp-frontend-delete-account-delete-comments">
-							<th scope="row"><?php echo esc_html__( 'Delete Comments', 'wp-frontend-delete-account' ); ?></th>
-								<td>
-									<input type="hidden" name="wpfda_delete_comments" value="off" />
-									<input style="width:auto" type="checkbox" name="wpfda_delete_comments" class="wp-frontend-delete-account-delete-comments-inline" <?php checked( 'on', $delete_comments ); ?> />
-								<i><?php echo esc_html__( 'Delete all comments by users when they delete themselves.', 'wp-frontend-delete-account' ); ?></i>
-								</td>
-								</td>
-						</tr>
-
-						<tr valign="top">
-							<th scope="row"><?php echo esc_html__( 'Title', 'wp-frontend-delete-account' ); ?></th>
-								<td><input type="text" name="wpfda_title" value ="<?php echo esc_html( $title ); ?>" class="wp-frontend-delete-account-title" />
-								</td>
-						</tr>
-
-						<tr valign="top">
-							<th scope="row"><?php echo esc_html__( 'Button Label', 'wp-frontend-delete-account' ); ?></th>
-								<td><input type="text" name="wpfda_button_label" value ="<?php echo esc_html( $button ); ?>" class="wp-frontend-delete-account-button-label" />
-								</td>
-						</tr>
-
-						<tr valign="top">
-							<th scope="row"><?php echo esc_html__( 'Redirect URL', 'wp-frontend-delete-account' ); ?></th>
-								<td><input type="url" name="wpfda_redirect_url" value ="<?php echo esc_html( $redirect_url ); ?>" class="wp-frontend-delete-account-redirect-url" /><br/>
-								<i><?php echo esc_html__( 'Leave empty for same page redirect.', 'wp-frontend-delete-account' ); ?></i>
-								</td>
-						</tr>
-
-						<tr valign="top">
-							<th scope="row"><?php echo esc_html__( 'Attribute all contents to:', 'wp-frontend-delete-account' ); ?></th>
-								<td>
-									<select style="width:17%;" name="wpfda_attribute">
-										<option><?php echo esc_html__( '--None--', 'wp-frontend-delete-account' ); ?></option>
-										<?php
-										foreach ( $users as $user ) {
-												// phpcs:ignore
-												echo '<option value="' . absint( $user->ID ) . '" ' . selected( $user->ID, $attribute, true ) . '>' . $user->data->user_login . '</option>';
-										}
-										?>
-									</select>
-								</td>
-						</tr>
-
-						<tr valign="top">
-							<th scope="row"><?php echo esc_html__( 'Security method before deleting:', 'wp-frontend-delete-account' ); ?></th>
-								<td>
-									<select style="width:17%;" name="wpfda_security" class="wpfda-security">
-										<option value="none" <?php selected( 'none', $security, true ); ?>><?php echo esc_html__( '--None--', 'wp-frontend-delete-account' ); ?></option>
-										<option value="password" <?php selected( 'password', $security, true ); ?>><?php echo esc_html__( 'Password', 'wp-frontend-delete-account' ); ?></option>
-										<option value="custom_captcha" <?php selected( 'custom_captcha', $security, true ); ?>><?php echo esc_html__( 'Custom Captcha', 'wp-frontend-delete-account' ); ?></option>
-									</select><br/>
-								</td>
-						</tr>
-						<tr valign="top" class="wp-frontend-delete-account-security-password">
-							<th scope="row"><?php echo esc_html__( 'Confirmation Text', 'wp-frontend-delete-account' ); ?></th>
-								<td>
-									<input style="width:50%" type="text" name="wpfda_security_password_text" value ="<?php echo esc_html( $password_text ); ?>" class="wp-frontend-delete-account-security-password-inline" />
-								</td>
-						</tr>
-
-						<tr valign="top" class="wp-frontend-delete-account-security-custom-captcha-question">
-							<th scope="row"><?php echo esc_html__( 'Captcha Question', 'wp-frontend-delete-account' ); ?></th>
-								<td>
-									<input style="width:50%" type="text" name="wpfda_security_custom_captcha_question" value ="<?php echo esc_html( $captcha_question ); ?>" class="wp-frontend-delete-account-security-custom-captcha-question-inline" />
-								</td>
-						</tr>
-
-						<tr valign="top" class="wp-frontend-delete-account-security-custom-captcha-answer">
-							<th scope="row"><?php echo esc_html__( 'Captcha Answer', 'wp-frontend-delete-account' ); ?></th>
-								<td>
-									<input style="width:50%" type="text" name="wpfda_security_custom_captcha_answer" value ="<?php echo esc_html( $captcha_answer ); ?>" class="wp-frontend-delete-account-security-custom-captcha-answer-inline" />
-								</td>
-						</tr>
-
-						<?php do_action( 'wp_frontend_delete_account_settings' ); ?>
-						<?php wp_nonce_field( 'wp_frontend_delete_account_settings', 'wp_frontend_delete_account_settings_nonce' ); ?>
-
-					</table>
-
-					<?php submit_button(); ?>
-
-				</form>
+			<div id="wp-frontend-delete-account-settings-page">
 			</div>
 		<?php
 	}
