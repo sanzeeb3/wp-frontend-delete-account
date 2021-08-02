@@ -85,6 +85,8 @@ class Field extends Component {
 				<td>
 					{this.props.attr.type === 'checkbox' ? <input type ="hidden" value="off" name={"wpfda_" + this.props.attr.name}/> : null}
 					{element}
+					{this.props.attr.type !== 'checkbox' ? <br/> : null }
+					<i>{this.props.attr.desc}</i>
 				</td>
 			</tr>
 		);
