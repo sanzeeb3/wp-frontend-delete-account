@@ -9,7 +9,8 @@ class Field extends Component {
 
     	this.state = {
     		value: props.attr.defaultValue,
-    		isChecked: 'on' === props.attr.defaultValue ? true : false
+    		isChecked: 'on' === props.attr.defaultValue ? true : false,
+    		isShowing: props.attr.isShowing
     	};
 
 	    this.handleInputChange = this.handleInputChange.bind(this);
@@ -22,6 +23,9 @@ class Field extends Component {
 	    		isChecked: event.target.checked,
 	    	}
 	    );
+
+		if ( 'wpfda_security' === event.target.name && 'password' === event.target.value) {
+		}
 	}
 
 	render() {
@@ -51,6 +55,7 @@ class Field extends Component {
 
 			case 'checkbox':
 				element = <input
+				            id={"wpfda-"+ this.props.attr.id}
 							type="checkbox"
 							onChange={this.handleInputChange}
 							checked={this.state.isChecked}
@@ -80,15 +85,23 @@ class Field extends Component {
 
 		return (
 
-			<tr valign="top" className={"wp-frontend-delete-account-" + this.props.attr.id}>
-				<th scope="row">{this.props.attr.label}</th>
-				<td>
-					{this.props.attr.type === 'checkbox' ? <input type ="hidden" value="off" name={"wpfda_" + this.props.attr.name}/> : null}
-					{element}
-					{this.props.attr.type !== 'checkbox' ? <br/> : null }
-					<i>{this.props.attr.desc}</i>
-				</td>
-			</tr>
+				this.state.isShowing
+
+				?
+
+					<tr valign="top" className={"wp-frontend-delete-account-" + this.props.attr.id}>
+						<th scope="row">{this.props.attr.label}</th>
+						<td>
+							{this.props.attr.type === 'checkbox' ? <input type ="hidden" value="off" name={"wpfda_" + this.props.attr.name}/> : null}
+							{element}
+							{this.props.attr.type !== 'checkbox' ? <br/> : null }
+							<label htmlFor={"wpfda-" + this.props.attr.id}><i>{this.props.attr.desc}</i></label>
+						</td>
+					</tr>
+
+				:
+
+				null
 		);
 	}
 }
@@ -111,7 +124,8 @@ class Form extends Component {
 				label: __( 'Load Assets Globally', 'wp-frontend-delete-account' ),
 				desc: __( 'Check this if only you have compatibility/styling issues', 'wp-frontend-delete-account' ),
 				type: 'checkbox',
-				defaultValue: wpfda_plugins_params.load_assets
+				defaultValue: wpfda_plugins_params.load_assets,
+				isShowing: true
 			},
 			{
 				id: 'delete-comments',
@@ -119,7 +133,8 @@ class Form extends Component {
 				label: __( 'Delete Comments', 'wp-frontend-delete-account' ),
 				desc: __( 'Delete all comments by users when they delete themselves.', 'wp-frontend-delete-account' ),
 				type: 'checkbox',
-				defaultValue: wpfda_plugins_params.delete_comments
+				defaultValue: wpfda_plugins_params.delete_comments,
+				isShowing: true
 			},
 			{
 				id: 'title',
@@ -127,7 +142,8 @@ class Form extends Component {
 				label: __( 'Title', 'wp-frontend-delete-account' ),
 				desc: '',
 				defaultValue: wpfda_plugins_params.title,
-				type: 'text'
+				type: 'text',
+				isShowing: true
 			},
 			{
 				id: 'button-label',
@@ -135,7 +151,8 @@ class Form extends Component {
 				label: __( 'Button Label', 'wp-frontend-delete-account' ),
 				desc: '',
 				defaultValue: wpfda_plugins_params.button,
-				type: 'text'
+				type: 'text',
+				isShowing: true
 			},
 			{
 				id: 'redirect-url',
@@ -143,7 +160,8 @@ class Form extends Component {
 				label: __( 'Redirect URL', 'wp-frontend-delete-account' ),
 				desc: __( 'Leave empty for same page redirect', 'wp-frontend-delete-account' ),
 				defaultValue: wpfda_plugins_params.redirect_url,
-				type: 'url'
+				type: 'url',
+				isShowing: true
 			},
 			{
 				id: 'attribute',
@@ -151,7 +169,8 @@ class Form extends Component {
 				label: __( 'Attribute all contents to:', 'wp-frontend-delete-account' ),
 				type: 'select',
 				options: attribute_options,
-				defaultValue: wpfda_plugins_params.attribute
+				defaultValue: wpfda_plugins_params.attribute,
+				isShowing: true
 			},
 			{
 				id: 'security',
@@ -169,28 +188,33 @@ class Form extends Component {
 						label: __( 'Custom Captcha', 'wp-frontend-delete-account' )
 					}
 				],
-				defaultValue: wpfda_plugins_params.security
+				defaultValue: wpfda_plugins_params.security,
+				isShowing: true
+
 			},
 			{
 				id: 'security-password',
 				name: 'security_password_text',
 				label: __( 'Confirmation Text', 'wp-frontend-delete-account' ),
 				defaultValue: wpfda_plugins_params.password_text,
-				type: 'text'
+				type: 'text',
+				isShowing: false
 			},
 			{
 				id: 'security-custom-captcha-question',
 				name: 'security_custom_captcha_question',
 				label: __( 'Captcha Question', 'wp-frontend-delete-account' ),
 				defaultValue: wpfda_plugins_params.captcha_question,
-				type: 'text'
+				type: 'text',
+				isShowing: false
 			},
 			{
 				id: 'security-custom-captcha-answer',
 				name: 'security_custom_captcha_answer',
 				label: __( 'Captcha Answer', 'wp-frontend-delete-account' ),
 				defaultValue: wpfda_plugins_params.captcha_answer,
-				type: 'text'
+				type: 'text',
+				isShowing: false
 			},
 		];
 
