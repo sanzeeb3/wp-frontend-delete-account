@@ -25,6 +25,29 @@ class Field extends Component {
 	    );
 
 		if ( 'wpfda_security' === event.target.name && 'password' === event.target.value) {
+			const fields = [
+				{
+					id: 'load-assets-globally',
+					name: 'load_assets_globally',
+					label: __( 'Load Assets Globally', 'wp-frontend-delete-account' ),
+					desc: __( 'Check this if only you have compatibility/styling issues', 'wp-frontend-delete-account' ),
+					type: 'checkbox',
+					defaultValue: wpfda_plugins_params.load_assets,
+					isShowing: true
+				},
+				{
+					id: 'delete-comments',
+					name: 'delete_comments',
+					label: __( 'Delete Comments', 'wp-frontend-delete-account' ),
+					desc: __( 'Delete all comments by users when they delete themselves.', 'wp-frontend-delete-account' ),
+					type: 'checkbox',
+					defaultValue: wpfda_plugins_params.delete_comments,
+					isShowing: true
+				}
+			];
+
+			this.props.parentCallback( fields );
+
 		}
 	}
 
@@ -109,7 +132,9 @@ class Field extends Component {
 }
 
 class Form extends Component {
-	render() {
+
+	constructor(props) {
+		super(props);
 
 		var users = wpfda_plugins_params.users;
 
@@ -220,15 +245,28 @@ class Form extends Component {
 			},
 		];
 
+		this.state = {
+			data: fields
+		}
+
+	    this.handleCallback = this.handleCallback.bind(this);
+	}
+
+    handleCallback(childData) {
+ 		this.setState({data: childData})
+	}
+
+	render() {
+
 		return (
 			<div className="wp-frontend-delete-account-settings">
 				<form method="post">
 					<table className="form-table">
 						<tbody>
 							{
-								fields.map( (field) =>
+								this.state.data.map( (field) =>
 
-									<Field key={field.id} attr={field} />
+									<Field parentCallback={this.handleCallback} key={field.id} attr={field} />
 								)
 							}
 						</tbody>
