@@ -5,12 +5,12 @@ import { __ } from '@wordpress/i18n';
 class Field extends Component {
 
 	constructor(props) {
+
     	super(props);
 
     	this.state = {
     		value: props.attr.defaultValue,
     		isChecked: 'on' === props.attr.defaultValue ? true : false,
-    		isShowing: props.attr.isShowing
     	};
 
 	    this.handleInputChange = this.handleInputChange.bind(this);
@@ -25,29 +25,17 @@ class Field extends Component {
 	    );
 
 		if ( 'wpfda_security' === event.target.name && 'password' === event.target.value) {
-			const fields = [
-				{
-					id: 'load-assets-globally',
-					name: 'load_assets_globally',
-					label: __( 'Load Assets Globally', 'wp-frontend-delete-account' ),
-					desc: __( 'Check this if only you have compatibility/styling issues', 'wp-frontend-delete-account' ),
-					type: 'checkbox',
-					defaultValue: wpfda_plugins_params.load_assets,
-					isShowing: true
-				},
-				{
-					id: 'delete-comments',
-					name: 'delete_comments',
-					label: __( 'Delete Comments', 'wp-frontend-delete-account' ),
-					desc: __( 'Delete all comments by users when they delete themselves.', 'wp-frontend-delete-account' ),
-					type: 'checkbox',
-					defaultValue: wpfda_plugins_params.delete_comments,
-					isShowing: true
-				}
-			];
 
-			this.props.parentCallback( fields );
+			var newFields = this.props.fields;
 
+			newFields.forEach((item,index)=>{
+
+  				 if(item.id == 'security-password' ) {
+    	  			newFields[index].isShowing = true;
+  				 }
+			});
+
+			this.props.parentCallback( newFields );
 		}
 	}
 
@@ -110,7 +98,7 @@ class Field extends Component {
 
 		return (
 
-				this.state.isShowing
+				this.props.attr.isShowing
 
 				?
 
@@ -225,7 +213,7 @@ class Form extends Component {
 				label: __( 'Confirmation Text', 'wp-frontend-delete-account' ),
 				defaultValue: wpfda_plugins_params.password_text,
 				type: 'text',
-				isShowing: true
+				isShowing: false
 			},
 			{
 				id: 'security-custom-captcha-question',
@@ -233,7 +221,7 @@ class Form extends Component {
 				label: __( 'Captcha Question', 'wp-frontend-delete-account' ),
 				defaultValue: wpfda_plugins_params.captcha_question,
 				type: 'text',
-				isShowing: true
+				isShowing: false
 			},
 			{
 				id: 'security-custom-captcha-answer',
@@ -241,7 +229,7 @@ class Form extends Component {
 				label: __( 'Captcha Answer', 'wp-frontend-delete-account' ),
 				defaultValue: wpfda_plugins_params.captcha_answer,
 				type: 'text',
-				isShowing: true
+				isShowing: false
 			},
 		];
 
@@ -266,7 +254,7 @@ class Form extends Component {
 							{
 								this.state.data.map( (field) =>
 
-									<Field parentCallback={this.handleCallback} key={field.id} attr={field} />
+									<Field parentCallback={this.handleCallback} key={field.id} attr={field} fields={this.state.data}/>
 								)
 							}
 						</tbody>
