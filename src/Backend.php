@@ -42,33 +42,35 @@ class Backend {
 		global $current_screen;
 
 		$params = array(
-			'ajax_url'           => admin_url( 'admin-ajax.php' ),
-			'deactivation_nonce' => wp_create_nonce( 'deactivation-notice' ),
+			'ajax_url'                     => admin_url( 'admin-ajax.php' ),
+			'deactivation_nonce'           => wp_create_nonce( 'deactivation-notice' ),
 			'wpfda_general_settings_nonce' => wp_create_nonce( 'wp_frontend_delete_account_settings' ),
-			'status_nonce'       => wp_create_nonce( 'email-status' ),
-			'deactivating'       => esc_html__( 'Deactivating...', 'wp-frontend-delete-account' ),
-			'wrong'              => esc_html__( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
-			'enable_email'       => esc_html__( 'Enable this email', 'wp-frontend-delete-account' ),
-			'disable_email'      => esc_html__( 'Disable this email', 'wp-frontend-delete-account' ),
-			'title'              => get_option( 'wpfda_title', 'Delete Account' ),
-			'button'             => get_option( 'wpfda_button_label', 'Confirm' ),
-			'attribute'          => get_option( 'wpfda_attribute' ),
-			'security'           => get_option( 'wpfda_security', 'password' ),
-			'password_text'      => get_option( 'wpfda_security_password_text', 'Enter password to confirm:' ),
-			'captcha_question'   => get_option( 'wpfda_security_custom_captcha_question', 'Enter PERMANENTLY DELETE to confirm:' ),
-			'captcha_answer'     => get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' ),
-			'load_assets'        => get_option( 'wpfda_load_assets_globally' ),
-			'delete_comments'    => get_option( 'wpfda_delete_comments' ),
-			'redirect_url'       => get_option( 'wpfda_redirect_url' ),
-			'users'              => get_users()
+			'status_nonce'                 => wp_create_nonce( 'email-status' ),
+			'deactivating'                 => esc_html__( 'Deactivating...', 'wp-frontend-delete-account' ),
+			'wrong'                        => esc_html__( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
+			'enable_email'                 => esc_html__( 'Enable this email', 'wp-frontend-delete-account' ),
+			'disable_email'                => esc_html__( 'Disable this email', 'wp-frontend-delete-account' ),
+			'title'                        => get_option( 'wpfda_title', 'Delete Account' ),
+			'button'                       => get_option( 'wpfda_button_label', 'Confirm' ),
+			'attribute'                    => get_option( 'wpfda_attribute' ),
+			'security'                     => get_option( 'wpfda_security', 'password' ),
+			'password_text'                => get_option( 'wpfda_security_password_text', 'Enter password to confirm:' ),
+			'captcha_question'             => get_option( 'wpfda_security_custom_captcha_question', 'Enter PERMANENTLY DELETE to confirm:' ),
+			'captcha_answer'               => get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' ),
+			'load_assets'                  => get_option( 'wpfda_load_assets_globally' ),
+			'delete_comments'              => get_option( 'wpfda_delete_comments' ),
+			'redirect_url'                 => get_option( 'wpfda_redirect_url' ),
+			'users'                        => get_users(),
 		);
+
 		if ( 'plugins.php' === $pagenow || 'settings_page_wp-frontend-delete-account' === $current_screen->id ) {
 
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 			wp_enqueue_style( 'wpfda-backend', plugins_url( 'assets/css/backend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, $media = 'all' );
 
-			if ( empty( $_GET['section'] ) ) {	// Settings JS is current not required for page sections such as emails page.
+			if ( empty( $_GET['section'] ) ) {
+				// Settings JS is current not required for page sections such as emails page.
 
 				wp_enqueue_script( 'wpf-delete-account-settings-js', plugins_url( 'assets/js/admin/settings.min.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
 				wp_localize_script(
@@ -84,7 +86,7 @@ class Backend {
 				'wpfda_plugins_params',
 				$params
 			);
-		}
+		}//end if
 
 	}
 
