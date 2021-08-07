@@ -29,3 +29,5 @@ Thumbs.db
 /vendor/
 
 *.zip
+
+bash.exe.stackdump

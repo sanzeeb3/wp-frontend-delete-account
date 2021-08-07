@@ -24,15 +24,44 @@ class Field extends Component {
 	    	}
 	    );
 
-		if ( 'wpfda_security' === event.target.name && 'password' === event.target.value) {
+		if ( 'wpfda_security' === event.target.name ) {
+
+			var showId = [];
+			var hideId = [];
+
+			switch( event.target.value ) {
+
+				case 'password':
+
+					showId = [ 'security-password' ];
+					hideId = [ 'security-custom-captcha-question', 'security-custom-captcha-answer' ];
+
+				break;
+
+				case 'custom_captcha':
+
+					showId = [ 'security-custom-captcha-question', 'security-custom-captcha-answer' ];
+					hideId = [ 'security-password' ];
+
+				break;
+
+				default:
+
+					hideId = [ 'security-password', 'security-custom-captcha-question', 'security-custom-captcha-answer' ]
+			}
 
 			var newFields = this.props.fields;
 
 			newFields.forEach((item,index)=>{
 
-  				 if(item.id == 'security-password' ) {
+  				if( showId.includes( item.id ) ) {	// Equivalent to PHP's in_array().
     	  			newFields[index].isShowing = true;
-  				 }
+  				}
+
+  				if( hideId.includes( item.id ) ) {
+  					newFields[index].isShowing = false;
+  				}
+
 			});
 
 			this.props.parentCallback( newFields );
@@ -213,7 +242,7 @@ class Form extends Component {
 				label: __( 'Confirmation Text', 'wp-frontend-delete-account' ),
 				defaultValue: wpfda_plugins_params.password_text,
 				type: 'text',
-				isShowing: false
+				isShowing: wpfda_plugins_params.security === 'password' ? true : false
 			},
 			{
 				id: 'security-custom-captcha-question',
@@ -221,7 +250,7 @@ class Form extends Component {
 				label: __( 'Captcha Question', 'wp-frontend-delete-account' ),
 				defaultValue: wpfda_plugins_params.captcha_question,
 				type: 'text',
-				isShowing: false
+				isShowing: wpfda_plugins_params.security === 'custom_captcha' ? true : false
 			},
 			{
 				id: 'security-custom-captcha-answer',
@@ -229,7 +258,7 @@ class Form extends Component {
 				label: __( 'Captcha Answer', 'wp-frontend-delete-account' ),
 				defaultValue: wpfda_plugins_params.captcha_answer,
 				type: 'text',
-				isShowing: false
+				isShowing: wpfda_plugins_params.security === 'custom_captcha' ? true : false
 			},
 		];
 
