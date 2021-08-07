@@ -44,7 +44,7 @@ class Backend {
 		$params = array(
 			'ajax_url'           => admin_url( 'admin-ajax.php' ),
 			'deactivation_nonce' => wp_create_nonce( 'deactivation-notice' ),
-			'wpfda_general_settings_nonce' => wp_create_nonce( 'wpfda-general-settings-save' ),
+			'wpfda_general_settings_nonce' => wp_create_nonce( 'wp_frontend_delete_account_settings' ),
 			'status_nonce'       => wp_create_nonce( 'email-status' ),
 			'deactivating'       => esc_html__( 'Deactivating...', 'wp-frontend-delete-account' ),
 			'wrong'              => esc_html__( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
@@ -164,7 +164,7 @@ class Backend {
 		if ( isset( $_POST['wp_frontend_delete_account_settings_nonce'] ) ) {
 
 			// phpcs:ignore
-			if ( ! wp_verify_nonce( $_POST['wp_frontend_delete_account_settings_nonce'], 'wpfda-general-settings-save' )
+			if ( ! wp_verify_nonce( $_POST['wp_frontend_delete_account_settings_nonce'], 'wp_frontend_delete_account_settings' )
 				) {
 				print 'Nonce Failed!';
 				exit;

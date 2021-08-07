@@ -58,6 +58,7 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 
 = 1.5.6 - xx/xx/2021 =
 * Enhancement - Ensure 'Delete Account' will be the last item in the WC account menu.
+* Enhancement - Refactor settings page, transistioning into react.
 
 = 1.5.5 - 07/22/2021 =
 * Fix - Compatibility with WP 5.5 widgets screen
