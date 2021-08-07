@@ -69,7 +69,7 @@ class Backend {
 
 			wp_enqueue_style( 'wpfda-backend', plugins_url( 'assets/css/backend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, $media = 'all' );
 
-			if ( empty( $_GET['section'] ) ) {
+			if ( 'settings_page_wp-frontend-delete-account' === $current_screen->id && empty( $_GET['section'] ) ) {
 				// Settings JS is current not required for page sections such as emails page.
 
 				wp_enqueue_script( 'wpf-delete-account-settings-js', plugins_url( 'assets/js/admin/settings.min.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
