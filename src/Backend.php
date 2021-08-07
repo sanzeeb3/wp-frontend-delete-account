@@ -62,19 +62,21 @@ class Backend {
 			'redirect_url'       => get_option( 'wpfda_redirect_url' ),
 			'users'              => get_users()
 		);
-
 		if ( 'plugins.php' === $pagenow || 'settings_page_wp-frontend-delete-account' === $current_screen->id ) {
 
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 			wp_enqueue_style( 'wpfda-backend', plugins_url( 'assets/css/backend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, $media = 'all' );
 
-			wp_enqueue_script( 'wpf-delete-account-settings-js', plugins_url( 'assets/js/admin/settings.min.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
-			wp_localize_script(
-				'wpf-delete-account-settings-js',
-				'wpfda_plugins_params',
-				$params
-			);
+			if ( empty( $_GET['section'] ) ) {	// Settings JS is current not required for page sections such as emails page.
+
+				wp_enqueue_script( 'wpf-delete-account-settings-js', plugins_url( 'assets/js/admin/settings.min.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
+				wp_localize_script(
+					'wpf-delete-account-settings-js',
+					'wpfda_plugins_params',
+					$params
+				);
+			}
 
 			wp_enqueue_script( 'wpf-delete-account-js', plugins_url( 'assets/js/admin/backend' . $suffix . '.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
 			wp_localize_script(
