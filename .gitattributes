@@ -18,4 +18,5 @@ webpack.config.js export-ignore
 /.gitignore export-ignore
 /.babelrc export-ignore
 /.editorconfig export-ignore
+/.*.zip
 
