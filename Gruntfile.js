@@ -237,6 +237,7 @@ module.exports = function( grunt ){
 					'!composer.lock',
 					'!node_modules/**',
 					'!package-lock.json',
+					'!webpack.config.js',
 					'!vendor/composer/installers/**'
 					],
 					dest: '<%= pkg.name %>',
