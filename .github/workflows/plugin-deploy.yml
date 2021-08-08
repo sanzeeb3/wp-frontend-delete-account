@@ -12,7 +12,6 @@ jobs:
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
-        run: composer update
 
       - name: grunt
         run: grunt
