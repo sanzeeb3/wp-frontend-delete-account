@@ -13,6 +13,9 @@ jobs:
       - name: Install dependencies
         run: composer install
 
+      - name: grunt
+        run: grunt
+
       - name: WordPress Plugin Deploy
         uses: 10up/action-wordpress-plugin-deploy@stable
         env:
