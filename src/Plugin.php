@@ -48,7 +48,7 @@ final class Plugin {
 		// Load plugin text domain.
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
-		$classes = array( 'Backend', 'Frontend', 'WooCommerce', 'Gutenberg' );
+		$classes = array( 'Backend', 'Frontend', 'WooCommerce', 'Gutenberg', 'EDD' );
 
 		foreach ( $classes as $class ) {
 			if ( \class_exists( __NAMESPACE__ . '\\' . $class ) ) {
