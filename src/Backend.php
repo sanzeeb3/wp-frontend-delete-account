@@ -24,8 +24,6 @@ class Backend {
 		add_action( 'admin_menu', array( $this, 'wpfda_register_setting_menu' ) );
 		add_action( 'admin_init', array( $this, 'save_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_assets' ) );
-		add_action( 'wp_ajax_wpfda_deactivation_notice', array( $this, 'deactivation_notice' ) );
-		add_action( 'wp_ajax_wpfda_deactivation_email', array( $this, 'deactivation_email' ) );
 		add_action( 'wp_ajax_wpfda_email_status', array( $this, 'email_status' ) );
 		add_action( 'admin_print_scripts', array( $this, 'remove_notices' ) );
 	}
@@ -43,11 +41,8 @@ class Backend {
 
 		$params = array(
 			'ajax_url'                     => admin_url( 'admin-ajax.php' ),
-			'deactivation_nonce'           => wp_create_nonce( 'deactivation-notice' ),
 			'wpfda_general_settings_nonce' => wp_create_nonce( 'wp_frontend_delete_account_settings' ),
 			'status_nonce'                 => wp_create_nonce( 'email-status' ),
-			'deactivating'                 => esc_html__( 'Deactivating...', 'wp-frontend-delete-account' ),
-			'wrong'                        => esc_html__( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
 			'enable_email'                 => esc_html__( 'Enable this email', 'wp-frontend-delete-account' ),
 			'disable_email'                => esc_html__( 'Disable this email', 'wp-frontend-delete-account' ),
 			'title'                        => get_option( 'wpfda_title', 'Delete Account' ),
@@ -63,13 +58,13 @@ class Backend {
 			'users'                        => get_users(),
 		);
 
-		if ( 'plugins.php' === $pagenow || 'settings_page_wp-frontend-delete-account' === $current_screen->id ) {
+		if ( 'settings_page_wp-frontend-delete-account' === $current_screen->id ) {
 
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 			wp_enqueue_style( 'wpfda-backend', plugins_url( 'assets/css/backend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, $media = 'all' );
 
-			if ( 'settings_page_wp-frontend-delete-account' === $current_screen->id && empty( $_GET['section'] ) ) {
+			if ( empty( $_GET['section'] ) ) {
 				// Settings JS is current not required for page sections such as emails page.
 
 				wp_enqueue_script( 'wpf-delete-account-settings-js', plugins_url( 'assets/js/admin/settings.min.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
@@ -226,94 +221,6 @@ class Backend {
 		$enable = ! empty( $_POST['enable'] ) ? 'on' : 'off';
 
 		update_option( 'wpfda_enable_' . $email . '_email', $enable );
-	}
-
-	/**
-	 * Popup feedback on plugin deactivation.
-	 *
-	 *  @since  1.0.1
-	 */
-	public static function deactivation_notice() {
-
-		check_ajax_referer( 'deactivation-notice', 'security' );
-
-		ob_start();
-		global $status, $page, $s;
-		$deactivate_url = wp_nonce_url( 'plugins.php?action=deactivate&amp;plugin=' . WPFDA_PLUGIN_FILE . '&amp;plugin_status=' . $status . '&amp;paged=' . $page . '&amp;s=' . $s, 'deactivate-plugin_' . WPFDA_PLUGIN_FILE );
-
-		?>
-			<!-- The Modal -->
-			<div id="wp-frontend-delete-account-modal" class="wp-frontend-delete-account-modal">
-
-				<!-- Modal content -->
-				<div class="wp-frontend-delete-account-modal-content">
-					<div class="wp-frontend-delete-account-modal-header">
-					</div>
-
-					<div class="wp-frontend-delete-account-modal-body">
-						<div class="container">
-							<form method="post" id="wp-frontend-delete-account-send-deactivation-email">
-
-								<div class="row">
-										<h3 for=""><?php echo esc_html__( 'Hey, would you care to provide a deactivation feedback? This is completely anonymous. ', 'wp-frontend-delete-account' ); ?></h3>
-									<div class="col-75">
-										<textarea id="message" name="message" placeholder="Deactivation Reason?" style="height:150px"></textarea>
-									</div>
-								</div>
-								<div class="row">
-										<?php wp_nonce_field( 'wpfda_deactivation_email', 'wpfda_deactivation_email' ); ?>
-										<a href="<?php echo esc_url( $deactivate_url ); ?>"><?php echo esc_html__( 'Skip and deactivate', 'wp-frontend-delete-account' ); ?>
-										<input type="submit" id="wpfda-send-deactivation-email" value="Deactivate">
-								</div>
-							</form>
-						</div>
-
-					<div class="wp-frontend-delete-account-modal-footer">
-					</div>
-				</div>
-			</div>
-
-		<?php
-
-		$content = ob_get_clean();
-		wp_send_json( $content );
-		// WPCS: XSS OK.
-	}
-
-	/**
-	 * Deactivation Email.
-	 *
-	 * @since  1.0.1
-	 *
-	 * Collecting feedback in site @since 1.4.0
-	 *
-	 * @return void
-	 */
-	public function deactivation_email() {
-
-		check_ajax_referer( 'wpfda_deactivation_email', 'security' );
-
-		$message = isset( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '';
-
-		if ( ! empty( $message ) ) {
-
-			$headers = array( 'Accept: application/json', 'Content-Type: application/json' );
-			$args    = array(
-				'method'  => 'POST',
-				'headers' => $headers,
-				'body'    => array(
-					// Will do better one day!
-					'deactivation_feedback_secret_key' => 'deactivation_feedback_secret_key',
-					'message'                          => $message,
-				),
-			);
-
-			$result = wp_remote_post( esc_url_raw( 'https://sanjeebaryal.com.np' ), $args );
-
-			do_action( 'wp_frontend_delete_account_deactivation_feedback_sent', $result );
-		}
-
-		deactivate_plugins( WPFDA_PLUGIN_FILE );
 	}
 
 	/**
