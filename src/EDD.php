@@ -15,6 +15,11 @@ class EDD {
 	 * @since @@{version}
 	 */
 	public function init() {
+
+		if( ! class_exists( 'Easy_Digital_Downloads' ) ) {
+			return;
+		}
+
 		add_action( 'edd_profile_editor_after_password_fields', [ $this, 'add_delete_account_section' ] );
 	}
 
