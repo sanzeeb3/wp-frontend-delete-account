@@ -20,6 +20,14 @@ function wpf_delete_account_content() {
 		return;
 	}
 
+	ob_get_clean();
+		?>
+			<div class='wpfda-delete-account-container'>
+			</div>
+		<?php
+
+	return ob_get_clean();
+
 	$button           = get_option( 'wpfda_button_label', 'Confirm' );
 	$user_id          = get_current_user_id();
 	$security         = get_option( 'wpfda_security', 'password' );
