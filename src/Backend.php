@@ -75,7 +75,7 @@ class Backend {
 				);
 			}
 
-			wp_enqueue_script( 'wpf-delete-account-js', plugins_url( 'assets/js/admin/backend' . $suffix . '.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
+			wp_enqueue_script( 'wpf-delete-account-js', plugins_url( 'assets/js/admin/backend' . $suffix . '.js', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
 			wp_localize_script(
 				'wpf-delete-account-js',
 				'wpfda_plugins_params',
