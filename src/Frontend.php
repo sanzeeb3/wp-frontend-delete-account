@@ -47,17 +47,12 @@ class Frontend {
 			wp_enqueue_script( 'wpfda-delete-account-frontend', plugins_url( 'assets/js/frontend.min.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
 			wp_enqueue_style( 'wpfda-frontend-css', plugins_url( 'assets/css/frontend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
 
-			$security       = get_option( 'wpfda_security', 'password' );
-			$captcha_answer = get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' );
-
 			wp_localize_script(
 				'wpfda-delete-account-frontend',
 				'wpfda_plugins_params',
 				array(
 					'ajax_url'            => admin_url( 'admin-ajax.php' ),
 					'wpfda_nonce'         => wp_create_nonce( 'wpfda_nonce' ),
-					'security'            => $security,
-					'captcha_answer'      => $captcha_answer,
 					'is_feedback_enabled' => get_option( 'wpfda_enable_feedback_email', 'no' ),
 					'redirect_url'        => get_option( 'wpfda_redirect_url' ),
 					'incorrect_answer'    => esc_html__( 'Incorrect Answer. Please try again.', 'wp-frontend-delete-account' ),
@@ -66,6 +61,13 @@ class Frontend {
 					'deleting'            => esc_html__( 'Deleting...', 'wp-frontend-delete-account' ),
 					'wrong'               => esc_html__( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
 					'current_user_email'  => wp_get_current_user()->user_email,
+					'button'              => get_option( 'wpfda_button_label', 'Confirm' ),
+					'user_id'             => get_current_user_id(),
+					'security'            => get_option( 'wpfda_security', 'password' ),
+					'captcha_question'    => get_option( 'wpfda_security_custom_captcha_question', 'Enter PERMANENTLY DELETE to confirm:' ),
+					'captcha_answer'      => get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' ),
+					'password_text'       => get_option( 'wpfda_security_password_text', esc_html__( 'Enter password to confirm:', 'wp-frontend-delete-account' ) ),
+					'is_administrator'    => current_user_can( 'administrator' )
 				)
 			);
 		}//end if
