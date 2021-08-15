@@ -1,10 +1,18 @@
 import { render } from '@wordpress/element';
 import { Component } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+import {useState} from 'react';
+
 
 function Contents() {
 
+	const processAction = () => {
+		setDisable( true );
+	}
+
 	var element = [];
+
+	const [disable, setDisable] = useState( false );
 
 	if ( wpfda_plugins_params.is_administrator ) {
 		element = [ <i key='warning' style={{color:'red'}}> { __( 'Just a heads up! You are the site administrator and processing further will delete yourself.', 'wp-frontend-delete-account' ) } </i> ]
@@ -38,7 +46,7 @@ function Contents() {
 
 	element = [	...element,
 				<div key='wpfda-submit' className='wpfda-submit'>
-						<button>{wpfda_plugins_params.button}</button>
+						<button disabled={disable} onClick={processAction}>{wpfda_plugins_params.button}</button>
 				</div>
 			]
 
