@@ -1,8 +1,11 @@
+/**
+ * global jQuery, wpfda_plugin_params
+ */
+
 import { render } from '@wordpress/element';
 import { Component } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { useState } from 'react';
-
 
 function Contents() {
 
@@ -26,35 +29,59 @@ function Contents() {
 			case 'password':
 
 				if ( '' === passwordValue ) {
-					setInputText( wpfda_plugins_params.empty_password );
+					setErrorText( wpfda_plugins_params.empty_password );
 					setDisable( false );
 
 					return;
 				}
 
+				var value = passwordValue;
 
 			break;
 
 			case 'custom_captcha':
 
 				if ( wpfda_plugins_params.captcha_answer != captchaValue ) {
-					setInputText( wpfda_plugins_params.incorrect_answer );
+					setErrorText( wpfda_plugins_params.incorrect_answer );
 					setDisable( false );
 
 					return;
 				}
 
+				var value = captchaValue;
+
 			break;
 		}
 
 		// Validation is complete at this point. Let's process the deletion now.
-		setInputText( wpfda_plugins_params.processing );
+		setErrorText( wpfda_plugins_params.processing );
+
+		var data = {
+			action: 'confirm_delete',
+			security: wpfda_plugins_params.wpfda_nonce,
+			value: value,
+		};
+
+		jQuery.post( wpfda_plugins_params.ajax_url, data, function( response ) {
+
+			if( response.success === false ) {
+				setErrorText( response.data.message );
+				setDisable( false );
+
+				return;
+			}
+
+			setErrorText( response.message );
+
+			window.location.replace( wpfda_plugins_params.redirect_url );
+
+		});
 	}
 
 	var element = [];
 
 	const [disable, setDisable] = useState( false );
-	const [inputText, setInputText] = useState( '' );
+	const [errorText, setErrorText] = useState( '' );
 	const [passwordValue, setPasswordValue] = useState( '' );
 	const [captchaValue, setCaptchaValue] = useState( '' );
 
@@ -86,7 +113,7 @@ function Contents() {
 				<div key='wpfda-error' className='wpfda-error'>
 					<span style={{color:'red'}}>
 						<i>
-							{inputText}
+							{errorText}
 						</i>
 					</span>
 				</div>
