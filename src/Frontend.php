@@ -20,7 +20,7 @@ class Frontend {
 	 */
 	public function init() {
 
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'register_assets' ) );
 		add_action( 'wp_ajax_confirm_delete', array( $this, 'confirm_delete' ) );
 		add_action( 'wp_ajax_nopriv_delete_feedback', array( $this, 'delete_feedback' ) );
 		add_action( 'wp_ajax_nopriv_delete_feedback_email', array( $this, 'delete_feedback_email' ) );
@@ -34,43 +34,10 @@ class Frontend {
 	 *
 	 * @return void.
 	 */
-	public function enqueue_assets() {
+	public function register_assets() {
 
-		global $post;
-
-		$has_shortcode = is_singular() && is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'wp_frontend_delete_account' );
-
-		if ( ( defined( 'WC_VERSION' ) && is_account_page() ) || ( function_exists( 'has_block' ) && has_block( 'wp-frontend-delete-account/delete-account-content' ) ) || $has_shortcode || 'on' === get_option( 'wpfda_load_assets_globally' ) ) {
-
-			$security = get_option( 'wpfda_security', 'password' );
-
-			wp_enqueue_script( 'wpfda-delete-account-frontend', plugins_url( 'assets/js/frontend.min.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
-			wp_enqueue_style( 'wpfda-frontend-css', plugins_url( 'assets/css/frontend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
-
-			wp_localize_script(
-				'wpfda-delete-account-frontend',
-				'wpfda_plugins_params',
-				array(
-					'ajax_url'            => admin_url( 'admin-ajax.php' ),
-					'wpfda_nonce'         => wp_create_nonce( 'wpfda_nonce' ),
-					'is_feedback_enabled' => get_option( 'wpfda_enable_feedback_email', 'no' ),
-					'redirect_url'        => get_option( 'wpfda_redirect_url' ),
-					'incorrect_answer'    => esc_html__( 'Incorrect Answer. Please try again.', 'wp-frontend-delete-account' ),
-					'empty_password'      => esc_html__( 'Empty Password.', 'wp-frontend-delete-account' ),
-					'processing'          => esc_html__( 'Processing...', 'wp-frontend-delete-account' ),
-					'deleting'            => esc_html__( 'Deleting...', 'wp-frontend-delete-account' ),
-					'wrong'               => esc_html__( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
-					'current_user_email'  => wp_get_current_user()->user_email,
-					'button'              => get_option( 'wpfda_button_label', 'Confirm' ),
-					'user_id'             => get_current_user_id(),
-					'security'            => get_option( 'wpfda_security', 'password' ),
-					'captcha_question'    => get_option( 'wpfda_security_custom_captcha_question', 'Enter PERMANENTLY DELETE to confirm:' ),
-					'captcha_answer'      => get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' ),
-					'password_text'       => get_option( 'wpfda_security_password_text', esc_html__( 'Enter password to confirm:', 'wp-frontend-delete-account' ) ),
-					'is_administrator'    => current_user_can( 'administrator' )
-				)
-			);
-		}//end if
+		wp_register_script( 'wpfda-delete-account-frontend', plugins_url( 'assets/js/frontend.min.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
+		wp_register_style( 'wpfda-frontend-css', plugins_url( 'assets/css/frontend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
 	}
 
 	/**
