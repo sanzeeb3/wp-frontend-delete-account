@@ -69,12 +69,65 @@ function Contents() {
 				setDisable( false );
 
 				return;
+			} else if( response.success === true ) {
+
+				setErrorText( response.message );
+
+				if ( 'on' !==  wpfda_plugins_params.is_feedback_enabled ) {
+
+					window.location.replace( wpfda_plugins_params.redirect_url );
+				} else {
+
+					var data = {
+						action: 'delete_feedback',
+					};
+
+					jQuery.post( wpfda_plugins_params.ajax_url, data, function( response ) {
+
+						jQuery('body').append( response );
+						var modal = document.getElementById('wp-frontend-delete-account-modal');
+
+				  		// Open the modal.
+				  		modal.style.display = "block";
+
+				  		// On click on send email button on the modal.
+					    jQuery("#wpfda-send-deactivation-email").click( function( e ) {
+
+					    	this.value 		= wpfda_plugins_params.deleting;
+							this.disabled   = true;	// Disable the feedback button once email is sent to avoid duplicates.
+
+					    	var form 		= jQuery("#wp-frontend-delete-account-send-deactivation-email");
+
+							var message		= form.find( ".row .col-75 textarea#message" ).val();
+							var nonce 		= form.find( ".row #wpfda_delete_feedback_email").val();
+
+							var data = {
+								action: 'delete_feedback_email',
+								security: nonce,
+								message: message,
+								user_email: wpfda_plugins_params.current_user_email
+							}
+
+							jQuery.post( wpfda_plugins_params.ajax_url, data, function( response ) {
+
+								if( response.success === false ) {
+									alert( wpfda_plugins_params.wrong );
+								} else {
+									window.location.replace( wpfda_plugins_params.redirect_url );
+								}
+
+								modal.remove();
+							}).fail( function( xhr ) {
+								alert( wpfda_plugins_params.wrong );
+							});
+
+					    });
+
+					}).fail( function( xhr ) {
+						window.console.log( xhr.responseText );
+					});
+				}
 			}
-
-			setErrorText( response.message );
-
-			window.location.replace( wpfda_plugins_params.redirect_url );
-
 		});
 	}
 

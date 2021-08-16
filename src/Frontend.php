@@ -44,7 +44,7 @@ class Frontend {
 
 			$security = get_option( 'wpfda_security', 'password' );
 
-			wp_enqueue_script( 'wpfda-delete-account-frontend', plugins_url( 'assets/js/frontend.min.js', WPFDA_PLUGIN_FILE ), array( 'jQuery', 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
+			wp_enqueue_script( 'wpfda-delete-account-frontend', plugins_url( 'assets/js/frontend.min.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
 			wp_enqueue_style( 'wpfda-frontend-css', plugins_url( 'assets/css/frontend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
 
 			wp_localize_script(
