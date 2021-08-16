@@ -7,11 +7,11 @@ import { useState } from 'react';
 function Contents() {
 
 	const changeValue = (e) => {
-		if (e.target.name = 'wpfda-password') {
+		if (e.target.name == 'wpfda-password') {
 			setPasswordValue(e.target.value);
 		}
 
-		if (e.target.name = 'wpfda-custom-captcha-answer') {
+		if (e.target.name == 'wpfda-custom-captcha-answer') {
 			setCaptchaValue(e.target.value);
 		}
 	}
@@ -47,7 +47,7 @@ function Contents() {
 			break;
 		}
 
-		// Processing the deletion.
+		// Validation is complete at this point. Let's process the deletion now.
 		setInputText( wpfda_plugins_params.processing );
 	}
 
