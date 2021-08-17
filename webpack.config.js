@@ -1,8 +1,8 @@
 module.exports = {
-	entry: './assets/js/frontend.js',
+	entry: './assets/js/admin/gutenberg.js',
 	output: {
 		path: __dirname,
-		filename: 'assets/js/frontend.min.js',
+		filename: 'assets/js/admin/gutenberg.min.js',
 	},
 	module: {
 		loaders: [

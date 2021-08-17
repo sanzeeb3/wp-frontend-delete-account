@@ -5,9 +5,9 @@
 import { render } from '@wordpress/element';
 import { Component } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { useState } from 'react';
+import { useState } from '@wordpress/element';
 
-function Contents() {
+export default function Contents() {
 
 	const changeValue = (e) => {
 		if (e.target.name == 'wpfda-password') {
