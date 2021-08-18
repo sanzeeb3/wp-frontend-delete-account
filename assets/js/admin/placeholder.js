@@ -9,11 +9,7 @@ import { __ } from '@wordpress/i18n';
 
 export default function Placeholder() {
 
-	var element = [];
-
-	if ( wpfda_plugins_params.is_administrator ) {
-		element = [ <i key='warning' style={{color:'red'}}> { __( 'Just a heads up! You are the site administrator and processing further will delete yourself.', 'wp-frontend-delete-account' ) } </i> ]
-	}
+	var element = [ <i key='warning' style={{color:'red'}}> { __( 'This is just a block view. For best experience, please visit the page in frontend.', 'wp-frontend-delete-account' ) } </i> ]
 
 	if ( 'password' === wpfda_plugins_params.security ) {
 		element = [ ...element,
