@@ -76,7 +76,7 @@ class Backend {
 			} else {
 
 				// Backend JS is currently only required for page sections such as emails page.
-				wp_enqueue_script( 'wpf-delete-account-js', plugins_url( 'assets/js/admin/backend' . $suffix . '.js', WPFDA_PLUGIN_FILE ), array( 'jQuery' ), WPFDA_VERSION, false );
+				wp_enqueue_script( 'wpf-delete-account-js', plugins_url( 'assets/js/admin/backend' . $suffix . '.js', WPFDA_PLUGIN_FILE ), array( 'jquery' ), WPFDA_VERSION, false );
 				wp_localize_script(
 					'wpf-delete-account-js',
 					'wpfda_plugins_params',
