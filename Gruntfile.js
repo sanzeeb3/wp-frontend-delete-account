@@ -94,7 +94,6 @@ module.exports = function( grunt ){
 							'!*.min.js',
 							'!gutenberg.js',
 							'!settings.js',
-							'!frontend.js'
 							'!placeholder.js'
 						],
 						dest: '<%= dirs.js %>/admin',
