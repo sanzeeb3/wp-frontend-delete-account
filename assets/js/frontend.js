@@ -1,7 +1,6 @@
 /**
  * global jQuery, wpfda_plugin_params
  */
-
 import { render } from '@wordpress/element';
 import { Component } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
@@ -188,8 +187,11 @@ export default function Contents() {
 
 document.addEventListener( "DOMContentLoaded", function(event) {
 
-	render(
-		<Contents />,
-		document.getElementsByClassName( 'wpfda-delete-account-container' )[0]
-	)
+	if ( document.getElementsByClassName( 'wpfda-delete-account-container' )[0] ) {
+
+		render(
+			<Contents />,
+			document.getElementsByClassName( 'wpfda-delete-account-container' )[0]
+		)
+	}
 });
