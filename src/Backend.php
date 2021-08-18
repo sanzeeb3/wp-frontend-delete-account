@@ -65,7 +65,7 @@ class Backend {
 			wp_enqueue_style( 'wpfda-backend', plugins_url( 'assets/css/backend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, $media = 'all' );
 
 			// Settings JS is currently not required for page sections such as emails page.
-			if ( empty( $_GET['section'] ) ) {
+			if ( empty( $_GET['section'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 				wp_enqueue_script( 'wpf-delete-account-settings-js', plugins_url( 'assets/js/admin/settings.min.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
 				wp_localize_script(
@@ -83,7 +83,6 @@ class Backend {
 					$params
 				);
 			}
-
 		}//end if
 
 	}

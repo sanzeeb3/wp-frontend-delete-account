@@ -41,7 +41,7 @@ function wpf_delete_account_content() {
 }
 
 /**
- * i10n data to pass to JavaScript files.
+ * The i10n data to pass to JavaScript files.
  *
  * @since @@{VERSION}
  *
