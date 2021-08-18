@@ -1,6 +1,11 @@
 /**
+ * Frontend JS. The feedback email is performed in jQuery, rest in react.
+ *
+ * @since 1.5.7
+ *
  * global jQuery, wpfda_plugin_params
  */
+
 import { render } from '@wordpress/element';
 import { Component } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';

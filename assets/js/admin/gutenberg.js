@@ -1,3 +1,9 @@
+/**
+ * The block.
+ *
+ * @since 1.5.7 Edit and Save changes.
+ *
+ */
 const { registerBlockType } = wp.blocks;
 import { __ } from '@wordpress/i18n';
 
