@@ -1,8 +1,7 @@
 const { registerBlockType } = wp.blocks;
 import { __ } from '@wordpress/i18n';
 
-import Contents from '../frontend';
-
+import Placeholder from './placeholder';
 
 registerBlockType( 'wp-frontend-delete-account/delete-account-content', {
     title: __( 'WP Frontend Account Delete', 'wp-frontend-delete-account' ),
@@ -15,10 +14,10 @@ registerBlockType( 'wp-frontend-delete-account/delete-account-content', {
 
         }
     },
-	edit: Contents,
+	edit: Placeholder,
 
 	/**
 	 * Save()
 	 */
-    Contents,
+    Placeholder,
 } );
