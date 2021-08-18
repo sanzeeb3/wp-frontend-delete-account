@@ -11,7 +11,9 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+        uses: php-actions/composer@v6
+        with:
+          version: 1
 
       - name: grunt
         run: grunt
