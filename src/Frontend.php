@@ -36,7 +36,7 @@ class Frontend {
 	 */
 	public function register_assets() {
 
-		wp_register_script( 'wpfda-delete-account-frontend', plugins_url( 'assets/js/frontend.min.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
+		wp_register_script( 'wpfda-delete-account-frontend', plugins_url( 'assets/js/frontend.min.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n', 'jquery' ), WPFDA_VERSION, false );
 		wp_register_style( 'wpfda-frontend-css', plugins_url( 'assets/css/frontend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, false );
 	}
 
