@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Frontend Delete Account 1.5.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-08 05:00:26+00:00\n"
+"POT-Creation-Date: 2021-08-19 12:54:28+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,52 +13,48 @@ msgstr ""
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: functions.php:26
-msgid "Enter password to confirm:"
+#: functions.php:57 src/Frontend.php:82
+msgid "Incorrect Answer. Please try again."
 msgstr ""
 
-#: functions.php:39
-msgid ""
-"Just a heads up! You are the site administrator and processing further will "
-"delete yourself."
+#: functions.php:58
+msgid "Empty Password."
 msgstr ""
 
-#: src/Backend.php:49
-msgid "Deactivating..."
+#: functions.php:59
+msgid "Processing..."
 msgstr ""
 
-#: src/Backend.php:50 src/Frontend.php:67
+#: functions.php:60 src/Frontend.php:117
+msgid "Deleting..."
+msgstr ""
+
+#: functions.php:61
 msgid "Oops! Something went wrong"
 msgstr ""
 
-#: src/Backend.php:51 src/Emails/Emails.php:30 src/Emails/Emails.php:184
+#: functions.php:68
+msgid "Enter password to confirm:"
+msgstr ""
+
+#: src/Backend.php:46 src/Emails/Emails.php:30 src/Emails/Emails.php:184
 msgid "Enable this email"
 msgstr ""
 
-#: src/Backend.php:52 src/Emails/Emails.php:30
+#: src/Backend.php:47 src/Emails/Emails.php:30
 msgid "Disable this email"
 msgstr ""
 
-#: src/Backend.php:116
+#: src/Backend.php:113
 msgid "General"
 msgstr ""
 
-#: src/Backend.php:117
+#: src/Backend.php:114
 msgid "Emails"
 msgstr ""
 
-#: src/Backend.php:152
+#: src/Backend.php:149
 msgid "General Settings"
-msgstr ""
-
-#: src/Backend.php:258
-msgid ""
-"Hey, would you care to provide a deactivation feedback? This is completely "
-"anonymous. "
-msgstr ""
-
-#: src/Backend.php:265
-msgid "Skip and deactivate"
 msgstr ""
 
 #: src/Emails/Emails.php:36
@@ -123,7 +119,7 @@ msgstr ""
 msgid "Your account has been deleted successfully."
 msgstr ""
 
-#: src/Emails/Emails.php:135 src/Frontend.php:323
+#: src/Emails/Emails.php:135 src/Frontend.php:292
 msgid "A user - {user_email} provided a feedback on account deletion."
 msgstr ""
 
@@ -170,39 +166,23 @@ msgstr ""
 msgid "Feedback provided by the user."
 msgstr ""
 
-#: src/Frontend.php:63 src/Frontend.php:113
-msgid "Incorrect Answer. Please try again."
-msgstr ""
-
-#: src/Frontend.php:64
-msgid "Empty Password."
-msgstr ""
-
-#: src/Frontend.php:65
-msgid "Processing..."
-msgstr ""
-
-#: src/Frontend.php:66 src/Frontend.php:148
-msgid "Deleting..."
-msgstr ""
-
-#: src/Frontend.php:101
+#: src/Frontend.php:70
 msgid "Invalid Password!"
 msgstr ""
 
-#: src/Frontend.php:273
+#: src/Frontend.php:242
 msgid "Hey, would you care to provide feedback on your account deletion?"
 msgstr ""
 
-#: src/Frontend.php:275
+#: src/Frontend.php:244
 msgid "Account deletion reason?"
 msgstr ""
 
-#: src/Frontend.php:280
+#: src/Frontend.php:249
 msgid "Skip and delete"
 msgstr ""
 
-#: src/Frontend.php:281 src/WooCommerce.php:80
+#: src/Frontend.php:250 src/WooCommerce.php:80
 msgid "Delete Account"
 msgstr ""
 

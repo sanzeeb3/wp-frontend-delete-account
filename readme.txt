@@ -4,7 +4,7 @@ Tags: delete-account, delete-account-from-frontend, frontend-delete, remove-acco
 Requires at least: 4.0
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 1.5.6
+Stable tag: 1.5.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -55,6 +55,10 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 3. Gutenberg Block View
 
 == Changelog ==
+
+= 1.5.7 - 08/19/2021 =
+* Enhancement - Remove unnecessary difficulties on plugin deactivation.
+* Enhancement - Refactor frontend part.
 
 = 1.5.6 - 08/08/2021 =
 * Enhancement - Ensure 'Delete Account' will be the last item in the WC account menu.
