@@ -15,9 +15,6 @@ jobs:
         with:
           version: 1
 
-      - name: grunt
-        run: grunt
-
       - name: WordPress Plugin Deploy
         uses: 10up/action-wordpress-plugin-deploy@stable
         env:
