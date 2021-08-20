@@ -62,7 +62,7 @@ class Emails {
 							<?php
 						}
 						?>
-						<!-- Emails row start !-->
+						<!-- Emails row end !-->
 					</tbody>
 				</table>
 			</td>
@@ -117,7 +117,7 @@ class Emails {
 				</tr>
 				<!-- Enable this email input end -->
 
-				<!-- Email receipent input start -->
+				<!-- Email receipent input start. User email do not require this section. -->
 				<?php if ( 'user' !== $email ) : ?>
 					<?php $name = 'admin' === $email ? 'wpfda_email_receipent' : 'wpfda_' . $email . '_email_receipent'; ?>
 					<tr valign="top">
@@ -259,7 +259,7 @@ class Emails {
 					'desc'      => esc_html__( 'Email notification sent to the user after their account has been deleted.', 'wp-frontend-delete-account' ),
 					'receipent' => esc_html__( 'User\'s Email Address', 'wp-frontend-delete-account' ),
 					'subject'   => esc_html__( 'Your account has been deleted successfully.', 'wp-frontend-delete-account' ),
-					'messagae'  => get_option(
+					'message'  => get_option(
 						'wpfda_user_email_message',
 						sprintf( /* translators: %1$s - Site URL. */
 							esc_html__( 'Your account has been deleted. In case this is a mistake, please contact the site administrator at %1$s', 'wp-frontend-delete-account' ),
