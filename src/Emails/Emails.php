@@ -258,7 +258,7 @@ class Emails {
 					'label'     => esc_html__( 'User Email', 'wp-frontend-delete-account' ),
 					'desc'      => esc_html__( 'Email notification sent to the user after their account has been deleted.', 'wp-frontend-delete-account' ),
 					'receipent' => esc_html__( 'User\'s Email Address', 'wp-frontend-delete-account' ),
-					'subject'   => esc_html__( 'Your account has been deleted successfully.', 'wp-frontend-delete-account' ),
+					'subject'   => get_option( 'wpfda_user_email_subject', esc_html__( 'Your account has been deleted successfully.', 'wp-frontend-delete-account' ) ),
 					'message'  => get_option(
 						'wpfda_user_email_message',
 						sprintf( /* translators: %1$s - Site URL. */
