@@ -23,7 +23,7 @@ class Emails {
 	public static function overview() {
 
 		// Email Notification title and description.
-		echo self::get_title_description_text();
+		echo self::get_title_description_text(); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		?>
 
 			<tr valign="top">
@@ -33,7 +33,7 @@ class Emails {
 						<tr>
 							<?php
 								// Table column head.
-								echo self::get_table_columns();
+								echo self::get_table_columns(); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							?>
 						</tr>
 					</thead>
@@ -45,16 +45,16 @@ class Emails {
 						$emails = self::get_emails();
 						foreach ( $emails as $key => $value ) {
 
-							 $read_class[ $key ]   = 'on' === $value['enable'] ? 'wpfda-enable' : 'wpfda-disable';
-							 $tooltip_text[ $key ] = 'on' === $value['enable'] ? __( 'Disable this email', 'wp-frontend-delete-account' ) : __( 'Enable this email', 'wp-frontend-delete-account' );
-							 $icon[ $key ]         = '<span title="' . esc_attr( $tooltip_text[ $key ] ) . '" data-email="' . esc_attr( $key ) . '" class="wpfda-enable-disable dashicons dashicons-marker ' . esc_attr( $read_class[ $key ] ) . '">
+							$read_class[ $key ]   = 'on' === $value['enable'] ? 'wpfda-enable' : 'wpfda-disable';
+							$tooltip_text[ $key ] = 'on' === $value['enable'] ? __( 'Disable this email', 'wp-frontend-delete-account' ) : __( 'Enable this email', 'wp-frontend-delete-account' );
+							$icon[ $key ]         = '<span title="' . esc_attr( $tooltip_text[ $key ] ) . '" data-email="' . esc_attr( $key ) . '" class="wpfda-enable-disable dashicons dashicons-marker ' . esc_attr( $read_class[ $key ] ) . '">
 													</span>';
 
 							?>
 								<tr>
 									<td class="email-status"><?php echo $icon[ $key ]; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> </td>
-									<td class="email-name"><?php echo $value['label']; ?> </td>
-									<td class="email-receipent"><?php echo $value['receipent']; ?> </td>
+									<td class="email-name"><?php echo $value['label']; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> </td>
+									<td class="email-receipent"><?php echo $value['receipent']; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> </td>
 									<td class="wc-email-settings-table-actions">
 										<a class="button" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=wp-frontend-delete-account&section=emails&email=' . $key . '' ), 'wp-frontend-delete-account-emails' ) ); ?>"><?php esc_html_e( 'Manage', 'wp-frontend-delete-account' ); ?></a>
 									</td>
@@ -92,12 +92,12 @@ class Emails {
 
 		?>
 		<h2 class="wp-heading-inline">
-			<?php	echo $email_options['label']; ?>
+			<?php	echo $email_options['label']; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=wp-frontend-delete-account&section=emails' ), 'wp-frontend-delete-account-emails' ) ); ?> "> ⤴ </a>
 		</h2>
 
 		<div id="email_notification_settings-description">
-			<p><?php echo $email_options['desc']; ?></p>
+			<p><?php echo $email_options['desc']; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 		</div>
 
 		<hr class="wp-header-end">
@@ -259,7 +259,7 @@ class Emails {
 					'desc'      => esc_html__( 'Email notification sent to the user after their account has been deleted.', 'wp-frontend-delete-account' ),
 					'receipent' => esc_html__( 'User\'s Email Address', 'wp-frontend-delete-account' ),
 					'subject'   => get_option( 'wpfda_user_email_subject', esc_html__( 'Your account has been deleted successfully.', 'wp-frontend-delete-account' ) ),
-					'message'  => get_option(
+					'message'   => get_option(
 						'wpfda_user_email_message',
 						sprintf( /* translators: %1$s - Site URL. */
 							esc_html__( 'Your account has been deleted. In case this is a mistake, please contact the site administrator at %1$s', 'wp-frontend-delete-account' ),
