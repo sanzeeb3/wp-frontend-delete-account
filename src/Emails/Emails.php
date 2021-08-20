@@ -22,53 +22,34 @@ class Emails {
 	 */
 	public static function overview() {
 
-		foreach ( array( 'admin', 'user', 'feedback' ) as $key ) {
-
-			$default = 'feedback' !== $key ? 'on' : 'off';
-
-			$read_class[ $key ]   = 'on' === get_option( 'wpfda_enable_' . $key . '_email', $default ) ? 'wpfda-enable' : 'wpfda-disable';
-			$tooltip_text[ $key ] = 'on' === get_option( 'wpfda_enable_' . $key . '_email', $default ) ? __( 'Disable this email', 'wp-frontend-delete-account' ) : __( 'Enable this email', 'wp-frontend-delete-account' );
-			$icon[ $key ]         = '<span title="' . esc_attr( $tooltip_text[ $key ] ) . '" data-email="' . esc_attr( $key ) . '" class="wpfda-enable-disable dashicons dashicons-marker ' . esc_attr( $read_class[ $key ] ) . '">
-							</span>';
-		}
-
+		echo self::get_title_description_text();
 		?>
-			<h2><?php esc_html_e( 'Email Notifications', 'wp-frontend-delete-account' ); ?></h2>
-			<div id="email_notification_settings-description">
-				<p>
-					<?php esc_html_e( 'Email notifications sent from WP Frontend Delete Account are listed below. Click on an email to configure it.', 'wp-frontend-delete-account' ); ?></p>
 
-				<p>
-					<?php
-					echo sprintf( /* translators: %1$s - link to WP Mail SMTP plugin page. */
-						esc_html__( 'If you are having issue with email delivery in your site, I recommend setting up SMTP in your site using SMTP plugins such as %1s.', 'wp-frontend-delete-account' ),
-						'<a href="https://wordpress.org/plugins/wp-mail-smtp/" target="_blank"><strong>WP Mail SMTP</strong></a>'
-					);
-					?>
-				</p>
-			</div>
-		<tr valign="top">
-		<td class="wc_emails_wrapper" colspan="3">
-			<table style="width:75%" class="wc_emails widefat" cellspacing="0">
-				<thead>
-					<tr>
-						<?php
-						$columns = apply_filters(
-							'wp_frontend_delete_account_email_setting_columns',
-							array(
-								'status'    => '',
-								'name'      => esc_html__( 'Email', 'wp-frontend-delete-account' ),
-								'recipient' => esc_html__( 'Recipient(s)', 'wp-frontend-delete-account' ),
-								'actions'   => esc_html__( 'Actions', 'wp-frontend-delete-account' ),
-							)
-						);
-						foreach ( $columns as $key => $column ) {
-							echo '<th class="wc-email-settings-table-' . esc_attr( $key ) . '">' . esc_html( $column ) . '</th>';
-						}
-						?>
+			<tr valign="top">
+			<td class="wc_emails_wrapper" colspan="3">
+				<table style="width:75%" class="wc_emails widefat" cellspacing="0">
+					<thead>
+						<tr>
+							<?php
+								echo self::get_table_columns();
+							?>
 						</tr>
 					</thead>
 					<tbody>
+
+						<?php
+						foreach ( array( 'admin', 'user', 'feedback', 'summary' ) as $key ) {
+
+							 $default = 'feedback' !== $key ? 'on' : 'off';
+
+							 $read_class[ $key ]   = 'on' === get_option( 'wpfda_enable_' . $key . '_email', $default ) ? 'wpfda-enable' : 'wpfda-disable';
+							 $tooltip_text[ $key ] = 'on' === get_option( 'wpfda_enable_' . $key . '_email', $default ) ? __( 'Disable this email', 'wp-frontend-delete-account' ) : __( 'Enable this email', 'wp-frontend-delete-account' );
+							 $icon[ $key ]         = '<span title="' . esc_attr( $tooltip_text[ $key ] ) . '" data-email="' . esc_attr( $key ) . '" class="wpfda-enable-disable dashicons dashicons-marker ' . esc_attr( $read_class[ $key ] ) . '">
+												</span>';
+						}
+
+						?>
+
 						<tr>
 							<td class="email-status"><?php echo $icon['admin']; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> </td>
 							<td class="email-name"><?php esc_html_e( 'Admin Email', 'wp-frontend-delete-account' ); ?> </td>
@@ -93,6 +74,15 @@ class Emails {
 							<td class="email-receipent"><?php echo get_option( 'wpfda_feedback_email_receipent', get_option( 'admin_email' ) ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> </td>
 							<td class="wc-email-settings-table-actions">
 								<a class="button" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=wp-frontend-delete-account&section=emails&email=feedback' ), 'wp-frontend-delete-account-emails' ) ); ?>"><?php esc_html_e( 'Manage', 'wp-frontend-delete-account' ); ?></a>
+							</td>
+						</tr>
+
+						<tr>
+							<td class="email-status"><?php echo $icon['summary']; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> </td>
+							<td class="email-name"><?php esc_html_e( 'Weekly Summary Email', 'wp-frontend-delete-account' ); ?> </td>
+							<td class="email-receipent"><?php echo get_option( 'wpfda_summary_email_receipent', get_option( 'admin_email' ) ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> </td>
+							<td class="wc-email-settings-table-actions">
+								<a class="button" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=wp-frontend-delete-account&section=emails&email=summary' ), 'wp-frontend-delete-account-emails' ) ); ?>"><?php esc_html_e( 'Manage', 'wp-frontend-delete-account' ); ?></a>
 							</td>
 						</tr>
 					</tbody>
@@ -127,21 +117,26 @@ class Emails {
 		switch ( $email ) {
 			case 'admin':
 				$default_subject = esc_html__( 'Heads up! A user deleted their account.', 'wp-frontend-delete-account' );
+				$default_message = esc_html__( 'A user {user_name} - {user_email} has deleted their account.', 'wp-frontend-delete-account' );
 				break;
 			case 'user':
 				$default_subject = esc_html__( 'Your account has been deleted successfully.', 'wp-frontend-delete-account' );
+				$default_message = sprintf( /* translators: %1$s - Site URL. */
+					esc_html__( 'Your account has been deleted. In case this is a mistake, please contact the site administrator at %1$s', 'wp-frontend-delete-account' ),
+					site_url()
+				);
 				break;
 			case 'feedback':
 				$default_subject = esc_html__( 'A user - {user_email} provided a feedback on account deletion.', 'wp-frontend-delete-account' );
 				break;
+			case 'summary':
+				$default_subject = esc_html__( 'WP Frontend Delete Account Email Summary', 'wp-frontend-delete-account' );
+				$default_message = esc_html( 'Oh, hi there' );
+				break;
 		}
 
-		$default_message = 'admin' === $email ? esc_html__( 'A user {user_name} - {user_email} has deleted their account.', 'wp-frontend-delete-account' ) : sprintf( /* translators: %1$s - Site URL. */
-			esc_html__( 'Your account has been deleted. In case this is a mistake, please contact the site administrator at %1$s', 'wp-frontend-delete-account' ),
-			site_url()
-		);
-		$subject         = get_option( 'wpfda_' . $email . '_email_subject', $default_subject );
-		$message         = get_option( 'wpfda_' . $email . '_email_message', $default_message );
+		$subject = get_option( 'wpfda_' . $email . '_email_subject', $default_subject );
+		$message = get_option( 'wpfda_' . $email . '_email_message', $default_message );
 
 		?>
 		<h2 class="wp-heading-inline">
@@ -155,6 +150,9 @@ class Emails {
 					break;
 				case 'feedback':
 					esc_html_e( 'Feedback Email', 'wp-frontend-delete-account' );
+					break;
+				case 'summary':
+					esc_html_e( 'Weekly Summary Email', 'wp-frontend-delete-account' );
 					break;
 
 			}
@@ -173,6 +171,10 @@ class Emails {
 				<?php if ( 'feedback' === $email ) : ?>
 					<p><?php esc_html_e( 'Email notification sent to the admin if user leaves a feedback upon deleting their account.', 'wp-frontend-delete-account' ); ?></p>
 				<?php endif; ?>
+
+				<?php if ( 'summary' === $email ) : ?>
+					<p><?php esc_html_e( 'Email notification sent to the admin about the total number of users deleted in a week.', 'wp-frontend-delete-account' ); ?></p>
+				<?php endif; ?>
 			</div>
 
 		<hr class="wp-header-end">
@@ -188,7 +190,7 @@ class Emails {
 						</td>
 				</tr>
 
-				<?php if ( 'admin' === $email || 'feedback' === $email ) : ?>
+				<?php if ( 'admin' === $email || 'feedback' === $email || 'summary' ) : ?>
 					<?php $name = 'admin' === $email ? 'wpfda_email_receipent' : 'wpfda_feedback_email_receipent'; ?>
 					<tr valign="top">
 					<th scope="row"><?php echo esc_html__( 'Email Recipient', 'wp-frontend-delete-account' ); ?></th>
@@ -238,5 +240,63 @@ class Emails {
 
 		</form>
 		<?php
+	}
+
+	/**
+	 * Tile and description of the Emails page.
+	 *
+	 * @since 1.5.8.
+	 *
+	 * @return string Text for title and description.
+	 */
+	public static function get_title_description_text() {
+
+		ob_start();
+		?>
+			<h2><?php esc_html_e( 'Email Notifications', 'wp-frontend-delete-account' ); ?></h2>
+			<div id="email_notification_settings-description">
+				<p>
+					<?php esc_html_e( 'Email notifications sent from WP Frontend Delete Account are listed below. Click on an email to configure it.', 'wp-frontend-delete-account' ); ?></p>
+
+				<p>
+					<?php
+					echo sprintf( /* translators: %1$s - link to WP Mail SMTP plugin page. */
+						esc_html__( 'If you are having issue with email delivery in your site, I recommend setting up SMTP in your site using SMTP plugins such as %1s.', 'wp-frontend-delete-account' ),
+						'<a href="https://wordpress.org/plugins/wp-mail-smtp/" target="_blank"><strong>WP Mail SMTP</strong></a>'
+					);
+					?>
+				</p>
+			</div>
+		<?php
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Table head column.
+	 *
+	 * @since 1.5.8
+	 *
+	 * @return string Text for column.
+	 */
+	public static function get_table_columns() {
+
+		$columns = apply_filters(
+			'wp_frontend_delete_account_email_setting_columns',
+			array(
+				'status'    => '',
+				'name'      => esc_html__( 'Email', 'wp-frontend-delete-account' ),
+				'recipient' => esc_html__( 'Recipient(s)', 'wp-frontend-delete-account' ),
+				'actions'   => esc_html__( 'Actions', 'wp-frontend-delete-account' ),
+			)
+		);
+
+		ob_start();
+
+		foreach ( $columns as $key => $column ) {
+			echo '<th class="wc-email-settings-table-' . esc_attr( $key ) . '">' . esc_html( $column ) . '</th>';
+		}
+
+		return ob_get_clean();
 	}
 }
