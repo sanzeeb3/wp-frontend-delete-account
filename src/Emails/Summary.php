@@ -44,7 +44,7 @@ class Summary {
 	 */
 	public function add_summary_email( $emails = array() ) {
 
-		$summary_message = 'Oh, hi there, <br><br><h1>{number}</h1><br/><br/>users deleted their account this past week. Previous week: {previous_number}';
+		$summary_message = 'Oh, hi there, <br><br><h1>{number}</h1><br/><br/>users deleted their account this past week. <br><br><b>Previous week:</b> {previous_number}. <br> <b>Total:</b> {total_number}';
 
 		$emails['summary'] = array(
 			'enable'    => get_option( 'wpfda_enable_summary_email', 'off' ),
@@ -90,9 +90,11 @@ class Summary {
 			$message         = $options['summary']['message'];
 			$this_number     = $this->get_deleted_users_count()['this'];
 			$previous_number = $this->get_deleted_users_count()['previous'];
+			$total_number    = $this->get_deleted_users_count()['total'];
 
 			$message = str_replace( '{number}', $this_number, $message );
-			$message = nl2br( str_replace( '{previous_number}', $previous_number, $message ) );
+			$message = str_replace( '{previous_number}', $previous_number, $message );
+			$message = nl2br( str_replace( '{total_number}', $total_number, $message ) );
 
 			$sent = \WPFrontendDeleteAccount\Frontend::now_send( $options['summary']['receipent'], $options['summary']['subject'], $message, $header );
 		}
@@ -105,6 +107,29 @@ class Summary {
 	 */
 	public function get_deleted_users_count() {
 
+		$options   = get_option( 'wpfda_deleted_users_date' );
+		$one_week  = strtotime( ' -1 week' );
+		$two_weeks = strtotime( ' -2 week' );
+
+		$number = array(
+			'this'     => 0,
+			'previous' => 0,
+			'total'    => count( $options ),
+		);
+
+		foreach ( $options as $option ) {
+
+			if ( $option > $one_week ) {
+				$number['this']++;
+			}
+
+			// Date is not greater than one week, but greater than two weeks.
+			if ( $option < $one_week && $option > $two_weeks ) {
+				$number['previous']++;
+			}
+		}
+
+		return $number;
 	}
 
 	/**
