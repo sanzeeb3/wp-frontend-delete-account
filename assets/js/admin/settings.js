@@ -163,15 +163,6 @@ class Form extends Component {
 
 		const fields = [
 			{
-				id: 'load-assets-globally',
-				name: 'load_assets_globally',
-				label: __( 'Load Assets Globally', 'wp-frontend-delete-account' ),
-				desc: __( 'Check this if only you have compatibility/styling issues', 'wp-frontend-delete-account' ),
-				type: 'checkbox',
-				defaultValue: wpfda_plugins_params.load_assets,
-				isShowing: true
-			},
-			{
 				id: 'delete-comments',
 				name: 'delete_comments',
 				label: __( 'Delete Comments', 'wp-frontend-delete-account' ),
