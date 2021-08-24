@@ -46,7 +46,10 @@ require_once __DIR__ . '/vendor/autoload.php';
  * @return Plugin.
  */
 function wp_frontend_delete_account() {
-		return \WPFrontendDeleteAccount\Plugin::get_instance();
+		$instance = \WPFrontendDeleteAccount\Plugin::get_instance();
+		$instance->init();
+
+		return $instance;
 }
 
 wp_frontend_delete_account();

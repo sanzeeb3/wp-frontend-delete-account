@@ -41,12 +41,21 @@ final class Plugin {
 	}
 
 	/**
-	 * Delete Account Constructor.
+	 * Delete Account Initialize.
 	 */
-	public function __construct() {
+	public function init() {
 
 		// Load plugin text domain.
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
+		add_action( 'init', array( $this, 'load_classes' ) );
+	}
+
+	/**
+	 * Load classes.
+	 *
+	 * @since 1.5.8.
+	 */
+	public function load_classes() {
 
 		$classes = array( 'Backend', 'Frontend', 'WooCommerce', 'Gutenberg', 'Summary' );
 

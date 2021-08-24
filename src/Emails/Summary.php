@@ -1,4 +1,9 @@
 <?php
+/**
+ * Action Scheduler: https://actionscheduler.org/api/
+ *
+ * The weekely summary email is sent using Action Scheduler.
+ */
 
 namespace WPFrontendDeleteAccount\Emails;
 
@@ -17,7 +22,14 @@ class Summary {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		add_filter( 'wp_frontend_delete_account_emails', [ $this, 'add_summary_email' ] ); //phpcs:ignore Generic.Arrays.DisallowShortArraySyntax.Found
+
+		if ( ! class_exists( 'ActionScheduler' ) ) {
+			return;
+		}
+
+		add_filter( 'wp_frontend_delete_account_emails', [ $this, 'add_summary_email' ] );
+		add_action( 'init', [ $this, 'schedule_summary_email'] );
+		add_action( 'as_next_scheduled_action', [ $this, 'initiate_email_sending' ] );
 	}
 
 	/**
@@ -41,5 +53,29 @@ class Summary {
 		);
 
 		return $emails;
+	}
+
+	/**
+	 * Schedule weekly summary email.
+	 *
+	 * @since 1.5.8
+	 *
+	 * @return integer|void The actions'd ID or void.
+	 */
+	public function schedule_summary_email() {
+		if ( false === as_next_scheduled_action( 'wpfda_weekly_summary_email' ) ) {
+			as_schedule_recurring_action( strtotime( '+ 7 days' ), WEEK_IN_SECONDS, 'wpfda_weekly_summary_email', array(), 'wp_frontend_delete_account' );
+		}
+	}
+
+	/**
+	 * Initiate email sending.
+	 *
+	 * @since 1.5.8
+	 *
+	 * @return bool
+	 */
+	public function initiate_email_sending() {
+
 	}
 }
