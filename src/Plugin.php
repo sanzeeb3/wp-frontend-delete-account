@@ -48,7 +48,7 @@ final class Plugin {
 		// Load plugin text domain.
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
-		$classes = array( 'Backend', 'Frontend', 'WooCommerce', 'Gutenberg' );
+		$classes = array( 'Backend', 'Frontend', 'WooCommerce', 'Gutenberg', 'Summary' );
 
 		foreach ( $classes as $class ) {
 			if ( \class_exists( __NAMESPACE__ . '\\' . $class ) ) {
@@ -57,6 +57,10 @@ final class Plugin {
 				$obj->init();
 			}
 		}
+
+		// Load Emails\Summary class.
+		$summary = new \WPFrontendDeleteAccount\Emails\Summary();
+		$summary->init();
 
 		do_action( 'wp_frontend_delete_account_loaded' );
 	}

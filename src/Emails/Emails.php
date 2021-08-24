@@ -242,6 +242,7 @@ class Emails {
 	 * @return array An array of emails and their options.
 	 */
 	public static function get_emails() {
+
 		return apply_filters(
 			'wp_frontend_delete_account_emails',
 			array(
@@ -274,14 +275,6 @@ class Emails {
 					'receipent' => get_option( 'wpfda_feedback_email_receipent', get_option( 'admin_email' ) ),
 					'subject'   => get_option( 'wpfda_feedback_email_subject', esc_html__( 'A user - {user_email} provided a feedback on account deletion.', 'wp-frontend-delete-account' ) ),
 					'message'   => get_option( 'wpfda_feedback_email_message', esc_html__( 'Feedback provided by the user.', 'wp-frontend-delete-account' ) ),
-				),
-				'summary'  => array(
-					'enable'    => get_option( 'wpfda_enable_summary_email', 'off' ),
-					'label'     => esc_html__( 'Weekly Summary Email', 'wp-frontend-delete-account' ),
-					'desc'      => esc_html__( 'Email notification sent to the admin about the total number of users deleted in a week.', 'wp-frontend-delete-account' ),
-					'receipent' => get_option( 'wpfda_summary_email_receipent', get_option( 'admin_email' ) ),
-					'subject'   => get_option( 'wpfda_summary_email_subject', esc_html__( 'WP Frontend Delete Account Email Summary', 'wp-frontend-delete-account' ) ),
-					'message'   => get_option( 'wpfda_summary_email_message', esc_html__( 'Oh, hi there', 'wp-frontend-delete-account' ) ),
 				),
 			)
 		);
