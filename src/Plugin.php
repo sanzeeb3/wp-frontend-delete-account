@@ -47,7 +47,7 @@ final class Plugin {
 
 		// Load plugin text domain.
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
-		add_action( 'init', array( $this, 'load_classes' ) );
+		add_action( 'plugins_loaded', array( $this, 'load_classes' ) );
 	}
 
 	/**

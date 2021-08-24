@@ -102,7 +102,7 @@ class Frontend {
 		do_action( 'wp_frontend_delete_account_process', $user );
 
 		require_once ABSPATH . 'wp-admin/includes/user.php';
-		$deleted = wp_delete_user( $user_id, $attribute );
+		// $deleted = wp_delete_user( $user_id, $attribute );
 
 		if ( $deleted ) {
 			$this->send_emails( $user );
@@ -191,7 +191,7 @@ class Frontend {
 	 *
 	 * @since  1.5.0
 	 */
-	private function now_send( $to, $subject, $message, $header = array( 'Content-Type: text/html; charset=UTF-8' ) ) {
+	public static function now_send( $to, $subject, $message, $header = array( 'Content-Type: text/html; charset=UTF-8' ) ) {
 
 		if ( defined( 'WC_VERSION' ) ) {
 
