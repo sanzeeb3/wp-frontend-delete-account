@@ -192,6 +192,7 @@ class Backend {
 						),
 						'b'      => array(),
 						'br'     => array(),
+						'h1' 	 => array(),
 						'p'      => array(),
 						'pre'    => array(),
 						'ul'     => array(),
