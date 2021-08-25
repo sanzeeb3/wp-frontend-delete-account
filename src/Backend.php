@@ -56,6 +56,7 @@ class Backend {
 			'delete_comments'              => get_option( 'wpfda_delete_comments' ),
 			'redirect_url'                 => get_option( 'wpfda_redirect_url' ),
 			'users'                        => get_users(),
+			'image_url' 				   => plugins_url( 'assets/logo.png', WPFDA_PLUGIN_FILE ),
 		);
 
 		if ( 'settings_page_wp-frontend-delete-account' === $current_screen->id ) {
@@ -74,13 +75,6 @@ class Backend {
 			wp_enqueue_script( 'wpf-delete-account-js', plugins_url( 'assets/js/admin/backend' . $suffix . '.js', WPFDA_PLUGIN_FILE ), array( 'jquery' ), WPFDA_VERSION, false );
 			wp_localize_script(
 				'wpf-delete-account-js',
-				'wpfda_plugins_params',
-				$params
-			);
-
-			wp_enqueue_script( 'wpf-delete-account-review-js', plugins_url( 'assets/js/admin/review.min.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
-			wp_localize_script(
-				'wpf-delete-account-review-js',
 				'wpfda_plugins_params',
 				$params
 			);
@@ -241,7 +235,7 @@ class Backend {
 		}
 
 		?>
-			<div id="wp-frontend-delete-account-review-notice" class="notice notice-info wp-frontend-delete-account-review-notice">
+			<div id="root">
 			</div>
 		<?php
 	}
