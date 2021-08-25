@@ -1,7 +1,7 @@
 === WP Frontend Delete Account ===
 Contributors: sanzeeb3
 Tags: delete-account, delete-account-from-frontend, frontend-delete, remove-account, gdpr, gdpr-erasure
-Requires at least: 4.0
+Requires at least: 4.9
 Tested up to: 5.8
 Requires PHP: 5.6
 Stable tag: 1.5.7
@@ -55,6 +55,10 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 3. Gutenberg Block View
 
 == Changelog ==
+
+= 1.5.8 - xx/xx/2021 =
+* Feature - Weekly summary email
+* Deprecate - load assets globally option
 
 = 1.5.7 - 08/19/2021 =
 * Enhancement - Remove unnecessary difficulties on plugin deactivation.

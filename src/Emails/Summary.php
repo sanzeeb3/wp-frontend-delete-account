@@ -49,7 +49,7 @@ class Summary {
 		$emails['summary'] = array(
 			'enable'    => get_option( 'wpfda_enable_summary_email', 'off' ),
 			'label'     => esc_html__( 'Weekly Summary Email', 'wp-frontend-delete-account' ),
-			'desc'      => esc_html__( 'Email notification sent to the admin about the total number of users deleted in a week. {number}, {previous_number} and {total} reprents the number of users deleted this past week, previous week and the total number respectively.', 'wp-frontend-delete-account' ),
+			'desc'      => esc_html__( 'Email notification sent to the admin about the total number of users deleted in a week. {number}, {previous_number} and {total} represents the number of users deleted this past week, previous week and the total number respectively.', 'wp-frontend-delete-account' ),
 			'receipent' => get_option( 'wpfda_summary_email_receipent', get_option( 'admin_email' ) ),
 			'subject'   => get_option( 'wpfda_summary_email_subject', esc_html__( 'WP Frontend Delete Account Weekly Summary', 'wp-frontend-delete-account' ) ),
 			'message'   => get_option( 'wpfda_summary_email_message', $summary_message ),
