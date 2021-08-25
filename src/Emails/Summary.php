@@ -21,7 +21,7 @@ class Summary {
 	/**
 	 * Initialize the class.
 	 *
-	 * @since 1.0.0
+	 * @since 1.5.8
 	 */
 	public function init() {
 
@@ -44,14 +44,14 @@ class Summary {
 	 */
 	public function add_summary_email( $emails = array() ) {
 
-		$summary_message = 'Oh, hi there, <br><br><h1>{number}</h1><br/><br/>users deleted their account this past week. <br><br><b>Previous week:</b> {previous_number}. <br> <b>Total:</b> {total_number}';
+		$summary_message = 'Oh, hi there, <br><br><h1>{number}</h1><br/><br/>users deleted their account this past week. <br><br><b>Previous week:</b> {previous_number} <br> <b>Total:</b> {total_number}';
 
 		$emails['summary'] = array(
 			'enable'    => get_option( 'wpfda_enable_summary_email', 'off' ),
 			'label'     => esc_html__( 'Weekly Summary Email', 'wp-frontend-delete-account' ),
-			'desc'      => esc_html__( 'Email notification sent to the admin about the total number of users deleted in a week.', 'wp-frontend-delete-account' ),
+			'desc'      => esc_html__( 'Email notification sent to the admin about the total number of users deleted in a week. {number}, {previous_number} and {total} reprents the number of users deleted this past week, previous week and the total number respectively.', 'wp-frontend-delete-account' ),
 			'receipent' => get_option( 'wpfda_summary_email_receipent', get_option( 'admin_email' ) ),
-			'subject'   => get_option( 'wpfda_summary_email_subject', esc_html__( 'WP Frontend Delete Account Email Summary', 'wp-frontend-delete-account' ) ),
+			'subject'   => get_option( 'wpfda_summary_email_subject', esc_html__( 'WP Frontend Delete Account Weekly Summary', 'wp-frontend-delete-account' ) ),
 			'message'   => get_option( 'wpfda_summary_email_message', $summary_message ),
 		);
 
@@ -96,12 +96,85 @@ class Summary {
 			$message = str_replace( '{previous_number}', $previous_number, $message );
 			$message = nl2br( str_replace( '{total_number}', $total_number, $message ) );
 
+			// Add the WC footer text filter.
+			add_filter( 'woocommerce_email_footer_text', array( $this, 'get_woocommerce_email_footer_text' ), 10, 1 );
+
 			$sent = \WPFrontendDeleteAccount\Frontend::now_send( $options['summary']['receipent'], $options['summary']['subject'], $message, $header );
+
+			// Remove the WC footer text filter.
+			remove_filter( 'woocommerce_email_footer_text', array( $this, 'filter_woocommerce_email_footer_text' ), 10, 1 );
 		}
 	}
 
 	/**
+	 * Filter WooCommerce Footer Text.
+	 *
+	 * @param  string $get_option The footer text stored in database. It isn't in use, just for refrence.
+	 *
+	 * @since 1.5.8
+	 *
+	 * @return string.
+	 */
+	public function get_woocommerce_email_footer_text( $get_option ) {
+
+		$site_url  = get_bloginfo( 'url' );
+		$site_name = get_bloginfo( 'name' );
+		$did_you_know = $this->did_you_know();
+
+		return sprintf(
+			wp_kses( /* translators: %1$s - blog link; %2$s - blog name; %3$s - did you know link; %4$s - did you know text;   */
+				__( 'This email was auto-generated and sent from <a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a>.<br><br>Did you know? You can <a href="%3$s">%4$s</a>', 'wp-frontend-delete-account' ),
+				array(
+					'strong' => true,
+					'a'      => array(
+						'href'   => true,
+						'target' => true,
+						'rel'    => true,
+					),
+					'br'     => true,
+				)
+			),
+			$site_url,
+			$site_name,
+			$did_you_know['link'],
+			$did_you_know['text']
+		);
+	}
+
+	/**
+	 * Did you know?
+	 *
+	 * @since 1.5.8.
+	 *
+	 * @return array
+	 */
+	public function did_you_know() {
+		$did_you_know = apply_filters(
+			'wp_frontend_delete_account_did_you_know',
+			array(
+				'https://sanjeebaryal.com.np/see-who-is-currently-online-in-your-wordpress-site/' => esc_html__( 'see who is currently online in your WordPress site.', 'wp-frontend-delete-account' ),
+				'https://sanjeebaryal.com.np/alert-visitors-about-their-lost-internet-connection/' => esc_html__( 'alert your website visitors when they\'ve lost their internet connection.', 'wp-frontend-delete-account' ),
+				'https://sanjeebaryal.com.np/force-user-to-logout-with-wpforce-logout-plugin/' => esc_html__( 'force users to logout with WPForce Logout plugin.', 'wp-frontend-delete-account' ),
+				'https://sanjeebaryal.com.np/bring-your-lost-customers-back/' => esc_html__( 'bring your lost customers back with Come Back! plugin.', 'wp-frontend-delete-account' ),
+				'https://sanjeebaryal.com.np/add-webp-image-support-in-a-multisite/' => esc_html__( 'add WebP image support in a WordPress multi-site.', 'wp-frontend-delete-account' ),
+			)
+		);
+
+		$random_key = array_rand( $did_you_know );
+
+		return apply_filters(
+			'wp_frontend_delete_account_selected_did_you_know',
+			array(
+				'link' => $random_key,
+				'text' => $did_you_know[ $random_key ],
+			)
+		);
+	}
+
+	/**
 	 * Get the number of users deleted this week and previous week.
+	 *
+	 * @since 1.5.8
 	 *
 	 * @return array The number of users deleted this week and previous week.
 	 */
@@ -119,11 +192,12 @@ class Summary {
 
 		foreach ( $options as $option ) {
 
+			// Count the number of users deleteed this past week.
 			if ( $option > $one_week ) {
 				$number['this']++;
 			}
 
-			// Date is not greater than one week, but greater than two weeks.
+			// Count the number of users deleteed the previous week.
 			if ( $option < $one_week && $option > $two_weeks ) {
 				$number['previous']++;
 			}
