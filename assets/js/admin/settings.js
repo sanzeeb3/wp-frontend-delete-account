@@ -290,8 +290,12 @@ class Form extends Component {
 }
 
 document.addEventListener( "DOMContentLoaded", function(event) {
-	render(
-		<Form />,
-		document.getElementById( 'wp-frontend-delete-account-settings-page' )
-	)
+	const appRoot = document.getElementById( 'wp-frontend-delete-account-settings-page' );
+
+	if ( appRoot ) {
+		render(
+			<Form />,
+			appRoot
+		)
+	}
 });

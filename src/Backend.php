@@ -25,6 +25,7 @@ class Backend {
 		add_action( 'admin_init', array( $this, 'save_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_assets' ) );
 		add_action( 'wp_ajax_wpfda_email_status', array( $this, 'email_status' ) );
+		add_action( 'in_admin_header', array( $this, 'review_notice' ) );
 		add_action( 'admin_print_scripts', array( $this, 'remove_notices' ) );
 	}
 
@@ -63,25 +64,27 @@ class Backend {
 
 			wp_enqueue_style( 'wpfda-backend', plugins_url( 'assets/css/backend.css', WPFDA_PLUGIN_FILE ), array(), WPFDA_VERSION, $media = 'all' );
 
-			// Settings JS is currently not required for page sections such as emails page.
-			if ( empty( $_GET['section'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			wp_enqueue_script( 'wpf-delete-account-settings-js', plugins_url( 'assets/js/admin/settings.min.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
+			wp_localize_script(
+				'wpf-delete-account-settings-js',
+				'wpfda_plugins_params',
+				$params
+			);
 
-				wp_enqueue_script( 'wpf-delete-account-settings-js', plugins_url( 'assets/js/admin/settings.min.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
-				wp_localize_script(
-					'wpf-delete-account-settings-js',
-					'wpfda_plugins_params',
-					$params
-				);
-			} else {
+			wp_enqueue_script( 'wpf-delete-account-js', plugins_url( 'assets/js/admin/backend' . $suffix . '.js', WPFDA_PLUGIN_FILE ), array( 'jquery' ), WPFDA_VERSION, false );
+			wp_localize_script(
+				'wpf-delete-account-js',
+				'wpfda_plugins_params',
+				$params
+			);
 
-				// Backend JS is currently only required for page sections such as emails page.
-				wp_enqueue_script( 'wpf-delete-account-js', plugins_url( 'assets/js/admin/backend' . $suffix . '.js', WPFDA_PLUGIN_FILE ), array( 'jquery' ), WPFDA_VERSION, false );
-				wp_localize_script(
-					'wpf-delete-account-js',
-					'wpfda_plugins_params',
-					$params
-				);
-			}
+			wp_enqueue_script( 'wpf-delete-account-review-js', plugins_url( 'assets/js/admin/review.min.js', WPFDA_PLUGIN_FILE ), array( 'wp-element', 'wp-i18n' ), WPFDA_VERSION, false );
+			wp_localize_script(
+				'wpf-delete-account-review-js',
+				'wpfda_plugins_params',
+				$params
+			);
+
 		}//end if
 
 	}
@@ -211,6 +214,50 @@ class Backend {
 		$enable = ! empty( $_POST['enable'] ) ? 'on' : 'off';
 
 		update_option( 'wpfda_enable_' . $email . '_email', $enable );
+	}
+
+	/**
+	 * Review notice.
+	 *
+	 * @since 1.5.8
+	 */
+	public function review_notice() {
+
+		global $current_screen;
+
+		// Show only to Admins
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$notice_dismissed = get_option( 'wpfda_review_notice_dismissed', 'no' );
+
+		if ( 'yes' === $notice_dismissed ) {
+			return;
+		}
+
+		if ( ! empty( $current_screen->id ) && $current_screen->id !== 'settings_page_wp-frontend-delete-account' ) {
+			return;
+		}
+
+		?>
+			<div id="wp-frontend-delete-account-review-notice" class="notice notice-info wp-frontend-delete-account-review-notice">
+			</div>
+		<?php
+	}
+
+	/**
+	 * Dismiss the reveiw notice on dissmiss click
+	 *
+	 * @since 1.5.8
+	 */
+	public function dismiss_review_notice() {
+
+		check_admin_referer( 'review-notice', 'security' );
+
+		if ( ! empty( $_POST['dismissed'] ) ) {
+			update_option( 'wpfda_review_notice_dismissed', 'yes' );
+		}
 	}
 
 	/**
