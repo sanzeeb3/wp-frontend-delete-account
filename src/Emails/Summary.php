@@ -77,7 +77,7 @@ class Summary {
 	 *
 	 * @since 1.5.8
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	public function initiate_email_sending() {
 
@@ -85,7 +85,7 @@ class Summary {
 
 		$options = $this->add_summary_email();
 
-		if ( $options['summary']['enable'] === 'on' ) {
+		if ( 'on' === $options['summary']['enable'] ) {
 
 			$message         = $options['summary']['message'];
 			$this_number     = $this->get_deleted_users_count()['this'];
@@ -117,8 +117,8 @@ class Summary {
 	 */
 	public function get_woocommerce_email_footer_text( $get_option ) {
 
-		$site_url  = get_bloginfo( 'url' );
-		$site_name = get_bloginfo( 'name' );
+		$site_url     = get_bloginfo( 'url' );
+		$site_name    = get_bloginfo( 'name' );
 		$did_you_know = $this->did_you_know();
 
 		return sprintf(
