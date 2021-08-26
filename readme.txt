@@ -26,7 +26,7 @@ For non-store sites, add the 'Delete Account' tab content anywhere with shortcod
 
 [Contact The Author](http://www.sanjeebaryal.com.np)
 
-== A Gentle reminder of GDPR's Right to be forgotten ==
+== A Gentle reminder on GDPR's Right to be forgotten ==
 
 The right to be forgotten dovetails with people’s right to access their personal information in [Article 15](https://gdpr.eu/article-15-right-of-access/). The right to control one’s data is meaningless if people cannot take action when they no longer consent to processing, when there are significant errors within the data, or if they believe information is being stored unnecessarily. In these cases, an individual can request that the data be erased. 
 
@@ -46,7 +46,7 @@ You might need to refresh the permalinks. Navigate to Settings->Permalinks and S
 
 = I accidently deleted my own account. I am the owner of the site.
 
-Unfortunately, there is not any way to recover the deleted user. To create a new user and get access to the site follow: [This Great Tutorial](https://www.wpbeginner.com/wp-tutorials/how-to-add-an-admin-user-to-the-wordpress-database-via-mysql/)
+Unfortunately, there is no any way to recover the deleted user. To create a new user and get access to the site follow: [This Great Tutorial](https://www.wpbeginner.com/wp-tutorials/how-to-add-an-admin-user-to-the-wordpress-database-via-mysql/)
 
 == Screenshots ==
 
@@ -58,6 +58,7 @@ Unfortunately, there is not any way to recover the deleted user. To create a new
 
 = 1.5.8 - xx/xx/2021 =
 * Feature - Weekly summary email
+* Add - Review notice
 * Deprecate - load assets globally option
 
 = 1.5.7 - 08/19/2021 =
