@@ -26,6 +26,7 @@ class Backend {
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_assets' ) );
 		add_action( 'wp_ajax_wpfda_email_status', array( $this, 'email_status' ) );
 		add_action( 'in_admin_header', array( $this, 'review_notice' ) );
+		add_action( 'wp_ajax_wp_frontend_delete_account_dismiss_review_notice', array( $this, 'dismiss_review_notice' ) );
 		add_action( 'admin_print_scripts', array( $this, 'remove_notices' ) );
 	}
 
@@ -44,6 +45,7 @@ class Backend {
 			'ajax_url'                     => admin_url( 'admin-ajax.php' ),
 			'wpfda_general_settings_nonce' => wp_create_nonce( 'wp_frontend_delete_account_settings' ),
 			'status_nonce'                 => wp_create_nonce( 'email-status' ),
+			'review_nonce'                 => wp_create_nonce( 'review-notice' ),
 			'enable_email'                 => esc_html__( 'Enable this email', 'wp-frontend-delete-account' ),
 			'disable_email'                => esc_html__( 'Disable this email', 'wp-frontend-delete-account' ),
 			'title'                        => get_option( 'wpfda_title', 'Delete Account' ),
@@ -57,6 +59,7 @@ class Backend {
 			'redirect_url'                 => get_option( 'wpfda_redirect_url' ),
 			'users'                        => get_users(),
 			'image_url' 				   => plugins_url( 'assets/logo.png', WPFDA_PLUGIN_FILE ),
+			'review_dismissed'  		   => get_option( 'wpfda_review_notice_dismissed', 'no' )
 		);
 
 		if ( 'settings_page_wp-frontend-delete-account' === $current_screen->id ) {
