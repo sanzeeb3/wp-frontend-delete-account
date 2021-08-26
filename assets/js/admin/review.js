@@ -24,7 +24,6 @@ export default function Review() {
 		};
 
 		jQuery.post( wpfda_plugins_params.ajax_url, data, function( response ) {
-			console.log( response );
 			// Success. Do nothing. Silence is golden.
     	});
 	}

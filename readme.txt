@@ -4,7 +4,7 @@ Tags: delete-account, delete-account-from-frontend, frontend-delete, remove-acco
 Requires at least: 4.9
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 1.5.7
+Stable tag: 1.5.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -56,7 +56,7 @@ Unfortunately, there is no any way to recover the deleted user. To create a new 
 
 == Changelog ==
 
-= 1.5.8 - xx/xx/2021 =
+= 1.5.8 - 08/26/2021 =
 * Feature - Weekly summary email
 * Add - Review notice
 * Deprecate - load assets globally option

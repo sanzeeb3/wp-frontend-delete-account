@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Frontend Delete Account package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Frontend Delete Account 1.5.6\n"
+"Project-Id-Version: WP Frontend Delete Account 1.5.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-19 12:54:28+00:00\n"
+"POT-Creation-Date: 2021-08-26 04:16:55+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -37,133 +37,178 @@ msgstr ""
 msgid "Enter password to confirm:"
 msgstr ""
 
-#: src/Backend.php:46 src/Emails/Emails.php:30 src/Emails/Emails.php:184
+#: src/Backend.php:49 src/Emails/Emails.php:49 src/Emails/Emails.php:112
 msgid "Enable this email"
 msgstr ""
 
-#: src/Backend.php:47 src/Emails/Emails.php:30
+#: src/Backend.php:50 src/Emails/Emails.php:49
 msgid "Disable this email"
 msgstr ""
 
-#: src/Backend.php:113
+#: src/Backend.php:112
 msgid "General"
 msgstr ""
 
-#: src/Backend.php:114
+#: src/Backend.php:113
 msgid "Emails"
 msgstr ""
 
-#: src/Backend.php:149
+#: src/Backend.php:136
 msgid "General Settings"
 msgstr ""
 
-#: src/Emails/Emails.php:36
+#: src/Emails/Emails.php:59
+msgid "Manage"
+msgstr ""
+
+#: src/Emails/Emails.php:75
+#. translators: %1$s - link to WooCommerce plugin settings.
+msgid "The email sender options, email templates etc. can be customized from %1s."
+msgstr ""
+
+#: src/Emails/Emails.php:124
+msgid "Email Recipient"
+msgstr ""
+
+#: src/Emails/Emails.php:133
+msgid "Email Subject"
+msgstr ""
+
+#: src/Emails/Emails.php:141
+msgid "Email Message"
+msgstr ""
+
+#: src/Emails/Emails.php:155 src/Emails/Emails.php:277
+msgid "Feedback provided by the user."
+msgstr ""
+
+#: src/Emails/Emails.php:190
 msgid "Email Notifications"
 msgstr ""
 
-#: src/Emails/Emails.php:39
+#: src/Emails/Emails.php:193
 msgid ""
 "Email notifications sent from WP Frontend Delete Account are listed below. "
 "Click on an email to configure it."
 msgstr ""
 
-#: src/Emails/Emails.php:44
+#: src/Emails/Emails.php:198
 #. translators: %1$s - link to WP Mail SMTP plugin page.
 msgid ""
 "If you are having issue with email delivery in your site, I recommend "
 "setting up SMTP in your site using SMTP plugins such as %1s."
 msgstr ""
 
-#: src/Emails/Emails.php:60
+#: src/Emails/Emails.php:222
 msgid "Email"
 msgstr ""
 
-#: src/Emails/Emails.php:61
+#: src/Emails/Emails.php:223
 msgid "Recipient(s)"
 msgstr ""
 
-#: src/Emails/Emails.php:62
+#: src/Emails/Emails.php:224
 msgid "Actions"
 msgstr ""
 
-#: src/Emails/Emails.php:74 src/Emails/Emails.php:151
+#: src/Emails/Emails.php:251
 msgid "Admin Email"
 msgstr ""
 
-#: src/Emails/Emails.php:77 src/Emails/Emails.php:86 src/Emails/Emails.php:95
-msgid "Manage"
+#: src/Emails/Emails.php:252
+msgid ""
+"Email notification sent to the admin if user deleted their account by their "
+"own."
 msgstr ""
 
-#: src/Emails/Emails.php:83 src/Emails/Emails.php:154
-msgid "User Email"
-msgstr ""
-
-#: src/Emails/Emails.php:84
-msgid "User's Email Address"
-msgstr ""
-
-#: src/Emails/Emails.php:92 src/Emails/Emails.php:157
-msgid "Feedback Email"
-msgstr ""
-
-#: src/Emails/Emails.php:107
-#. translators: %1$s - link to WooCommerce plugin settings.
-msgid "The email sender options, email templates etc. can be customized from %1s."
-msgstr ""
-
-#: src/Emails/Emails.php:129
+#: src/Emails/Emails.php:254
 msgid "Heads up! A user deleted their account."
 msgstr ""
 
-#: src/Emails/Emails.php:132
-msgid "Your account has been deleted successfully."
-msgstr ""
-
-#: src/Emails/Emails.php:135 src/Frontend.php:292
-msgid "A user - {user_email} provided a feedback on account deletion."
-msgstr ""
-
-#: src/Emails/Emails.php:139
+#: src/Emails/Emails.php:255
 msgid "A user {user_name} - {user_email} has deleted their account."
 msgstr ""
 
-#: src/Emails/Emails.php:140
+#: src/Emails/Emails.php:259
+msgid "User Email"
+msgstr ""
+
+#: src/Emails/Emails.php:260
+msgid "Email notification sent to the user after their account has been deleted."
+msgstr ""
+
+#: src/Emails/Emails.php:261
+msgid "User's Email Address"
+msgstr ""
+
+#: src/Emails/Emails.php:262
+msgid "Your account has been deleted successfully."
+msgstr ""
+
+#: src/Emails/Emails.php:266
 #. translators: %1$s - Site URL.
 msgid ""
 "Your account has been deleted. In case this is a mistake, please contact "
 "the site administrator at %1$s"
 msgstr ""
 
-#: src/Emails/Emails.php:166
-msgid "Email notification sent to the user after their account has been deleted."
+#: src/Emails/Emails.php:273
+msgid "Feedback Email"
 msgstr ""
 
-#: src/Emails/Emails.php:170
+#: src/Emails/Emails.php:274
 msgid ""
-"Email notification sent to the admin if user deleted their account by their "
-"own."
-msgstr ""
-
-#: src/Emails/Emails.php:174
-msgid ""
-"Email notification sent to the admin if user leaves a feedback upon "
+"Email notification sent to the admin when user leaves a feedback upon "
 "deleting their account."
 msgstr ""
 
-#: src/Emails/Emails.php:194
-msgid "Email Recipient"
+#: src/Emails/Emails.php:276 src/Frontend.php:292
+msgid "A user - {user_email} provided a feedback on account deletion."
 msgstr ""
 
-#: src/Emails/Emails.php:201
-msgid "Email Subject"
+#: src/Emails/Summary.php:51
+msgid "Weekly Summary Email"
 msgstr ""
 
-#: src/Emails/Emails.php:207
-msgid "Email Message"
+#: src/Emails/Summary.php:52
+msgid ""
+"Email notification sent to the admin about the total number of users "
+"deleted in a week. {number}, {previous_number} and {total} represents the "
+"number of users deleted this past week, previous week and the total number "
+"respectively."
 msgstr ""
 
-#: src/Emails/Emails.php:221
-msgid "Feedback provided by the user."
+#: src/Emails/Summary.php:54
+msgid "WP Frontend Delete Account Weekly Summary"
+msgstr ""
+
+#: src/Emails/Summary.php:126
+#. translators: %1$s - blog link; %2$s - blog name; %3$s - did you know link;
+#. %4$s - did you know text;
+msgid ""
+"This email was auto-generated and sent from <a href=\"%1$s\" "
+"target=\"_blank\" rel=\"noopener noreferrer\">%2$s</a>.<br><br>Did you "
+"know? You can <a href=\"%3$s\">%4$s</a>"
+msgstr ""
+
+#: src/Emails/Summary.php:155
+msgid "see who is currently online in your WordPress site."
+msgstr ""
+
+#: src/Emails/Summary.php:156
+msgid "alert your website visitors when they've lost their internet connection."
+msgstr ""
+
+#: src/Emails/Summary.php:157
+msgid "force users to logout with WPForce Logout plugin."
+msgstr ""
+
+#: src/Emails/Summary.php:158
+msgid "bring your lost customers back with Come Back! plugin."
+msgstr ""
+
+#: src/Emails/Summary.php:159
+msgid "add WebP image support in a WordPress multi-site."
 msgstr ""
 
 #: src/Frontend.php:70
