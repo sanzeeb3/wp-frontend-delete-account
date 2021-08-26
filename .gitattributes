@@ -11,7 +11,7 @@ webpack.config.js export-ignore
 # Directories
 /.wordpress-org export-ignore
 /.github export-ignore
-/.vendor/composer/installers/**
+/vendor/composer/installers/** export-ignore
 
 # Files
 /.gitattributes export-ignore
