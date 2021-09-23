@@ -158,7 +158,7 @@ class Form extends Component {
 		var attribute_options = [];
 
 		users.map( (user) =>
-			attribute_options[attribute_options.length] = { value: user.ID, label: user.data.user_login }
+			attribute_options[attribute_options.length] = { value: user.ID, label: user.user_login }
 		);
 
 		const fields = [

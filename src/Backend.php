@@ -59,7 +59,7 @@ class Backend {
 				'captcha_answer'               => get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' ),
 				'delete_comments'              => get_option( 'wpfda_delete_comments' ),
 				'redirect_url'                 => get_option( 'wpfda_redirect_url' ),
-				'users'                        => get_users(),
+				'users'                        => get_users( array( 'fields' => array( 'ID', 'user_login' ) ) ),
 				'image_url'                    => plugins_url( 'assets/logo.png', WPFDA_PLUGIN_FILE ),
 				'review_dismissed'             => get_option( 'wpfda_review_notice_dismissed', 'no' ),
 			);
