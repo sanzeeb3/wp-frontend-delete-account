@@ -44,3 +44,8 @@ yarn.lock
 LICENSE.md
 vendor/composer/installers/**
 dist
+.babelrc
+DOCKER_ENV
+docker_tag
+output.log
+webpack.config.js
