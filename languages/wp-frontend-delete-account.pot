@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Frontend Delete Account package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Frontend Delete Account 1.5.8\n"
+"Project-Id-Version: WP Frontend Delete Account 1.5.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-26 04:16:55+00:00\n"
+"POT-Creation-Date: 2021-09-23 05:22:00+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -37,11 +37,11 @@ msgstr ""
 msgid "Enter password to confirm:"
 msgstr ""
 
-#: src/Backend.php:49 src/Emails/Emails.php:49 src/Emails/Emails.php:112
+#: src/Backend.php:51 src/Emails/Emails.php:49 src/Emails/Emails.php:112
 msgid "Enable this email"
 msgstr ""
 
-#: src/Backend.php:50 src/Emails/Emails.php:49
+#: src/Backend.php:52 src/Emails/Emails.php:49
 msgid "Disable this email"
 msgstr ""
 
