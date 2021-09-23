@@ -34,35 +34,35 @@ class Backend {
 	 * Load assets for backend.
 	 *
 	 * @since  1.0.0
+	 *
 	 * @return void.
 	 */
 	public function load_assets() {
 
-		global $pagenow;
 		global $current_screen;
 
-		$params = array(
-			'ajax_url'                     => admin_url( 'admin-ajax.php' ),
-			'wpfda_general_settings_nonce' => wp_create_nonce( 'wp_frontend_delete_account_settings' ),
-			'status_nonce'                 => wp_create_nonce( 'email-status' ),
-			'review_nonce'                 => wp_create_nonce( 'review-notice' ),
-			'enable_email'                 => esc_html__( 'Enable this email', 'wp-frontend-delete-account' ),
-			'disable_email'                => esc_html__( 'Disable this email', 'wp-frontend-delete-account' ),
-			'title'                        => get_option( 'wpfda_title', 'Delete Account' ),
-			'button'                       => get_option( 'wpfda_button_label', 'Confirm' ),
-			'attribute'                    => get_option( 'wpfda_attribute' ),
-			'security'                     => get_option( 'wpfda_security', 'password' ),
-			'password_text'                => get_option( 'wpfda_security_password_text', 'Enter password to confirm:' ),
-			'captcha_question'             => get_option( 'wpfda_security_custom_captcha_question', 'Enter PERMANENTLY DELETE to confirm:' ),
-			'captcha_answer'               => get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' ),
-			'delete_comments'              => get_option( 'wpfda_delete_comments' ),
-			'redirect_url'                 => get_option( 'wpfda_redirect_url' ),
-			'users'                        => get_users(),
-			'image_url' 				   => plugins_url( 'assets/logo.png', WPFDA_PLUGIN_FILE ),
-			'review_dismissed'  		   => get_option( 'wpfda_review_notice_dismissed', 'no' )
-		);
-
 		if ( 'settings_page_wp-frontend-delete-account' === $current_screen->id ) {
+
+			$params = array(
+				'ajax_url'                     => admin_url( 'admin-ajax.php' ),
+				'wpfda_general_settings_nonce' => wp_create_nonce( 'wp_frontend_delete_account_settings' ),
+				'status_nonce'                 => wp_create_nonce( 'email-status' ),
+				'review_nonce'                 => wp_create_nonce( 'review-notice' ),
+				'enable_email'                 => esc_html__( 'Enable this email', 'wp-frontend-delete-account' ),
+				'disable_email'                => esc_html__( 'Disable this email', 'wp-frontend-delete-account' ),
+				'title'                        => get_option( 'wpfda_title', 'Delete Account' ),
+				'button'                       => get_option( 'wpfda_button_label', 'Confirm' ),
+				'attribute'                    => get_option( 'wpfda_attribute' ),
+				'security'                     => get_option( 'wpfda_security', 'password' ),
+				'password_text'                => get_option( 'wpfda_security_password_text', 'Enter password to confirm:' ),
+				'captcha_question'             => get_option( 'wpfda_security_custom_captcha_question', 'Enter PERMANENTLY DELETE to confirm:' ),
+				'captcha_answer'               => get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' ),
+				'delete_comments'              => get_option( 'wpfda_delete_comments' ),
+				'redirect_url'                 => get_option( 'wpfda_redirect_url' ),
+				'users'                        => get_users(),
+				'image_url'                    => plugins_url( 'assets/logo.png', WPFDA_PLUGIN_FILE ),
+				'review_dismissed'             => get_option( 'wpfda_review_notice_dismissed', 'no' ),
+			);
 
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
@@ -222,7 +222,7 @@ class Backend {
 
 		global $current_screen;
 
-		// Show only to Admins
+		// Show only to Admins.
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
@@ -233,7 +233,7 @@ class Backend {
 			return;
 		}
 
-		if ( ! empty( $current_screen->id ) && $current_screen->id !== 'settings_page_wp-frontend-delete-account' ) {
+		if ( ! empty( $current_screen->id ) && 'settings_page_wp-frontend-delete-account' !== $current_screen->id ) {
 			return;
 		}
 
