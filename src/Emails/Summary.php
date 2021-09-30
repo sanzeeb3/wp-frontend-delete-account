@@ -149,24 +149,27 @@ class Summary {
 	 * @return array
 	 */
 	public function did_you_know() {
-		$did_you_know = apply_filters(
-			'wp_frontend_delete_account_did_you_know',
-			array(
-				'https://sanjeebaryal.com.np/see-who-is-currently-online-in-your-wordpress-site/' => esc_html__( 'see who is currently online in your WordPress site.', 'wp-frontend-delete-account' ),
-				'https://sanjeebaryal.com.np/alert-visitors-about-their-lost-internet-connection/' => esc_html__( 'alert your website visitors when they\'ve lost their internet connection.', 'wp-frontend-delete-account' ),
-				'https://sanjeebaryal.com.np/force-user-to-logout-with-wpforce-logout-plugin/' => esc_html__( 'force users to logout with WPForce Logout plugin.', 'wp-frontend-delete-account' ),
-				'https://sanjeebaryal.com.np/bring-your-lost-customers-back/' => esc_html__( 'bring your lost customers back with Come Back! plugin.', 'wp-frontend-delete-account' ),
-				'https://sanjeebaryal.com.np/add-webp-image-support-in-a-multisite/' => esc_html__( 'add WebP image support in a WordPress multi-site.', 'wp-frontend-delete-account' ),
-			)
-		);
 
-		$random_key = array_rand( $did_you_know );
+		$did_you_know = wp_remote_post( 'https://sanjeebaryal.com.np/did-you-know.json' );
+
+		if ( ! empty( $did_you_know['body'] ) ) {
+			$did_you_know_in_array = json_decode( $did_you_know['body'], true );
+		}
+
+		if ( is_wp_error( $did_you_know ) || ! is_array( $did_you_know_in_array ) ) {
+			return array(
+				'link' => '',
+				'text' => esc_html__( 'win!', 'wp-frontend-delete-account' ),
+			);
+		}
+
+		$random_key = array_rand( $did_you_know_in_array );
 
 		return apply_filters(
 			'wp_frontend_delete_account_selected_did_you_know',
 			array(
 				'link' => $random_key,
-				'text' => $did_you_know[ $random_key ],
+				'text' => $did_you_know_in_array[ $random_key ],
 			)
 		);
 	}
