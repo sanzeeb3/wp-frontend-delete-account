@@ -121,7 +121,7 @@ class Summary {
 		$site_name    = get_bloginfo( 'name' );
 		$did_you_know = $this->did_you_know();
 
-	return sprintf(
+		return sprintf(
 			wp_kses(
 				apply_filters(
 					'wp_frontend_delete_account_summary_email_footer_text',
