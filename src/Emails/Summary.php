@@ -121,9 +121,13 @@ class Summary {
 		$site_name    = get_bloginfo( 'name' );
 		$did_you_know = $this->did_you_know();
 
-		return sprintf(
-			wp_kses( /* translators: %1$s - blog link; %2$s - blog name; %3$s - did you know link; %4$s - did you know text;   */
-				__( 'This email was auto-generated and sent from <a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a>.<br><br>Did you know? You can <a href="%3$s">%4$s</a>', 'wp-frontend-delete-account' ),
+	return sprintf(
+			wp_kses(
+				apply_filters(
+					'wp_frontend_delete_account_summary_email_footer_text',
+					/* translators: %1$s - blog link; %2$s - blog name; %3$s - did you know link; %4$s - did you know text;   */
+					__( 'This email was auto-generated and sent from <a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a>.<br><br>Did you know? You can <a href="%3$s">%4$s</a>', 'wp-frontend-delete-account' )
+				),
 				array(
 					'strong' => true,
 					'a'      => array(
