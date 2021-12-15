@@ -12,7 +12,7 @@ Lets customers delete their account by their own from their myaccount page for W
 
 == Description ==
 
-Lets customers delete thier account by their own from their myaccount page for WooCommerce sites. New 'Delete Account' tab will be created automatically in myaccount page.
+Lets customers delete their account by their own from their myaccount page for WooCommerce sites. New 'Delete Account' tab will be created automatically in myaccount page.
 
 For non-store sites, add the 'Delete Account' tab content anywhere with shortcode [wp_frontend_delete_account] or with the built-in gutenberg block.
 
