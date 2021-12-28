@@ -23,10 +23,10 @@ function wpf_delete_account_content() {
 	wp_enqueue_style( 'wpfda-frontend-css' );
 	wp_enqueue_script( 'wpfda-delete-account-frontend' );
 
-	wp_localize_script(
+	wp_add_inline_script(
 		'wpfda-delete-account-frontend',
-		'wpfda_plugins_params',
-		i10n_data()
+		'const wpfda_plugins_params = ' . json_encode( wpfda_i10n_data() ),
+		'before'
 	);
 
 	// TODO:: deprecate filters "wp_frontend_delete_account_before_content" and "wp_frontend_delete_account_after_content".
@@ -47,7 +47,7 @@ function wpf_delete_account_content() {
  *
  * @return array An array of data
  */
-function i10n_data() {
+function wpfda_i10n_data() {
 
 	return array(
 		'ajax_url'            => admin_url( 'admin-ajax.php' ),
