@@ -42,7 +42,7 @@ class Gutenberg {
 		wp_localize_script(
 			'wpfda-gutenberg-block',
 			'wpfda_plugins_params',
-			i10n_data()
+			\wpfda_i10n_data()
 		);
 	}
 
