@@ -24,7 +24,7 @@ For non-store sites, add the 'Delete Account' tab content anywhere with shortcod
 
 [Contribute On GitHub Repository](https://github.com/sanzeeb3/wp-frontend-delete-account)
 
-[Contact The Author](http://www.sanjeebaryal.com.np)
+[Follow the documentation](https://sanjeebaryal.com.np/how-to-allow-users-to-delete-their-account-from-frontend/)
 
 == A Gentle reminder on GDPR's Right to be forgotten ==
 
@@ -55,6 +55,9 @@ Unfortunately, there is no any way to recover the deleted user. To create a new 
 3. Gutenberg Block View
 
 == Changelog ==
+
+= 1.6.0 - xx/xx/2022 =
+* Fix - Compatiblity with block themes.
 
 = 1.5.9 - 09/23/2021 =
 * Optimize - Users query
