@@ -77,6 +77,8 @@ class WooCommerce {
 			return $items;
 		}
 
+				error_log( print_r( $items, true ) );
+
 		$items['wpf-delete-account'] = get_option( 'wpfda_title', esc_html__( 'Delete Account', 'wp-frontend-delete-account' ) );
 		return $items;
 	}
