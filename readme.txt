@@ -58,6 +58,7 @@ Unfortunately, there is no any way to recover the deleted user. To create a new 
 
 = 1.6.0 - xx/xx/2022 =
 * Fix - Compatiblity with block themes.
+* Fix - Email summary task should not be scheduled if not enabled.
 
 = 1.5.9 - 09/23/2021 =
 * Optimize - Users query

@@ -67,8 +67,12 @@ class Summary {
 	 */
 	public function schedule_summary_email() {
 
-		if ( false === as_next_scheduled_action( 'wpfda_weekly_summary_email' ) ) {
-			as_schedule_recurring_action( strtotime( '+ 7 days' ), WEEK_IN_SECONDS, 'wpfda_weekly_summary_email', array(), 'wp_frontend_delete_account' );
+		$options = $this->add_summary_email();
+
+		if ( 'on' === $options['summary']['enable'] ) {
+			if ( false === as_next_scheduled_action( 'wpfda_weekly_summary_email' ) ) {
+				as_schedule_recurring_action( strtotime( '+ 7 days' ), WEEK_IN_SECONDS, 'wpfda_weekly_summary_email', array(), 'wp_frontend_delete_account' );
+			}
 		}
 	}
 
