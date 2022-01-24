@@ -2,9 +2,9 @@
 Contributors: sanzeeb3
 Tags: delete-account, delete-account-from-frontend, frontend-delete, remove-account, gdpr, gdpr-erasure
 Requires at least: 4.9
-Tested up to: 5.8
+Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 1.5.9
+Stable tag: 1.6.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -22,9 +22,9 @@ For non-store sites, add the 'Delete Account' tab content anywhere with shortcod
 * Gutenberg block.
 * Shortcode [wp_frontend_delete_account]
 
-[Contribute On GitHub Repository](https://github.com/sanzeeb3/wp-frontend-delete-account)
+Find out more on [setup documentation](https://sanjeebaryal.com.np/how-to-allow-users-to-delete-their-account-from-frontend/)
 
-[Follow the documentation](https://sanjeebaryal.com.np/how-to-allow-users-to-delete-their-account-from-frontend/)
+[Contribute On GitHub Repository](https://github.com/sanzeeb3/wp-frontend-delete-account)
 
 == A Gentle reminder on GDPR's Right to be forgotten ==
 
@@ -56,7 +56,7 @@ Unfortunately, there is no any way to recover the deleted user. To create a new 
 
 == Changelog ==
 
-= 1.6.0 - xx/xx/2022 =
+= 1.6.0 - 01/24/2022 =
 * Fix - Compatiblity with block themes.
 * Fix - Email summary task should not be scheduled if not enabled.
 
