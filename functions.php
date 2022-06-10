@@ -50,7 +50,7 @@ function wpfda_i10n_data() {
 		'ajax_url'            => admin_url( 'admin-ajax.php' ),
 		'wpfda_nonce'         => wp_create_nonce( 'wpfda_nonce' ),
 		'is_feedback_enabled' => get_option( 'wpfda_enable_feedback_email', 'no' ),
-		'redirect_url'        => get_option( 'wpfda_redirect_url' ),
+		'redirect_url' 		  => get_option( 'wpfda_redirect_url', '' ),
 		'incorrect_answer'    => esc_html__( 'Incorrect Answer. Please try again.', 'wp-frontend-delete-account' ),
 		'empty_password'      => esc_html__( 'Empty Password.', 'wp-frontend-delete-account' ),
 		'processing'          => esc_html__( 'Processing...', 'wp-frontend-delete-account' ),
