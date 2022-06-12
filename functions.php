@@ -57,7 +57,7 @@ function wpfda_i10n_data() {
 		'deleting'            => esc_html__( 'Deleting...', 'wp-frontend-delete-account' ),
 		'wrong'               => esc_html__( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
 		'current_user_email'  => wp_get_current_user()->user_email,
-		'button'              => get_option( 'wpfda_button_label', 'Confirm' ),
+		'button' 			  => get_option( 'wpfda_button_label', esc_html__( 'Confirm', 'wp-frontend-delete-account' ),
 		'user_id'             => get_current_user_id(),
 		'security'            => get_option( 'wpfda_security', 'password' ),
 		'captcha_question'    => get_option( 'wpfda_security_custom_captcha_question', 'Enter PERMANENTLY DELETE to confirm:' ),
