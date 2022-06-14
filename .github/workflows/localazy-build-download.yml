@@ -1,3 +1,7 @@
+name: Download From Localazy
+on: 
+  push:
+
 uses: localazy/download@v1
 with:
   read_key: ${{ secrets.LOCALAZY_READ_KEY }}

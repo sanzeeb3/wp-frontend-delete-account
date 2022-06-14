@@ -1,10 +1,10 @@
 {
     "upload": {  
-      "type": "json",
+      "type": "pot",
       "files": "languages/wp-frontend-delete-account.pot"         
     },
     
     "download": {
-      "files": "locales/${lang}.json"
+      "files": "locales/${lang}.po"
     }
   }
