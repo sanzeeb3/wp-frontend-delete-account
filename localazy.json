@@ -5,6 +5,6 @@
     },
     
     "download": {
-      "files": "locales/${lang}.po"
+      "files": "locales/${lang}.json"
     }
   }
