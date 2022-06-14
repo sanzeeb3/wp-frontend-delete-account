@@ -16,4 +16,4 @@ jobs:
       - run: |
           # Test that localized files were downloaded by listing 
           # the content of locales folder.
-          ls locales/*.json
+          ls locales/*.po
