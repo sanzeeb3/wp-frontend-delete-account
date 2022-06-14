@@ -1,7 +1,7 @@
 {
     "upload": {  
       "type": "json",
-      "files": "locales/en.json"         
+      "files": "langugaes/wp-frontend-delete-account.pot"         
     },
     
     "download": {
