@@ -30,7 +30,7 @@ function wpf_delete_account_content() {
 			</div>
 
 			<script id='wpfda-delete-account-frontend-js'>
-				const wpfda_plugins_params = <?php echo wp_json_encode( wpfda_i10n_data() ); ?>
+				var wpfda_plugins_params = <?php echo wp_json_encode( wpfda_i10n_data() ); ?>
 			</script>
 	<?php
 
