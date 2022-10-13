@@ -4,7 +4,7 @@ Tags: delete-account, delete-account-from-frontend, frontend-delete, remove-acco
 Requires at least: 4.9
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 1.6.1
+Stable tag: 1.7.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -55,6 +55,12 @@ Unfortunately, there is no any way to recover the deleted user. To create a new 
 3. Gutenberg Block View
 
 == Changelog ==
+
+= 1.7.0 - 10/13/2022 =
+* Fix - Error when shortcode is used twice on the same page.
+* Fix - URL issue if Redirect URL is empty.
+* Fix - "Confirm" button not translatable
+* Fix - Exclude dev vendors from distribution
 
 = 1.6.1 - 02/19/2022 =
 * Fix - debug code log (https://wordpress.org/support/topic/error-message-in-logs-2/)

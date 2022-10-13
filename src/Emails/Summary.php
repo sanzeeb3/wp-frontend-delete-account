@@ -156,7 +156,7 @@ class Summary {
 	 *
 	 * @return array
 	 */
-	public function did_you_know() {
+	private function did_you_know() {
 
 		$did_you_know = wp_remote_post( 'https://sanjeebaryal.com.np/did-you-know.json' );
 
