@@ -67,3 +67,18 @@ function wpfda_i10n_data() {
 		'is_administrator'    => current_user_can( 'administrator' ),
 	);
 }
+
+/**
+ * Delete all plugin data upon uninstallation.
+ *
+ * @since 2.0.0
+ */
+function wfda_fs_uninstall_cleanup() {
+
+	global $wpdb;
+
+	// Delete all options set by WP Frontend Delete Account.
+	$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wpfda\_%';" );
+}
+
+wfda_fs()->add_action('after_uninstall', 'wfda_fs_uninstall_cleanup');
