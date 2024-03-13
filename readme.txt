@@ -2,9 +2,9 @@
 Contributors: sanzeeb3
 Tags: delete-account, delete-account-from-frontend, frontend-delete, remove-account, gdpr, gdpr-erasure
 Requires at least: 4.9
-Tested up to: 5.9
+Tested up to: 6.4
 Requires PHP: 5.6
-Stable tag: 1.7.0
+Stable tag: 2.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -16,7 +16,7 @@ Lets customers delete their account by their own from their myaccount page for W
 
 For non-store sites, add the 'Delete Account' tab content anywhere with shortcode [wp_frontend_delete_account] or with the built-in gutenberg block.
 
-# Feature and Options:
+### Feature and Options:
 * Reassign the posts by deleted user.
 * Optinally delete comments by the user.
 * Gutenberg block.
@@ -25,6 +25,10 @@ For non-store sites, add the 'Delete Account' tab content anywhere with shortcod
 Find out more on [setup documentation](https://sanjeebaryal.com.np/how-to-allow-users-to-delete-their-account-from-frontend/)
 
 [Contribute On GitHub Repository](https://github.com/sanzeeb3/wp-frontend-delete-account)
+
+== PRO Version Features ==
+* Customize delete account (wpf-delete-account) endpoint
+* Exclude user roles
 
 == A Gentle reminder on GDPR's Right to be forgotten ==
 
@@ -55,6 +59,9 @@ Unfortunately, there is no any way to recover the deleted user. To create a new 
 3. Gutenberg Block View
 
 == Changelog ==
+
+= 2.0.0 - 03/13/2024 =
+* Info - Tested upto WP 6.4
 
 = 1.7.0 - 10/13/2022 =
 * Fix - Error when shortcode is used twice on the same page.
