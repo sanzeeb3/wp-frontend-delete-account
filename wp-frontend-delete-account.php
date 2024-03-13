@@ -33,7 +33,7 @@ if ( ! function_exists( 'wfda_fs' ) ) {
                 'slug'                => 'wp-frontend-delete-account',
                 'type'                => 'plugin',
                 'public_key'          => 'pk_eb6b8985bfbc6eff4bf462ab818ec',
-                'is_premium'          => false,
+                'is_premium'          => true,
                 'premium_suffix'      => 'Pro',
                 // If your plugin is a serviceware, set this option to false.
                 'has_premium_version' => true,
