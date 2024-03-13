@@ -47,6 +47,7 @@ function wpf_delete_account_content() {
 function wpfda_i10n_data() {
 
 	return array(
+		'pricing_page_url'    => admin_url('options-general.php?page=wp-frontend-delete-account-pricing'),
 		'ajax_url'            => admin_url( 'admin-ajax.php' ),
 		'wpfda_nonce'         => wp_create_nonce( 'wpfda_nonce' ),
 		'is_feedback_enabled' => get_option( 'wpfda_enable_feedback_email', 'no' ),

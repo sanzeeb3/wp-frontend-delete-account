@@ -13,7 +13,6 @@ import { useState } from '@wordpress/element';
 export default function Review() {
 
 	const [dismiss, setDismiss] = useState( wpfda_plugins_params.review_dismissed );
-
 	const dismissReview = (e) => {
 		setDismiss( 'yes' );
 
@@ -42,8 +41,9 @@ export default function Review() {
 					<a onClick={dismissReview} id='wp-frontend-delete-account-dismiss' href='#'>x</a>
 					<h3> { __( 'Whoopee! 😀', 'wp-frontend-delete-account' ) } </h3>
 					<p>{ __( 'How\'s it going? I hope that you found WP Frontend Delete Account helpful. ', 'wp-frontend-delete-account' ) }<br/><br/>
-					Would you do me some favour and leave a  <a href='https://wordpress.org/support/plugin/wp-frontend-delete-account/reviews/?filter=5#new-post' target='_blank'>&#9733;&#9733;&#9733;&#9733;&#9733; </a>review on <a href='https://wordpress.org/support/plugin/wp-frontend-delete-account/reviews/?filter=5#new-post' target='_blank'><strong>WordPress.org</strong></a> to help us spread the word and boost my motivation?
-                    &nbsp;<a href='https://wordpress.org/support/plugin/wp-frontend-delete-account/reviews/?filter=5#new-post' target='_blank'>{ __( 'Yes, I\'d like to.', 'wp-frontend-delete-account' ) }</a></p>
+					<p>{ __( 'WP Frontend Delete Account PRO ⭐ is now avaialble with more powerful features.') }</p>
+						<a href={wpfda_plugins_params.pricing_page_url} >Upgrade Now </a>
+					</p>
 				</div>
 			</div>
 

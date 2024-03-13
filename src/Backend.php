@@ -44,6 +44,7 @@ class Backend {
 		if ( 'settings_page_wp-frontend-delete-account' === $current_screen->id ) {
 
 			$params = array(
+				'pricing_page_url'    => admin_url('options-general.php?page=wp-frontend-delete-account-pricing'),
 				'ajax_url'                     => admin_url( 'admin-ajax.php' ),
 				'wpfda_general_settings_nonce' => wp_create_nonce( 'wp_frontend_delete_account_settings' ),
 				'status_nonce'                 => wp_create_nonce( 'email-status' ),
