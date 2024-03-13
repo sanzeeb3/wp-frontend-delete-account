@@ -62,7 +62,7 @@ class Backend {
 				'redirect_url'                 => get_option( 'wpfda_redirect_url' ),
 				'users'                        => get_users( array( 'fields' => array( 'ID', 'user_login' ) ) ),
 				'image_url'                    => plugins_url( 'assets/logo.png', WPFDA_PLUGIN_FILE ),
-				'review_dismissed'             => get_option( 'wpfda_review_notice_dismissed', 'no' ),
+				'review_notice_dismissed'             => get_option( 'wpfda_upgrade_notice_dismissed', 'no' ),
 			);
 
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
@@ -228,7 +228,7 @@ class Backend {
 			return;
 		}
 
-		$notice_dismissed = get_option( 'wpfda_review_notice_dismissed', 'no' );
+		$notice_dismissed = get_option( 'wpfda_upgrade_notice_dismissed', 'no' );
 
 		if ( 'yes' === $notice_dismissed ) {
 			return;
@@ -254,7 +254,7 @@ class Backend {
 		check_admin_referer( 'review-notice', 'security' );
 
 		if ( ! empty( $_POST['dismissed'] ) ) {
-			update_option( 'wpfda_review_notice_dismissed', 'yes' );
+			update_option( 'wpfda_upgrade_notice_dismissed', 'yes' );
 		}
 	}
 
