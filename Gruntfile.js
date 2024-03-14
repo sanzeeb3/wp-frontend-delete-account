@@ -240,7 +240,11 @@ module.exports = function( grunt ){
 					'!node_modules/**',
 					'!package-lock.json',
 					'!webpack.config.js',
-					'!vendor/composer/installers/**'
+					'!vendor/composer/installers/**',
+					'!bin/**',
+					'!tests/**',
+					'!bash.exe.stackdump',
+					'!phpunit.xml.dist'
 					],
 					dest: '<%= pkg.name %>',
 					expand: true
