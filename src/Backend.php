@@ -62,7 +62,7 @@ class Backend {
 				'redirect_url'                 => get_option( 'wpfda_redirect_url' ),
 				'users'                        => get_users( array( 'fields' => array( 'ID', 'user_login' ) ) ),
 				'image_url'                    => plugins_url( 'assets/logo.png', WPFDA_PLUGIN_FILE ),
-				'review_notice_dismissed'             => get_option( 'wpfda_upgrade_notice_dismissed', 'no' ),
+				'upgrade_notice_dismissed'             => get_option( 'wpfda_upgrade_notice_dismissed', 'no' ),
 			);
 
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';

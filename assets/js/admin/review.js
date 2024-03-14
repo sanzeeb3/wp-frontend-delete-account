@@ -12,7 +12,7 @@ import { useState } from '@wordpress/element';
 
 export default function Review() {
 
-	const [dismiss, setDismiss] = useState( wpfda_plugins_params.review_notice_dismissed );
+	const [dismiss, setDismiss] = useState( wpfda_plugins_params.upgrade_notice_dismissed );
 	const dismissReview = (e) => {
 		setDismiss( 'yes' );
 
