@@ -14,6 +14,11 @@ namespace WPFrontendDeleteAccount;
 class WooCommerce {
 
 	/**
+	 * Delete Account Endpoint.
+	 */
+	private $endpoint;
+
+	/**
 	 * Initialize.
 	 *
 	 * @since  1.3.0 Change Constructor to init.
@@ -25,10 +30,16 @@ class WooCommerce {
 			return;
 		}
 
+		if ( wpfda_is_excluded() ) {
+			return;
+		}
+
+		$this->endpoint = get_option( 'wpfda_delete_account_endpoint' );
+
 		add_action( 'init', array( $this, 'register_endpoint' ) );
 		add_filter( 'query_vars', array( $this, 'query_vars' ) );
 		add_filter( 'woocommerce_account_menu_items', array( $this, 'add_wpf_delete_account_tab' ), PHP_INT_MAX );
-		add_action( 'woocommerce_account_wpf-delete-account_endpoint', array( $this, 'add_content' ) );
+		add_action( 'woocommerce_account_' . $this->endpoint . '_endpoint', array( $this, 'add_content' ) );
 	}
 
 	/**
@@ -48,7 +59,7 @@ class WooCommerce {
 			$wp_rewrite->flush_rules( true );
 		}
 
-		add_rewrite_endpoint( 'wpf-delete-account', EP_ROOT | EP_PAGES );
+		add_rewrite_endpoint( $this->endpoint, EP_ROOT | EP_PAGES );
 	}
 
 	/**
@@ -60,7 +71,7 @@ class WooCommerce {
 	 */
 	public function query_vars( $vars ) {
 
-		$vars[] = 'wpf-delete-account';
+		$vars[] = $this->endpoint;
 		return $vars;
 	}
 
@@ -77,7 +88,7 @@ class WooCommerce {
 			return $items;
 		}
 
-		$items['wpf-delete-account'] = get_option( 'wpfda_title', esc_html__( 'Delete Account', 'wp-frontend-delete-account' ) );
+		$items[$this->endpoint] = get_option( 'wpfda_title', esc_html__( 'Delete Account', 'wp-frontend-delete-account' ) );
 
 		return $items;
 	}

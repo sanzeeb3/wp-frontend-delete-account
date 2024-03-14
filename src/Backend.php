@@ -108,9 +108,11 @@ class Backend {
 	public function wpfda_settings_page() {
 
 		$emails_active  = isset( $_GET['section'] ) && 'emails' === $_GET['section'] ? 'nav-tab-active' : '';
-		$general_active = empty( $email_active ) ? 'nav-tab-active' : '';
+		$advanced_active  = isset( $_GET['section'] ) && 'advanced' === $_GET['section'] ? 'nav-tab-active' : '';
+		$general_active = empty( $email_active ) && empty( $advanced_active ) ? 'nav-tab-active' : '';
 		$template       = '<h2 class="nav-tab-wrapper">
 			<a href="' . esc_url( admin_url( 'admin.php?page=wp-frontend-delete-account' ) ) . '" class="nav-tab ' . $general_active . '">' . esc_html__( 'General', 'wp-frontend-delete-account' ) . '</a>
+			<a href="' . esc_url( admin_url( 'admin.php?page=wp-frontend-delete-account&section=advanced' ) ) . '" class="nav-tab ' . $advanced_active . '">' . esc_html__( 'Advanced', 'wp-frontend-delete-account' ) . '</a>
 			<a href="' . esc_url( wp_nonce_url( admin_url( 'admin.php?page=wp-frontend-delete-account&section=emails' ), 'wp-frontend-delete-account-emails' ) ) . '" class="nav-tab ' . $emails_active . '">' . esc_html__( 'Emails', 'wp-frontend-delete-account' ) . '</a>
 			</h2>';
 
@@ -130,6 +132,11 @@ class Backend {
 				}
 			}
 
+			return;
+		}
+
+		if ( isset( $_GET['section'] ) && 'advanced' === $_GET['section'] ) {
+			( new Pro )->render_page();
 			return;
 		}
 
@@ -159,11 +166,19 @@ class Backend {
 				exit;
 			}
 
-			$options = array( 'wpfda_title', 'wpfda_button_label', 'wpfda_redirect_url', 'wpfda_attribute', 'wpfda_security', 'wpfda_security_password_text', 'wpfda_security_custom_captcha_question', 'wpfda_security_custom_captcha_answer', 'wpfda_load_assets_globally', 'wpfda_delete_comments', 'wpfda_email_receipent', 'wpfda_feedback_email_receipent', 'wpfda_enable_user_email', 'wpfda_enable_admin_email', 'wpfda_user_email_subject', 'wpfda_admin_email_subject', 'wpfda_enable_feedback_email', 'wpfda_feedback_email_subject', 'wpfda_enable_summary_email', 'wpfda_summary_email_receipent', 'wpfda_summary_email_subject', 'wpfda_summary_email_message' );
+			$options = array( 'wpfda_title', 'wpfda_button_label', 'wpfda_redirect_url', 'wpfda_attribute', 'wpfda_security', 'wpfda_security_password_text', 'wpfda_security_custom_captcha_question', 'wpfda_security_custom_captcha_answer', 'wpfda_load_assets_globally', 'wpfda_delete_comments', 'wpfda_email_receipent', 'wpfda_feedback_email_receipent', 'wpfda_enable_user_email', 'wpfda_enable_admin_email', 'wpfda_user_email_subject', 'wpfda_admin_email_subject', 'wpfda_enable_feedback_email', 'wpfda_feedback_email_subject', 'wpfda_enable_summary_email', 'wpfda_summary_email_receipent', 'wpfda_summary_email_subject', 'wpfda_summary_email_message',
+			'wpfda_delete_account_endpoint', 'wpfda_exclude_roles'
+			);
 
 			foreach ( $options as $option ) {
 				if ( isset( $_POST[ $option ] ) ) {
-					$value = sanitize_text_field( wp_unslash( $_POST[ $option ] ) );
+
+					if ( is_array( $_POST[ $option ] ) ) {
+						$value = array_map( 'sanitize_text_field', $_POST[ $option ] );
+					} else {
+						$value = sanitize_text_field( wp_unslash( $_POST[ $option ] ) );
+					}
+
 					update_option( $option, $value );
 				}
 			}

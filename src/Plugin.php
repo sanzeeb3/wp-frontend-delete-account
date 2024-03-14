@@ -57,7 +57,7 @@ final class Plugin {
 	 */
 	public function load_classes() {
 
-		$classes = array( 'Backend', 'Frontend', 'WooCommerce', 'Gutenberg', 'Summary' );
+		$classes = array( 'Backend', 'Frontend', 'WooCommerce', 'Gutenberg', 'Summary', 'Pro' );
 
 		foreach ( $classes as $class ) {
 			if ( \class_exists( __NAMESPACE__ . '\\' . $class ) ) {

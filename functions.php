@@ -16,7 +16,7 @@
  */
 function wpf_delete_account_content() {
 
-	if ( ! is_user_logged_in() ) {
+	if ( ! is_user_logged_in() || wpfda_is_excluded() ) {
 		return;
 	}
 
@@ -66,6 +66,33 @@ function wpfda_i10n_data() {
 		'password_text'       => get_option( 'wpfda_security_password_text', esc_html__( 'Enter password to confirm:', 'wp-frontend-delete-account' ) ),
 		'is_administrator'    => current_user_can( 'administrator' ),
 	);
+}
+
+/**
+ * Is User Role excluded.
+ *
+ * @since 2.0.0
+ *
+ * @return bool
+ */
+function wpfda_is_excluded() {
+
+	if ( ! is_user_logged_in() ) {
+		return true;
+	}
+
+	$excluded = ! empty( get_option( 'wpfda_exclude_roles' ) ) ? (array) get_option( 'wpfda_exclude_roles' ) : [];
+
+	$user  = wp_get_current_user();
+	$roles = (array) $user->roles;
+
+	foreach ( $roles as $role ) {
+		if ( in_array( $role, $excluded ) ) { //phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
+			return true;
+		}
+	}
+
+	return false;
 }
 
 /**
