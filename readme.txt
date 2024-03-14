@@ -26,7 +26,7 @@ Find out more on [setup documentation](https://sanjeebaryal.com.np/how-to-allow-
 
 [Contribute On GitHub Repository](https://github.com/sanzeeb3/wp-frontend-delete-account)
 
-== PRO Version Features ==
+== ⭐ PRO Version Features ==
 * Customize delete account (wpf-delete-account) endpoint
 * Exclude user roles
 
@@ -60,7 +60,7 @@ Unfortunately, there is no any way to recover the deleted user. To create a new 
 
 == Changelog ==
 
-= 2.0.0 - 03/13/2024 =
+= 2.0.0 - 03/14/2024 =
 * Info - Tested upto WP 6.4
 
 = 1.7.0 - 10/13/2022 =
