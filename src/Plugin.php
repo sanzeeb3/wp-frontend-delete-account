@@ -88,5 +88,9 @@ final class Plugin {
 
 		load_textdomain( 'wp-frontend-delete-account', WP_LANG_DIR . '/wp-frontend-delete-account/wp-frontend-delete-account-' . $locale . '.mo' );
 		load_plugin_textdomain( 'wp-frontend-delete-account', false, plugin_basename( dirname( WPFDA_PLUGIN_FILE ) ) . '/languages' );
+
+		wp_set_script_translations( 'wpf-delete-account-js', 'wp-frontend-delete-account' );
+		wp_set_script_translations( 'wpf-delete-account-settings-js', 'wp-frontend-delete-account' );
+		wp_set_script_translations( 'wpfda-delete-account-frontend', 'wp-frontend-delete-account' );
 	}
 }
