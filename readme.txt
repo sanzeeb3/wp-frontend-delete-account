@@ -24,8 +24,6 @@ For non-store sites, add the 'Delete Account' tab content anywhere with shortcod
 
 Find out more on [setup documentation](https://sanjeebaryal.com.np/how-to-allow-users-to-delete-their-account-from-frontend/)
 
-[Contribute On GitHub Repository](https://github.com/sanzeeb3/wp-frontend-delete-account)
-
 == ⭐ PRO Version Features ==
 * Customize delete account (wpf-delete-account) endpoint
 * Exclude user roles
