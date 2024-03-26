@@ -41,7 +41,7 @@ export default function Review() {
 					<a onClick={dismissReview} id='wp-frontend-delete-account-dismiss' href='#'>x</a>
 					<h3> { __( 'Whoopee! 😀', 'wp-frontend-delete-account' ) } </h3>
 					<p>{ __( 'How\'s it going? I hope that you found WP Frontend Delete Account helpful. ', 'wp-frontend-delete-account' ) }<br/><br/>
-					<p>{ __( 'WP Frontend Delete Account PRO ⭐ is now avaialble with more powerful features.') }</p>
+					<p>{ __( 'WP Frontend Delete Account PRO ⭐ is now available with more powerful features.') }</p>
 						<a href={wpfda_plugins_params.pricing_page_url}>{__( 'Upgrade Now', 'wp-frontend-delete-account')} </a>
 					</p>
 				</div>

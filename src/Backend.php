@@ -135,9 +135,12 @@ class Backend {
 
 		?>
 		<h2><?php esc_html_e( 'General Settings', 'wp-frontend-delete-account' ); ?></h2>
-
+		<div id="wp-frontend-delete-account-settings-page-container">
 			<div id="wp-frontend-delete-account-settings-page">
 			</div>
+
+			<?php echo \wpfda_backend_sidebar(); ?>
+		</div>
 		<?php
 	}
 
