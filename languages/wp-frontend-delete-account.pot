@@ -1,59 +1,85 @@
-# Copyright (C) 2022 Sanjeev Aryal
-# This file is distributed under the same license as the WP Frontend Delete Account package.
+# Copyright (C) 2024 Sanjeev Aryal
+# This file is distributed under the same license as the WP Frontend Delete Account plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Frontend Delete Account 1.6.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-14 04:39:07+00:00\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
+"Project-Id-Version: WP Frontend Delete Account 2.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-frontend-delete-account\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
-"X-Generator: grunt-wp-i18n 1.0.3\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-03-26T08:50:18+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: wp-frontend-delete-account\n"
 
-#: functions.php:54 src/Frontend.php:82
-msgid "Incorrect Answer. Please try again."
+#. Plugin Name of the plugin
+msgid "WP Frontend Delete Account"
+msgstr ""
+
+#. Description of the plugin
+msgid "Lets customers delete their account by their own."
+msgstr ""
+
+#. Author of the plugin
+msgid "Sanjeev Aryal"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://www.sanjeebaryal.com.np"
 msgstr ""
 
 #: functions.php:55
-msgid "Empty Password."
+#: src/Frontend.php:82
+msgid "Incorrect Answer. Please try again."
 msgstr ""
 
 #: functions.php:56
+msgid "Empty Password."
+msgstr ""
+
+#: functions.php:57
 msgid "Processing..."
 msgstr ""
 
-#: functions.php:57 src/Frontend.php:117
+#: functions.php:58
+#: src/Frontend.php:117
 msgid "Deleting..."
 msgstr ""
 
-#: functions.php:58
+#: functions.php:59
 msgid "Oops! Something went wrong"
 msgstr ""
 
-#: functions.php:65
+#: functions.php:61
+msgid "Confirm"
+msgstr ""
+
+#: functions.php:66
 msgid "Enter password to confirm:"
 msgstr ""
 
-#: src/Backend.php:51 src/Emails/Emails.php:49 src/Emails/Emails.php:112
+#: src/Backend.php:52
+#: src/Emails/Emails.php:49
+#: src/Emails/Emails.php:112
 msgid "Enable this email"
 msgstr ""
 
-#: src/Backend.php:52 src/Emails/Emails.php:49
+#: src/Backend.php:53
+#: src/Emails/Emails.php:49
 msgid "Disable this email"
 msgstr ""
 
-#: src/Backend.php:112
+#: src/Backend.php:113
 msgid "General"
 msgstr ""
 
-#: src/Backend.php:113
+#: src/Backend.php:114
 msgid "Emails"
 msgstr ""
 
-#: src/Backend.php:136
+#: src/Backend.php:137
 msgid "General Settings"
 msgstr ""
 
@@ -61,8 +87,8 @@ msgstr ""
 msgid "Manage"
 msgstr ""
 
-#: src/Emails/Emails.php:75
 #. translators: %1$s - link to WooCommerce plugin settings.
+#: src/Emails/Emails.php:75
 msgid "The email sender options, email templates etc. can be customized from %1s."
 msgstr ""
 
@@ -78,7 +104,8 @@ msgstr ""
 msgid "Email Message"
 msgstr ""
 
-#: src/Emails/Emails.php:155 src/Emails/Emails.php:277
+#: src/Emails/Emails.php:155
+#: src/Emails/Emails.php:277
 msgid "Feedback provided by the user."
 msgstr ""
 
@@ -87,16 +114,12 @@ msgid "Email Notifications"
 msgstr ""
 
 #: src/Emails/Emails.php:193
-msgid ""
-"Email notifications sent from WP Frontend Delete Account are listed below. "
-"Click on an email to configure it."
+msgid "Email notifications sent from WP Frontend Delete Account are listed below. Click on an email to configure it."
 msgstr ""
 
-#: src/Emails/Emails.php:198
 #. translators: %1$s - link to WP Mail SMTP plugin page.
-msgid ""
-"If you are having issue with email delivery in your site, I recommend "
-"setting up SMTP in your site using SMTP plugins such as %1s."
+#: src/Emails/Emails.php:198
+msgid "If you are having issue with email delivery in your site, I recommend setting up SMTP in your site using SMTP plugins such as %1s."
 msgstr ""
 
 #: src/Emails/Emails.php:222
@@ -116,9 +139,7 @@ msgid "Admin Email"
 msgstr ""
 
 #: src/Emails/Emails.php:252
-msgid ""
-"Email notification sent to the admin if user deleted their account by their "
-"own."
+msgid "Email notification sent to the admin if user deleted their account by their own."
 msgstr ""
 
 #: src/Emails/Emails.php:254
@@ -145,11 +166,9 @@ msgstr ""
 msgid "Your account has been deleted successfully."
 msgstr ""
 
-#: src/Emails/Emails.php:266
 #. translators: %1$s - Site URL.
-msgid ""
-"Your account has been deleted. In case this is a mistake, please contact "
-"the site administrator at %1$s"
+#: src/Emails/Emails.php:266
+msgid "Your account has been deleted. In case this is a mistake, please contact the site administrator at %1$s"
 msgstr ""
 
 #: src/Emails/Emails.php:273
@@ -157,12 +176,11 @@ msgid "Feedback Email"
 msgstr ""
 
 #: src/Emails/Emails.php:274
-msgid ""
-"Email notification sent to the admin when user leaves a feedback upon "
-"deleting their account."
+msgid "Email notification sent to the admin when user leaves a feedback upon deleting their account."
 msgstr ""
 
-#: src/Emails/Emails.php:276 src/Frontend.php:292
+#: src/Emails/Emails.php:276
+#: src/Frontend.php:292
 msgid "A user - {user_email} provided a feedback on account deletion."
 msgstr ""
 
@@ -171,24 +189,16 @@ msgid "Weekly Summary Email"
 msgstr ""
 
 #: src/Emails/Summary.php:52
-msgid ""
-"Email notification sent to the admin about the total number of users "
-"deleted in a week. {number}, {previous_number} and {total} represents the "
-"number of users deleted this past week, previous week and the total number "
-"respectively."
+msgid "Email notification sent to the admin about the total number of users deleted in a week. {number}, {previous_number} and {total} represents the number of users deleted this past week, previous week and the total number respectively."
 msgstr ""
 
 #: src/Emails/Summary.php:54
 msgid "WP Frontend Delete Account Weekly Summary"
 msgstr ""
 
+#. translators: %1$s - blog link; %2$s - blog name; %3$s - did you know link; %4$s - did you know text;
 #: src/Emails/Summary.php:133
-#. translators: %1$s - blog link; %2$s - blog name; %3$s - did you know link;
-#. %4$s - did you know text;
-msgid ""
-"This email was auto-generated and sent from <a href=\"%1$s\" "
-"target=\"_blank\" rel=\"noopener noreferrer\">%2$s</a>.<br><br>Did you "
-"know? You can <a href=\"%3$s\">%4$s</a>"
+msgid "This email was auto-generated and sent from <a href=\"%1$s\" target=\"_blank\" rel=\"noopener noreferrer\">%2$s</a>.<br><br>Did you know? You can <a href=\"%3$s\">%4$s</a>"
 msgstr ""
 
 #: src/Emails/Summary.php:170
@@ -211,22 +221,87 @@ msgstr ""
 msgid "Skip and delete"
 msgstr ""
 
-#: src/Frontend.php:250 src/WooCommerce.php:80
+#: src/Frontend.php:250
+#: src/WooCommerce.php:80
 msgid "Delete Account"
 msgstr ""
 
-#. Plugin Name of the plugin/theme
-msgid "WP Frontend Delete Account"
+#: assets/js/admin/gutenberg.js:13
+msgid "WP Frontend Account Delete"
 msgstr ""
 
-#. Description of the plugin/theme
-msgid "Lets customers delete their account by their own."
+#: assets/js/admin/placeholder.js:12
+msgid "This is just a block view. For best experience, please visit the page in frontend."
 msgstr ""
 
-#. Author of the plugin/theme
-msgid "Sanjeev Aryal"
+#: assets/js/admin/review.js:42
+msgid "Whoopee! 😀"
 msgstr ""
 
-#. Author URI of the plugin/theme
-msgid "https://www.sanjeebaryal.com.np"
+#: assets/js/admin/review.js:43
+msgid "How's it going? I hope that you found WP Frontend Delete Account helpful. "
+msgstr ""
+
+#: assets/js/admin/review.js:45
+msgid "Upgrade Now"
+msgstr ""
+
+#: assets/js/admin/settings.js:115
+msgid "None"
+msgstr ""
+
+#: assets/js/admin/settings.js:168
+msgid "Delete Comments"
+msgstr ""
+
+#: assets/js/admin/settings.js:169
+msgid "Delete all comments by users when they delete themselves."
+msgstr ""
+
+#: assets/js/admin/settings.js:177
+msgid "Title"
+msgstr ""
+
+#: assets/js/admin/settings.js:186
+msgid "Button Label"
+msgstr ""
+
+#: assets/js/admin/settings.js:195
+msgid "Redirect URL"
+msgstr ""
+
+#: assets/js/admin/settings.js:196
+msgid "Leave empty for same page redirect"
+msgstr ""
+
+#: assets/js/admin/settings.js:204
+msgid "Attribute all contents to:"
+msgstr ""
+
+#: assets/js/admin/settings.js:213
+msgid "Security method before deleting:"
+msgstr ""
+
+#: assets/js/admin/settings.js:218
+msgid "Password"
+msgstr ""
+
+#: assets/js/admin/settings.js:223
+msgid "Custom Captcha"
+msgstr ""
+
+#: assets/js/admin/settings.js:233
+msgid "Confirmation Text"
+msgstr ""
+
+#: assets/js/admin/settings.js:241
+msgid "Captcha Question"
+msgstr ""
+
+#: assets/js/admin/settings.js:249
+msgid "Captcha Answer"
+msgstr ""
+
+#: assets/js/frontend.js:146
+msgid "Just a heads up! You are the site administrator and processing further will delete yourself."
 msgstr ""
