@@ -62,6 +62,7 @@ class Pro {
 
 		?>	
 		<?php do_action( 'wpfda_pro_settings_init' ); ?>
+		<h2><?php esc_html_e( 'Advanced Settings', 'wp-frontend-delete-account' ); ?></h2>
 		<div class="wpfda-pro-settings-container">
 			<div class="wpfda-pro-settings-settings" style="max-width: 80%">
 				<form method="post">
@@ -133,6 +134,8 @@ class Pro {
 						<?php submit_button(); ?>
 				</form>
 			</div>
+
+			<?php echo \wpfda_backend_sidebar(); ?>
 
 			<?php do_action( 'wpfda_pro_settings_after' ); ?>
 		</div>

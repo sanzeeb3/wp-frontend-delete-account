@@ -91,3 +91,22 @@ span.wpfda-disable.dashicons.dashicons-marker {
 a#wp-frontend-delete-account-dismiss {
 	float: right;
 }
+
+#wp-frontend-delete-account-settings-page-container, .wpfda-pro-settings-container {
+	align-items: start;
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr 300px;
+	max-width: 1500px;
+
+	.wp-frontend-delete-account-sidebar {
+		padding-right: 25px;
+	}
+
+	.wp-frontend-delete-account-box {
+		background: #fff;
+		border: 1px solid #e0e0e0;
+		border-radius: 6px;
+		padding: 12px 24px;
+	}
+}
