@@ -115,7 +115,7 @@ class Pro {
 										default:
 											?>
 												<input type="<?php echo esc_attr( $settings['type'] ); ?>"
-													value="<?php echo isset( $saved ) ? esc_attr( $saved ) : esc_attr( $settings['default'] ); ?>"
+													value="<?php echo !empty( $saved ) ? esc_attr( $saved ) : esc_attr( $settings['default'] ); ?>"
 													id="<?php echo esc_attr( $settings['id'] ); ?>"
 													name="<?php echo esc_attr( $settings['name'] ); ?>"
 												/>
