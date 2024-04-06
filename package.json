@@ -1,7 +1,7 @@
 {
   "name": "wp-frontend-delete-account",
   "title": "WP Frontend Delete Account",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "homepage": "",
   "repository": {
     "type": "git",
@@ -9,11 +9,6 @@
   },
   "license": "GPL-3.0+",
   "main": "Gruntfile.js",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.php": [
       "php -d display_errors=1 -l",
