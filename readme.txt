@@ -4,7 +4,7 @@ Tags: delete-account, delete-account-from-frontend, frontend-delete, remove-acco
 Requires at least: 4.9
 Tested up to: 6.4
 Requires PHP: 5.6
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -29,6 +29,7 @@ Find out more on [setup documentation](https://sanjeebaryal.com.np/how-to-allow-
 == ⭐ PRO Version Features ==
 * Customize delete account (wpf-delete-account) endpoint
 * Exclude user roles
+* Elementor Widget
 
 == A Gentle reminder on GDPR's Right to be forgotten ==
 
@@ -59,6 +60,9 @@ Unfortunately, there is no any way to recover the deleted user. To create a new 
 3. Gutenberg Block View
 
 == Changelog ==
+
+= 2.1.2 - 04/11/2024 =
+* New - Elementor Widget
 
 = 2.1.1 - 04/06/2024 =
 * Fix - default delete account endpoint not working

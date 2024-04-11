@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP Frontend Delete Account
  * Description: Lets customers delete their account by their own.
- * Version: 2.1.1
+ * Version: 2.1.2
  * Author: Sanjeev Aryal
  * Author URI: https://www.sanjeebaryal.com.np
  * Text Domain: wp-frontend-delete-account
@@ -76,7 +76,7 @@ if ( ! defined( 'WPFDA_PLUGIN_DIR' ) ) {
  *
  * @var string
  */
-const WPFDA_VERSION = '2.1.1';
+const WPFDA_VERSION = '2.1.2';
 
 require_once __DIR__ . '/vendor/autoload.php';
 
