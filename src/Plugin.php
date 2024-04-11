@@ -71,6 +71,8 @@ final class Plugin {
 		$summary = new \WPFrontendDeleteAccount\Emails\Summary();
 		$summary->init();
 
+		( new \WPFrontendDeleteAccount\Elementor\Elementor() )->init();
+
 		do_action( 'wp_frontend_delete_account_loaded' );
 	}
 
