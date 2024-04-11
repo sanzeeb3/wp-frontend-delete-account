@@ -27,6 +27,7 @@ Find out more on [setup documentation](https://sanjeebaryal.com.np/how-to-allow-
 == ⭐ PRO Version Features ==
 * Customize delete account (wpf-delete-account) endpoint
 * Exclude user roles
+* Elementor Widget
 
 == A Gentle reminder on GDPR's Right to be forgotten ==
 
