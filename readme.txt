@@ -12,20 +12,12 @@ Lets customers delete their account by their own from their myaccount page for W
 
 == Description ==
 
-WP Frontend Delete Account is a powerful and user-friendly plugin that allows customers to delete their account from the myaccount page in WooCommerce sites with ease. It offers a seamless and intuitive way for users to manage their accounts, enhancing the overall user experience.
+Lets customers delete their account by their own from their myaccount page for WooCommerce sites. New 'Delete Account' tab will be created automatically in myaccount page.
 
-One of the key features of WP Frontend Delete Account is its ability to automatically add a 'Delete Account' tab to the myaccount page. This tab provides users with a straightforward process to delete their account, eliminating the need for complex procedures or contacting site administrators.
-
-For non-store sites, WP Frontend Delete Account provides a shortcode and Gutenberg block, making it easy to add the 'Delete Account' tab content anywhere on the site. This flexibility allows site owners to customize the user experience and meet the specific needs of their audience.
-
-A major concern for users deleting their accounts is the impact on their content, such as posts and comments. WP Frontend Delete Account addresses this concern by providing an option to reassign posts by the deleted user. This ensures that valuable content is not lost and can continue to contribute to the site's content.
-
-Additionally, WP Frontend Delete Account offers the option to delete user comments, providing users with a comprehensive account deletion process. This feature is particularly useful for sites with user-generated content, ensuring that deleted accounts do not leave behind unwanted comments.
-
-WP Frontend Delete Account is fully compliant with GDPR regulations regarding the right to erasure. It allows users to delete their account and provides options for reassigning posts and deleting comments, ensuring compliance with GDPR's requirements.
+For non-store sites, add the 'Delete Account' tab content anywhere with shortcode [wp_frontend_delete_account] or with the built-in gutenberg block.
 
 ### Feature and Options:
-* Easy account deletion from the myaccount page.
+* Easy account deletion from the WooCommerce myaccount page.
 * Reassigns posts by the deleted user.
 * Option to delete user comments.
 * Gutenberg block and shortcode ([wp_frontend_delete_account]) support.
