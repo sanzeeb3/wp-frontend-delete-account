@@ -200,6 +200,11 @@ class Backend {
 				update_option( 'wpfda_' . $email . '_email_message', $editor );
 			}//end if
 		}//end if
+
+		// Flush Permalinks.
+		if ( ! empty( $_GET['page'] ) && 'wp-frontend-delete-account' === $_GET['page'] ) {
+			flush_rewrite_rules();
+		}
 	}
 
 	/**
