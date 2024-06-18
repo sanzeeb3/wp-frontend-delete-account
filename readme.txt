@@ -4,7 +4,7 @@ Tags: delete-account, delete-account-from-frontend, frontend-delete, remove-acco
 Requires at least: 4.9
 Tested up to: 6.5
 Requires PHP: 5.6
-Stable tag: 2.1.2
+Stable tag: 2.3.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -23,12 +23,14 @@ For non-store sites, add the 'Delete Account' tab content anywhere with shortcod
 * Gutenberg block and shortcode ([wp_frontend_delete_account]) support.
 * GDPR compliance for user data erasure.
 
-Find out more on [setup documentation](https://sanjeebaryal.com.np/how-to-allow-users-to-delete-their-account-from-frontend/)
+Find out more on [setup documentation](https://miniplugins.com/how-to-allow-users-to-delete-their-account-from-frontend/)
 
 == ⭐ PRO Version Features ==
 * Customize delete account (wpf-delete-account) endpoint
 * Exclude user roles
 * Elementor Widget
+
+[Upgrade to PRO](https://miniplugins.com/wp-frontend-delete-account/)
 
 == A Gentle reminder on GDPR's Right to be forgotten ==
 
@@ -38,13 +40,12 @@ You have one month to respond to a request. I understand you're busy. Make it ea
 
 **I am not a lawyer and this is not a legal advice.** In all circumstances I strongly recommend you consult directly with legal counsel familiar with the GDPR regulations.
 
-What's Next?
 ### What's Next?
 If you like WP Frontend Delete Account plugin, then consider checking out my other projects:
-- [WPForce Logout](https://sanjeebaryal.com.np/wp-force-logout/) - the best WordPress user login logout management plugin.
-- [WooCommerce Auto Delete Old Orders](https://sanjeebaryal.com.np/woocommerce-auto-delete-old-orders-a-plugin-from-scratch/) - Automatically delete old WooCommerce orders.
-- [WooCommerce Auto Delete Users With No Orders](https://sanjeebaryal.com.np/woocommerce-auto-delete-users-with-no-orders/) - Automatically delete users with no purchase history.
-- [WooCommerce Customer Journey](https://sanjeebaryal.com.np/woocommerce-customer-journey/) - Displays every step of the customer until the order of the product in the orders page.
+- [WPForce Logout](https://miniplugins.com/wp-force-logout/) - the best WordPress user login logout management plugin.
+- [WooCommerce Auto Delete Old Orders](https://miniplugins.com/woocommerce-auto-delete-old-orders/) - Automatically delete old WooCommerce orders.
+- [WooCommerce Auto Delete Users With No Orders](https://miniplugins.com/wc-auto-delete-users-with-no-orders/) - Automatically delete users with no purchase history.
+- [WooCommerce Customer Journey](https://miniplugins.com/customer-journey-for-woocommerce/) - Displays every step of the customer until the order of the product in the orders page.
 
 == Frequently Asked Questions ==
 
@@ -68,22 +69,11 @@ Unfortunately, there is no any way to recover the deleted user. To create a new 
 
 == Changelog ==
 
-<<<<<<< HEAD
-= 2.1.2 - 04/11/2024 =
-* New - Elementor Widget
-
-= 2.1.1 - 04/06/2024 =
-* Fix - default delete account endpoint not working
-
-= 2.1.0 - 03/26/2024 =
-* Fix - JSX transations issue
-=======
 = 2.2.0 - 05/27/2024 =
 * Fix - Flush permalinks to fix 404 issues on static pages
 
 = 2.1.0 - 03/26/2024 =
 * Fix - JSX translations issue
->>>>>>> master
 * Tweak - Submenu & sidebar
 
 = 2.0.0 - 03/14/2024 =
