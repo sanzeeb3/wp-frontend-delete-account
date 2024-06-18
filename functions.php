@@ -78,7 +78,7 @@ function wpfda_backend_sidebar() {
 			<p><?php esc_html_e( 'You\'re using WP Frontend Delete Account FREE Version', 'wp-frontend-delete-account' ); ?></p>
 
 			<p><a href="<?php echo admin_url( 'options-general.php?page=wp-frontend-delete-account-pricing' ); ?>"><strong><?php esc_html_e( 'Account',  'wp-frontend-delete-account' );?></strong></a> - <?php esc_html_e( 'your account information.', 'wp-frontend-delete-account' ); ?></p>
-			<p><a href="https://sanjeebaryal.com.np/how-to-allow-users-to-delete-their-account-from-frontend/" target="_blank"><strong><?php esc_html_e( 'Documentation',  'wp-frontend-delete-account' );?></strong></a> - <?php esc_html_e( 'docs & articles.', 'wp-frontend-delete-account' ); ?></p>
+			<p><a href="https://miniplugins.com/how-to-allow-users-to-delete-their-account-from-frontend/" target="_blank"><strong><?php esc_html_e( 'Documentation',  'wp-frontend-delete-account' );?></strong></a> - <?php esc_html_e( 'docs & articles.', 'wp-frontend-delete-account' ); ?></p>
 			<p><a href="<?php echo admin_url( 'options-general.php?page=wp-frontend-delete-account-contact' ); ?>"><strong><?php esc_html_e( 'Support',  'wp-frontend-delete-account' );?></strong></a> - <?php esc_html_e( 'need help or have questions?', 'wp-frontend-delete-account' ); ?></p>
 			<p><a href="<?php echo admin_url( 'options-general.php?page=wp-frontend-delete-account-pricing' ); ?>"><strong><?php esc_html_e( 'Upgrade',  'wp-frontend-delete-account' );?></strong></a> - <?php esc_html_e( 'need more benifits?', 'wp-frontend-delete-account' ); ?></p>
 
@@ -87,8 +87,8 @@ function wpfda_backend_sidebar() {
 		<div class="wp-frontend-delete-account-widget wp-frontend-delete-account-box">
 			<h2 class="wp-frontend-delete-account-widget_title"><?php esc_html_e( 'Our WordPress Plugins', 'wp-frontend-delete-account' ); ?></h2>
 			<p><?php esc_html_e( 'Like this plugin? Check out our other WordPress plugins:', 'wp-frontend-delete-account' ); ?></p>
-			<p><a href="https://sanjeebaryal.com.np/woocommerce-customer-journey/" target="_blank"><strong>WooCommerce Customer Journey</strong></a> - <?php esc_html_e( 'A simple yet powerful plugin that records every step of the visitor until the order of the product.', 'wp-frontend-delete-account' ); ?></p>
-			<p><a href="https://sanjeebaryal.com.np/force-user-to-logout-with-wpforce-logout-plugin/" target="_blank"><strong>WPForce Logout</strong></a> - <?php esc_html_e( 'A user activity management plugin. See who\'s online, last login activity & more.', 'wp-frontend-delete-account' ); ?></p>
+			<p><a href="https://miniplugins.com/customer-journey-for-woocommerce/" target="_blank"><strong>WooCommerce Customer Journey</strong></a> - <?php esc_html_e( 'A simple yet powerful plugin that records every step of the visitor until the order of the product.', 'wp-frontend-delete-account' ); ?></p>
+			<p><a href="https://miniplugins.com/wp-force-logout/" target="_blank"><strong>WPForce Logout</strong></a> - <?php esc_html_e( 'A user activity management plugin. See who\'s online, last login activity & more.', 'wp-frontend-delete-account' ); ?></p>
 		</div>
 	</div>
 	<?php
