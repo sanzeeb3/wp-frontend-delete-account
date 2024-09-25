@@ -14,8 +14,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.KANBAN_WORKFLOW }}
       run: |
         ISSUE_NUMBER=${{ github.event.issue.number }}
-        PROJECT_ID=2
-        COLUMN_ID=2
+        PROJECT_ID=1
+        COLUMN_ID=1
 
         # Get the issue ID using GitHub API
         ISSUE_ID=$(curl -s \
