@@ -11,11 +11,11 @@ jobs:
     steps:
     - name: Add issue to Kanban
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: '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'
       run: |
         ISSUE_NUMBER=${{ github.event.issue.number }}
-        PROJECT_ID=1
-        COLUMN_ID=1
+        PROJECT_ID=2
+        COLUMN_ID=2
 
         # Get the issue ID using GitHub API
         ISSUE_ID=$(curl -s \
