@@ -30,7 +30,7 @@ jobs:
             exit 1
           fi
           
-          # Debugging: Show the data payload for the mutation
+          # Corrected mutation query
           DATA_PAYLOAD='{"query":"mutation { addProjectV2ItemById(input: {projectId: \"'"$PROJECT_ID"'\", contentId: \"'"$ISSUE_ID"'\") { item { id }}}"}'
           echo "Data payload: $DATA_PAYLOAD"
 
