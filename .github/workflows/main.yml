@@ -12,24 +12,30 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.KANBAN_WORKFLOW }}
         run: |
-          # Fetch PROJECT_ID dynamically from the repository's projects
-          PROJECT_ID=$(curl -H "Authorization: Bearer ${{ secrets.KANBAN_WORKFLOW }}" \
-            -H "Accept: application/vnd.github+json" \
-            https://api.github.com/repos/${{ github.repository }}/projects \
-            | jq -r '.[] | select(.name == "Your Project Name") | .node_id')
+          # Use the repository and owner from the current workflow context
+          OWNER=${{ github.repository_owner }}
+          REPO=${{ github.event.repository.name }}
+
+          # Fetch the first PROJECT_ID dynamically from GraphQL
+          PROJECT_ID=$(curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.KANBAN_WORKFLOW }}" \
+            -H "Content-Type: application/json" \
+            -d '{"query":"{ repository(owner: \"'$OWNER'\", name: \"'$REPO'\") { projectsV2(first: 1) { nodes { id title }}}}"}' \
+            https://api.github.com/graphql \
+            | jq -r '.data.repository.projectsV2.nodes[0].id')
 
           # Debugging: Print PROJECT_ID
           echo "PROJECT_ID: $PROJECT_ID"
           
-          # Fetch ISSUE_ID
+          # Fetch ISSUE_ID using the GitHub REST API
           ISSUE_ID=$(curl -H "Authorization: Bearer ${{ secrets.KANBAN_WORKFLOW }}" \
             -H "Accept: application/vnd.github+json" \
             https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }} \
             | jq -r '.node_id')
-          
+
           # Debugging: Print ISSUE_ID
           echo "ISSUE_ID: $ISSUE_ID"
-          
+
           # Check if PROJECT_ID or ISSUE_ID is empty
           if [ -z "$PROJECT_ID" ]; then
             echo "ERROR: PROJECT_ID is empty!"
@@ -40,15 +46,16 @@ jobs:
             echo "ERROR: ISSUE_ID is empty!"
             exit 1
           fi
-          
-          # Corrected mutation query to add the issue to the project
+
+          # Build the mutation payload to add the issue to the project
           DATA_PAYLOAD='{"query":"mutation { addProjectV2ItemById(input: {projectId: \"'"$PROJECT_ID"'\", contentId: \"'"$ISSUE_ID"'\"}) { item { id }}}"}'
+          
+          # Debugging: Print the mutation payload
           echo "Data payload: $DATA_PAYLOAD"
 
           # Execute the GraphQL mutation to add the issue to the project
           curl -X POST \
             -H "Authorization: Bearer ${{ secrets.KANBAN_WORKFLOW }}" \
             -H "Content-Type: application/json" \
-            -H "Accept: application/vnd.github.v4.idl" \
             -d "$DATA_PAYLOAD" \
             https://api.github.com/graphql
