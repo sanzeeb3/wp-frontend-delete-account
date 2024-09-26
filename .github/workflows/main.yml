@@ -1,33 +1,26 @@
-name: Add to Kanban on Assignment
+name: Create Project Card on Issue Assign
 
 on:
   issues:
     types: [assigned]
 
 jobs:
-  add-to-kanban:
+  create_project_card:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Add issue to Kanban
-      env:
-        GITHUB_TOKEN: ${{ secrets.KANBAN_WORKFLOW }}
-      run: |
-        ISSUE_NUMBER=${{ github.event.issue.number }}
-        PROJECT_ID=1
-        COLUMN_ID=1
-
-        # Get the issue ID using GitHub API
-        ISSUE_ID=$(curl -s \
-          -H "Authorization: token $GITHUB_TOKEN" \
-          -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ github.repository }}/issues/${ISSUE_NUMBER} \
-          | jq -r '.id')
-
-        # Create a card in the specified column
-        curl -s \
-          -X POST \
-          -H "Authorization: token $GITHUB_TOKEN" \
-          -H "Accept: application/vnd.github.v3+json" \
-          -d "{\"content_id\": $ISSUE_ID, \"content_type\": \"Issue\"}" \
-          https://api.github.com/projects/columns/$COLUMN_ID/cards
+      - name: Create a card in GitHub Project
+        env:
+          GITHUB_TOKEN: ${{ secrets.KANBAN_WORKFLOW }}
+        run: |
+          PROJECT_ID="PVT_kwHOAQCcYM4Ao1At"
+          ISSUE_ID=$(curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }} \
+            | jq -r '.node_id')
+          
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -H "Accept: application/vnd.github.v4.idl" \
+            -d '{"query":"mutation { addProjectV2ItemById(input: {projectId: \"'"$PROJECT_ID"'\", contentId: \"'"$ISSUE_ID"'\") { item { id }}}"}' \
+            https://api.github.com/graphql
