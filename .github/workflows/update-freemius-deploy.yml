@@ -1,0 +1,36 @@
+name: Deploy to Freemius
+
+on:
+  push:
+    tags:
+      - '*'  # Runs on every tag push
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v3
+
+      - name: Get Latest Tag
+        id: get_tag
+        run: |
+          # Fetch tags and get the latest tag
+          git fetch --tags
+          TAG=$(git describe --tags --abbrev=0)
+          echo "tag=$TAG" >> $GITHUB_ENV  # Store in environment variable
+
+      - name: Deploy to Freemius
+        uses: buttonizer/freemius-deploy@c104cc8c63c850b01f20fa642046ea76b3f7e53b # Using the PR @see https://github.com/buttonizer/freemius-deploy/pull/2
+        with:
+          file_name: ${{ github.event.repository.name }}.zip
+          release_mode: pending
+          version: ${{ env.tag }}  # Use the retrieved tag as the version
+          sandbox: false
+        env:
+          PUBLIC_KEY: ${{ secrets.FREEMIUS_PUBLIC_KEY }}
+          DEV_ID: ${{ secrets.FREEMIUS_DEV_ID }}
+          SECRET_KEY: ${{ secrets.FREEMIUS_SECRET_KEY }}
+          PLUGIN_SLUG: ${{ github.event.repository.name }}
+          PLUGIN_ID: ${{ secrets.FREEMIUS_PLUGIN_ID }}
