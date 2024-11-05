@@ -25,11 +25,9 @@ jobs:
 
       - name: Install WP-CLI
         run: |
-          curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/keys/cli.key
-          curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/keys/cli.pub
           curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/installer.sh
           chmod +x installer.sh
-          ./installer.sh --install-dir=/usr/local/bin --filename=wp
+          bash installer.sh --install-dir=/usr/local/bin --filename=wp
           wp --info  # Verify WP-CLI installation
 
       - name: Run GPT-PO Command
