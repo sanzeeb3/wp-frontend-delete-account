@@ -13,7 +13,8 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Fetch all history for accurate commit history
+          persist-credentials: false  # For security, don't persist credentials
+          fetch-depth: 0  # Fetch all history for accurate commit
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -23,40 +24,31 @@ jobs:
       - name: Install gpt-po
         run: npm install gpt-po  # Installs `gpt-po` package locally in `node_modules`
 
-      - name: Install WP-CLI
-        run: |
-          curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/installer.sh
-          chmod +x installer.sh
-          bash installer.sh --install-dir=/usr/local/bin --filename=wp
-          wp --info  # Verify WP-CLI installation
-
       - name: Run GPT-PO Command
         env:
           API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           npx gpt-po --dir languages --key $API_KEY
-          echo "Translation completed."
 
-      - name: Generate PHP Files
+      - name: Install WP-CLI
         run: |
-          wp i18n make-php languages
-          echo "PHP files generated from translations."
+          curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x wp-cli.phar
+          sudo mv wp-cli.phar /usr/local/bin/wp
+          wp --info  # Verify WP-CLI installation
 
-      - name: Generate JSON Files
+      - name: Run WP-CLI Commands
         run: |
+          wp i18n make-pot languages
           wp i18n make-json languages
-          echo "JSON files generated from translations."
-
-      - name: Check Git Status
-        run: git status  # Check if .po files were modified
 
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add languages  # Stage changes only in the languages directory
           if [ -n "$(git status --porcelain)" ]; then
-            git add languages/*.po languages/*.php languages/*.json
-            git commit -m "Update .po, .php, and .json files with new translations"
+            git commit -m "Update translation files with new translations"
             git push
           else
             echo "No changes to commit"
