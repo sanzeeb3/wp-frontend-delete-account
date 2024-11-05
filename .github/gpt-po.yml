@@ -1,0 +1,28 @@
+name: Run GPT-PO Command
+
+on:
+  push:
+    branches:
+      - master  # Runs the workflow on push to the main branch
+
+jobs:
+  run-gpt-po:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Adjust this to your project's Node.js version
+
+      - name: Install gpt-po
+        run: npm install gpt-po  # Installs `gpt-po` package locally in `node_modules`
+
+      - name: Run GPT-PO Command
+        env:
+          API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          npx gpt-po --dir languages --key $API_KEY

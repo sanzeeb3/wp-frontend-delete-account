@@ -59,6 +59,7 @@
   "dependencies": {
     "@wordpress/element": "2.20.2",
     "@wordpress/i18n": "3.19.2",
+    "gpt-po": "^1.1.1",
     "save": "^2.3.3"
   }
 }
