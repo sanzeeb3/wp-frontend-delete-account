@@ -15,7 +15,7 @@ msgstr ""
 
 #: includes/Backend.php:51
 msgid "Deactivating..."
-msgstr "Deaktywacja…"
+msgstr ""
 
 #: includes/Backend.php:52
 msgid "Oops! Something went wrong"
