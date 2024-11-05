@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Frontend Delete Account 1.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: \n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2020-07-28 06:44:47+00:00\n"
 "PO-Revision-Date: 2020-12-17 14:10+0100\n"
@@ -19,7 +19,7 @@ msgstr "Deaktywacja…"
 
 #: includes/Backend.php:52
 msgid "Oops! Something went wrong"
-msgstr "Ups! Coś poszło nie tak"
+msgstr ""
 
 #: includes/Backend.php:53
 #: includes/emails/Emails.php:24
@@ -139,8 +139,12 @@ msgid "Email notifications sent from WP Frontend Delete Account are listed below
 msgstr "Powiadomienia e-mail wysyłane z WP Frontend Usuń Konto są wypisane poniżej. Kliknij na e-mail aby go skonfigurować."
 
 #: includes/emails/Emails.php:33
-msgid "If you are having issue with email delivery in your site, I recommend setting up SMTP in your site using SMTP plugins such as WP Mail SMTP."
-msgstr "Jeśli występuje problem z dostarczeniem e-maili z Twojej strony, polecamy ustawić wysyłkę poprzez SMPT za pomocą wtyczki, takich jak WP Mail SMTP."
+msgid ""
+"If you are having issue with email delivery in your site, I recommend setting up SMTP in your site using SMTP plugins "
+"such as WP Mail SMTP."
+msgstr ""
+"Jeśli występuje problem z dostarczeniem e-maili z Twojej strony, polecamy ustawić wysyłkę poprzez SMPT za pomocą "
+"wtyczki, takich jak WP Mail SMTP."
 
 #: includes/emails/Emails.php:47
 msgid "Email"
@@ -173,10 +177,16 @@ msgstr "E-mail użytkownika"
 msgid "User's Email Address"
 msgstr "Adres e-mail użytkownika"
 
-#. translators: %1$s - WP.org link; %2$s - same WP.org link.
 #: includes/emails/Emails.php:89
-msgid "Please rate <strong>WP Frontend Delete Account</strong> <a href=\"%1$s\" target=\"_blank\" rel=\"noopener noreferrer\">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href=\"%2$s\" target=\"_blank\" rel=\"noopener noreferrer\">WordPress.org</a> to help us spread the word. Thank you!"
-msgstr "Proszę oceń <strong>WP Frontend Delete Account</strong> <a href=„%1$s” target=„_blank” rel=„noopener noreferrer”>&#9733;&#9733;&#9733;&#9733;&#9733;</a> na <a href=„%2$s” target=„_blank” rel=„noopener noreferrer”>WordPress.org</a> aby pomóc spopularyzować wtyczkę. Dziękujemy!"
+#. translators: %1$s - WP.org link; %2$s - same WP.org link.
+msgid ""
+"Please rate <strong>WP Frontend Delete Account</strong> <a href=\"%1$s\" target=\"_blank\" rel=\"noopener "
+"noreferrer\">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href=\"%2$s\" target=\"_blank\" rel=\"noopener "
+"noreferrer\">WordPress.org</a> to help us spread the word. Thank you!"
+msgstr ""
+"Proszę oceń <strong>WP Frontend Delete Account</strong> <a href=„%1$s” target=„_blank” rel=„noopener "
+"noreferrer”>&#9733;&#9733;&#9733;&#9733;&#9733;</a> na <a href=„%2$s” target=„_blank” rel=„noopener "
+"noreferrer”>WordPress.org</a> aby pomóc spopularyzować wtyczkę. Dziękujemy!"
 
 #: includes/emails/Emails.php:116
 msgid "Heads up! A user deleted their account."
