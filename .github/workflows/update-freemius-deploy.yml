@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Check out the code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Fetch all history so we can access tags
 
       - name: Get Latest Tag
         id: get_tag
@@ -21,15 +23,15 @@ jobs:
           TAG=$(git describe --tags --abbrev=0)
           echo "tag=$TAG" >> $GITHUB_ENV  # Store in environment variable
 
-      # Create zip file with the repository name
-      - name: Create zipfile of the repository
+      # Create zip file from the latest tag
+      - name: Create zipfile from tag
         run: |
-          zip -qq -r "${{ github.event.repository.name }}.zip" ./*
+          git archive -o "${{ github.event.repository.name }}-${{ env.tag }}.zip" ${{ env.tag }}
 
       - name: Deploy to Freemius
         uses: buttonizer/freemius-deploy@c104cc8c63c850b01f20fa642046ea76b3f7e53b # Using the PR @see https://github.com/buttonizer/freemius-deploy/pull/2
         with:
-          file_name: "${{ github.event.repository.name }}.zip"  # Use the dynamically named zip file
+          file_name: "${{ github.event.repository.name }}-${{ env.tag }}.zip"  # Use the tag-based zip file
           release_mode: pending
           version: ${{ env.tag }}  # Use the retrieved tag as the version
           sandbox: false
