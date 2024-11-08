@@ -24,7 +24,7 @@ jobs:
       # Create zip file with the repository name
       - name: Create zipfile of the repository
         run: |
-          zip -qq -r "${{ github.event.repository.name }}.zip" ./*
+          zip -qq -r "${{ github.event.repository.name }}.zip" $(git ls-files)
 
       - name: Deploy to Freemius
         uses: buttonizer/freemius-deploy@c104cc8c63c850b01f20fa642046ea76b3f7e53b # Using the PR @see https://github.com/buttonizer/freemius-deploy/pull/2
