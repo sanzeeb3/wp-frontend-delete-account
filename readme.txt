@@ -2,9 +2,9 @@
 Contributors: miniplugins3, sanzeeb3
 Tags: delete-account, delete-account-from-frontend, frontend-delete, remove-account, gdpr, gdpr-erasure
 Requires at least: 4.9
-Tested up to: 6.5
+Tested up to: 6.7
 Requires PHP: 5.6
-Stable tag: 2.3.0
+Stable tag: 2.4.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -16,19 +16,18 @@ Lets customers delete their account by their own from their myaccount page for W
 
 For non-store sites, add the 'Delete Account' tab content anywhere with shortcode [wp_frontend_delete_account] or with the built-in gutenberg block.
 
-### Feature and Options:
+Find out more on [setup documentation](https://miniplugins.com/how-to-allow-users-to-delete-their-account-from-frontend/)
+
+### Features:
 * Easy account deletion from the WooCommerce myaccount page.
 * Reassigns posts by the deleted user.
 * Option to delete user comments.
 * Gutenberg block and shortcode ([wp_frontend_delete_account]) support.
 * GDPR compliance for user data erasure.
 
-Find out more on [setup documentation](https://miniplugins.com/how-to-allow-users-to-delete-their-account-from-frontend/)
-
-== ⭐ PRO Version Features ==
-* Customize delete account (wpf-delete-account) endpoint
-* Exclude user roles
-* Elementor Widget
+* Customize delete account (wpf-delete-account) endpoint [PRO]
+* Exclude user roles [PRO]
+* Elementor Widget [PRO]
 
 [Upgrade to PRO](https://miniplugins.com/wp-frontend-delete-account/)
 
@@ -42,7 +41,7 @@ You have one month to respond to a request. I understand you're busy. Make it ea
 
 ### What's Next?
 If you like WP Frontend Delete Account plugin, then consider checking out my other projects:
-- [WPForce Logout](https://miniplugins.com/wp-force-logout/) - the best WordPress user login logout management plugin.
+- [Birthday For WooCommerce](https://miniplugins.com/birthday-for-woocommerce-premium/) - celebrate your customers birthday in style.
 - [WooCommerce Auto Delete Old Orders](https://miniplugins.com/woocommerce-auto-delete-old-orders/) - Automatically delete old WooCommerce orders.
 - [WooCommerce Auto Delete Users With No Orders](https://miniplugins.com/wc-auto-delete-users-with-no-orders/) - Automatically delete users with no purchase history.
 - [WooCommerce Customer Journey](https://miniplugins.com/customer-journey-for-woocommerce/) - Displays every step of the customer until the order of the product in the orders page.
