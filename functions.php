@@ -87,8 +87,8 @@ function wpfda_backend_sidebar() {
 		<div class="wp-frontend-delete-account-widget wp-frontend-delete-account-box">
 			<h2 class="wp-frontend-delete-account-widget_title"><?php esc_html_e( 'Our WordPress Plugins', 'wp-frontend-delete-account' ); ?></h2>
 			<p><?php esc_html_e( 'Like this plugin? Check out our other WordPress plugins:', 'wp-frontend-delete-account' ); ?></p>
+			<p><a href="https://miniplugins.com/birthday-for-woocommerce-premium/" target="_blank"><strong>Birthday For WooCommerce</strong></a> - <?php esc_html_e( 'WooCommerce Birthday plugin. Celebrate your customers birthday in style!', 'wp-frontend-delete-account' ); ?></p>
 			<p><a href="https://miniplugins.com/customer-journey-for-woocommerce/" target="_blank"><strong>WooCommerce Customer Journey</strong></a> - <?php esc_html_e( 'A simple yet powerful plugin that records every step of the visitor until the order of the product.', 'wp-frontend-delete-account' ); ?></p>
-			<p><a href="https://miniplugins.com/wp-force-logout/" target="_blank"><strong>WPForce Logout</strong></a> - <?php esc_html_e( 'A user activity management plugin. See who\'s online, last login activity & more.', 'wp-frontend-delete-account' ); ?></p>
 		</div>
 	</div>
 	<?php
