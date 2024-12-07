@@ -68,6 +68,10 @@ Unfortunately, there is no any way to recover the deleted user. To create a new 
 
 == Changelog ==
 
+= 2.4.0 - 12/7/2024 =
+* Tweaks - Freemius integration code snippet
+* Info - Tested upto WP 6.7
+
 = 2.2.0 - 05/27/2024 =
 * Fix - Flush permalinks to fix 404 issues on static pages
 
