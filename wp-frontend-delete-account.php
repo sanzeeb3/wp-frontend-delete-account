@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WP Frontend Delete Account Pro
+ * Plugin Name: WP Frontend Delete Account
  * Description: Lets customers delete their account by their own.
  * Version: 2.4.0
  * Author: Mini Plugins
