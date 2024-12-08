@@ -1,10 +1,10 @@
 === WP Frontend Delete Account ===
 Contributors: miniplugins3, sanzeeb3
 Tags: delete-account, delete-account-from-frontend, frontend-delete, remove-account, gdpr, gdpr-erasure
-Requires at least: 4.9
+Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 5.6
-Stable tag: 2.4.0
+Stable tag: 2.4.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -24,7 +24,6 @@ Find out more on [setup documentation](https://miniplugins.com/how-to-allow-user
 * Option to delete user comments.
 * Gutenberg block and shortcode ([wp_frontend_delete_account]) support.
 * GDPR compliance for user data erasure.
-
 * Customize delete account (wpf-delete-account) endpoint [PRO]
 * Exclude user roles [PRO]
 * Elementor Widget [PRO]
@@ -67,6 +66,9 @@ Unfortunately, there is no any way to recover the deleted user. To create a new 
 3. Gutenberg Block View
 
 == Changelog ==
+
+= 2.4.1 - 12/8/2024 =
+* Fix - Image icon
 
 = 2.4.0 - 12/7/2024 =
 * Tweaks - Freemius integration code snippet
