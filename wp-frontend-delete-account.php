@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP Frontend Delete Account
  * Description: Lets customers delete their account by their own.
- * Version: 6.0.0
+ * Version: 6.0.4
  * Author: Mini Plugins
  * Author URI: https://miniplugins.com
  * Text Domain: wp-frontend-delete-account

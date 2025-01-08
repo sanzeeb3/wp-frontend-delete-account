@@ -27,7 +27,7 @@ jobs:
           zip -qq -r "${{ github.event.repository.name }}.zip" $(git ls-files)
 
       - name: Deploy to Freemius
-        uses: buttonizer/freemius-deploy@c104cc8c63c850b01f20fa642046ea76b3f7e53b # Using the PR @see https://github.com/buttonizer/freemius-deploy/pull/2
+        uses: buttonizer/freemius-deploy@v0.1.3
         with:
           file_name: "${{ github.event.repository.name }}.zip"  # Use the dynamically named zip file
           release_mode: pending
