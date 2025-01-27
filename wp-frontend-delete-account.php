@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP Frontend Delete Account
  * Description: Lets customers delete their account by their own.
- * Version: 2.4.1
+ * Version: 2.4.2
  * Author: Mini Plugins
  * Author URI: https://miniplugins.com
  * Text Domain: wp-frontend-delete-account
@@ -80,7 +80,7 @@ if ( function_exists( 'wfda_fs' ) ) {
      *
      * @var string
      */
-    define( 'WPFDA_VERSION', '2.4.1' );
+    define( 'WPFDA_VERSION', '2.4.2' );
 
     require_once __DIR__ . '/vendor/autoload.php';
 
