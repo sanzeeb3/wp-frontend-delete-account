@@ -1,14 +1,14 @@
 === WP Frontend Delete Account ===
 Contributors: miniplugins3, sanzeeb3
-Tags: delete-account, delete-account-from-frontend, frontend-delete, remove-account, gdpr, gdpr-erasure
+Tags: delete-account, frontend-delete, remove-account, gdpr
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 5.6
-Stable tag: 7.0.1
+Stable tag: 2.4.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Lets customers delete their account by their own from their myaccount page for WooCommerce sites. For non-store sites, add the account delete page anywhere with shortcode and gutenberg block.
+Lets customers delete their account by their own.
 
 == Description ==
 
@@ -66,6 +66,9 @@ Unfortunately, there is no any way to recover the deleted user. To create a new 
 3. Gutenberg Block View
 
 == Changelog ==
+
+= 2.4.2 - 1/27/2025 =
+* Tweak - Freemius SDK update
 
 = 2.4.1 - 12/8/2024 =
 * Fix - Image icon

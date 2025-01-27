@@ -9,11 +9,6 @@
   },
   "license": "GPL-3.0+",
   "main": "Gruntfile.js",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.php": [
       "php -d display_errors=1 -l",
