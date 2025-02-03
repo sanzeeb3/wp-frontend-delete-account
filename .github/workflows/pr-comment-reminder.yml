@@ -3,6 +3,7 @@ name: Auto Comment on Pull Request
 on:
   pull_request:
     types: [opened, edited]  # Trigger on PR creation and edit
+    workflow_dispatch: # Allows manual triggering
 permissions: write-all
 jobs:
   comment:
