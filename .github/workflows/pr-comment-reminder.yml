@@ -2,19 +2,20 @@ name: Auto Comment on Pull Request
 
 on:
   pull_request:
-    types: [opened, edited]  # Trigger on PR creation and edit
+    types: [opened]
 
 permissions: write-all
 jobs:
-  post-comment:
+  review:
     runs-on: ubuntu-latest
     steps:
-      - name: Add Comment
-        run: |
-          PR_AUTHOR="${{ github.event.pull_request.user.login }}"
-          COMMENT="🚀 Great! Thanks you @${PR_AUTHOR}, for the PR. **Reminder:** Don't forget to deploy the code changes to the staging/dev environment for review!"
-          PR_NUMBER=${{ github.event.pull_request.number }}
-          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          COMMENT_URL="https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
-          
-          curl -s -H "Authorization: token ${GITHUB_TOKEN}" -X POST $COMMENT_URL -d "{\"body\":\"$COMMENT\"}"
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: AI Code Reviewer
+        uses: freeedcom/ai-codereviewer@main
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # The GITHUB_TOKEN is there by default so you just need to keep it like it is and not necessarily need to add it as secret as it will throw an error. [More Details](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret)
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_MODEL: "gpt-4" # Optional: defaults to "gpt-4"
+          exclude: "**/*.json, **/*.md, vendor/**, freemius/**, **/*.css, languages/**" # Exclude JSON, Markdown, and the whole languages directory
