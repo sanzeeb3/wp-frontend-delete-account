@@ -1,0 +1,17 @@
+name: PR Comment Reminder
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  add-comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add deployment reminder comment
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            🚀 Great! Thanks for the review. **Reminder:** Don't forget to deploy the code changes to the staging/dev environment for review!

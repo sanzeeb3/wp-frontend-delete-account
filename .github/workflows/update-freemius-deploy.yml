@@ -13,12 +13,10 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v3
 
-      - name: Get Latest Tag
+      - name: Get Pushed Tag
         id: get_tag
         run: |
-          # Fetch tags and get the latest tag
-          git fetch --tags
-          TAG=$(git describe --tags --abbrev=0)
+          TAG=${GITHUB_REF#refs/tags/}
           echo "tag=$TAG" >> $GITHUB_ENV  # Store in environment variable
 
       # Create zip file with the repository name
