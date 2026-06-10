@@ -2,7 +2,7 @@
 Contributors: miniplugins3, sanzeeb3
 Tags: delete-account, frontend-delete, remove-account, gdpr
 Requires at least: 5.0
-Tested up to: 6.7
+Tested up to: 7.0
 Requires PHP: 5.6
 Stable tag: 2.4.2
 License: GPLv3
