@@ -71,6 +71,7 @@ Unfortunately, there is no any way to recover the deleted user. To create a new 
 == Changelog ==
 
 = 3.0.0 - 2026-11-02 =
+* Update - Freemius SDK to 2.13.5 and move it to vendor/freemius.
 * New - Custom content before the deletion form and an optional acknowledgement checkbox.
 * Fix - Enforce excluded roles on deletion requests and save empty role selections (PRO).
 * Fix - Feedback submissions, failed deletions, email delivery status and content reassignment.

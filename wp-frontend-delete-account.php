@@ -34,7 +34,12 @@ if ( function_exists( 'wfda_fs' ) ) {
 
             if ( ! isset( $wfda_fs ) ) {
                 // Include Freemius SDK.
-                require_once dirname(__FILE__) . '/freemius/start.php';
+                if ( file_exists( __DIR__ . '/vendor/freemius/start.php' ) ) {
+                    require_once __DIR__ . '/vendor/freemius/start.php';
+                } else {
+                    // Allow existing installations with the previous SDK location.
+                    require_once __DIR__ . '/freemius/start.php';
+                }
 
                 $wfda_fs = fs_dynamic_init( array(
                     'id'                  => '15171',

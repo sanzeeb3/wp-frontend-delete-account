@@ -49,7 +49,7 @@ jobs:
 
       - name: Lint PHP
         run: |
-          find . -name '*.php' -not -path './freemius/*' -print0 | xargs -0 -n1 php -l > /dev/null
+          find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 php -l > /dev/null
           php tests/release-smoke.php
 
       - name: Set up Node.js
@@ -66,7 +66,9 @@ jobs:
           node tests/js-smoke.cjs
 
       - name: Build the zip
-        run: git archive --format=zip --prefix=wp-frontend-delete-account/ --output=wp-frontend-delete-account.zip HEAD
+        run: |
+          git archive --format=zip --prefix=wp-frontend-delete-account/ --output=wp-frontend-delete-account.zip HEAD
+          unzip -Z1 wp-frontend-delete-account.zip | grep -Fx 'wp-frontend-delete-account/vendor/freemius/start.php'
 
       - name: Check out the Freemius PHP SDK
         uses: actions/checkout@v4

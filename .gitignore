@@ -27,7 +27,8 @@ none
 Thumbs.db
 
 # Composer
-/vendor/
+/vendor/*
+!/vendor/freemius/
 
 *.zip
 
