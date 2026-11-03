@@ -56,6 +56,9 @@ final class Plugin {
 	 * @since 1.5.8.
 	 */
 	public function load_classes() {
+		if ( wfda_fs()->can_use_premium_code__premium_only() ) {
+			( new \WPFrontendDeleteAccount\Pro\Features() )->init();
+		}
 
 		$classes = array( 'Backend', 'Frontend', 'WooCommerce', 'Gutenberg', 'Summary' );
 

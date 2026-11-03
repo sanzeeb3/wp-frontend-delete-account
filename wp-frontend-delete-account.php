@@ -2,11 +2,14 @@
 /**
  * Plugin Name: WP Frontend Delete Account
  * Description: Lets customers delete their account by their own.
- * Version: 2.4.2
+ * Version: 3.0.0
+ * Requires at least: 5.3
+ * Requires PHP: 5.6
  * Author: Mini Plugins
  * Author URI: https://miniplugins.com
  * Text Domain: wp-frontend-delete-account
  * Domain Path: /languages/
+ * @fs_premium_only /src/Pro/
  *
  * @package    WP Frontend Delete Account
  * @author     Mini Plugins
@@ -38,7 +41,7 @@ if ( function_exists( 'wfda_fs' ) ) {
                     'slug'                => 'wp-frontend-delete-account',
                     'type'                => 'plugin',
                     'public_key'          => 'pk_eb6b8985bfbc6eff4bf462ab818ec',
-                    'is_premium'          => false,
+                    'is_premium'          => true,
                     'premium_suffix'      => 'Pro',
                     // If your plugin is a serviceware, set this option to false.
                     'has_premium_version' => true,
@@ -75,9 +78,24 @@ if ( function_exists( 'wfda_fs' ) ) {
         define( 'WPFDA_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
     }
 
-    define( 'WPFDA_VERSION', '2.4.2' );
+    define( 'WPFDA_VERSION', '3.0.0' );
 
-    require_once __DIR__ . '/vendor/autoload.php';
+    register_activation_hook( __FILE__, function () {
+        delete_option( 'wpfda_registered_endpoint' );
+    } );
+
+    // The release archive must not depend on an ignored Composer vendor directory.
+    spl_autoload_register( function ( $class ) {
+        $prefix = 'WPFrontendDeleteAccount\\';
+        if ( 0 !== strpos( $class, $prefix ) ) {
+            return;
+        }
+        $file = __DIR__ . '/src/' . str_replace( '\\', '/', substr( $class, strlen( $prefix ) ) ) . '.php';
+        if ( is_file( $file ) ) {
+            require_once $file;
+        }
+    } );
+    require_once __DIR__ . '/functions.php';
 
     /**
      * Return the main instance of Plugin Class.

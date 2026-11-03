@@ -1,10 +1,10 @@
 === WP Frontend Delete Account ===
 Contributors: miniplugins3, sanzeeb3
 Tags: delete-account, frontend-delete, remove-account, gdpr
-Requires at least: 5.0
+Requires at least: 5.3
 Tested up to: 7.0
 Requires PHP: 5.6
-Stable tag: 2.4.2
+Stable tag: 3.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -16,12 +16,15 @@ Lets customers delete their account by their own from their myaccount page for W
 
 For non-store sites, add the 'Delete Account' tab content anywhere with shortcode [wp_frontend_delete_account] or with the built-in gutenberg block.
 
+On WordPress Multisite, deletion removes the user from the current site; it does not delete the network account.
+
 Find out more on [setup documentation](https://miniplugins.com/how-to-allow-users-to-delete-their-account-from-frontend/)
 
 ### Features:
 * Easy account deletion from the WooCommerce myaccount page.
 * Reassigns posts by the deleted user.
 * Option to delete user comments.
+* Add explanatory text before the deletion form and optionally require acknowledgement.
 * Gutenberg block and shortcode ([wp_frontend_delete_account]) support.
 * GDPR compliance for user data erasure.
 * Customize delete account (wpf-delete-account) endpoint [PRO]
@@ -66,6 +69,15 @@ Unfortunately, there is no any way to recover the deleted user. To create a new 
 3. Gutenberg Block View
 
 == Changelog ==
+
+= 3.0.0 - 2026-11-02 =
+* New - Custom content before the deletion form and an optional acknowledgement checkbox.
+* Fix - Enforce excluded roles on deletion requests and save empty role selections (PRO).
+* Fix - Feedback submissions, failed deletions, email delivery status and content reassignment.
+* Fix - Validate custom confirmation answers on the server without exposing them in page source.
+* Fix - Do not change the site's permalink structure when registering the WooCommerce endpoint.
+* Fix - Search for the reassignment user instead of loading every user on the settings page.
+* Free and PRO now share one codebase; Freemius builds the free edition.
 
 = 2.4.2 - 1/27/2025 =
 * Tweak - Freemius SDK update

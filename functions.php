@@ -16,7 +16,7 @@
  */
 function wpf_delete_account_content() {
 
-	if ( ! is_user_logged_in() ) {
+	if ( ! wpfda_can_delete_account() ) {
 		return;
 	}
 
@@ -26,15 +26,25 @@ function wpf_delete_account_content() {
 	ob_start();
 
 	?>
-			<div class='wpfda-delete-account-container'>
-			</div>
+			<?php echo wp_kses_post( wpautop( get_option( 'wpfda_before_content', '' ) ) ); ?>
+			<div class='wpfda-delete-account-container'></div>
 
 			<script id='wpfda-delete-account-frontend-js'>
-				var wpfda_plugins_params = <?php echo wp_json_encode( wpfda_i10n_data() ); ?>
+				var wpfda_plugins_params = <?php echo wp_json_encode( wpfda_i10n_data(), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT ); ?>
 			</script>
 	<?php
 
 		return ob_get_clean();
+}
+
+/** Whether the current user is allowed to use self-service deletion. */
+function wpfda_can_delete_account() {
+	return is_user_logged_in() && apply_filters( 'wpfda_can_delete_account', true, wp_get_current_user() );
+}
+
+/** Backwards-compatible PRO helper. */
+function wpfda_is_excluded() {
+	return ! wpfda_can_delete_account();
 }
 
 /**
@@ -57,13 +67,12 @@ function wpfda_i10n_data() {
 		'processing'          => esc_html__( 'Processing...', 'wp-frontend-delete-account' ),
 		'deleting'            => esc_html__( 'Deleting...', 'wp-frontend-delete-account' ),
 		'wrong'               => esc_html__( 'Oops! Something went wrong', 'wp-frontend-delete-account' ),
-		'current_user_email'  => wp_get_current_user()->user_email,
 		'button'              => get_option( 'wpfda_button_label', esc_html__( 'Confirm', 'wp-frontend-delete-account' ) ),
-		'user_id'             => get_current_user_id(),
-		'security'            => get_option( 'wpfda_security', 'password' ),
+		'security'            => 'recaptcha_v2' === get_option( 'wpfda_security', 'password' ) ? 'password' : get_option( 'wpfda_security', 'password' ),
 		'captcha_question'    => get_option( 'wpfda_security_custom_captcha_question', 'Enter PERMANENTLY DELETE to confirm:' ),
-		'captcha_answer'      => get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' ),
 		'password_text'       => get_option( 'wpfda_security_password_text', esc_html__( 'Enter password to confirm:', 'wp-frontend-delete-account' ) ),
+		'require_acknowledgement' => 'on' === get_option( 'wpfda_require_acknowledgement', 'off' ),
+		'acknowledgement_text' => get_option( 'wpfda_acknowledgement_text', __( 'I understand that deleting my account is permanent.', 'wp-frontend-delete-account' ) ),
 		'is_administrator'    => current_user_can( 'administrator' ),
 	);
 }
@@ -75,12 +84,12 @@ function wpfda_backend_sidebar() {
 	<div class="wp-frontend-delete-account-sidebar">
 		<div class="wp-frontend-delete-account-widget wp-frontend-delete-account-box">
 			<h2 class="wp-frontend-delete-account-widget_title"><?php esc_html_e( 'Account', 'wp-frontend-delete-account' ); ?></h2>
-			<p><?php esc_html_e( 'You\'re using WP Frontend Delete Account FREE Version', 'wp-frontend-delete-account' ); ?></p>
+			<p><?php echo wfda_fs()->can_use_premium_code() ? esc_html__( 'You are using WP Frontend Delete Account PRO.', 'wp-frontend-delete-account' ) : esc_html__( 'You are using WP Frontend Delete Account Free.', 'wp-frontend-delete-account' ); ?></p>
 
-			<p><a href="<?php echo admin_url( 'options-general.php?page=wp-frontend-delete-account-pricing' ); ?>"><strong><?php esc_html_e( 'Account',  'wp-frontend-delete-account' );?></strong></a> - <?php esc_html_e( 'your account information.', 'wp-frontend-delete-account' ); ?></p>
+			<p><a href="<?php echo esc_url( wfda_fs()->get_account_url() ); ?>"><strong><?php esc_html_e( 'Account',  'wp-frontend-delete-account' );?></strong></a> - <?php esc_html_e( 'your account information.', 'wp-frontend-delete-account' ); ?></p>
 			<p><a href="https://miniplugins.com/how-to-allow-users-to-delete-their-account-from-frontend/" target="_blank"><strong><?php esc_html_e( 'Documentation',  'wp-frontend-delete-account' );?></strong></a> - <?php esc_html_e( 'docs & articles.', 'wp-frontend-delete-account' ); ?></p>
 			<p><a href="<?php echo admin_url( 'options-general.php?page=wp-frontend-delete-account-contact' ); ?>"><strong><?php esc_html_e( 'Support',  'wp-frontend-delete-account' );?></strong></a> - <?php esc_html_e( 'need help or have questions?', 'wp-frontend-delete-account' ); ?></p>
-			<p><a href="<?php echo admin_url( 'options-general.php?page=wp-frontend-delete-account-pricing' ); ?>"><strong><?php esc_html_e( 'Upgrade',  'wp-frontend-delete-account' );?></strong></a> - <?php esc_html_e( 'need more benifits?', 'wp-frontend-delete-account' ); ?></p>
+			<?php if ( ! wfda_fs()->can_use_premium_code() ) : ?><p><a href="<?php echo esc_url( wfda_fs()->get_upgrade_url() ); ?>"><strong><?php esc_html_e( 'Upgrade', 'wp-frontend-delete-account' ); ?></strong></a></p><?php endif; ?>
 
 		</div><br/>
 

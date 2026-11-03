@@ -5,7 +5,7 @@
  *
  * @since 1.5.7
  */
-import { __ } from '@wordpress/i18n';
+const { __ } = wp.i18n;
 
 export default function Placeholder() {
 

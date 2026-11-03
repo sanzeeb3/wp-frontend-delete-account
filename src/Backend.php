@@ -25,6 +25,7 @@ class Backend {
 		add_action( 'admin_init', array( $this, 'save_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_assets' ) );
 		add_action( 'wp_ajax_wpfda_email_status', array( $this, 'email_status' ) );
+		add_action( 'wp_ajax_wpfda_search_users', array( $this, 'search_users' ) );
 		add_action( 'in_admin_header', array( $this, 'review_notice' ) );
 		add_action( 'wp_ajax_wp_frontend_delete_account_dismiss_review_notice', array( $this, 'dismiss_review_notice' ) );
 		add_action( 'admin_print_scripts', array( $this, 'remove_notices' ) );
@@ -43,8 +44,10 @@ class Backend {
 
 		if ( 'settings_page_wp-frontend-delete-account' === $current_screen->id ) {
 
+			$attribute_id = absint( get_option( 'wpfda_attribute' ) );
+			$attribute_user = $attribute_id ? get_user_by( 'id', $attribute_id ) : false;
 			$params = array(
-				'pricing_page_url'    => admin_url('options-general.php?page=wp-frontend-delete-account-pricing'),
+				'pricing_page_url'    => wfda_fs()->get_upgrade_url(),
 				'ajax_url'                     => admin_url( 'admin-ajax.php' ),
 				'wpfda_general_settings_nonce' => wp_create_nonce( 'wp_frontend_delete_account_settings' ),
 				'status_nonce'                 => wp_create_nonce( 'email-status' ),
@@ -58,9 +61,12 @@ class Backend {
 				'password_text'                => get_option( 'wpfda_security_password_text', 'Enter password to confirm:' ),
 				'captcha_question'             => get_option( 'wpfda_security_custom_captcha_question', 'Enter PERMANENTLY DELETE to confirm:' ),
 				'captcha_answer'               => get_option( 'wpfda_security_custom_captcha_answer', 'PERMANENTLY DELETE' ),
+				'before_content'               => get_option( 'wpfda_before_content', '' ),
+				'require_acknowledgement'      => get_option( 'wpfda_require_acknowledgement', 'off' ),
+				'acknowledgement_text'         => get_option( 'wpfda_acknowledgement_text', __( 'I understand that deleting my account is permanent.', 'wp-frontend-delete-account' ) ),
 				'delete_comments'              => get_option( 'wpfda_delete_comments' ),
 				'redirect_url'                 => get_option( 'wpfda_redirect_url' ),
-				'users'                        => get_users( array( 'fields' => array( 'ID', 'user_login' ) ) ),
+				'users'                        => $attribute_user ? array( array( 'ID' => $attribute_user->ID, 'user_login' => $attribute_user->user_login ) ) : array(),
 				'image_url'                    => plugins_url( 'assets/logo.png', WPFDA_PLUGIN_FILE ),
 				'upgrade_notice_dismissed'             => get_option( 'wpfda_upgrade_notice_dismissed', 'no' ),
 			);
@@ -87,6 +93,25 @@ class Backend {
 
 	}
 
+	/** Search a bounded set of users instead of loading the entire user table. */
+	public function search_users() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( null, 403 );
+		}
+		check_ajax_referer( 'wp_frontend_delete_account_settings', 'security' );
+		$search = isset( $_GET['search'] ) ? sanitize_text_field( wp_unslash( $_GET['search'] ) ) : '';
+		if ( strlen( $search ) < 2 ) {
+			wp_send_json_success( array() );
+		}
+		$users = get_users( array(
+			'search' => '*' . $search . '*',
+			'search_columns' => array( 'user_login', 'user_email', 'display_name' ),
+			'number' => 20,
+			'fields' => array( 'ID', 'user_login' ),
+		) );
+		wp_send_json_success( $users );
+	}
+
 	/**
 	 * Add WP Frontend Delete Account Submenu
 	 *
@@ -107,15 +132,14 @@ class Backend {
 	 */
 	public function wpfda_settings_page() {
 
-		$emails_active  = isset( $_GET['section'] ) && 'emails' === $_GET['section'] ? 'nav-tab-active' : '';
-		$general_active = empty( $email_active ) ? 'nav-tab-active' : '';
-		$template       = '<h2 class="nav-tab-wrapper">
-			<a href="' . esc_url( admin_url( 'admin.php?page=wp-frontend-delete-account' ) ) . '" class="nav-tab ' . $general_active . '">' . esc_html__( 'General', 'wp-frontend-delete-account' ) . '</a>
-			<a href="' . esc_url( wp_nonce_url( admin_url( 'admin.php?page=wp-frontend-delete-account&section=emails' ), 'wp-frontend-delete-account-emails' ) ) . '" class="nav-tab ' . $emails_active . '">' . esc_html__( 'Emails', 'wp-frontend-delete-account' ) . '</a>
-			</h2>';
-
-		// phpcs:ignore
-		echo $template;
+		$section = isset( $_GET['section'] ) ? sanitize_key( wp_unslash( $_GET['section'] ) ) : '';
+		echo '<h2 class="nav-tab-wrapper"><a href="' . esc_url( admin_url( 'options-general.php?page=wp-frontend-delete-account' ) ) . '" class="nav-tab ' . ( '' === $section ? 'nav-tab-active' : '' ) . '">' . esc_html__( 'General', 'wp-frontend-delete-account' ) . '</a>';
+		do_action( 'wpfda_settings_tabs', $section );
+		echo '<a href="' . esc_url( wp_nonce_url( admin_url( 'options-general.php?page=wp-frontend-delete-account&section=emails' ), 'wp-frontend-delete-account-emails' ) ) . '" class="nav-tab ' . ( 'emails' === $section ? 'nav-tab-active' : '' ) . '">' . esc_html__( 'Emails', 'wp-frontend-delete-account' ) . '</a></h2>';
+		if ( 'advanced' === $section && has_action( 'wpfda_settings_section' ) ) {
+			do_action( 'wpfda_settings_section', $section );
+			return;
+		}
 
 		if ( isset( $_GET['section'] ) && 'emails' === $_GET['section'] ) {
 
@@ -154,6 +178,9 @@ class Backend {
 	public function save_settings() {//phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
 
 		if ( isset( $_POST['wp_frontend_delete_account_settings_nonce'] ) ) {
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_die( esc_html__( 'You are not allowed to change these settings.', 'wp-frontend-delete-account' ), '', array( 'response' => 403 ) );
+			}
 
 			// phpcs:ignore
 			if ( ! wp_verify_nonce( $_POST['wp_frontend_delete_account_settings_nonce'], 'wp_frontend_delete_account_settings' )
@@ -162,13 +189,16 @@ class Backend {
 				exit;
 			}
 
-			$options = array( 'wpfda_title', 'wpfda_button_label', 'wpfda_redirect_url', 'wpfda_attribute', 'wpfda_security', 'wpfda_security_password_text', 'wpfda_security_custom_captcha_question', 'wpfda_security_custom_captcha_answer', 'wpfda_load_assets_globally', 'wpfda_delete_comments', 'wpfda_email_receipent', 'wpfda_feedback_email_receipent', 'wpfda_enable_user_email', 'wpfda_enable_admin_email', 'wpfda_user_email_subject', 'wpfda_admin_email_subject', 'wpfda_enable_feedback_email', 'wpfda_feedback_email_subject', 'wpfda_enable_summary_email', 'wpfda_summary_email_receipent', 'wpfda_summary_email_subject', 'wpfda_summary_email_message' );
+			$options = array( 'wpfda_title', 'wpfda_button_label', 'wpfda_redirect_url', 'wpfda_attribute', 'wpfda_security', 'wpfda_security_password_text', 'wpfda_security_custom_captcha_question', 'wpfda_security_custom_captcha_answer', 'wpfda_load_assets_globally', 'wpfda_delete_comments', 'wpfda_email_receipent', 'wpfda_feedback_email_receipent', 'wpfda_enable_user_email', 'wpfda_enable_admin_email', 'wpfda_user_email_subject', 'wpfda_admin_email_subject', 'wpfda_enable_feedback_email', 'wpfda_feedback_email_subject', 'wpfda_enable_summary_email', 'wpfda_summary_email_receipent', 'wpfda_summary_email_subject', 'wpfda_summary_email_message', 'wpfda_require_acknowledgement', 'wpfda_acknowledgement_text' );
 
 			foreach ( $options as $option ) {
 				if ( isset( $_POST[ $option ] ) ) {
 					$value = sanitize_text_field( wp_unslash( $_POST[ $option ] ) );
 					update_option( $option, $value );
 				}
+			}
+			if ( isset( $_POST['wpfda_before_content'] ) ) {
+				update_option( 'wpfda_before_content', wp_kses_post( wp_unslash( $_POST['wpfda_before_content'] ) ) );
 			}
 
 			$email = isset( $_GET['email'] ) ? sanitize_text_field( wp_unslash( $_GET['email'] ) ) : '';
@@ -201,10 +231,6 @@ class Backend {
 			}//end if
 		}//end if
 
-		// Flush Permalinks.
-		if ( ! empty( $_GET['page'] ) && 'wp-frontend-delete-account' === $_GET['page'] ) {
-			flush_rewrite_rules();
-		}
 	}
 
 	/**
@@ -213,6 +239,9 @@ class Backend {
 	 * @since  1.2.0
 	 */
 	public function email_status() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( null, 403 );
+		}
 
 		check_admin_referer( 'email-status', 'security' );
 
@@ -230,6 +259,9 @@ class Backend {
 	public function review_notice() {
 
 		global $current_screen;
+		if ( wfda_fs()->can_use_premium_code() ) {
+			return;
+		}
 
 		// Show only to Admins.
 		if ( ! current_user_can( 'manage_options' ) ) {
@@ -258,6 +290,9 @@ class Backend {
 	 * @since 1.5.8
 	 */
 	public function dismiss_review_notice() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( null, 403 );
+		}
 
 		check_admin_referer( 'review-notice', 'security' );
 

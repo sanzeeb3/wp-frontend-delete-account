@@ -6,10 +6,8 @@
  * global jQuery, wpfda_plugin_params
  */
 
-import { render } from '@wordpress/element';
-import { Component } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
+const { render, useState } = wp.element;
+const { __ } = wp.i18n;
 
 export default function Contents() {
 
@@ -45,13 +43,6 @@ export default function Contents() {
 
 			case 'custom_captcha':
 
-				if ( wpfda_plugins_params.captcha_answer != captchaValue ) {
-					setErrorText( wpfda_plugins_params.incorrect_answer );
-					setDisable( false );
-
-					return;
-				}
-
 				var value = captchaValue;
 
 			break;
@@ -64,6 +55,7 @@ export default function Contents() {
 			action: 'confirm_delete',
 			security: wpfda_plugins_params.wpfda_nonce,
 			value: value,
+			acknowledged: acknowledged ? '1' : '',
 		};
 
 		jQuery.post( wpfda_plugins_params.ajax_url, data, function( response ) {
@@ -79,12 +71,14 @@ export default function Contents() {
 
 				if ( 'on' !==  wpfda_plugins_params.is_feedback_enabled ) {
 
-					window.location.replace( wpfda_plugins_params.redirect_url );
+					window.location.replace( wpfda_plugins_params.redirect_url || window.location.href );
 				} else {
 
 					var data = {
 						action: 'delete_feedback',
+						feedback_token: response.feedback_token,
 					};
+					var feedbackToken = response.feedback_token;
 
 					jQuery.post( wpfda_plugins_params.ajax_url, data, function( response ) {
 
@@ -95,10 +89,15 @@ export default function Contents() {
 				  		modal.style.display = "block";
 
 				  		// On click on send email button on the modal.
-					    jQuery("#wpfda-send-deactivation-email").click( function( e ) {
+						jQuery('.wpfda-skip-feedback').on('click', function(e) {
+							e.preventDefault();
+							window.location.replace( wpfda_plugins_params.redirect_url || window.location.href );
+						});
+						jQuery("#wp-frontend-delete-account-send-deactivation-email").on('submit', function( e ) {
+							e.preventDefault();
 
-					    	this.value 		= wpfda_plugins_params.deleting;
-							this.disabled   = true;	// Disable the feedback button once email is sent to avoid duplicates.
+							var button = jQuery('#wpfda-send-deactivation-email');
+							button.val( wpfda_plugins_params.deleting ).prop( 'disabled', true );
 
 					    	var form 		= jQuery("#wp-frontend-delete-account-send-deactivation-email");
 
@@ -109,29 +108,32 @@ export default function Contents() {
 								action: 'delete_feedback_email',
 								security: nonce,
 								message: message,
-								user_email: wpfda_plugins_params.current_user_email
+								feedback_token: feedbackToken
 							}
 
 							jQuery.post( wpfda_plugins_params.ajax_url, data, function( response ) {
 
 								if( response.success === false ) {
 									alert( wpfda_plugins_params.wrong );
+									button.prop( 'disabled', false );
 								} else {
-									window.location.replace( wpfda_plugins_params.redirect_url );
+									window.location.replace( wpfda_plugins_params.redirect_url || window.location.href );
 								}
-
-								modal.remove();
 							}).fail( function( xhr ) {
 								alert( wpfda_plugins_params.wrong );
+								button.prop( 'disabled', false );
 							});
 
 					    });
 
 					}).fail( function( xhr ) {
-						window.console.log( xhr.responseText );
+						window.location.replace( wpfda_plugins_params.redirect_url || window.location.href );
 					});
 				}
 			}
+		}).fail( function() {
+			setErrorText( wpfda_plugins_params.wrong );
+			setDisable( false );
 		});
 	}
 
@@ -141,6 +143,7 @@ export default function Contents() {
 	const [errorText, setErrorText] = useState( '' );
 	const [passwordValue, setPasswordValue] = useState( '' );
 	const [captchaValue, setCaptchaValue] = useState( '' );
+	const [acknowledged, setAcknowledged] = useState( false );
 
 	if ( wpfda_plugins_params.is_administrator ) {
 		element = [ <i key='warning' style={{color:'red'}}> { __( 'Just a heads up! You are the site administrator and processing further will delete yourself.', 'wp-frontend-delete-account' ) } </i> ]
@@ -164,6 +167,10 @@ export default function Contents() {
 						<input onChange={changeValue} type='text' name='wpfda-custom-captcha-answer' />
 					</div>
 				]
+	}
+
+	if ( wpfda_plugins_params.require_acknowledgement ) {
+		element = [ ...element, <label key="acknowledgement"><input type="checkbox" required checked={acknowledged} onChange={e => setAcknowledged(e.target.checked)} /> {wpfda_plugins_params.acknowledgement_text}</label> ];
 	}
 
 	element = [ ...element,
@@ -192,11 +199,7 @@ export default function Contents() {
 
 document.addEventListener( "DOMContentLoaded", function(event) {
 
-	if ( document.getElementsByClassName( 'wpfda-delete-account-container' )[0] ) {
-
-		render(
-			<Contents />,
-			document.getElementsByClassName( 'wpfda-delete-account-container' )[0]
-		)
-	}
+	Array.prototype.forEach.call( document.getElementsByClassName( 'wpfda-delete-account-container' ), function( container ) {
+		render( <Contents />, container );
+	} );
 });

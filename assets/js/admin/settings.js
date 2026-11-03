@@ -1,6 +1,6 @@
-import { render } from '@wordpress/element';
-import { Component } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import './review';
+const { render, Component } = wp.element;
+const { __ } = wp.i18n;
 
 class Field extends Component {
 
@@ -14,7 +14,24 @@ class Field extends Component {
     	};
 
 	    this.handleInputChange = this.handleInputChange.bind(this);
+		this.searchUsers = this.searchUsers.bind(this);
   	}
+
+	searchUsers(event) {
+		const search = event.target.value.trim();
+		clearTimeout(this.searchTimer);
+		const sequence = this.searchSequence = (this.searchSequence || 0) + 1;
+		if (search.length < 2) return;
+		this.searchTimer = setTimeout(() => {
+			const url = wpfda_plugins_params.ajax_url + '?action=wpfda_search_users&security=' + encodeURIComponent(wpfda_plugins_params.wpfda_general_settings_nonce) + '&search=' + encodeURIComponent(search);
+			fetch(url).then(response => response.json()).then(response => {
+				if (sequence !== this.searchSequence || !response.success) return;
+				const selected = (this.state.options || this.props.attr.options).filter(option => String(option.value) === String(this.state.value));
+				const options = response.data.map(user => ({value: user.ID, label: user.user_login}));
+				this.setState({options: selected.concat(options.filter(option => !selected.some(item => String(item.value) === String(option.value))))});
+			}).catch(() => {});
+		}, 250);
+	}
 
 	handleInputChange(event) {
 	    this.setState(
@@ -73,6 +90,9 @@ class Field extends Component {
 		var element = '';
 
 		switch(this.props.attr.type) {
+			case 'textarea':
+				element = <textarea name={"wpfda_" + this.props.attr.name} value={this.state.value} onChange={this.handleInputChange} rows="5" className="large-text" />;
+			break;
 			case 'text':
 				element = <input
 							type="text"
@@ -105,7 +125,7 @@ class Field extends Component {
 			break;
 
 			case 'select':
-				element = <select
+				element = <div>{this.props.attr.name === 'attribute' ? <div><input type="search" onChange={this.searchUsers} placeholder={__( 'Search users by name or email', 'wp-frontend-delete-account' )} /></div> : null}<select
 							name={"wpfda_" + this.props.attr.name }
 							value={this.state.value}
 							onChange={this.handleInputChange}
@@ -114,12 +134,12 @@ class Field extends Component {
 
 							<option value="none"> { __( 'None', 'wp-frontend-delete-account' ) } </option>
 							{
-								this.props.attr.options.map( (option) =>
+								(this.state.options || this.props.attr.options).map( (option) =>
 									<option key={option.value} value={option.value}>{option.label}</option>
 								)
 							}
 
-							</select>
+							</select></div>
 			break;
 
 			default:
@@ -162,6 +182,23 @@ class Form extends Component {
 		);
 
 		const fields = [
+			{
+				id: 'before-content', name: 'before_content',
+				label: __( 'Content before the deletion form', 'wp-frontend-delete-account' ),
+				desc: __( 'Explain what account deletion means. Basic HTML is allowed.', 'wp-frontend-delete-account' ),
+				type: 'textarea', defaultValue: wpfda_plugins_params.before_content, isShowing: true
+			},
+			{
+				id: 'require-acknowledgement', name: 'require_acknowledgement',
+				label: __( 'Require acknowledgement', 'wp-frontend-delete-account' ),
+				desc: __( 'Require users to confirm they understand deletion is permanent.', 'wp-frontend-delete-account' ),
+				type: 'checkbox', defaultValue: wpfda_plugins_params.require_acknowledgement, isShowing: true
+			},
+			{
+				id: 'acknowledgement-text', name: 'acknowledgement_text',
+				label: __( 'Acknowledgement text', 'wp-frontend-delete-account' ),
+				type: 'text', defaultValue: wpfda_plugins_params.acknowledgement_text, isShowing: true
+			},
 			{
 				id: 'delete-comments',
 				name: 'delete_comments',

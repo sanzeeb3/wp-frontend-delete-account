@@ -6,9 +6,8 @@
  * @since 1.5.8
  */
 
-import { render } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
+const { render, useState } = wp.element;
+const { __ } = wp.i18n;
 
 export default function Review() {
 

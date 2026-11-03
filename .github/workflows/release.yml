@@ -1,0 +1,141 @@
+name: Release
+
+# Push a version tag (e.g. 3.0.0) to release:
+#   1. build:   check the version, upload the PRO zip to Freemius as pending, download the free build.
+#   2. release: deploy the free build to wordpress.org, then release the version on Freemius.
+#
+# The release job runs in the "production" environment. Add required reviewers to it
+# (Settings → Environments → production) to approve each release after testing the pending
+# version; without reviewers it runs right after the build.
+#
+# Secrets: FREEMIUS_DEV_ID, FREEMIUS_PUBLIC_KEY, FREEMIUS_SECRET_KEY, SVN_USERNAME, SVN_PASSWORD
+
+on:
+  push:
+    tags:
+      - '*'
+  # To redeploy a release, run it from the tag ("Use workflow from" → Tags → e.g. 3.0.0).
+  workflow_dispatch:
+
+env:
+  VERSION: ${{ github.ref_name }}
+  FREEMIUS_PLUGIN_ID: '15171'
+  FREEMIUS_SDK_REF: 226c6223962c74e7001528880d25b3923ecf8b65
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      # Freemius takes the version from the plugin header and wordpress.org from the readme.
+      - name: Check the version
+        run: |
+          [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "::error::Run from a version tag"; exit 1; }
+          grep -qE "^ \* Version: +${VERSION}$" wp-frontend-delete-account.php || { echo "::error::Plugin Version header isn't ${VERSION}"; exit 1; }
+          grep -qF "define( 'WPFDA_VERSION', '${VERSION}' );" wp-frontend-delete-account.php || { echo "::error::WPFDA_VERSION isn't ${VERSION}"; exit 1; }
+          grep -qE "^Stable tag: ${VERSION}$" readme.txt || { echo "::error::readme.txt Stable tag isn't ${VERSION}"; exit 1; }
+          grep -qF "= ${VERSION} - " readme.txt || { echo "::error::readme.txt has no changelog entry for ${VERSION}"; exit 1; }
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: none
+
+      - name: Lint PHP
+        run: |
+          find . -name '*.php' -not -path './freemius/*' -print0 | xargs -0 -n1 php -l > /dev/null
+          php tests/release-smoke.php
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Verify JavaScript bundles
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+          git diff --exit-code -- assets/js/frontend.min.js assets/js/admin/settings.min.js assets/js/admin/gutenberg.min.js
+          node tests/js-smoke.cjs
+
+      - name: Build the zip
+        run: git archive --format=zip --prefix=wp-frontend-delete-account/ --output=wp-frontend-delete-account.zip HEAD
+
+      - name: Check out the Freemius PHP SDK
+        uses: actions/checkout@v4
+        with:
+          repository: Freemius/freemius-php-sdk
+          ref: ${{ env.FREEMIUS_SDK_REF }}
+          path: freemius-php-sdk
+
+      - name: Upload to Freemius
+        run: |
+          export COMMIT_TIME=$(git log -1 --format=%ct)
+          php .github/scripts/freemius-deploy.php upload wp-frontend-delete-account.zip "$VERSION" wp-frontend-delete-account-free.zip
+        env:
+          FREEMIUS_SDK_DIR: freemius-php-sdk
+          FREEMIUS_DEV_ID: ${{ secrets.FREEMIUS_DEV_ID }}
+          FREEMIUS_PUBLIC_KEY: ${{ secrets.FREEMIUS_PUBLIC_KEY }}
+          FREEMIUS_SECRET_KEY: ${{ secrets.FREEMIUS_SECRET_KEY }}
+
+      - name: Keep the zips
+        uses: actions/upload-artifact@v4
+        with:
+          name: wp-frontend-delete-account-${{ env.VERSION }}
+          path: |
+            wp-frontend-delete-account.zip
+            wp-frontend-delete-account-free.zip
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Download the zips
+        uses: actions/download-artifact@v4
+        with:
+          name: wp-frontend-delete-account-${{ env.VERSION }}
+
+      - name: Install Subversion
+        run: command -v svn || (sudo apt-get update && sudo apt-get install -y subversion)
+
+      - name: Deploy to wordpress.org
+        run: bash .github/scripts/wporg-deploy.sh wp-frontend-delete-account-free.zip --yes
+        env:
+          SVN_DIR: ${{ runner.temp }}/svn
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: none
+
+      - name: Check out the Freemius PHP SDK
+        uses: actions/checkout@v4
+        with:
+          repository: Freemius/freemius-php-sdk
+          ref: ${{ env.FREEMIUS_SDK_REF }}
+          path: freemius-php-sdk
+
+      - name: Release on Freemius
+        run: php .github/scripts/freemius-deploy.php release "$VERSION"
+        env:
+          FREEMIUS_SDK_DIR: freemius-php-sdk
+          FREEMIUS_DEV_ID: ${{ secrets.FREEMIUS_DEV_ID }}
+          FREEMIUS_PUBLIC_KEY: ${{ secrets.FREEMIUS_PUBLIC_KEY }}
+          FREEMIUS_SECRET_KEY: ${{ secrets.FREEMIUS_SECRET_KEY }}

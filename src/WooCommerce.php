@@ -12,6 +12,7 @@ namespace WPFrontendDeleteAccount;
  * @class WooCommerce
  */
 class WooCommerce {
+	private $endpoint;
 
 	/**
 	 * Initialize.
@@ -25,10 +26,12 @@ class WooCommerce {
 			return;
 		}
 
+		$this->endpoint = apply_filters( 'wpfda_woocommerce_endpoint', 'wpf-delete-account' );
 		add_action( 'init', array( $this, 'register_endpoint' ) );
+		add_action( 'wp_loaded', array( $this, 'maybe_refresh_rewrites' ) );
 		add_filter( 'query_vars', array( $this, 'query_vars' ) );
 		add_filter( 'woocommerce_account_menu_items', array( $this, 'add_wpf_delete_account_tab' ), PHP_INT_MAX );
-		add_action( 'woocommerce_account_wpf-delete-account_endpoint', array( $this, 'add_content' ) );
+		add_action( 'woocommerce_account_' . $this->endpoint . '_endpoint', array( $this, 'add_content' ) );
 	}
 
 	/**
@@ -36,19 +39,15 @@ class WooCommerce {
 	 */
 	public function register_endpoint() {
 
-		$permalink = get_option( 'permalink_structure' );
+		add_rewrite_endpoint( $this->endpoint, EP_ROOT | EP_PAGES );
+	}
 
-		if ( empty( $permalink ) ) {
-
-			global $wp_rewrite;
-
-			update_option( 'rewrite_rules', false );
-
-			$wp_rewrite->set_permalink_structure( '/%postname%/' );
-			$wp_rewrite->flush_rules( true );
+	/** Refresh once after installation or an endpoint change, after all endpoints are registered. */
+	public function maybe_refresh_rewrites() {
+		if ( get_option( 'wpfda_registered_endpoint' ) !== $this->endpoint ) {
+			flush_rewrite_rules( false );
+			update_option( 'wpfda_registered_endpoint', $this->endpoint );
 		}
-
-		add_rewrite_endpoint( 'wpf-delete-account', EP_ROOT | EP_PAGES );
 	}
 
 	/**
@@ -60,7 +59,7 @@ class WooCommerce {
 	 */
 	public function query_vars( $vars ) {
 
-		$vars[] = 'wpf-delete-account';
+		$vars[] = $this->endpoint;
 		return $vars;
 	}
 
@@ -73,11 +72,11 @@ class WooCommerce {
 	 */
 	public function add_wpf_delete_account_tab( $items ) {
 
-		if ( true === apply_filters( 'wpfda_disable_delete_account_tab', false ) ) {
+		if ( ! wpfda_can_delete_account() || true === apply_filters( 'wpfda_disable_delete_account_tab', false ) ) {
 			return $items;
 		}
 
-		$items['wpf-delete-account'] = get_option( 'wpfda_title', esc_html__( 'Delete Account', 'wp-frontend-delete-account' ) );
+		$items[ $this->endpoint ] = get_option( 'wpfda_title', esc_html__( 'Delete Account', 'wp-frontend-delete-account' ) );
 
 		return $items;
 	}

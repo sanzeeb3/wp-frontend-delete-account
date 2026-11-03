@@ -23,7 +23,9 @@ class Frontend {
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_assets' ) );
 		add_action( 'wp_ajax_confirm_delete', array( $this, 'confirm_delete' ) );
 		add_action( 'wp_ajax_nopriv_delete_feedback', array( $this, 'delete_feedback' ) );
+		add_action( 'wp_ajax_delete_feedback', array( $this, 'delete_feedback' ) );
 		add_action( 'wp_ajax_nopriv_delete_feedback_email', array( $this, 'delete_feedback_email' ) );
+		add_action( 'wp_ajax_delete_feedback_email', array( $this, 'delete_feedback_email' ) );
 		add_shortcode( 'wp_frontend_delete_account', 'wpf_delete_account_content' );
 	}
 
@@ -48,9 +50,15 @@ class Frontend {
 	 * @return Void.
 	 */
 	public function confirm_delete() { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.MaxExceeded
-		if ( isset( $_POST['security'] ) ) {
+		if ( ! wpfda_can_delete_account() ) {
+			wp_send_json_error( array( 'message' => __( 'You cannot delete this account.', 'wp-frontend-delete-account' ) ), 403 );
+		}
+		if ( 'on' === get_option( 'wpfda_require_acknowledgement', 'off' ) && empty( $_POST['acknowledged'] ) ) {
+			wp_send_json_error( array( 'message' => __( 'Please acknowledge that deletion is permanent.', 'wp-frontend-delete-account' ) ) );
+		}
+		if ( isset( $_POST['security'] ) && is_string( $_POST['security'] ) ) {
 			if ( ! wp_verify_nonce( wp_unslash( $_POST['security'] ), 'wpfda_nonce' ) ) { //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-				return;
+				wp_send_json_error( array( 'message' => __( 'Invalid security token.', 'wp-frontend-delete-account' ) ), 403 );
 			}
 
 			$security       = get_option( 'wpfda_security', 'password' );
@@ -60,7 +68,7 @@ class Frontend {
 				// Backwards compatibility. Removing reCAPTCHA support since 1.1.0.
 				$user_id = get_current_user_id();
 				$user    = get_user_by( 'id', $user_id );
-				$pass    = isset( $_POST['value'] ) ? wp_unslash( $_POST['value'] ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				$pass    = isset( $_POST['value'] ) && is_string( $_POST['value'] ) ? wp_unslash( $_POST['value'] ) : ''; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 				if ( $user && wp_check_password( $pass, $user->data->user_pass, $user->ID ) ) {
 					$this->delete_user();
@@ -72,9 +80,9 @@ class Frontend {
 					);
 				}
 			} elseif ( 'custom_captcha' === $security ) {
-				$value = sanitize_text_field( wp_unslash( $_POST['value'] ) );
+				$value = isset( $_POST['value'] ) && is_string( $_POST['value'] ) ? sanitize_text_field( wp_unslash( $_POST['value'] ) ) : '';
 
-				if ( $value === $captcha_answer ) {
+				if ( '' !== $captcha_answer && $value === $captcha_answer ) {
 					$this->delete_user();
 				} else {
 					wp_send_json_error(
@@ -85,8 +93,11 @@ class Frontend {
 				}
 			} elseif ( 'none' === $security ) {
 				$this->delete_user();
+			} else {
+				wp_send_json_error( array( 'message' => __( 'Invalid security method.', 'wp-frontend-delete-account' ) ) );
 			}//end if
 		}//end if
+		wp_send_json_error( array( 'message' => __( 'Invalid security token.', 'wp-frontend-delete-account' ) ), 403 );
 	}
 
 	/**
@@ -99,15 +110,28 @@ class Frontend {
 		$user_id   = get_current_user_id();
 		$user      = get_user_by( 'id', $user_id );
 
-		do_action( 'wp_frontend_delete_account_process', $user );
-
 		require_once ABSPATH . 'wp-admin/includes/user.php';
-		$deleted = wp_delete_user( $user_id, $attribute );
+		if ( $attribute && ( $attribute === $user_id || ! get_user_by( 'id', $attribute ) ) ) {
+			wp_send_json_error( array( 'message' => __( 'The content reassignment account is invalid. Please contact the site administrator.', 'wp-frontend-delete-account' ) ) );
+		}
+		// Preserve the previous behaviour for "None": reassign to ID 0 rather than
+		// deleting the user's posts (which wp_delete_user does for null).
+		$reassign = $attribute;
+		do_action( 'wp_frontend_delete_account_process', $user );
+		$deleted = wp_delete_user( $user_id, $reassign );
 
 		if ( $deleted ) {
 			$this->send_emails( $user );
 			$this->delete_comments( $user_id );
+		} else {
+			wp_send_json_error( array( 'message' => __( 'The account could not be deleted.', 'wp-frontend-delete-account' ) ) );
 		}
+		$feedback_token = '';
+		if ( 'on' === get_option( 'wpfda_enable_feedback_email', 'no' ) ) {
+			$feedback_token = wp_generate_password( 40, false );
+			set_transient( 'wpfda_feedback_' . hash( 'sha256', $feedback_token ), $user->user_email, HOUR_IN_SECONDS );
+		}
+		wp_clear_auth_cookie();
 
 		do_action( 'wp_frontend_delete_account_process_complete', $user );
 
@@ -115,6 +139,7 @@ class Frontend {
 			array(
 				'success' => true,
 				'message' => esc_html__( 'Deleting...', 'wp-frontend-delete-account' ),
+				'feedback_token' => $feedback_token,
 			)
 		);
 	}
@@ -136,7 +161,7 @@ class Frontend {
 			foreach ( $comments as $comment ) {
 
 				// Delete comments.
-				wp_delete_comment( $comment, true );
+				wp_delete_comment( $comment->comment_ID, true );
 			}
 		}
 	}
@@ -175,7 +200,7 @@ class Frontend {
 
 			$sent = $this->now_send( $user->data->user_email, $subject, $message, $header );
 
-			do_action( 'wp_frontend_delete_account_admin_email_sent', $sent );
+			do_action( 'wp_frontend_delete_account_user_email_sent', $sent );
 		}
 	}
 
@@ -215,6 +240,7 @@ class Frontend {
 
 			$sent = \wp_mail( $to, $subject, $message, $header );
 		}//end if
+		return $sent;
 	}
 
 	/**
@@ -223,6 +249,10 @@ class Frontend {
 	 *  @since  1.4.0
 	 */
 	public static function delete_feedback() {
+		$token = isset( $_POST['feedback_token'] ) ? sanitize_text_field( wp_unslash( $_POST['feedback_token'] ) ) : '';
+		if ( ! $token || ! get_transient( 'wpfda_feedback_' . hash( 'sha256', $token ) ) ) {
+			wp_send_json_error( array( 'message' => __( 'Feedback session expired.', 'wp-frontend-delete-account' ) ), 403 );
+		}
 
 		ob_start();
 
@@ -246,7 +276,7 @@ class Frontend {
 								</div>
 								<div class="row">
 										<?php wp_nonce_field( 'wpfda_delete_feedback_email', 'wpfda_delete_feedback_email' ); ?>
-										<a href=""><?php echo esc_html__( 'Skip and delete', 'wp-frontend-delete-account' ); ?>
+										<a href="#" class="wpfda-skip-feedback"><?php echo esc_html__( 'Skip feedback', 'wp-frontend-delete-account' ); ?></a>
 										<input type="submit" id="wpfda-send-deactivation-email" value="<?php echo esc_html__( 'Delete Account', 'wp-frontend-delete-account' ); ?> ">
 								</div>
 							</form>
@@ -275,26 +305,38 @@ class Frontend {
 	public function delete_feedback_email() {
 
 		if ( ! isset( $_POST['security'] ) ) {
-			return;
+			wp_send_json_error();
 		}
 
 		if ( ! wp_verify_nonce( wp_unslash( $_POST['security'] ), 'wpfda_delete_feedback_email' ) ) { //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			return;
+			wp_send_json_error();
 		}
 
 		if ( empty( $_POST['message'] ) ) {
-			return;
+			wp_send_json_error();
 		}
 
 		$message    = sanitize_textarea_field( wp_unslash( $_POST['message'] ) );
-		$user_email = isset( $_POST['user_email'] ) ? sanitize_email( wp_unslash( $_POST['user_email'] ) ) : '';
+		$token = isset( $_POST['feedback_token'] ) ? sanitize_text_field( wp_unslash( $_POST['feedback_token'] ) ) : '';
+		$key = 'wpfda_feedback_' . hash( 'sha256', $token );
+		$user_email = $token ? get_transient( $key ) : false;
+		if ( ! $user_email ) {
+			wp_send_json_error( array( 'message' => __( 'Feedback session expired.', 'wp-frontend-delete-account' ) ), 403 );
+		}
 
 		$default_subject = esc_html__( 'A user - {user_email} provided a feedback on account deletion.', 'wp-frontend-delete-account' );
 		$subject         = get_option( 'wpfda_feedback_email_subject', $default_subject );
 		$subject         = str_replace( '{user_email}', $user_email, $subject );
 
 		$sent = $this->now_send( get_option( 'wpfda_feedback_email_receipent', get_option( 'admin_email' ) ), $subject, $message );
+		if ( $sent ) {
+			delete_transient( $key );
+		}
 
 		do_action( 'wp_frontend_delete_account_feedback_email_sent', $sent );
+		if ( ! $sent ) {
+			wp_send_json_error();
+		}
+		wp_send_json_success();
 	}
 }
